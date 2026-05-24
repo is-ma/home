@@ -10,16 +10,7 @@ Abre este archivo en una ventana y una terminal en otra.
 Lee cada ejercicio, escribe el "COMANDO ROTO" en tu terminal y
 aplica las pulsaciones de la SOLUCIÓN para arreglarlo.
 
-Cada ejercicio incluye:
-  - COMANDO ROTO:   lo que tecleaste mal
-  - OBJETIVO:       qué resultado debes obtener
-  - SOLUCIÓN:       secuencia mínima de teclas para lograrlo
-  - EXPLICACIÓN:    por qué funciona esa secuencia
-  - COMANDOS USADOS: los atajos que practicaste
-
 IMPORTANTE:
-  - Ctrl+X significa: mantén Ctrl, pulsa X, suelta ambos.
-  - Alt+X  significa: mantén Alt,  pulsa X, suelta ambos.
   - Las mayúsculas en Ctrl+E o Alt+F son por claridad; no pulses Shift.
   - Si un comando falla, pulsa Ctrl+_ para borrar la línea y vuelve a intentar.
   - Practica cada ejercicio varias veces hasta que las teclas salgan solas.
@@ -39,18 +30,8 @@ sin tocar las flechas.
 COMANDO ROTO:
   xecho "Hola mundo"
 
-OBJETIVO:
-  echo "Hola mundo"
-
 SOLUCIÓN:
   Ctrl+A  Ctrl+D  Enter
-
-EXPLICACIÓN:
-  Ctrl+A te lleva al inicio de la línea. El cursor queda sobre la 'x'.
-  Ctrl+D borra el carácter justo debajo del cursor (la 'x').
-  Enter ejecuta el comando ya corregido.
-
-COMANDOS USADOS: Ctrl+A, Ctrl+D
 
 
 --- Ejercicio 2: Intercambiar dos caracteres (transponer) -------------------
@@ -58,18 +39,8 @@ COMANDOS USADOS: Ctrl+A, Ctrl+D
 COMANDO ROTO:
   ehco "Tipoo corregido al vuelo"
 
-OBJETIVO:
-  echo "Tipoo corregido al vuelo"
-
 SOLUCIÓN:
   Ctrl+A  Ctrl+F  Ctrl+T  Enter
-
-EXPLICACIÓN:
-  Ctrl+A te lleva al inicio. Ctrl+F avanza un carácter — el cursor
-  queda sobre la 'h'. Ctrl+T transpone (intercambia) el carácter bajo
-  el cursor con el anterior: 'eh' se convierte en 'he', es decir 'echo'.
-
-COMANDOS USADOS: Ctrl+A, Ctrl+F, Ctrl+T
 
 
 --- Ejercicio 3: Convertir una palabra a minúsculas -------------------------
@@ -81,18 +52,7 @@ OBJETIVO:
   echo "informe final del proyecto"
 
 SOLUCIÓN:
-  Ctrl+A  Alt+F  Alt+L
-
-EXPLICACIÓN:
-  Ctrl+A va al inicio. Alt+F salta una palabra hacia adelante: el cursor
-  aterriza al final de "INFORME". Alt+L convierte a minúsculas desde el
-  cursor hasta el final de esa palabra. Repite con cada palabra restante:
-  Alt+F  Alt+L, Alt+F  Alt+L, Alt+F  Alt+L, Alt+F  Alt+L  Enter.
-
-  ¿Hay una forma más rápida? Sí: Ctrl+E para ir al final y repetir
-  Alt+L, Alt+L... ¡pero hoy practicamos Alt+F!
-
-COMANDOS USADOS: Ctrl+A, Alt+F, Alt+L
+  Ctrl+A  Alt+F  Alt+L (varias veces)
 
 
 --- Ejercicio 4: Convertir una palabra a mayúsculas -------------------------
@@ -104,17 +64,7 @@ OBJETIVO:
   export DATABASE_URL=postgresql://localhost:5432/app
 
 SOLUCIÓN:
-  Ctrl+A  Alt+F  Alt+U  Enter
-
-EXPLICACIÓN:
-  Ctrl+A al inicio. Alt+F salta a "database_url". Alt+U convierte desde
-  el cursor hasta el final de la palabra a MAYÚSCULAS.
-
-  Nota: Alt+U y Alt+L solo afectan desde el cursor hasta el final de la
-  palabra actual. Si el cursor está en medio de la palabra, solo cambia
-  la parte derecha. Por eso conviene posicionarse al inicio de la palabra.
-
-COMANDOS USADOS: Ctrl+A, Alt+F, Alt+U
+  Ctrl+A  Alt+F  Alt+U (twice)  Enter
 
 
 ========================================================================
@@ -128,45 +78,24 @@ eliminan palabras o regiones enteras en una sola pulsación.
 --- Ejercicio 5: Borrar la palabra a la izquierda del cursor ---------------
 
 COMANDO ROTO:
-  git push origin feature/login-button-refactor
-
-OBJETIVO:
-  git push origin feature/login-button  (sin "-refactor")
+  git push remove/this-and-this
 
 SOLUCIÓN:
-  Ctrl+E  Ctrl+W  Enter
-
-EXPLICACIÓN:
-  Ctrl+E va al final de la línea. Ctrl+W borra la palabra que está a la
-  izquierda del cursor ("feature/login-button-refactor" completa).
-  Luego escribes "feature/login-button" y Enter.
-
-  Ctrl+W es mucho más rápido que mantener Backspace para borrar una
-  palabra larga. Es uno de los atajos que más usarás.
-
-COMANDOS USADOS: Ctrl+E, Ctrl+W
+  Ctrl+W  Enter
 
 
 --- Ejercicio 6: Borrar la palabra a la derecha del cursor ------------------
 
 COMANDO ROTO:
-  docker compose up database redis nginx unused_service
+  docker compose up database redis unused nginx 
 
 OBJETIVO:
-  docker compose up database redis nginx  (sin "unused_service")
+  docker compose up database redis nginx
 
 SOLUCIÓN:
-  Ctrl+E  Alt+B  Alt+D  Enter
-
-EXPLICACIÓN:
-  Ctrl+E va al final. Alt+B retrocede una palabra: el cursor queda al
-  inicio de "unused_service". Alt+D borra la palabra desde el cursor
-  hacia adelante.
-
-  Fíjate en el patrón: Alt+B + Alt+D = "borrar la palabra actual".
-  Memorízalo, lo usarás constantemente.
-
-COMANDOS USADOS: Ctrl+E, Alt+B, Alt+D
+  Alt+B  Ctrl+W  Enter
+  o
+  Alt+B (twice)  Alt+D  Enter
 
 
 --- Ejercicio 7: Borrar desde el cursor hasta el final de la línea ---------
@@ -178,14 +107,7 @@ OBJETIVO:
   ls -la /var/log/
 
 SOLUCIÓN:
-  Ctrl+A  Alt+F  Alt+F  Alt+F  Ctrl+K  Enter
-
-EXPLICACIÓN:
-  Ctrl+A al inicio. Tres Alt+F te llevan justo después de "/var/log/".
-  Ctrl+K (kill) borra todo desde el cursor hasta el final de la línea,
-  eliminando de golpe " -t -r --color=auto".
-
-COMANDOS USADOS: Ctrl+A, Alt+F, Ctrl+K
+  Ctrl+A  Alt+F (4 times)  Ctrl+F  Ctrl+K  Enter
 
 
 --- Ejercicio 8: Borrar desde el cursor hasta el inicio de la línea ---------
@@ -197,18 +119,7 @@ OBJETIVO:
   echo "mensaje real"
 
 SOLUCIÓN:
-  Ctrl+A  Alt+F  Alt+F  Alt+F  Alt+F  Alt+F
-  (hasta que el cursor esté al inicio de "mensaje")
-  Ctrl+U  Enter
-
-EXPLICACIÓN:
-  Ctrl+A al inicio. Con Alt+F avanzas hasta llegar a "mensaje".
-  Ctrl+U borra todo desde el cursor hacia atrás hasta el inicio,
-  eliminando 'echo "Este es un prefijo innecesario: '.
-  Escribe 'echo "' y ejecuta. O si estabas practicando borrado puro,
-  puedes omitir el echo y corregir la línea entera.
-
-COMANDOS USADOS: Ctrl+A, Alt+F, Ctrl+U
+  Alt+B  Ctrl+U  escribe «echo "»  Enter
 
 
 --- Ejercicio 9: Limpiar espacios múltiples entre palabras ------------------
@@ -220,45 +131,12 @@ OBJETIVO:
   echo "hola mundo"  (un solo espacio)
 
 SOLUCIÓN:
-  Ctrl+A  Alt+F  Alt+\  Enter
-
-EXPLICACIÓN:
-  Ctrl+A al inicio. Alt+F salta al espacio después de "hola".
-  Alt+\ (delete-horizontal-space) borra todos los espacios y tabs
-  alrededor del cursor, dejando las palabras pegadas.
-  Escribe un espacio manualmente y listo.
-
-COMANDOS USADOS: Ctrl+A, Alt+F, Alt+\
+  Ctrl+A  Alt+F (twice)  Alt+\  space  Enter
 
 
 ========================================================================
 LECCIÓN 3: CORTAR, PEGAR Y DESHACER
 ========================================================================
-
-El "kill ring" de readline guarda todo lo que borras con Ctrl+W, Alt+D,
-Ctrl+K y Ctrl+U. Puedes recuperarlo con Ctrl+Y (yank).
-
-
---- Ejercicio 10: Mover una palabra con cortar y pegar ----------------------
-
-COMANDO ROTO:
-  echo mundo hola
-
-OBJETIVO:
-  echo hola mundo
-
-SOLUCIÓN:
-  Ctrl+A  Alt+F  Ctrl+W  Ctrl+E  [espacio]  Ctrl+Y  Enter
-
-EXPLICACIÓN:
-  Ctrl+A al inicio. Alt+F salta a "mundo" (el cursor queda al final).
-  Ctrl+W corta "mundo" hacia atrás y lo guarda en el kill ring.
-  Ctrl+E va al final. Escribes un espacio. Ctrl+Y pega "mundo".
-
-  ¡Magia! Moviste una palabra de lugar sin borrarla y reescribirla.
-
-COMANDOS USADOS: Ctrl+A, Alt+F, Ctrl+W, Ctrl+E, Ctrl+Y
-
 
 --- Ejercicio 11: Borrar línea completa y empezar de cero -------------------
 
@@ -269,18 +147,7 @@ OBJETIVO:
   Línea vacía (te diste cuenta de que el comando entero está mal)
 
 SOLUCIÓN:
-  Ctrl+_
-
-EXPLICACIÓN:
-  Ctrl+_ (Control + guion bajo, es decir Ctrl+Shift+- en teclados
-  en inglés) equivale a "undo" o "borrar toda la línea" en muchos
-  sistemas. Borra la línea entera de una sola pulsación.
-
-  También puedes usar Ctrl+U cuando el cursor está al final (borra
-  todo hacia atrás), o Ctrl+A seguido de Ctrl+K, pero Ctrl+_ es
-  un solo gesto y funciona estés donde estés sobre la línea.
-
-COMANDOS USADOS: Ctrl+_
+  Ctrl+U
 
 
 --- Ejercicio 12: Recuperar lo borrado accidentalmente con Ctrl+Y -----------
@@ -301,12 +168,6 @@ EXPLICACIÓN:
   cosas seguidas con la misma acción, todas se concatenan y se recuperan
   juntas.
 
-  Practica: escribe "uno dos tres", pon el cursor al inicio de "dos",
-  Alt+D (borra "dos"), Alt+D (borra "tres"), ahora Ctrl+Y — recupera
-  "dostres" juntos.
-
-COMANDOS USADOS: Alt+D, Ctrl+Y
-
 
 ========================================================================
 LECCIÓN 4: NAVEGACIÓN QUIRÚRGICA
@@ -326,22 +187,12 @@ OBJETIVO:
   (cambiar el token "abc123" por "xyz789")
 
 SOLUCIÓN:
+  Ctrl+A
   Ctrl+] a    (salta a la 'a' de Authorization)
   Ctrl+] a    (salta a la 'a' de Bearer)
   Ctrl+] a    (salta a la 'a' de abc123)
   Ctrl+W      (borra "abc123")
   escribe "xyz789" y Enter
-
-EXPLICACIÓN:
-  Ctrl+] seguido de un carácter busca hacia adelante la siguiente
-  aparición de ese carácter y sitúa el cursor justo encima.
-  Pulsando Ctrl+] a varias veces, recorres todas las 'a' de la línea
-  hasta llegar a "abc123".
-
-  Truco: si te pasas, puedes usar Ctrl+B para retroceder manualmente,
-  o Alt+B para volver una palabra atrás y reintentar.
-
-COMANDOS USADOS: Ctrl+], Ctrl+W
 
 
 --- Ejercicio 14: Saltar al carácter anterior con Alt+Ctrl+] ----------------
@@ -356,15 +207,9 @@ OBJETIVO:
 SOLUCIÓN:
   Ctrl+E         (ir al final)
   Alt+Ctrl+] @   (retrocede al '@')
-  Alt+D          (borra "192.168.1.100")
+  Ctrl+F         (avanza un caracter)
+  Alt+D (x4)     (borra "192.168.1.100")
   escribe "10.0.0.50" y Enter
-
-EXPLICACIÓN:
-  Alt+Ctrl+] es el espejo de Ctrl+]: busca el carácter hacia atrás
-  en lugar de hacia adelante. Desde el final de la línea, retrocedes
-  directamente al '@' sin contar palabras con Alt+B.
-
-COMANDOS USADOS: Ctrl+E, Alt+Ctrl+], Alt+D
 
 
 --- Ejercicio 15: Retroceder carácter a carácter con Ctrl+B ----------------
@@ -378,25 +223,9 @@ OBJETIVO:
 
 SOLUCIÓN:
   Ctrl+E
-  Ctrl+B  Ctrl+B  Ctrl+B  Ctrl+B  Ctrl+B  Ctrl+B
-  (hasta que el cursor esté sobre el '4' de 2024)
-  Ctrl+D          (borra el '4')
+  Ctrl+B  Deja presionado hasta posicionarte sobre el '4' del 2024
+  Ctrl+D  Borra el '4'
   escribe "5"
-
-  Ahora el input:
-  Ctrl+A  Alt+F  Alt+F  Alt+F  Alt+F
-  (hasta el '4' de data_2024)
-  Ctrl+D
-  escribe "5"
-  Enter
-
-EXPLICACIÓN:
-  Ctrl+B retrocede un carácter. Ctrl+F avanza uno. Usarlos es más fino
-  que Alt+B/Alt+F cuando necesitas posicionarte sobre un carácter
-  concreto dentro de una palabra. Ctrl+H también es útil aquí como
-  alternativa a Ctrl+D (backspace sin estirar el meñique).
-
-COMANDOS USADOS: Ctrl+E, Ctrl+B, Ctrl+D, Ctrl+A, Alt+F
 
 
 ========================================================================
@@ -419,14 +248,7 @@ SOLUCIÓN:
   Escribe "pipewire"
   (el historial muestra el comando; si es el correcto, pulsa Enter)
 
-EXPLICACIÓN:
-  Ctrl+R activa la búsqueda inversa (reverse-i-search). Cada carácter
-  que escribes filtra el historial hacia atrás. Si aparece un comando
-  que no es el que buscas, vuelve a pulsar Ctrl+R para la siguiente
-  coincidencia. Si quieres cancelar la búsqueda sin ejecutar nada:
-  Ctrl+G.
-
-COMANDOS USADOS: Ctrl+R, Ctrl+G
+  Si quieres cancelar la búsqueda sin ejecutar nada: Ctrl+G.
 
 
 --- Ejercicio 17: Insertar el último argumento con Alt+. --------------------
@@ -449,32 +271,6 @@ EXPLICACIÓN:
   de comandos anteriores. Ideal para secuencias como mkdir + cd, o
   cp + vim.
 
-COMANDOS USADOS: Alt+.
-
-
---- Ejercicio 18: Ejecutar y traer el siguiente con Ctrl+O ------------------
-
-ESCENARIO:
-  Tienes que ejecutar estos comandos en orden (ya están en tu historial,
-  uno inmediatamente después del otro):
-    python -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
-
-SOLUCIÓN:
-  Ctrl+P  Ctrl+P           (hasta llegar a "python -m venv .venv")
-  Ctrl+O                   (ejecuta y automáticamente trae el siguiente)
-  Ctrl+O                   (ejecuta "source .venv/bin/activate" y trae el siguiente)
-  Enter                    (ejecuta "pip install -r requirements.txt")
-
-EXPLICACIÓN:
-  Ctrl+O (operate-and-get-next) ejecuta el comando actual y carga el
-  siguiente del historial en la línea de comandos, listo para ejecutar
-  o editar. Es como un "play" para tu historial. Muy útil para
-  secuencias repetitivas.
-
-COMANDOS USADOS: Ctrl+P, Ctrl+O
-
 
 --- Ejercicio 19: Restaurar un comando del historial con Alt+R --------------
 
@@ -484,14 +280,6 @@ ESCENARIO:
 
 SOLUCIÓN:
   Alt+R
-
-EXPLICACIÓN:
-  Alt+R (revert-line) descarta tus ediciones y recupera la línea
-  original tal como estaba en el historial. Funciona mientras no hayas
-  ejecutado el comando (pulsado Enter). Si ya lo ejecutaste, búscalo
-  de nuevo con Ctrl+R.
-
-COMANDOS USADOS: Ctrl+P, Alt+R
 
 
 --- Ejercicio 20: Navegar el historial hacia adelante y atrás --------------
@@ -504,18 +292,6 @@ SOLUCIÓN:
   Ctrl+N                (avanza un comando hacia adelante en el historial)
   Ctrl+N  Ctrl+N ...    (sigue avanzando hasta el más reciente)
 
-  Alt+<                 (salta al primer comando del historial de bash)
-  Alt+>                 (salta al último comando del historial)
-
-EXPLICACIÓN:
-  Ctrl+P = previous (atrás), Ctrl+N = next (adelante). Son simétricos.
-
-  Alt+< y Alt+> te llevan a los extremos del historial. En algunas
-  configuraciones de terminal, Alt+< puede requerir Alt+Shift+, y
-  Alt+> Alt+Shift+. (porque < y > están en las mismas teclas que , y .).
-
-COMANDOS USADOS: Ctrl+P, Ctrl+N, Alt+<, Alt+>
-
 
 ========================================================================
 LECCIÓN 6: AUTOCOMPLETADO SIN FLECHAS
@@ -523,28 +299,6 @@ LECCIÓN 6: AUTOCOMPLETADO SIN FLECHAS
 
 El autocompletado de bash/readline va mucho más allá del Tab. Puedes
 completar comandos, archivos, variables y nombres de host por separado.
-
-
---- Ejercicio 21: Autocompletar un comando con Tab --------------------------
-
-ESCENARIO:
-  Quieres ejecutar "systemctl restart nginx" pero no quieres escribir
-  "systemctl" entero.
-
-SOLUCIÓN:
-  Escribe:  syst  Tab
-  (completa a "systemctl"; si no es único, sigue escribiendo o pulsa Tab
-  dos veces para ver opciones)
-  Escribe:   res  Tab  (completa a "restart")
-  Escribe:   ngi  Tab  (completa a "nginx")
-  Enter
-
-EXPLICACIÓN:
-  Tab intenta completar el texto actual. Si hay una única opción, la
-  inserta. Si hay varias, no hace nada (en ese caso, Alt+? te muestra
-  la lista, como verás en el ejercicio siguiente).
-
-COMANDOS USADOS: Tab
 
 
 --- Ejercicio 22: Listar opciones de autocompletado con Alt+? --------------
@@ -557,72 +311,6 @@ ESCENARIO:
 SOLUCIÓN:
   Escribe:  cat sys  Tab  (no completa)
   Pulsa:    Alt+?
-
-EXPLICACIÓN:
-  Alt+? (possible-completions) lista todas las opciones de autocompletado
-  debajo de tu línea de comandos sin ejecutar nada, como si hubieras
-  pulsado Tab dos veces, pero sin el "Display all N possibilities?" que
-  a veces interrumpe. La línea actual se mantiene intacta para que sigas
-  escribiendo.
-
-COMANDOS USADOS: Tab, Alt+?
-
-
---- Ejercicio 23: Autocompletar archivos con Alt+/ --------------------------
-
-ESCENARIO:
-  Quieres editar ~/.ssh/config pero hay otros archivos en ~/.ssh/.
-  Prefieres completar solo el nombre de archivo, sin ambigüedad con
-  comandos u otras cosas.
-
-SOLUCIÓN:
-  Escribe:  vim ~/.ssh/conf  Alt+/
-  Enter
-
-EXPLICACIÓN:
-  Alt+/ (complete-filename) completa específicamente nombres de archivo.
-  A diferencia de Tab, que intenta completar comandos, alias, variables
-  y archivos, Alt+/ se limita a nombres de archivo. Es útil cuando un
-  nombre de archivo coincide con un comando del sistema y Tab se confunde.
-
-COMANDOS USADOS: Alt+/
-
-
---- Ejercicio 24: Autocompletar variables con Alt+$ --------------------------
-
-ESCENARIO:
-  Quieres referenciar la variable $HOME pero solo recuerdas que empieza
-  con "HO".
-
-SOLUCIÓN:
-  Escribe:  echo $HO  Alt+$
-  (completa a $HOME)
-  Enter
-
-EXPLICACIÓN:
-  Alt+$ (complete-variable) completa nombres de variables de entorno.
-  Escribe $ seguido de las primeras letras y pulsa Alt+$. Si hay varias
-  variables que empiezan igual (p.ej. $HOME, $HOSTNAME), Alt+? te
-  mostrará las opciones.
-
-COMANDOS USADOS: Alt+$
-
-
---- Ejercicio 25: Autocompletar hostnames con Alt+@ -------------------------
-
-ESCENARIO:
-  Quieres hacer ping a "localhost" pero solo escribiste "loca".
-
-SOLUCIÓN:
-  Escribe:  ping loca  Alt+@
-  Enter
-
-EXPLICACIÓN:
-  Alt+@ (complete-hostname) completa nombres de host usando el archivo
-  /etc/hosts y otros mecanismos de resolución. Muy útil para no escribir
-  direcciones completas cuando trabajas con servidores conocidos.
-
-COMANDOS USADOS: Alt+@
 
 
 ========================================================================
@@ -642,14 +330,6 @@ ESCENARIO:
 SOLUCIÓN:
   Ctrl+L
 
-EXPLICACIÓN:
-  Ctrl+L limpia la pantalla (equivalente al comando "clear") pero
-  conserva la línea que estabas escribiendo. No es solo estético:
-  reduce la fatiga visual y te ayuda a concentrarte en el comando
-  actual.
-
-COMANDOS USADOS: Ctrl+L
-
 
 --- Ejercicio 27 (BONUS 2): Guardar un comando sin ejecutarlo ---------------
 
@@ -661,15 +341,6 @@ ESCENARIO:
 SOLUCIÓN:
   Alt+#
 
-EXPLICACIÓN:
-  Alt+# (insert-comment) antepone un '#' al inicio de la línea y pulsa
-  Enter automáticamente. Como el intérprete trata la línea como un
-  comentario, no se ejecuta nada, pero el comando queda registrado en
-  el historial. Luego lo recuperas con Ctrl+R, quitas el '#' y lo
-  ejecutas cuando estés listo.
-
-COMANDOS USADOS: Alt+#
-
 
 --- Ejercicio 28 (BONUS 3): Editar el comando actual en tu $EDITOR ---------
 
@@ -679,17 +350,6 @@ ESCENARIO:
 
 SOLUCIÓN:
   Ctrl+X  Ctrl+E
-
-EXPLICACIÓN:
-  Ctrl+X Ctrl+E (edit-and-execute-command) abre el comando actual en
-  tu editor de texto configurado en $EDITOR (normalmente vim, nano
-  o emacs). Allí puedes editarlo con todas las capacidades de tu editor:
-  múltiples líneas, buscar/reemplazar, macros... Al guardar y salir,
-  el comando se ejecuta automáticamente.
-
-  Si no tienes $EDITOR definido, define uno: export EDITOR=vim
-
-COMANDOS USADOS: Ctrl+X Ctrl+E
 
 
 --- Ejercicio 29 (BONUS 4): Insertar salto de línea literal -----------------
@@ -717,105 +377,3 @@ EXPLICACIÓN:
   ejecutar el comando. Es distinto de Enter en que no envía la línea
   al intérprete. Esto permite escribir comandos multilínea sin que
   bash los ejecute prematuramente.
-
-COMANDOS USADOS: Ctrl+J
-
-
---- Ejercicio 30 (BONUS 5): Autocompletar nombres de comando con Alt+! ----
-
-ESCENARIO:
-  No recuerdas si el comando que buscas es "ifconfig", "ipconfig"
-  o "iwconfig".
-
-SOLUCIÓN:
-  Escribe:  ifc
-  Pulsa:    Alt+!
-
-EXPLICACIÓN:
-  Alt+! (complete-command) completa exclusivamente nombres de comandos
-  del sistema (los que están en $PATH). A diferencia de Tab, que intenta
-  completar archivos y comandos, Alt+! solo busca ejecutables. Si hay
-  múltiples coincidencias, las muestra o completa hasta el prefijo común.
-
-COMANDOS USADOS: Alt+!
-
-
-========================================================================
-RESUMEN DE COMANDOS PRACTICADOS
-========================================================================
-
-Movimiento:
-  Ctrl+A        Ir al inicio de la línea                    (Ej. 1)
-  Ctrl+E        Ir al final de la línea                     (Ej. 5)
-  Ctrl+F        Avanzar un carácter                         (Ej. 2)
-  Ctrl+B        Retroceder un carácter                      (Ej. 15)
-  Alt+F         Avanzar una palabra                         (Ej. 3)
-  Alt+B         Retroceder una palabra                      (Ej. 6)
-  Ctrl+]        Buscar carácter hacia adelante              (Ej. 13)
-  Alt+Ctrl+]    Buscar carácter hacia atrás                 (Ej. 14)
-  Alt+<         Ir al primer comando del historial          (Ej. 20)
-  Alt+>         Ir al último comando del historial          (Ej. 20)
-
-Borrado:
-  Ctrl+D        Borrar carácter bajo el cursor              (Ej. 1)
-  Ctrl+H        Backspace alternativo                       (Ej. 15)
-  Alt+D         Borrar palabra hacia adelante               (Ej. 6)
-  Ctrl+W        Borrar palabra hacia atrás                  (Ej. 5)
-  Ctrl+K        Borrar hasta el final de la línea           (Ej. 7)
-  Ctrl+U        Borrar hasta el inicio de la línea          (Ej. 8)
-  Ctrl+Y        Pegar (yank) lo último borrado              (Ej. 10)
-  Alt+\         Borrar espacios alrededor del cursor        (Ej. 9)
-
-Historial:
-  Ctrl+P        Comando anterior                            (Ej. 18)
-  Ctrl+N        Comando siguiente                           (Ej. 20)
-  Ctrl+R        Buscar en el historial                      (Ej. 16)
-  Ctrl+G        Cancelar búsqueda en historial              (Ej. 16)
-  Alt+.         Último argumento del comando anterior       (Ej. 17)
-  Alt+R         Revertir cambios en línea del historial     (Ej. 19)
-  Ctrl+O        Ejecutar y traer el siguiente               (Ej. 18)
-
-Misceláneos:
-  Ctrl+J        Enter alternativo (salto de línea literal)  (Ej. 29)
-  Ctrl+L        Limpiar pantalla                            (Ej. 26)
-  Ctrl+T        Transponer dos caracteres                   (Ej. 2)
-  Alt+U         Mayúsculas hasta fin de palabra             (Ej. 4)
-  Alt+L         Minúsculas hasta fin de palabra             (Ej. 3)
-  Ctrl+_        Borrar línea completa                       (Ej. 11)
-  Alt+#         Comentar comando y guardar en historial     (Ej. 27)
-  Ctrl+X Ctrl+E Abrir comando en $EDITOR                    (Ej. 28)
-
-Autocompletado:
-  Tab           Autocompletar genérico                      (Ej. 21)
-  Alt+?         Listar posibles autocompletados             (Ej. 22)
-  Alt+/         Autocompletar nombre de archivo             (Ej. 23)
-  Alt+$         Autocompletar variable de shell             (Ej. 24)
-  Alt+@         Autocompletar nombre de host                (Ej. 25)
-  Alt+!         Autocompletar nombre de comando             (Ej. 30)
-
-
-========================================================================
-PRÓXIMOS PASOS
-========================================================================
-
-1. Repite el tutorial una vez por semana. No intentes memorizar todos
-   los comandos de golpe. Concéntrate en 3-4 cada vez.
-
-2. Los comandos de mayor retorno de inversión son:
-   Ctrl+A, Ctrl+E, Alt+F, Alt+B, Ctrl+W, Alt+D, Ctrl+K, Ctrl+Y, Alt+.
-
-3. Para practicar en el día a día: cada vez que te descubras usando las
-   flechas de dirección o manteniendo Backspace, PARA. Piensa: "¿qué
-   atajo de Emacs haría esto en menos pulsaciones?" y usa el atajo aunque
-   al principio te resulte más lento. La memoria muscular se construye
-   con repetición deliberada.
-
-4. Si tu terminal no responde a Alt, configura tu emulador de terminal:
-   - Gnome Terminal / Konsole / iTerm2: habilita "Usar Alt como Meta"
-   - tmux: asegúrate de que Meta está configurada (set -g prefix M-...)
-
-5. Crea tus propios ejercicios: cada vez que corrijas un comando roto
-   de forma elegante, anota la secuencia. Tus propios errores son los
-   mejores ejercicios.
-
-¡Buena suerte! La terminal nunca volverá a ser un obstáculo.

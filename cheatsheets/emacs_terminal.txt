@@ -11,8 +11,6 @@ Alt+F            | Avanzar una palabra
 Alt+B            | Retroceder una palabra
 Ctrl+]           | Buscar carácter hacia adelante
 Alt+Ctrl+]       | Buscar carácter hacia atrás
-Alt+<            | Ir al primer comando del historial
-Alt+>            | Ir al último comando del historial
 
 # Borrado
 Ctrl+D           | Borrar caracter bajo el cursor
@@ -31,7 +29,6 @@ Ctrl+R           | Buscar en el historial (modo búsqueda)
 Ctrl+G           | Salir del modo búsqueda sin seleccionar
 Alt+.            | Insertar el último argumento del comando anterior
 Alt+R            | Revertir cambios en una línea del historial
-Ctrl+O           | Ejecutar comando actual y traer el siguiente del historial
 
 # Misceláneos útiles
 Ctrl+J           | Enter alternativo
@@ -39,14 +36,6 @@ Ctrl+L           | Limpiar la pantalla (como clear)
 Ctrl+T           | Transponer dos caracteres
 Alt+U            | Mayúsculas desde el cursor hasta el final de la palabra
 Alt+L            | Minúsculas desde el cursor hasta el final de la palabra
-Ctrl+_           | Borra línea completa
-Alt+#            | Inserta # al inicio de la línea y la ejecuta (comenta el comando actual)
+Ctrl+_           | Deshacer
+Alt+#            | Inserta # al inicio de la línea y la ejecuta
 Ctrl+X Ctrl+E    | Abrir el comando actual en $EDITOR para edición
-
-# Comandos de autocompletado
-Tab              | Autocompletar archivo/comando
-Alt+?            | Listar posibles autocompletados (en columnas, sin Ctrl+C)
-Alt+/            | Autocompletar nombre de archivo
-Alt+$            | Autocompletar variable de shell ($PATH, $HOME...)
-Alt+@            | Autocompletar hostname (localhost, google.com...)
-Alt+!            | Autocompletar nombre de comando
