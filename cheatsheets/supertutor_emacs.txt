@@ -138,7 +138,7 @@ SOLUCIÓN:
 LECCIÓN 3: CORTAR, PEGAR Y DESHACER
 ========================================================================
 
---- Ejercicio 11: Borrar línea completa y empezar de cero -------------------
+--- Ejercicio 10: Borrar línea completa y empezar de cero -------------------
 
 COMANDO ROTO:
   find / -name "*.log" -mtime -7 -exec grep "ERROR" {} \; | sort | uniq -c | tee errores.txt
@@ -150,7 +150,7 @@ SOLUCIÓN:
   Ctrl+U
 
 
---- Ejercicio 12: Recuperar lo borrado accidentalmente con Ctrl+Y -----------
+--- Ejercicio 11: Recuperar lo borrado accidentalmente con Ctrl+Y -----------
 
 COMANDO ROTO:
   cat /var/log/syslog | grep "error" | awk '{print $1, $2, $3}' | head -20
@@ -177,7 +177,7 @@ Cuando editas comandos largos, ir palabra por palabra es lento. Esta
 lección enseña a saltar directamente al carácter que buscas.
 
 
---- Ejercicio 13: Saltar al siguiente carácter con Ctrl+] -------------------
+--- Ejercicio 12: Saltar al siguiente carácter con Ctrl+] -------------------
 
 COMANDO ROTO:
   curl -H "Authorization: Bearer abc123" https://api.ejemplo.com/v1/items
@@ -195,7 +195,7 @@ SOLUCIÓN:
   escribe "xyz789" y Enter
 
 
---- Ejercicio 14: Saltar al carácter anterior con Alt+Ctrl+] ----------------
+--- Ejercicio 13: Saltar al carácter anterior con Alt+Ctrl+] ----------------
 
 COMANDO ROTO:
   ssh admin@192.168.1.100 -p 2222
@@ -212,7 +212,7 @@ SOLUCIÓN:
   escribe "10.0.0.50" y Enter
 
 
---- Ejercicio 15: Retroceder carácter a carácter con Ctrl+B ----------------
+--- Ejercicio 14: Retroceder carácter a carácter con Ctrl+B ----------------
 
 COMANDO ROTO:
   python script.py --input data_2024.csv --output results_2024.json
@@ -236,7 +236,7 @@ El historial no es solo para repetir comandos. Es un espacio de trabajo
 donde puedes buscar, modificar y encadenar acciones previas.
 
 
---- Ejercicio 16: Buscar en el historial con Ctrl+R -------------------------
+--- Ejercicio 15: Buscar en el historial con Ctrl+R -------------------------
 
 ESCENARIO:
   Hace 20 comandos ejecutaste:
@@ -251,7 +251,7 @@ SOLUCIÓN:
   Si quieres cancelar la búsqueda sin ejecutar nada: Ctrl+G.
 
 
---- Ejercicio 17: Insertar el último argumento con Alt+. --------------------
+--- Ejercicio 16: Insertar el último argumento con Alt+. --------------------
 
 ESCENARIO:
   Acabas de crear un directorio muy profundo:
@@ -272,7 +272,7 @@ EXPLICACIÓN:
   cp + vim.
 
 
---- Ejercicio 19: Restaurar un comando del historial con Alt+R --------------
+--- Ejercicio 17: Restaurar un comando del historial con Alt+R --------------
 
 ESCENARIO:
   Recuperaste un comando del historial con Ctrl+P, lo editaste
@@ -282,7 +282,7 @@ SOLUCIÓN:
   Alt+R
 
 
---- Ejercicio 20: Navegar el historial hacia adelante y atrás --------------
+--- Ejercicio 18: Navegar el historial hacia adelante y atrás --------------
 
 ESCENARIO:
   Te pasaste pulsando Ctrl+P y te fuiste demasiado atrás en el historial.
@@ -301,7 +301,7 @@ El autocompletado de bash/readline va mucho más allá del Tab. Puedes
 completar comandos, archivos, variables y nombres de host por separado.
 
 
---- Ejercicio 22: Listar opciones de autocompletado con Alt+? --------------
+--- Ejercicio 19: Listar opciones de autocompletado con Alt+? --------------
 
 ESCENARIO:
   Estás en /etc/ y escribes "cat sys". Pulsas Tab pero no completa
@@ -321,7 +321,7 @@ Estos comandos no encajan en una sola categoría, pero son los que
 convierten a un usuario de terminal en un power user.
 
 
---- Ejercicio 26 (BONUS 1): Limpiar pantalla sin perder el comando ----------
+--- Ejercicio 20 (BONUS 1): Limpiar pantalla sin perder el comando ----------
 
 ESCENARIO:
   Tu terminal está llena de logs y output viejo. Quieres limpiar sin
@@ -331,7 +331,7 @@ SOLUCIÓN:
   Ctrl+L
 
 
---- Ejercicio 27 (BONUS 2): Guardar un comando sin ejecutarlo ---------------
+--- Ejercicio 21 (BONUS 2): Guardar un comando sin ejecutarlo ---------------
 
 ESCENARIO:
   Escribiste un comando largo y peligroso. Quieres guardarlo en el
@@ -342,7 +342,7 @@ SOLUCIÓN:
   Alt+#
 
 
---- Ejercicio 28 (BONUS 3): Editar el comando actual en tu $EDITOR ---------
+--- Ejercicio 22 (BONUS 3): Editar el comando actual en tu $EDITOR ---------
 
 ESCENARIO:
   Necesitas escribir un comando muy complejo con múltiples pipes,
@@ -352,7 +352,7 @@ SOLUCIÓN:
   Ctrl+X  Ctrl+E
 
 
---- Ejercicio 29 (BONUS 4): Insertar salto de línea literal -----------------
+--- Ejercicio 23 (BONUS 4): Insertar salto de línea literal -----------------
 
 ESCENARIO:
   Quieres escribir un here-doc multilínea directamente en la terminal:

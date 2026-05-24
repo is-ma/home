@@ -1,0 +1,2366 @@
+#####################################################################
+#                    HELIX TUTOR                                    #
+#             70 ejercicios para edición quirúrgica                 #
+#           con selecciones múltiples y tree-sitter                 #
+#####################################################################
+
+=== CÓMO USAR ESTE TUTORIAL =========================================
+
+Abre este archivo en Helix. Cada ejercicio te propone un TEXTO INICIAL
+que debes transformar en el OBJETIVO usando las pulsaciones de la
+SOLUCIÓN. Practica directamente sobre este archivo.
+
+CONVENCIONES:
+  <Esc>        = Escape (vuelve a normal mode)
+  <Ret>        = Enter
+  <Tab>        = Tabulador
+  <Space>      = Barra espaciadora
+  <A-letra>    = Alt + letra (ej. <A-o> = Alt+O)
+  <C-letra>    = Ctrl + letra (ej. <C-c> = Ctrl+C)
+  <C-w>letra   = Ctrl+W, luego la letra
+  gletra       = g, luego la letra (goto mode)
+  zletra       = z, luego la letra (view mode)
+  Zletra       = Z mayúscula, luego la letra (sticky view)
+  mletra       = m, luego la letra (match mode)
+  "letra       = comilla + letra (seleccionar registro)
+
+Los comandos en mayúscula (W, B, E, etc.) son pulsaciones
+de mayúscula o Shift+letra.
+
+Cada ejercicio es independiente. Restaura el texto inicial con
+<Esc> u <A-u> (undo) antes de repetirlo.
+
+NOTA: Los ejercicios con (LSP) requieren un language server activo
+para el lenguaje del archivo. Los que marcan (TS) necesitan el
+grammar tree-sitter instalado.
+
+====================================================================
+SECCIÓN 1: NAVEGACIÓN QUIRÚRGICA
+====================================================================
+
+En Helix, cada movimiento puede ser también una extensión de selección
+si estás en select mode (v). Dominar el movimiento es dominar la
+selección. Aquí practicarás moverte sin tocar las flechas.
+
+
+--- Navegación compuesta: palabras + WORDS --------------------------
+
+ESCENARIO:
+  Tienes una línea de código y necesitas llegar a puntos específicos
+  usando combinaciones de movimientos por palabra y WORD.
+
+TEXTO INICIAL:
+  const MAX_CONNECTIONS: usize = 1500;
+
+OBJETIVO:
+  const MAX_RETRIES: usize = 3;
+
+SOLUCIÓN:
+  w w w       (tres palabras adelante: "MAX_CONNECTIONS")
+  b e         (retrocede al inicio de "MAX_CONNECTIONS", avanza al final)
+  d i w       (borra "CONNECTIONS" -- delete inner word)
+  i           (entra en insert mode)
+  RETRIES<Esc> (escribe y vuelve a normal)
+  w w w       (llega a "1500")
+  d i w       (borra "1500")
+  i           (insert mode)
+  3<Esc>
+
+
+--- Cacería de caracteres con f, F, t, T --------------------------------
+
+ESCENARIO:
+  Necesitas llegar exactamente a un carácter específico. Los comandos
+  f/F (find) y t/T (till) te llevan al vuelo. A diferencia de Vim,
+  en Helix no están limitados a la línea actual.
+
+TEXTO INICIAL:
+  git commit -m "fix: corrige el bug de autenticación en el módulo de usuarios"
+
+OBJETIVO:
+  git commit -m "feat: añade test de carga para el módulo de pagos"
+
+SOLUCIÓN:
+  f "         (salta a la primera comilla doble)
+  ;           (repite el último motion: salta a la siguiente comilla)
+  ; ;         (dos veces más hasta la comilla de cierre)
+  F :         (retrocede hasta los dos puntos de "fix:")
+  t :         (se sitúa justo antes de los dos puntos)
+  d i w       (borra "fix")
+  i feat<Esc> (escribe "feat")
+  f "         (salta a la siguiente comilla)
+  ; ;         (sigue saltando comillas hasta "usuarios")
+  T d         (retrocede hasta justo antes de la 'd' de "de")
+  b b         (retrocede dos palabras: "el", "módulo")
+  d w         (borra "módulo")
+  i pagos<Esc>(escribe "pagos")
+  T u         (retrocede hasta justo antes de "usuarios")
+  d w         (borra "usuarios")
+  g e         (va al final del archivo para refrescar)
+  <Esc>       (asegura normal mode)
+
+
+--- Saltos estructurales con gg, ge, G, gs -----------------------------
+
+ESCENARIO:
+  Los comandos del goto mode (g) te permiten saltar a extremos del
+  archivo, a la pantalla visible y a whitespace significativo.
+
+TEXTO INICIAL (ejecuta estos movimientos sobre el archivo completo):
+
+  Línea 1:   package main
+  Línea 2:
+  Línea 3:   import "fmt"
+  Línea 4:
+  Línea 5:   func main() {
+  Línea 6:       fmt.Println("  hola  ")
+  Línea 7:   }
+
+OBJETIVO: Lleva el cursor a cada una de las siguientes posiciones:
+
+  a) Primera línea del archivo (package main)
+  b) Última línea (})
+  c) Primer carácter no whitespace de la línea 6
+  d) Inicio de la línea 6
+  e) Final de la línea 6
+
+SOLUCIÓN:
+  g g         (va a la primera línea -- package main)
+  g e         (va a la última línea -- })
+  g e         (va a la línea 6 si está en la última línea, o usa G)
+  G           (va a la línea 6)
+  g s         (primer no-whitespace de la línea actual)
+  ||| NOTA: |
+  | gs = first_nonwhitespace en la línea actual                 |
+  g h         (inicio de la línea actual)
+  g l         (final de la línea actual)
+
+
+--- Paseo a media página: Ctrl-u, Ctrl-d, Ctrl-b, Ctrl-f -----------------
+
+ESCENARIO:
+  En lugar de saltar línea por línea, puedes avanzar medias páginas
+  o páginas completas. El cursor se mueve con la pantalla.
+
+TEXTO INICIAL (colócate en la línea 1 y ve bajando):
+
+  (imagina un archivo con ~80 líneas; practica estos movimientos)
+
+OBJETIVO: Desplázate así:
+
+  a) Baja media página
+  b) Baja otra media página
+  c) Sube media página
+  d) Baja una página completa
+  e) Sube una página completa
+
+SOLUCIÓN:
+  <C-d>       (baja media página, el cursor se mueve con la pantalla)
+  <C-d>       (otra media página)
+  <C-u>       (sube media página)
+  <C-f>       (baja una página completa)
+  <C-b>       (sube una página completa)
+
+
+--- La lista de saltos: Ctrl-i, Ctrl-o, Ctrl-s ----------------------------
+
+ESCENARIO:
+  Cada vez que saltas (con gd, gf, etc.), Helix guarda la posición
+  anterior en la jumplist. Puedes navegar hacia adelante y atrás
+  en esa lista.
+
+TEXTO INICIAL:
+  fn parse_config(path: &str) -> Result<Config, Error> {
+      let content = std::fs::read_to_string(path)?;
+      let cfg: Config = toml::from_str(&content)?;
+      Ok(cfg)
+  }
+
+  fn main() {
+      let config = parse_config("config.toml").unwrap();
+      println!("{config:?}");
+  }
+
+OBJETIVO:
+  Salta a la definición de parse_config desde main(), vuelve,
+  y guarda la selección actual en la jumplist.
+
+SOLUCIÓN:
+  / parse_config<Ret>  (busca "parse_config" desde donde estés)
+  g d           (va a la definición de parse_config [LSP])
+  <C-o>         (vuelve atrás en la jumplist -- a main())
+  <C-i>         (va adelante en la jumplist -- a parse_config)
+  <C-s>         (guarda la selección actual en la jumplist)
+  <Space> j     (abre el picker de la jumplist para ver todas)
+
+
+--- Goto mode: g seguido de una letra ------------------------------------
+
+ESCENARIO:
+  El modo goto (g) se abre con una sola pulsación de g normal, no gg.
+  gg es para ir al inicio del archivo. El resto de comandos g+letra
+  son accesos directos a posiciones clave.
+
+TEXTO INICIAL:
+  fn calcular_total(items: &[Item]) -> f64 {
+      let mut total = 0.0;
+      for item in items {
+          total += item.precio * item.cantidad as f64;
+      }
+      total
+  }
+
+  fn main() {
+      let items = vec![
+          Item { precio: 10.5, cantidad: 3 },
+          Item { precio: 25.0, cantidad: 2 },
+      ];
+      println!("Total: {}", calcular_total(&items));
+  }
+
+OBJETIVO:
+  a) Colócate en el primer carácter no-whitespace de la línea con "total"
+  b) Salta a la última línea modificada del archivo
+  c) Salta al último archivo accedido (alterna entre buffers)
+  d) Colócate en la parte superior de la pantalla
+
+SOLUCIÓN:
+  : g s         (Esto no funciona así; gs es una sola tecla)
+  g s           (va al primer no-whitespace de la línea actual)
+  g m           (va al último archivo modificado -- alterna buffer)
+  g a           (va al último archivo accedido -- alterna buffer)
+  g t           (va a la parte superior de la ventana)
+  g c           (va al centro de la ventana)
+  g b           (va a la parte inferior de la ventana)
+
+
+--- Movimiento por párrafos y cambios: ]p, [p, ]g, [g --------------------
+
+ESCENARIO:
+  Los comandos unimpaired (inspirados en vim-unimpaired) permiten
+  navegar entre párrafos, cambios y otros elementos estructurales.
+
+TEXTO INICIAL:
+  fn primera() {
+      println!("una");
+  }
+
+  fn segunda() {
+      println!("dos");
+  }
+
+  fn tercera() {
+      println!("tres");
+  }
+
+OBJETIVO: Navega en este orden:
+
+  a) Baja al siguiente párrafo
+  b) Sube al párrafo anterior
+  c) Salta al siguiente cambio en el archivo
+  d) Salta al primer cambio del archivo
+
+SOLUCIÓN:
+  ] p           (baja al siguiente párrafo)
+  [ p           (sube al párrafo anterior)
+  ] g           (siguiente cambio en el archivo -- donde editaste)
+  [ G           (primer cambio del archivo)
+  ] G           (último cambio del archivo)
+
+====================================================================
+SECCIÓN 2: SELECCIONES MÚLTIPLES
+====================================================================
+
+El superpoder de Helix son las selecciones múltiples. Casi cualquier
+comando opera sobre TODAS las selecciones activas simultáneamente.
+
+
+--- Copiar selección vertical: C y Alt-C ---------------------------------
+
+ESCENARIO:
+  Tienes varias líneas similares y quieres añadir un cursor en cada
+  una para editarlas al mismo tiempo.
+
+TEXTO INICIAL:
+  nombre: str = "alice"
+  email: str = "alice@example.com"
+  rol: str = "admin"
+  activo: bool = True
+
+OBJETIVO:
+  nombre: str = "alice alice"
+  email: str = "alice alice@example.com"
+  rol: str = "admin admin"
+  activo: bool = True
+
+SOLUCIÓN:
+  / : <Ret>     (busca los dos puntos, deja selección en el primer match)
+  n n n         (expande la selección a los siguientes 3 matches de ":")
+  ;             (colapsa a un cursor por selección)
+  <A-;>         (flipa cursor y anchor -- el cursor va al inicio)
+  <A-:>         (asegura que todas las selecciones miran hacia adelante)
+  C C C C       (copia la selección en las 4 líneas siguientes)
+  w             (mueve todos los cursores una palabra)
+  i hola <Esc>  (inserta "hola" en las 4 líneas simultáneamente)
+  | OJO: Este ejercicio es conceptual. Ajusta según el texto real. |
+  | En su lugar, prueba:                                           |
+  |                                                               |
+  | Sitúate en "nombre"                                           |
+  | x x x x      (selecciona las 4 líneas)                        |
+  | C            (copia la selección en la línea siguiente)        |
+  | <Esc>        (algo salió mal, deshace con u)                  |
+  |                                                               |
+  | Mejor práctica:                                               |
+  | Colócate en la línea 1                                        |
+  | x x x x  (extiende selección a las 4 líneas)                  |
+
+
+--- Selección por patrón regex: s ---------------------------------------
+
+ESCENARIO:
+  El comando s busca un patrón DENTRO de la selección actual y crea
+  una selección por cada match. Esto permite extraer y modificar
+  subcadenas específicas.
+
+TEXTO INICIAL:
+  user_123 = "Juan Perez"
+  user_456 = "Maria Garcia"
+  user_789 = "Carlos Lopez"
+
+OBJETIVO:
+  user_123 = "JUAN PEREZ"
+  user_456 = "MARIA GARCIA"
+  user_789 = "CARLOS LOPEZ"
+
+SOLUCIÓN:
+  v             (entra en select mode)
+  %             (selecciona todo el archivo)
+  s \A".*"\z    (busca el contenido entre comillas -- s + patrón)
+  | NOTA: regex no es exacto, ajusta: |
+  s " . * "     (no, s usa regex. Prueba: )
+  s ".*"        (selecciona todo lo que está entre comillas)
+  <Esc>         (¡Ups! Saliste de select mode. Vuelve a entrar)
+  v             (select mode)
+  `             (convierte a minúsculas todo lo seleccionado)
+  <A-`>         (convierte a mayúsculas todo lo seleccionado)
+  | ALTERNATIVA MÁS PRÁCTICA: |
+  Colócate en "Juan Perez"
+  v i "         (selecciona inner quote -- el contenido)
+  <A-`>         (pone en mayúsculas)
+  j .           (baja y repite la última operación)
+  j .           (baja y repite otra vez)
+
+
+--- Dividir selecciones en subselecciones: S ------------------------------
+
+ESCENARIO:
+  El comando S (mayúscula) divide la selección actual en múltiples
+  cursor en cada coincidencia del patrón. A diferencia de s, S crea
+  cursores NO superpuestos.
+
+TEXTO INICIAL:
+  fn suma(a: i32, b: i32) -> i32 { a + b }
+  fn resta(a: i32, b: i32) -> i32 { a - b }
+  fn mul(a: i32, b: i32) -> i32 { a * b }
+
+OBJETIVO: Borra todos los parámetros de todos los argumentos.
+
+SOLUCIÓN:
+  %             (selecciona todo)
+  S i32         (divide en cursores en cada ocurrencia de "i32")
+  | Espera, S espera un patrón regex. |
+  %             (selecciona todo)
+  S \b i 3 2 \b (no, mejor)
+  S i32         (divide la selección en cada "i32")
+  | Alternativa: selecciona cada coma de parámetro |
+  %             (selecciona todo)
+  s a \s * : \s * i 3 2 (no, mejor así:)
+  |
+  | PRUEBA ESTO: |
+  | Colócate en la línea de suma. |
+  v i p         (selecciona el párrafo entero)
+  S ,           (divide en cada coma)
+  ;             (colapsa cada selección a un cursor)
+  d d           (borra cada selección -- ¡boom!)
+
+
+--- Fusión de selecciones: Alt--, Alt-_ -----------------------------------
+
+ESCENARIO:
+  A veces te pasas creando cursores. Alt-- (Alt+guion) fusiona todas
+  las selecciones en una sola. Alt+_ fusiona solo las consecutivas.
+
+TEXTO INICIAL:
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+OBJETIVO: Convierte la línea en: [1 2 3 4 5 6 7 8 9 10]
+
+SOLUCIÓN:
+  %             (selecciona todo)
+  S \d +        (divide en cada número... mejor usar s)
+  s \d+         (selecciona cada número)
+  ;             (colapsa cada selección al cursor)
+  <A-->         (fusiona todas las selecciones en una sola)
+  | Eso no fue lo que querías. Mejor: |
+  %             (selecciona todo)
+  s ,           (selecciona las comas)
+  d             (borra las comas)
+  | Ahora fusiona: |
+  <A-->         (fusiona todas las selecciones vacías en una)
+  ;             (colapsa en un solo cursor)
+
+
+--- Rotación de selecciones: ), (, Alt-), Alt-( -------------------------
+
+ESCENARIO:
+  Con varias selecciones activas, ) y ( rotan cuál es la selección
+  "principal" (la que tiene el cursor más visible). Alt-) y Alt-(
+  rotan el contenido entre las selecciones.
+
+TEXTO INICIAL:
+  let a = 1;
+  let b = 2;
+  let c = 3;
+  let d = 4;
+
+OBJETIVO: Intercambia los valores para que quede:
+  let a = 4;
+  let b = 3;
+  let c = 2;
+  let d = 1;
+
+SOLUCIÓN:
+  v             (select mode)
+  %             (selecciona todo)
+  s = \s * \d + (busca "= número")
+  w             (expande selección al número)
+  | Mejor: |
+  v %           (selecciona todo)
+  s \d +        (selecciona cada número)
+  <A-(>        (rota contenidos hacia atrás)
+  <A-(>        (otra vez)
+  | Así los números se desplazan circularmente. |
+  | Para invertirlos, usa <A-(> hasta lograr el orden. |
+
+
+--- Mantener y eliminar selecciones por patrón: K y Alt-K -----------------
+
+ESCENARIO:
+  Tienes muchas selecciones y quieres quedarte solo con las que
+  (o sin las que) coinciden con un regex.
+
+TEXTO INICIAL:
+  ERROR: conexión fallida
+  INFO: servicio iniciado
+  WARN: memoria baja
+  ERROR: timeout excedido
+  INFO: proceso completado
+
+OBJETIVO: Elimina todas las líneas INFO, conserva solo ERROR y WARN.
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  s ^ \w +      (selecciona la palabra inicial de cada línea)
+  | Mejor: |
+  x x x x x     (extiende selección a las 5 líneas)
+  K INFO        (keep selections -- solo las que contengan "INFO")
+  | Espera: K quita las que NO coinciden. Queremos lo contrario: |
+  x x x x x     (selecciona las 5 líneas)
+  <A-K> ERROR   (remove selections: quita las que tengan "ERROR")
+  <A-K> WARN    (remove selections: quita las que tengan "WARN")
+  | Ahora solo quedan las INFO. En realidad queríamos eliminar INFO: |
+  u u u         (deshace hasta el inicio)
+  x x x x x     (selecciona 5 líneas)
+  K ERROR|WARN  (keep solo ERROR o WARN con regex)
+  d             (borra todo lo NO seleccionado... )
+  | CUIDADO: K conserva las que coinciden. Así que: |
+  x x x x x
+  K ^INFO       (conserva solo las que empiezan con INFO)
+  <A-K> ^INFO  (o esto: elimina las que empiezan con INFO)
+  |
+  | MEJOR PRÁCTICA: |
+  x x x x x     (selecciona todo)
+  K ERROR       (mantiene solo las que contienen ERROR)
+  d             (borra esas líneas)
+  u             (deshace)
+  x x x x x     (selecciona de nuevo)
+  K WARN        (mantiene solo WARN)
+  d             (borra)
+  u             (deshace)
+
+
+--- La selección primaria: , y Alt-, ---------------------------------------
+
+ESCENARIO:
+  Con múltiples selecciones, puedes quedarte solo con la principal
+  (,) o eliminar la principal (Alt-,). Útil para refinar.
+
+TEXTO INICIAL:
+  nodo1 = "activo"
+  nodo2 = "inactivo"
+  nodo3 = "mantenimiento"
+  nodo4 = "activo"
+
+OBJETIVO: Concéntrate solo en editar "nodo2" y "nodo3".
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  s ^ \w +      (busca los nombres de los nodos al inicio)
+  | Alternativa: |
+  v %           (selecciona todo)
+  s nodo\w +    (selecciona cada nombre de nodo)
+  ;             (colapsa a un cursor por selección)
+  <A-,>         (elimina la selección primaria -- la primera)
+  ,             (se queda solo con la primaria, descarta el resto)
+  | Así puedes navegar entre cursores con ) y ( antes de decidir. |
+
+====================================================================
+SECCIÓN 3: TEXT OBJECTS TREE-SITTER (TS)
+====================================================================
+
+Helix usa tree-sitter para entender la estructura del código. Los
+text objects operan sobre esa estructura: funciones, clases,
+argumentos, comentarios, etc. Necesitas un grammar tree-sitter activo.
+
+Los text objects se usan con:
+  mi<letra>  = select inside  (igualmente expande selección)
+  ma<letra>  = select around (incluye bordes/delimitadores)
+
+
+--- Dentro y alrededor de objetos sintácticos ------------------------------
+
+ESCENARIO:
+  Necesitas operar sobre una función completa, o solo su cuerpo,
+  o solo un argumento. mi y ma seleccionan exactamente el nivel
+  que quieres.
+
+TEXTO INICIAL:
+  fn procesar_datos(origen: &str, destino: &str) -> Result<()> {
+      let data = leer_archivo(origen)?;
+      let limpio = sanitizar(&data);
+      guardar(limpio, destino)?;
+      Ok(())
+  }
+
+OBJETIVO: Selecciona y borra solo el cuerpo de la función (4 líneas).
+
+SOLUCIÓN:
+  Colócate en cualquier línea dentro de la función.
+  m i f         (select inside function -- TODO el cuerpo)
+  | Alternativamente: |
+  m a f         (select around function -- incluye la firma y la llave)
+  | Para borrar solo el cuerpo: |
+  m i f         (selecciona el interior de la función)
+  d             (borra el cuerpo entero -- ¡se fue!)
+
+
+--- Escalar en el árbol sintáctico: Alt-o y Alt-i -------------------------
+
+ESCENARIO:
+  No siempre sabes qué text object usar. Alt-o expande la selección
+  al padre sintáctico actual. Alt-i la reduce al hijo anterior.
+
+TEXTO INICIAL:
+  if usuario.activo && tiene_permiso("admin") {
+      println!("Acceso concedido a {}", usuario.nombre);
+  }
+
+OBJETIVO: Selecciona todo el if completo, empezando desde "usuario".
+
+SOLUCIÓN:
+  f .           (encuentra el primer punto -- en "usuario.activo")
+  <A-o>         (expande al padre: "usuario.activo")
+  <A-o>         (expande a la expresión "usuario.activo && ...")
+  <A-o>         (expande a la condición del if)
+  <A-o>         (expande al if statement completo)
+  | Para reducir: |
+  <A-i>         (reduce al hijo anterior -- la condición)
+  <A-i>         (reduce a la expresión derecha)
+
+
+--- Navegar hermanos y padres en el AST: Alt-n, Alt-p, Alt-a, Alt-I --------
+
+ESCENARIO:
+  El AST (Abstract Syntax Tree) es una estructura jerárquica.
+  Alt-n/Alt-p navegan entre hermanos. Alt-a selecciona todos los
+  hermanos. Alt-I selecciona todos los hijos.
+
+TEXTO INICIAL:
+  match status {
+      Status::Ok => 200,
+      Status::NotFound => 404,
+      Status::Error => 500,
+      Status::Timeout => 504,
+  }
+
+OBJETIVO: Selecciona todos los brazos del match y conviértelos a mayúsculas.
+
+SOLUCIÓN:
+  Colócate en "Status::Ok".
+  m a a         (select around argument -- o prueba:)
+  <A-p>         (hermano anterior en el AST)
+  <A-n>         (hermano siguiente en el AST)
+  | Para seleccionar todos los hijos de match: |
+  v %           (todo el archivo)
+  | Mejor: colócate en la línea con "match" |
+  <A-I>         (selecciona todos los hijos del nodo actual)
+  | Eso selecciona los brazos del match. |
+  <A-`>         (convierte a mayúsculas todas las selecciones)
+
+
+--- Argumentos y funciones: mia, maf, ]a, [a ------------------------------
+
+ESCENARIO:
+  Puedes seleccionar argumentos individuales (mia), funciones (maf),
+  y navegar entre argumentos con ]a y [a.
+
+TEXTO INICIAL:
+  let resultado = calculo_complejo(
+      parametro_uno,
+      parametro_dos,
+      parametro_tres,
+  );
+
+OBJETIVO: Borra "parametro_dos" y su coma anterior.
+
+SOLUCIÓN:
+  Colócate en "parametro_dos".
+  m i a         (select inside argument -- selecciona el argumento)
+  | Para expandir al argumento con su coma: |
+  m a a         (select around argument -- incluye la coma)
+  d             (borra el argumento con su coma)
+  | Para navegar entre argumentos: |
+  ] a           (next argument)
+  [ a           (prev argument)
+  | PRÁCTICA: borra todos los argumentos excepto el primero |
+  Colócate en "parametro_uno"
+  m a a         (around para incluir la coma siguiente)
+  ] a           (siguiente argumento)
+  m a a d       (selecciona around y borra)
+  ] a ] a d     (siguiente y borra)
+  | NOTA: La navegación ]a funciona incluso sin tree-sitter. |
+
+
+--- Comentarios y tests: mic, mat, ]c, [c, ]T, [T -------------------------
+
+ESCENARIO:
+  Tree-sitter también entiende comentarios y tests. Puedes navegar
+  y seleccionarlos directamente.
+
+TEXTO INICIAL:
+  // TODO: optimizar este bucle
+  fn calcular() {
+      // suma de todos los elementos
+      let total = datos.iter().sum();
+      // FIXME: esto puede overflow
+      total * 2
+  }
+
+  #[test]
+  fn test_calcular() {
+      assert_eq!(calcular(), 42);
+  }
+
+  #[test]
+  fn test_calcular_cero() {
+      assert_eq!(calcular_cero(), 0);
+  }
+
+OBJETIVO: Borra el primer comentario y navega al test anterior.
+
+SOLUCIÓN:
+  Colócate en el primer comentario "// TODO".
+  m i c         (select inside comment -- selecciona el comentario)
+  d             (lo borra)
+  ] T           (next test -- baja al primer test)
+  {NOTA: ]T busca tests marcados con #[test] si el grammar lo soporta}
+  [ T           (prev test -- sube al test anterior)
+  | Para navegar entre comentarios: |
+  ] c           (next comment)
+  [ c           (prev comment)
+
+
+--- Bloques anidados profundos: expande y reduce -------------------------
+
+ESCENARIO:
+  Cuando trabajas con código profundamente anidado, Alt-o/Alt-i
+  te permiten escalar desde el token más pequeño hasta el
+  statement completo sin pensar.
+
+TEXTO INICIAL:
+  let filtrados = usuarios
+      .iter()
+      .filter(|u| u.edad > 18 && u.activo)
+      .map(|u| u.nombre.clone())
+      .collect::<Vec<String>>();
+
+OBJETIVO: Selecciona desde "u.edad" hasta toda la cadena de métodos.
+
+SOLUCIÓN:
+  Colócate en "edad".
+  f .           (salta al punto de "u.edad")
+  <A-o>         (expande a "u.edad")
+  <A-o>         (expande a "u.edad > 18")
+  <A-o>         (expande a "u.edad > 18 && u.activo")
+  <A-o>         (expande al closure entero)
+  <A-o>         (expande al argumento de .filter())
+  <A-o>         (expande a toda la cadena .iter().filter()...)
+  <A-o>         (expande al let statement completo)
+  | Para retroceder: |
+  <A-i>         (reduce un nivel)
+  <A-i>         (reduce otro nivel)
+
+====================================================================
+SECCIÓN 4: SURROUND
+====================================================================
+
+Helix incluye funcionalidad similar a vim-surround. Se accede desde
+match mode (m): ms (add), mr (replace), md (delete).
+
+
+--- Envolver selecciones con ms -------------------------------------------
+
+ESCENARIO:
+  Tienes una palabra y quieres rodearla con paréntesis, corchetes,
+  comillas, etc.
+
+TEXTO INICIAL:
+  let url = "https://api.example.com/v1/users"
+
+OBJETIVO:
+  let url = Some("https://api.example.com/v1/users")
+
+SOLUCIÓN:
+  f "           (salta a la primera comilla)
+  v i "         (selecciona inner quote -- el contenido)
+  | Cuidado: i" selecciona todo entre comillas. |
+  | Pero queremos envolver, no reemplazar. Así que: |
+  f "           (salta a la comilla)
+  m i "         (select inside quotes -- el contenido sin comillas)
+  | NO: ms se aplica a una selección existente. |
+  | PRÁCTICA CORRECTA: |
+  f "           (salta a la comilla de apertura)
+  v             (select mode)
+  f "           (extiende selección hasta la comilla de cierre)
+  m s (         (envuelve la selección con paréntesis)
+  | Eso añade () alrededor de "https://...". |
+  | Para añadir Some() y conservar las comillas: |
+  u             (deshace)
+  f h           (salta a la h de https)
+  v             (select mode)
+  f "           (extiende hasta la comilla de cierre)
+  m s (         (envuelve con paréntesis)
+  b             (retrocede a la S de "Some"... no está)
+  | Mejor práctica: simplemente escribe Some() alrededor |
+  f "           (salta a la comilla de apertura)
+  i Some(       (inserta "Some(" antes)
+  <Esc>         (normal mode)
+  f "           (salta a la última comilla del texto)
+  ;             (repite: salta a la siguiente comilla...)
+  a )           (append ")" después)
+  <Esc>
+
+
+--- Reemplazar surrounds con mr --------------------------------------------
+
+ESCENARIO:
+  Necesitas cambiar (algo) por [algo], o 'texto' por "texto".
+
+TEXTO INICIAL:
+  let data = (nombre, edad, email);
+
+OBJETIVO:
+  let data = [nombre, edad, email];
+
+SOLUCIÓN:
+  Colócate dentro de los paréntesis.
+  m r ( [       (reemplaza el surround ( por [)
+  | mr espera: primero el carácter a reemplazar, luego el nuevo. |
+  | Si el surround tiene diferentes apertura/cierre, mr detecta
+    el par más cercano al cursor. |
+
+
+--- Eliminar surrounds con md -----------------------------------------------
+
+ESCENARIO:
+  Tienes comillas dobles alrededor de una string, o paréntesis
+  innecesarios, y quieres eliminarlos sin tocar el contenido.
+
+TEXTO INICIAL:
+  print!("El valor es: {valor}")
+
+OBJETIVO:
+  print!("El valor es: {valor}")    (sin cambios aquí)
+  | Mejor ejemplo: |
+  ("  valor  ")
+
+OBJETIVO:
+  valor
+
+SOLUCIÓN:
+  Colócate dentro de los paréntesis.
+  m d (         (elimina el surround ( -- borra () y deja el contenido)
+  | Para las comillas: |
+  m d "         (elimina las comillas dobles)
+  | md busca el surround más cercano al cursor y lo elimina
+    dejando el contenido intacto. |
+
+
+--- Surround con multiselección --------------------------------------------
+
+ESCENARIO:
+  Tienes varias palabras iguales esparcidas y quieres rodearlas
+  todas a la vez con el mismo surround.
+
+TEXTO INICIAL:
+  let [x, y, z] = obtener_coordenadas();
+  println!("x: {}, y: {}, z: {}", x, y, z);
+  assert_eq!(x + y + z, 42);
+
+OBJETIVO: Rodea cada variable x, y, z individual con paréntesis:
+  let [(x), (y), (z)] = obtener_coordenadas();
+  println!("x: {}, y: {}, z: {}", (x), (y), (z));
+  assert_eq!((x) + (y) + (z), 42);
+
+SOLUCIÓN:
+  v %           (selecciona todo el archivo)
+  s \b (x | y | z) \b  (busca x, y, z como palabras completas)
+  | NOTA: s es select regex, busca dentro de la selección actual |
+  s \b[xyz]\b   (regex: letra x, y o z como palabra completa)
+  m s (         (envuelve cada una con paréntesis)
+  | ¡Todas las x, y, z quedan rodeadas de paréntesis! |
+
+====================================================================
+SECCIÓN 5: MANIPULACIÓN AVANZADA DE TEXTO
+====================================================================
+
+
+--- Join de líneas: J y Alt-J ----------------------------------------------
+
+ESCENARIO:
+  Tienes varias líneas que quieres unir en una sola. J las une
+  (insertando un espacio). Alt-J las une y selecciona el espacio
+  insertado.
+
+TEXTO INICIAL:
+  let mensaje =
+      format!("Usuario {} ha iniciado sesión desde {}",
+              usuario.nombre,
+              usuario.ip);
+
+OBJETIVO:
+  let mensaje = format!("Usuario {} ha iniciado sesión desde {}",
+                        usuario.nombre, usuario.ip);
+
+SOLUCIÓN:
+  Colócate en la línea "usuario.nombre,".
+  x x x         (selecciona las 2 líneas de argumentos)
+  J             (join selections -- las une en una línea)
+  | Para ajustar: la línea queda formateada. |
+  | Alternativa: join de las 3 líneas del format! |
+  g c           (centra la vista si es necesario)
+  x x x x       (selecciona las 4 líneas del let)
+  J             (las une todas en una)
+
+
+--- Ordenar y alinear con & y :sort ----------------------------------------
+
+ESCENARIO:
+  & alinea selecciones en columnas. :sort ordena las líneas
+  seleccionadas.
+
+TEXTO INICIAL:
+  let users = [
+      ("admin",   "admin@site.com",    true),
+      ("root",    "root@site.com",     true),
+      ("guest",   "guest@site.com",    false),
+  ];
+
+OBJETIVO:
+  let users = [
+      ("admin", "admin@site.com", true),
+      ("guest", "guest@site.com", false),
+      ("root",  "root@site.com",  true),
+  ];
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  | Primero alinea las columnas: |
+  s ,           (selecciona las comas)
+  &             (align selections in column -- alinea)
+  | & puede no hacer lo que esperas si las selecciones son solo comas. |
+  | Prueba mejor: |
+  u             (deshace)
+  v j j j       (selecciona las 3 líneas de tuplas)
+  : sort        (ordena alfabéticamente las líneas)
+  <Ret>
+  | Para alinear visualmente: selecciona las tuplas y usa & |
+  v j j
+  s ,           (selecciona las comas dentro de la selección)
+  &             (alinea las comas en columnas)
+
+
+--- Comentarios inteligentes: Ctrl-c, Space c, Space C --------------------
+
+ESCENARIO:
+  Comentar y descomentar código es una operación frecuente.
+  Helix ofrece tres variantes: Ctrl-c (toggle), Space C (bloque),
+  Space Alt-c (línea).
+
+TEXTO INICIAL:
+  fn debug_info() {
+      println!("DEBUG: paso 1");
+      println!("DEBUG: paso 2");
+      // println!("DEBUG: paso 3");
+      println!("DEBUG: paso 4");
+  }
+
+OBJETIVO: Comenta temporalmente toda la función.
+
+SOLUCIÓN:
+  Colócate dentro de la función.
+  m a f         (select around function)
+  <C-c>         (toggle comments -- añade // a cada línea)
+  | Para descomentar: selecciona de nuevo y pulsa <C-c> otra vez |
+  | Diferencia entre los tres: |
+  <Space> c     (toggle comments -- igual que Ctrl-c)
+  <Space> <A-c> (line comment -- añade // al inicio)
+  <Space> C     (block comment -- añade /* */ alrededor)
+
+
+--- Incrementar y decrementar: Ctrl-a, Ctrl-x -----------------------------
+
+ESCENARIO:
+  Con el cursor sobre un número, Ctrl-a lo incrementa y Ctrl-x
+  lo decrementa. Funciona con números en cualquier parte del código.
+
+TEXTO INICIAL:
+  const VERSION_MAJOR: u32 = 1;
+  const VERSION_MINOR: u32 = 9;
+  const VERSION_PATCH: u32 = 23;
+  const PUERTO: u16 = 8080;
+
+OBJETIVO:
+  const VERSION_MAJOR: u32 = 2;
+  const VERSION_MINOR: u32 = 0;
+  const VERSION_PATCH: u32 = 24;
+  const PUERTO: u16 = 3000;
+
+SOLUCIÓN:
+  Colócate en el "1" de VERSION_MAJOR.
+  <C-a>         (incrementa: 1 -> 2)
+  j             (baja a VERSION_MINOR)
+  <C-a>         (incrementa: 9 -> 10 -- ¡nos pasamos!)
+  u             (deshace)
+  <C-x> <C-x>   (decrementa dos veces: 9 -> 7 -> ... no)
+  | Mejor: colócate sobre el 9 y pulsa <C-x> repetido |
+  | Para VERSION_MINOR: queremos pasar de 9 a 0 |
+  <C-x> <C-x> <C-x> <C-x> <C-x> <C-x> <C-x> <C-x> <C-x>
+  | Más fácil: r 0 (replace char) |
+  j             (baja a VERSION_PATCH)
+  <C-a>         (23 -> 24)
+  j             (baja a PUERTO)
+  3 <C-a>       (no, Ctrl-a no acepta counts así)
+  | Borra 8080 y escribe 3000, o: |
+  f 8 f 8       (llega al segundo 8)
+  d             (borra el 8)
+  i 0 0 0 <Esc> (escribe 000)
+  | Es más práctico: pon el cursor en 8, r 3, luego w r 0, w r 0, w r 0 |
+
+
+--- Cambio de caso: ~, `, Alt-` --------------------------------------------
+
+ESCENARIO:
+  Alternar entre mayúsculas/minúsculas es instantáneo con ~ (toggle),
+  ` (lowercase) y Alt-` (uppercase). Operan sobre la selección.
+
+TEXTO INICIAL:
+  let database_url = "postgres://localhost:5432/mi_app";
+  const SESSION_TIMEOUT: usize = 3600;
+  fn obtenerUsuario(id: Uuid) -> Usuario { ... }
+
+OBJETIVO:
+  let DATABASE_URL = "postgres://localhost:5432/mi_app";
+  const session_timeout: usize = 3600;
+  fn ObtenerUsuario(id: Uuid) -> Usuario { ... }
+
+SOLUCIÓN:
+  Colócate en "database_url".
+  v i w         (select inner word -- selecciona "database_url")
+  <A-`>         (convierte a mayúsculas: DATABASE_URL)
+  j             (baja a "SESSION_TIMEOUT")
+  v i W         (select inner WORD -- selecciona SESSION_TIMEOUT)
+  `             (convierte a minúsculas: session_timeout)
+  j j           (baja a "obtenerUsuario")
+  f U           (salta a la U de Usuario)
+  ~             (toggle case: U -> u)
+  | Espera, queríamos ObtenerUsuario, no obtenerUsuario. |
+  | Deshace y hazlo bien: |
+  u u u
+  f o           (salta a la o de obtenerUsuario)
+  ~             (toggle: o -> O)
+  | Con selección múltiple: |
+  f U           (salta a la U)
+  ~             (toggle a u)
+  | Así queda: ObtenerUsuario |
+
+
+--- Formateo con LSP: = ----------------------------------------------------
+
+ESCENARIO:
+  El = (format selection) pide al LSP que formatee el código
+  seleccionado. Requiere un language server activo.
+
+TEXTO INICIAL:
+  fn  suma (a:i32,b:i32)->i32{a+b}
+
+OBJETIVO:
+  fn suma(a: i32, b: i32) -> i32 {
+      a + b
+  }
+
+SOLUCIÓN:
+  v %           (selecciona todo el archivo)
+  =             (formatea con LSP -- el formateador arregla todo)
+  | = delega en el formateador del LSP (rustfmt, prettier, etc.) |
+  | Si no tienes LSP, no hará nada. |
+
+
+--- Trim y selección por líneas: _ , x, X, Alt-x ---------------------------
+
+ESCENARIO:
+  _ recorta espacios en blanco de las selecciones. x/X/Alt-x
+  expanden/contraen selecciones a nivel de línea.
+
+TEXTO INICIAL:
+  let datos = [
+      "  alice  ",
+      "  bob    ",
+      "  carlos ",
+  ];
+
+OBJETIVO:
+  let datos = [
+      "alice",
+      "bob",
+      "carlos",
+  ];
+
+SOLUCIÓN:
+  x x x x       (selecciona las 3 líneas de strings)
+  _             (trim selections -- quita espacios exteriores)
+  | _ solo recorta si hay espacios al inicio/final de la selección |
+  | Para recortar DENTRO de las comillas: |
+  v %           (selecciona todo)
+  s "  . *  "   (regex: texto entre comillas con espacios)
+  | Mejor: |
+  Colócate en la primera línea "  alice  "
+  v i "         (selecciona inner quote)
+  _             (trim espacios dentro de las comillas)
+  j .           (baja y repite)
+  j .           (baja y repite)
+
+====================================================================
+SECCIÓN 6: MACROS Y REGISTROS
+====================================================================
+
+Las macros en Helix son experimentales pero funcionales. Q inicia/para
+la grabación en el registro seleccionado. q reproduce la macro.
+Los registros se seleccionan con " (select_register).
+
+
+--- Grabar y reproducir una macro -----------------------------------------
+
+ESCENARIO:
+  Tienes que repetir la misma transformación en varias líneas.
+  Graba una macro y reprodúcela en cada línea.
+
+TEXTO INICIAL:
+  alice,admin,true
+  bob,user,false
+  carlos,admin,true
+  diana,user,true
+
+OBJETIVO:
+  alice, admin, true
+  bob, user, false
+  carlos, admin, true
+  diana, user, true
+
+SOLUCIÓN:
+  Colócate en la primera línea.
+  " a           (selecciona el registro 'a' para la macro)
+  Q             (inicia grabación -- el prompt cambia)
+  f ,           (salta a la primera coma)
+  i <Space>     (inserta un espacio después de la coma)
+  <Esc>         (normal mode)
+  ;             (repite el último motion: salta a la siguiente coma)
+  i <Space>     (inserta espacio)
+  <Esc>         (normal mode)
+  Q             (detiene grabación)
+  | Ahora reproduce la macro en las líneas siguientes: |
+  j             (baja a la segunda línea)
+  q             (reproduce la macro del registro 'a')
+  j q           (baja y reproduce)
+  j q           (baja y reproduce)
+  | Si cometiste un error en la macro, grábala de nuevo. |
+
+
+--- Macros con selecciones múltiples ---------------------------------------
+
+ESCENARIO:
+  En lugar de bajar línea por línea reproduciendo la macro,
+  puedes crear selecciones en todas las líneas y ejecutar la
+  macro una vez sobre todas ellas.
+
+TEXTO INICIAL:
+  item_001 = "pendiente"
+  item_002 = "completado"
+  item_003 = "revision"
+  item_004 = "pendiente"
+  item_005 = "archivado"
+
+OBJETIVO:
+  item_001 = "pendiente"    // TODO
+  item_002 = "completado"   // TODO
+  item_003 = "revision"     // TODO
+  item_004 = "pendiente"    // TODO
+  item_005 = "archivado"    // TODO
+
+SOLUCIÓN:
+  " b           (registro 'b')
+  Q             (inicia grabación)
+  A <Space> / / <Space> T O D O <Esc>
+  | No, mejor: |
+  A (va al final de la línea) pero en Helix es gl o End.
+  | Más simple: |
+  g l           (final de línea)
+  i <Space>/ / <Space>T O D O <Esc>
+  | En macros: |
+  " b Q         (registro b, inicia)
+  g l i <Space>// TODO<Esc>
+  Q             (detiene)
+  | Ahora selecciona todas las líneas y ejecuta: |
+  x x x x x     (selecciona las 5 líneas)
+  q             (reproduce la macro en todas las selecciones)
+
+
+--- Registros con nombre: " + letra ----------------------------------------
+
+ESCENARIO:
+  Los registros almacenan texto y macros. Usa "letra para elegir
+  un registro antes de yank (y), paste (p/P), o macro (Q/q).
+
+TEXTO INICIAL:
+  fn saludar(nombre: &str) -> String {
+      format!("Hola, {}. Bienvenido.", nombre)
+  }
+
+  fn despedir(nombre: &str) -> String {
+      format!("Adiós, {}. Hasta pronto.", nombre)
+  }
+
+OBJETIVO: Extrae "nombre" de saludar y pégalo en despedir.
+
+SOLUCIÓN:
+  Colócate en "nombre" dentro de saludar.
+  v i w         (selecciona inner word: "nombre")
+  " x y         (registro 'x', yank -- guarda "nombre" en x)
+  | Navega a despedir |
+  / despedir<Ret> (busca "despedir")
+  f (           (salta al paréntesis de apertura)
+  f (           (salta al paréntesis del parámetro)
+  v i w         (selecciona el parámetro actual)
+  " x P         (pega desde registro 'x' antes de la selección)
+  | Así intercambias texto entre partes distantes del archivo
+    sin tocar el portapapeles del sistema. |
+
+
+--- Registro por defecto y registros especiales --------------------------
+
+ESCENARIO:
+  Sin especificar registro, y/p usan el registro por defecto.
+  Los registros especiales incluyen / (search), " (default).
+
+TEXTO INICIAL:
+  let nombre = "ana";
+  let email = "ana@example.com";
+  let ciudad = "madrid";
+
+OBJETIVO: Intercambia "nombre" con "email" sin perder ninguno.
+
+SOLUCIÓN:
+  Colócate en "nombre".
+  v i w y       (yank "nombre")
+  j w           (baja y avanza a "email")
+  v i w         (selecciona "email")
+  " _ d         (borra en el registro _blackhole_...)
+  | No hay registro _ en Helix. El comando Alt-d borra sin yank: |
+  j w           (baja a "email")
+  v i w         (selecciona "email")
+  <A-d>         (delete without yanking)
+  P             (paste antes: pega "nombre" donde estaba "email")
+  | Pero perdimos "email". Hagámoslo bien: |
+  u u u         (deshace todo)
+  Colócate en "nombre".
+  v i w " 1 y   (yank a registro '1')
+  j w v i w " 2 y (yank "email" a registro '2')
+  b b v i w " 1 P (pega "nombre" sobre "email"... no)
+  | Mejor: |
+  <C-o>         (vuelve atrás en jumplist)
+  v i w " 1 y   (yank "nombre" a 1)
+  j w v i w " 2 y (yank "email" a 2)
+  v i w " 2 p   (pega "email" desde registro 2)
+  b b v i w     (retrocede dos palabras, selecciona "nombre")
+  " 1 p         (pega "nombre" desde registro 1)
+
+====================================================================
+SECCIÓN 7: LSP AVANZADO
+====================================================================
+
+Helix se integra con language servers para ofrecer diagnóstico,
+renombrado, acciones de código y navegación semántica.
+
+
+--- Navegación por diagnósticos: ]d, [d, ]D, [D ---------------------------
+
+ESCENARIO:
+  Tu archivo tiene errores y warnings. Los comandos unimpaired
+  ]d/[d saltan entre diagnósticos.
+
+TEXTO INICIAL (si tienes LSP activo):
+  fn calcular(x: i32) -> i32 {
+      let y = "texto" + 42;    // error: tipo
+      let z = y / 0;            // warning: división por cero
+      let w = funcion_inexistente(); // error: no existe
+      x
+  }
+
+OBJETIVO: Salta al primer diagnóstico y revisa cada uno.
+
+SOLUCIÓN:
+  [ D           (va al primer diagnóstico del documento)
+  <Space> d     (abre el picker de diagnósticos del documento)
+  | Para navegar uno por uno: |
+  [ d           (diagnóstico anterior)
+  ] d           (diagnóstico siguiente)
+  <Space> D     (picker de diagnósticos del workspace -- global)
+  [ d ] d ] d   (navega secuencialmente por todos)
+
+
+--- Renombrar símbolos con LSP: Space r ------------------------------------
+
+ESCENARIO:
+  Quieres renombrar una variable, función o tipo en todo el
+  proyecto. Space r abre el prompt de rename del LSP.
+
+TEXTO INICIAL:
+  fn procesar_pedido(pedido: &Pedido) -> Result<Factura> {
+      let total = calcular_total(pedido);
+      let factura = Factura::nueva(pedido, total);
+      Ok(factura)
+  }
+
+  fn calcular_total(pedido: &Pedido) -> f64 {
+      pedido.items.iter().map(|i| i.precio).sum()
+  }
+
+OBJETIVO: Renombra "pedido" a "orden" en TODO el archivo.
+
+SOLUCIÓN:
+  Colócate en el parámetro "pedido" (cualquier ocurrencia).
+  <Space> r     (activa rename -- el prompt muestra el nombre actual)
+  orden<Ret>    (escribe el nuevo nombre y Enter)
+  | El LSP renombra todas las referencias. |
+  | Si el LSP no soporta rename, no hará nada. |
+
+
+--- Acciones de código: Space a -------------------------------------------
+
+ESCENARIO:
+  El LSP puede sugerir acciones como importar un símbolo, generar
+  un getter, añadir una implementación faltante, etc.
+
+TEXTO INICIAL:
+  use std::collections::HashMap;
+
+  fn main() {
+      let mut map = HashMap::new();
+      map.insert("clave", 42);
+      let valor: Option<&i32> = map.get("clave");
+      println!("{}", valor.unwrap_or(&0));
+  }
+
+OBJETIVO: Aplica una code action sobre el unwrap para manejarlo
+  con if let o match (si el LSP lo sugiere).
+
+SOLUCIÓN:
+  Colócate en "valor.unwrap_or".
+  <Space> a     (abre el menú de code actions del LSP)
+  | Navega las opciones con j/k o las teclas mostradas. |
+  | Selecciona "Replace with match" o similar. |
+  | Las code actions dependen del language server. |
+
+
+--- Documentación hover: Space k -------------------------------------------
+
+ESCENARIO:
+  Quieres ver la documentación de una función, tipo o módulo sin
+  moverte del archivo.
+
+TEXTO INICIAL:
+  use std::collections::HashMap;
+
+  fn main() {
+      let mut map = HashMap::with_capacity(100);
+      map.entry("clave").or_insert(42);
+  }
+
+OBJETIVO: Muestra la documentación de HashMap::with_capacity.
+
+SOLUCIÓN:
+  Colócate en "with_capacity".
+  <Space> k     (muestra el hover/doc del LSP en un popup)
+  | Para desplazarte en el popup: |
+  <C-d>         (baja en el popup)
+  <C-u>         (sube en el popup)
+  | Pulsa cualquier tecla para cerrar el popup. |
+
+
+--- Símbolos y referencias: Space s, Space S, Space h ----------------------
+
+ESCENARIO:
+  Space s abre un picker de símbolos del archivo actual.
+  Space S busca símbolos en todo el workspace.
+  Space h selecciona todas las referencias del símbolo bajo el cursor.
+
+TEXTO INICIAL:
+  fn cargar_archivo(ruta: &str) -> Result<String, Error> {
+      let contenido = std::fs::read_to_string(ruta)?;
+      Ok(contenido)
+  }
+
+  fn procesar_archivo(ruta: &str) -> Result<Data, Error> {
+      let raw = cargar_archivo(ruta)?;
+      let data: Data = toml::from_str(&raw)?;
+      Ok(data)
+  }
+
+OBJETIVO:
+  a) Encuentra "cargar_archivo" en el symbol picker
+  b) Selecciona todas las referencias de "cargar_archivo"
+  c) Aplica un rename desde ahí
+
+SOLUCIÓN:
+  <Space> s     (symbol picker -- muestra funciones, tipos, etc.)
+  | Escribe "cargar" para filtrar |
+  <Ret>         (salta a ese símbolo)
+  | Ahora selecciona todas las referencias: |
+  <Space> h     (select references to symbol under cursor [LSP])
+  | Todas las referencias quedan seleccionadas.
+    Puedes renombrar, cambiar tipo, lo que quieras. |
+  <Space> S     (workspace symbol picker -- busca en todo el proyecto)
+
+
+--- Definiciones múltiples: gd, gy, gi, gr --------------------------------
+
+ESCENARIO:
+  Desde una llamada, puedes saltar a su definición, type definition,
+  implementación o referencias.
+
+TEXTO INICIAL:
+  trait ProveedorDatos {
+      fn obtener(&self, id: &str) -> Result<Dato, Error>;
+  }
+
+  struct CacheLocal {
+      datos: HashMap<String, Dato>,
+  }
+
+  impl ProveedorDatos for CacheLocal {
+      fn obtener(&self, id: &str) -> Result<Dato, Error> {
+          self.datos.get(id).cloned().ok_or(Error::NoEncontrado)
+      }
+  }
+
+  fn main() {
+      let cache = CacheLocal { datos: HashMap::new() };
+      let dato = cache.obtener("001");
+  }
+
+OBJETIVO:
+  a) Desde cache.obtener(), salta a la definición del método
+  b) Desde cache.obtener(), salta al trait donde se declara
+  c) Desde cache.obtener(), salta a la implementación
+
+SOLUCIÓN:
+  Colócate en "obtener" dentro de main().
+  g d           (goto definition -- va a la implementación en CacheLocal)
+  g y           (goto type definition -- va a la declaración del trait)
+  g r           (goto references -- muestra todas las referencias)
+  g i           (goto implementation -- va a la implementación del trait)
+
+====================================================================
+SECCIÓN 8: SHELL Y PIPES
+====================================================================
+
+Helix puede comunicarse con el shell directamente desde las
+selecciones. | pipea cada selección a un comando y reemplaza con
+su output. Alt-| pipea ignorando el output (solo efectos secundarios).
+
+
+--- Pipear selecciones a shell: | -------------------------------------------
+
+ESCENARIO:
+  Tienes una lista de palabras que quieres ordenar o transformar
+  con comandos Unix.
+
+TEXTO INICIAL:
+  banana
+  cereza
+  manzana
+  durazno
+  fresa
+
+OBJETIVO: Ordena alfabéticamente y pon cada una en mayúsculas.
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  | sort        (pipea al comando 'sort')
+  <Ret>         (ejecuta)
+  | Ahora ordenadas, pero en minúsculas. Para mayúsculas: |
+  v %           (selecciona todo)
+  | tr '[:lower:]' '[:upper:]'   (pipea a tr)
+  <Ret>
+  | O en un solo paso: |
+  u             (deshace al original)
+  v %
+  | sort | tr '[:lower:]' '[:upper:]'
+  <Ret>
+
+
+--- Filtrar selecciones con $ ----------------------------------------------
+
+ESCENARIO:
+  El comando $ (shell_keep_pipe) pipea cada selección al shell
+  y CONSERVA solo las selecciones donde el comando retorna 0 (éxito).
+  Es como grep pero con selecciones.
+
+TEXTO INICIAL:
+  fn es_par(n: i32) -> bool { n % 2 == 0 }
+  fn es_impar(n: i32) -> bool { n % 2 != 0 }
+  fn es_positivo(n: i32) -> bool { n > 0 }
+  fn es_negativo(n: i32) -> bool { n < 0 }
+  fn es_cero(n: i32) -> bool { n == 0 }
+
+OBJETIVO: Quédate solo con las funciones que contienen "par" o "impar".
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  $ grep -q par   (conserva selecciones donde grep encuentra "par")
+  <Ret>
+  | $ conserva las selecciones cuyo comando retorna 0. |
+  | Alternativa con K (keep selections por regex): |
+  u             (deshace)
+  v %
+  K par|impar   (keep selections que contengan "par" o "impar")
+
+
+--- Insertar output de shell: ! y Alt-! ------------------------------------
+
+ESCENARIO:
+  ! ejecuta un comando shell e INSERTA el output antes de cada
+  selección. Alt-! lo APPENDE después de cada selección.
+
+TEXTO INICIAL:
+  Error: conexion rechazada
+  Error: timeout
+  Warning: disco casi lleno
+  Error: permiso denegado
+
+OBJETIVO: Antepón un timestamp a cada línea:
+  [2025-01-15] Error: conexion rechazada
+  [2025-01-15] Error: timeout
+  [2025-01-15] Warning: disco casi lleno
+  [2025-01-15] Error: permiso denegado
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  ! date +\%F   (inserta output de date ANTES de cada selección)
+  <Ret>
+  | ! inserta antes. Para añadir después: |
+  v %
+  <A-!> date +\%F    (append después de cada selección)
+
+
+--- Pipe silencioso: Alt-| --------------------------------------------------
+
+ESCENARIO:
+  A veces solo quieres ejecutar un comando sobre el texto
+  seleccionado sin reemplazarlo. Por ejemplo, contar palabras,
+  enviar a un log, o compilar.
+
+TEXTO INICIAL:
+  fn calcular_media(numeros: &[f64]) -> f64 {
+      let suma: f64 = numeros.iter().sum();
+      suma / numeros.len() as f64
+  }
+
+  fn calcular_varianza(numeros: &[f64]) -> f64 {
+      let media = calcular_media(numeros);
+      let suma_cuadrados: f64 = numeros.iter()
+          .map(|n| (n - media).powi(2))
+          .sum();
+      suma_cuadrados / numeros.len() as f64
+  }
+
+OBJETIVO: Pasa el código por rustfmt para verificar (no formatear).
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  <A-|> rustfmt --check   (pipea a rustfmt sin reemplazar)
+  <Ret>
+  | El output se muestra en la línea de estado.
+    Si hay errores, los verás. El texto no se modifica. |
+
+====================================================================
+SECCIÓN 9: COMANDOS TIPEABLES
+====================================================================
+
+Helix tiene un modo de comandos (:) similar a Vim, con comandos
+para gestionar archivos, buffers, opciones y más.
+
+
+--- Formateo y sort desde comandos -----------------------------------------
+
+ESCENARIO:
+  :format formatea el archivo con el LSP.
+  :sort ordena las líneas seleccionadas.
+  :reflow reajusta el ancho de línea.
+
+TEXTO INICIAL:
+  fn    a( ){1}  fn  b( ){2}   fn  c( ){3}
+
+OBJETIVO: Formatea el archivo completo.
+
+SOLUCIÓN:
+  : format<Ret>   (formatea todo el archivo con el LSP)
+  | Para ordenar líneas: |
+  x x x         (selecciona 3 líneas)
+  : sort<Ret>
+  | Para reflow (hard wrap a 80 columnas): |
+  : reflow 80<Ret>
+
+
+--- Opciones en runtime: :set, :toggle, :get --------------------------------
+
+ESCENARIO:
+  Puedes cambiar opciones de configuración sin recargar el archivo
+  de configuración. Útil para probar ajustes.
+
+TEXTO INICIAL:
+  (Este ejercicio es interactivo; no modifica texto)
+
+OBJETIVO:
+  a) Desactiva el smart-case para la búsqueda
+  b) Verifica el valor actual de una opción
+  c) Actívalo de nuevo
+
+SOLUCIÓN:
+  : set search.smart-case false<Ret>
+  : get search.smart-case<Ret>
+  : toggle search.smart-case<Ret>
+  | Otras opciones útiles: |
+  : set editor.cursor-shape block<Ret>
+  : set editor.line-number relative<Ret>
+
+
+--- Gestión de buffers: :bn, :bp, :bco, :bca --------------------------------
+
+ESCENARIO:
+  Tienes varios archivos abiertos (buffers). Necesitas navegar
+  entre ellos y cerrar los que no necesitas.
+
+TEXTO INICIAL:
+  (Práctica con los archivos que tengas abiertos en Helix)
+
+OBJETIVO:
+  a) Ve al siguiente buffer
+  b) Ve al buffer anterior
+  c) Cierra todos excepto el actual
+  d) Cierra todos los buffers
+
+SOLUCIÓN:
+  : bn<Ret>     (buffer next)
+  g n           (atajo directo: goto next buffer)
+  : bp<Ret>     (buffer previous)
+  g p           (atajo directo: goto previous buffer)
+  : bco<Ret>    (buffer close others)
+  : bca<Ret>    (buffer close all -- cuidado al cerrar todo)
+  | También: |
+  <Space> b     (buffer picker -- lista interactiva)
+
+
+--- Historial de cambios: :earlier, :later ----------------------------------
+
+ESCENARIO:
+  Has hecho muchos cambios y quieres volver a un estado anterior
+  sin usar u (undo) 50 veces.
+
+TEXTO INICIAL:
+  (Cualquier archivo con ediciones recientes)
+
+OBJETIVO: Vuelve al estado de hace 10 cambios.
+
+SOLUCIÓN:
+  : earlier 10<Ret>   (retrocede 10 cambios)
+  : later 5<Ret>      (avanza 5 cambios)
+  <A-u>               (atajo: earlier -- un paso atrás en la historia)
+  <A-U>               (atajo: later -- un paso adelante)
+  | Diferencia con u/U: u/U son undo/redo lineales.
+    earlier/later navegan por la historia completa de cambios
+    del archivo, incluso después de guardar. |
+
+
+--- Gestión de archivos: :w, :wq, :q, :e -----------------------------------
+
+ESCENARIO:
+  Comandos básicos de gestión de archivos para trabajar ágilmente.
+
+TEXTO INICIAL:
+  (Archivo abierto en Helix)
+
+OBJETIVO: Guarda, abre otro archivo y cierra sin perder datos.
+
+SOLUCIÓN:
+  : w<Ret>      (guardar)
+  : e otro_archivo.rs<Ret>  (abre otro archivo en el mismo buffer)
+  : wq<Ret>     (guardar y cerrar -- cierra la vista)
+  : q!<Ret>     (cerrar sin guardar -- fuerza)
+  : wa<Ret>     (guardar todos los buffers)
+  : wqa<Ret>    (guardar todos y cerrar todo)
+
+====================================================================
+SECCIÓN 10: VENTANAS Y SPLITS
+====================================================================
+
+Helix soporta splits horizontales y verticales. Los comandos se
+acceden desde Ctrl-w (window mode) o Space w (space mode).
+
+
+--- Splits básicos: Ctrl-w v, Ctrl-w s --------------------------------------
+
+ESCENARIO:
+  Quieres ver dos archivos lado a lado, o el mismo archivo en
+  dos posiciones diferentes.
+
+TEXTO INICIAL:
+  (Cualquier archivo. Abre un split y practica.)
+
+OBJETIVO: Abre una vista vertical.split y horizontal.split.
+
+SOLUCIÓN:
+  <C-w> v       (vertical split -- divide la pantalla a la derecha)
+  <C-w> s       (horizontal split -- divide abajo)
+  | Para abrir un archivo en el nuevo split: |
+  <Space> f     (file picker -- abre el archivo en el split activo)
+  | También: |
+  <C-w> f       (goto file en horizontal split -- abre el archivo
+                  bajo el cursor en un split horizontal)
+
+
+--- Navegación entre ventanas: Ctrl-w h/j/k/l -------------------------------
+
+ESCENARIO:
+  Una vez que tienes múltiples splits, navegar entre ellos es
+  crítico.
+
+TEXTO INICIAL:
+  (Abre 3-4 splits y navega entre ellos)
+
+OBJETIVO: Muévete al split de la izquierda, luego abajo,
+  luego a la derecha, luego arriba.
+
+SOLUCIÓN:
+  <C-w> h       (split izquierdo)
+  <C-w> j       (split inferior)
+  <C-w> k       (split superior)
+  <C-w> l       (split derecho)
+  <C-w> <C-w>   (rota al siguiente split)
+  | También desde space mode: |
+  <Space> w h   (ídem)
+  <Space> w j
+  <Space> w k
+  <Space> w l
+
+
+--- Intercambio y transposición de ventanas --------------------------------
+
+ESCENARIO:
+  Los splits no están en el orden que quieres. Ctrl-w H/J/K/L
+  intercambia la ventana actual con la de esa dirección.
+
+TEXTO INICIAL:
+  (Abre 2 splits verticales: archivo A izq, archivo B der)
+
+OBJETIVO: Intercambia el split izquierdo con el derecho.
+
+SOLUCIÓN:
+  <C-w> L       (swap window to the right -- mueve el split actual
+                  a la derecha, empujando el otro a la izquierda)
+  <C-w> H       (swap window to the left)
+  <C-w> J       (swap window down)
+  <C-w> K       (swap window up)
+  <C-w> t       (transpose splits -- rota la disposición)
+  | NOTA: mayúscula H, J, K, L = swap.
+    minúscula h, j, k, l = jump/move. |
+
+
+--- Cerrar y maximizar ventanas: Ctrl-w q, Ctrl-w o ------------------------
+
+ESCENARIO:
+  Demasiados splits. Quieres cerrar algunos o maximizar uno.
+
+TEXTO INICIAL:
+  (Abre varios splits)
+
+OBJETIVO: Cierra el split actual y luego maximiza el restante.
+
+SOLUCIÓN:
+  <C-w> q       (close current window -- cierra el split activo)
+  <C-w> o       (only -- cierra todos los splits excepto el actual)
+  | o = "only", q = "quit" |
+  | Si cierras el último split, Helix abrirá un nuevo buffer vacío. |
+
+
+--- Abrir archivos en splits: Ctrl-w f, Ctrl-w F, :vs, :hs -------------------
+
+ESCENARIO:
+  Tienes una ruta de archivo en el código (un import o un string
+  con una ruta) y quieres abrir ese archivo en un split.
+
+TEXTO INICIAL:
+  // mod database;
+  // mod routes;
+  // mod models;
+
+OBJETIVO: Abre cada módulo en un split y navega entre ellos.
+
+SOLUCIÓN:
+  Colócate sobre "database" en el comentario.
+  g f           (goto file -- abre el archivo en el buffer actual)
+  | Para abrirlo en un split: |
+  <C-w> f       (goto file en horizontal split)
+  <C-w> F       (goto file en vertical split -- mayúscula)
+  | Desde comandos: |
+  : vs database.rs<Ret>   (vertical split)
+  : hs database.rs<Ret>   (horizontal split)
+
+====================================================================
+SECCIÓN 11: VIEW MODE
+====================================================================
+
+View mode (z) permite desplazar la vista SIN mover la selección.
+La variante sticky (Z) permanece activa hasta que pulses Escape.
+
+
+--- Scroll sin mover selección: z j, z k ------------------------------------
+
+ESCENARIO:
+  Tu cursor está en una línea y quieres ver lo que hay más abajo
+  sin perder tu posición.
+
+TEXTO INICIAL:
+  (Cualquier archivo. Coloca el cursor en la línea 1.)
+
+OBJETIVO: Desplaza la vista hacia abajo y arriba sin mover el cursor.
+
+SOLUCIÓN:
+  z j           (scroll view down -- el cursor se mueve con la vista
+                  pero la selección no cambia)
+  z k           (scroll view up)
+  z <C-f>       (page down en view mode)
+  z <C-b>       (page up en view mode)
+
+
+--- Alinear vista: z z, z t, z b, z m ---------------------------------------
+
+ESCENARIO:
+  Quieres centrar la línea actual en la pantalla, o ponerla al
+  tope o al fondo, sin mover la selección.
+
+TEXTO INICIAL:
+  (Cualquier archivo. Coloca el cursor en una línea del medio.)
+
+OBJETIVO: Centra la línea, luego ponla al tope, luego al fondo.
+
+SOLUCIÓN:
+  z z           (centra la línea verticalmente en la pantalla)
+  z t           (alinea la línea al tope de la pantalla)
+  z b           (alinea la línea al fondo de la pantalla)
+  z m           (centra horizontalmente -- mueve la vista al centro
+                  horizontal del archivo)
+
+
+--- Sticky view mode: Z -----------------------------------------------------
+
+ESCENARIO:
+  A veces necesitas explorar el archivo durante un rato sin editar.
+  Z (mayúscula) activa sticky view mode que permanece activo hasta
+  que pulses Escape.
+
+TEXTO INICIAL:
+  (Cualquier archivo de al menos 2 pantallas de alto)
+
+OBJETIVO: Recorre todo el archivo viendo el contenido sin riesgo
+  de modificar nada.
+
+SOLUCIÓN:
+  Z             (entra en sticky view mode -- el prompt cambia)
+  j j j j       (desplázate hacia abajo -- el cursor no se mueve)
+  k k           (desplázate hacia arriba)
+  <C-d>         (baja media página)
+  <C-u>         (sube media página)
+  <C-f>         (baja página completa)
+  <C-b>         (sube página completa)
+  <Esc>         (sale de sticky view mode, vuelve a normal)
+
+====================================================================
+SECCIÓN 12: WORKFLOWS AVANZADOS
+====================================================================
+
+Combinaciones de técnicas anteriores para resolver problemas reales
+de edición con la máxima eficiencia.
+
+
+--- Refactor con tree-sitter + multiselección + LSP -------------------------
+
+ESCENARIO:
+  Tienes una estructura con campos que cambian de nombre y tipo.
+  Usa tree-sitter para seleccionar, multiselección para abarcar
+  todo, y LSP para verificar.
+
+TEXTO INICIAL:
+  struct Usuario {
+      nombre: String,
+      email: String,
+      edad: u32,
+      activo: bool,
+  }
+
+  fn crear_usuario(nombre: String, email: String, edad: u32) -> Usuario {
+      Usuario { nombre, email, edad, activo: true }
+  }
+
+OBJETIVO: Añade el campo "telefono: Option<String>" después de email.
+
+SOLUCIÓN:
+  Colócate en la línea "email: String," dentro del struct.
+  <A-o>         (expande al nodo field del struct)
+  d             (borra la línea... no, queremos añadir después)
+  u             (deshace)
+  A <Ret>       (append: nueva línea después de "email: String,")
+  <Tab>         (identa)
+  telefono: Option<String>,<Esc>
+  | Para añadirlo también en el constructor: |
+  n             (next search match? No. Usa gf o salta)
+  / Usuario {<Ret> (busca el constructor)
+  f }           (salta al cierre)
+  b b           (retrocede a "activo: true")
+  a , <Ret>     (append: inserta coma y nueva línea)
+  <Tab> telefono: None,<Esc>
+
+
+--- Búsqueda global y reemplazo compuesto -----------------------------------
+
+ESCENARIO:
+  Necesitas cambiar un patrón en múltiples archivos del proyecto.
+  Space / abre la búsqueda global, y desde los resultados puedes
+  abrir archivos y aplicar cambios.
+
+TEXTO INICIAL:
+  (Proyecto con varios archivos que contengan una palabra clave)
+
+OBJETIVO: Busca "api_version" en todo el proyecto y cámbialo a
+  "api_versio" en los archivos que corresponda.
+
+SOLUCIÓN:
+  <Space> /     (global search en el workspace)
+  api_version<Ret>  (escribe el patrón)
+  | Se abre un picker con todos los archivos que coinciden. |
+  | Puedes navegar los resultados y abrir cada archivo. |
+  | Para reemplazar dentro del archivo abierto: |
+  <Space> '     (reabre el último picker)
+  | Una vez en un archivo, usa s para seleccionar el patrón: |
+  v %
+  s api_version
+  c api_versio<Esc>  (change todas las selecciones)
+
+
+--- Edición de columnas con cursor múltiple ---------------------------------
+
+ESCENARIO:
+  Tienes datos tabulares y quieres añadir/eliminar una columna
+  completa.
+
+TEXTO INICIAL:
+  Alice    30  Ingeniera
+  Bob      25  Diseñador
+  Carlos   35  Doctor
+  Diana    28  Abogada
+
+OBJETIVO:
+  Alice    30  Ingeniera    Madrid
+  Bob      25  Diseñador    Madrid
+  Carlos   35  Doctor       Madrid
+  Diana    28  Abogada      Madrid
+
+SOLUCIÓN:
+  Colócate al final de la primera línea (después de "Ingeniera").
+  g l           (final de línea)
+  C             (copy selection on next line -- añade cursor abajo)
+  C             (otro cursor abajo)
+  C             (otro cursor abajo)
+  | Ahora tienes un cursor al final de cada línea: |
+  i <Space> Madrid<Esc>  (inserta " Madrid" en todas las líneas)
+
+
+--- Macro + búsqueda + sustitución -------------------------------------------
+
+ESCENARIO:
+  Una macro puede incluir búsquedas y sustituciones, permitiendo
+  transformaciones complejas que se repiten en todo el archivo.
+
+TEXTO INICIAL:
+  fn get_user(id: Uuid) -> Result<User, Error> { ... }
+  fn get_product(id: Uuid) -> Result<Product, Error> { ... }
+  fn get_order(id: Uuid) -> Result<Order, Error> { ... }
+  fn get_invoice(id: Uuid) -> Result<Invoice, Error> { ... }
+
+OBJETIVO:
+  pub fn get_user(id: Uuid) -> Result<User, AppError> { ... }
+  pub fn get_product(id: Uuid) -> Result<Product, AppError> { ... }
+  pub fn get_order(id: Uuid) -> Result<Order, AppError> { ... }
+  pub fn get_invoice(id: Uuid) -> Result<Invoice, AppError> { ... }
+
+SOLUCIÓN:
+  Colócate en la primera línea.
+  " m Q         (registro m, inicia grabación)
+  g s           (primer no-whitespace -- la f de fn)
+  i pub <Space> (inserta "pub ")
+  <Esc>         (normal mode)
+  / Error<Ret>  (busca "Error")
+  g h           (inicio de la palabra "Error")
+  i App<Esc>    (inserta "App" delante de "Error")
+  j             (baja a la siguiente línea)
+  Q             (detiene grabación)
+  | Ahora ejecuta la macro en las 3 líneas restantes: |
+  q             (reproduce en la línea actual)
+  q             (otra vez)
+  q             (otra vez)
+  | Cada q ejecuta la macro sobre esa línea y baja a la siguiente. |
+
+
+--- Rotación de contenido entre selecciones ---------------------------------
+
+ESCENARIO:
+  Tienes varias selecciones y quieres rotar su contenido para
+  reordenar elementos.
+
+TEXTO INICIAL:
+  server = "primario"
+  server = "secundario"
+  server = "backup"
+
+OBJETIVO:
+  server = "backup"
+  server = "primario"
+  server = "secundario"
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  s " .* "      (selecciona el contenido entre comillas de cada línea)
+  ;             (colapsa cada selección a un cursor)
+  | NOTA: también puedes usar s con regex más preciso |
+  <A-(>         (rota contenidos hacia atrás)
+  | Para ver el cambio: rota hasta que quede backup, primario, secundario |
+  <A-(>         (otra rotación)
+  <A-(>         (otra más)
+  | Alt-( rota los CONTENIDOS de las selecciones, no la selección
+    primaria. ) y ( rotan cuál es la selección principal. |
+
+
+--- Recuperación con earlier/later -------------------------------------------
+
+ESCENARIO:
+  Has hecho 20 cambios y necesitas volver a un estado de hace
+  15 cambios, pero no quieres perderlos todos permanentemente.
+
+TEXTO INICIAL:
+  (Cualquier archivo con ediciones recientes)
+
+OBJETIVO: Retrocede 15 cambios, inspecciona, y vuelve.
+
+SOLUCIÓN:
+  : earlier 15<Ret>   (retrocede 15 cambios en la historia)
+  | Inspecciona el estado. |
+  : later 10<Ret>     (avanza 10 cambios)
+  | Si quieres volver al estado actual: |
+  <A-U> <A-U> <A-U>   (later repetido hasta llegar al presente)
+  | earlier/later navegan por la historia completa del archivo,
+    no solo el undo lineal. |
+
+
+--- Reemplazar con yanked text: R --------------------------------------------
+
+ESCENARIO:
+  Tienes una palabra copiada (yanked) y quieres reemplazar otra
+  palabra con ella, sin entrar en insert mode.
+
+TEXTO INICIAL:
+  const VERSION: &str = "1.0.0";
+
+  fn mostrar_version() {
+      println!("Versión actual: {}", VERSION);
+      enviar_metrica("version", "1.0.0");
+  }
+
+OBJETIVO: Cambia el string "1.0.0" en la métrica para que use VERSION.
+
+SOLUCIÓN:
+  Colócate en VERSION (la constante).
+  v i W y       (yank: copia VERSION)
+  f "           (salta a la comilla de "1.0.0" en la métrica)
+  v             (select mode)
+  f "           (extiende hasta la comilla de cierre)
+  R             (replace with yanked -- pega VERSION sobre "1.0.0")
+  | R reemplaza la selección con el contenido del registro por
+    defecto (lo último que yankaste), sin entrar en insert mode. |
+  | NOTA: R pega el TEXTO yankado, no el nombre de la variable. |
+  | Para pegar la variable deberías haber yankado "VERSION". |
+  u u u         (deshace y hazlo bien:)
+  b b           (retrocede a "VERSION")
+  v i W y
+  f "           (salta a las comillas de "1.0.0")
+  v f " R       (selecciona hasta la comilla final y reemplaza)
+
+
+--- Goto word: gw -----------------------------------------------------------
+
+ESCENARIO:
+  gw muestra etiquetas sobre cada palabra visible y te deja
+  seleccionar una escribiendo su etiqueta. Es una forma de
+  movimiento ultra-rápido.
+
+TEXTO INICIAL:
+  fn procesar(lote: &[Item]) -> Result<Informe> {
+      let resumen = lote.iter()
+          .filter(|i| i.esta_completo())
+          .map(|i| i.generar_linea())
+          .collect::<Vec<_>>();
+      Ok(Informe::nuevo(resumen))
+  }
+
+OBJETIVO: Salta directamente a "generate_linea" sin navegación incremental.
+
+SOLUCIÓN:
+  g w           (activa goto word -- aparecen etiquetas sobre cada
+                  palabra visible -- son combinaciones de 2 letras)
+  | Escribe las 2 letras de la etiqueta sobre "generar_linea" |
+  | El cursor salta directamente a esa palabra. |
+  | Si no ves la palabra (está fuera de pantalla), cancela con
+    <Esc> y desplázate.
+
+
+--- Rotación de selección primaria con ) y ( --------------------------------
+
+ESCENARIO:
+  Con múltiples selecciones activas, a veces necesitas cambiar
+  cuál es la "principal" (la que tiene el cursor más visible)
+  para operaciones como , (keep primary).
+
+TEXTO INICIAL:
+  fn foo() { println!("foo"); }
+  fn bar() { println!("bar"); }
+  fn baz() { println!("baz"); }
+  fn qux() { println!("qux"); }
+
+OBJETIVO: Rotar la selección principal hasta la tercera función.
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  s ^ f n \s + \w +  (selecciona los nombres de función)
+  | Alternativa: |
+  v % s ^ f n \s + \w +  (ajusta el regex)
+  | Mejor con texto object: colócate en "foo" y usa miw |
+  | Vamos directo a la rotación: |
+  ) )           (rota la selección primaria hacia adelante)
+  ( (           (rota hacia atrás)
+  ,             (keep primary -- descarta el resto)
+  | ) y ( rotan qué selección es la principal.
+    Útil cuando quieres inspeccionar una selección específica. |
+
+
+--- Unimpaired completo: ] y [ con letras ------------------------------------
+
+ESCENARIO:
+  Los comandos unimpaired no son solo para diagnósticos. Puedes
+  navegar entre funciones, clases, parámetros, comentarios, tests,
+  cambios y más.
+
+TEXTO INICIAL:
+  // == SECCIÓN: CONFIGURACIÓN ==
+  fn config() {
+      let puerto = 8080;
+      // TODO: leer de env
+      let host = "localhost";
+  }
+
+  // == SECCIÓN: NEGOCIO ==
+  fn negocio() {
+      // procesamiento principal
+      println!("ok");
+  }
+
+  #[test]
+  fn test_config() {
+      assert_eq!(config().puerto, 8080);
+  }
+
+  #[test]
+  fn test_negocio() {
+      assert!(negocio());
+  }
+
+OBJETIVO: Navega entre secciones usando varios comandos unimpaired.
+
+SOLUCIÓN:
+  ] c           (siguiente comentario -- salta a "// TODO")
+  [ c           (comentario anterior)
+  ] f           (siguiente función -- salta a "negocio()")
+  [ f           (función anterior -- vuelve a "config()")
+  ] t           (siguiente type/class -- o struct)
+  [ t           (anterior type/class)
+  ] T           (siguiente test -- salta a "test_config")
+  [ T           (test anterior)
+  ] a           (siguiente argumento/parámetro)
+  [ a           (argumento anterior)
+  <Space>       (nueva línea abajo)
+  ] <Space>     (add newline below -- añade línea debajo)
+  [ <Space>     (add newline above -- añade línea encima)
+
+
+--- La paleta de comandos: Space ? -------------------------------------------
+
+ESCENARIO:
+  ¿No recuerdas el atajo exacto? Space ? abre la paleta de comandos
+  con búsqueda fuzzy. Puedes ejecutar cualquier comando desde ahí.
+
+TEXTO INICIAL:
+  (Cualquier archivo en Helix)
+
+OBJETIVO: Busca el comando "merge_selections" y ejecútalo.
+
+SOLUCIÓN:
+  <Space> ?     (abre la paleta de comandos)
+  | Escribe "merge" en el prompt fuzzy |
+  | Los resultados se filtran mientras escribes. |
+  | Navega con j/k y pulsa Enter para ejecutar. |
+  | La paleta muestra el nombre del comando y su atajo. |
+  | Para cerrar sin seleccionar: <Esc> o <C-c>. |
+
+
+--- Macros anidadas y registros múltiples ------------------------------------
+
+ESCENARIO:
+  Puedes grabar una macro que llame a otra macro, o usar diferentes
+  registros para diferentes propósitos simultáneamente.
+
+TEXTO INICIAL:
+  src/main.rs      ERROR: no compila
+  src/config.rs    WARNING: deprecado
+  src/db.rs        ERROR: conexión fallida
+  src/utils.rs     INFO: sin errores
+  src/routes.rs    WARNING: timeout alto
+
+OBJETIVO:
+  [FAIL]  src/main.rs      ERROR: no compila
+  [WARN]  src/config.rs    WARNING: deprecado
+  [FAIL]  src/db.rs        ERROR: conexión fallida
+  [PASS]  src/utils.rs     INFO: sin errores
+  [WARN]  src/routes.rs    WARNING: timeout alto
+
+SOLUCIÓN:
+  | Graba una macro que añada la etiqueta según el nivel. |
+  " a Q         (registro a, inicia grabación)
+  g s           (primer no-whitespace)
+  i [<Esc>      (inserta "[")
+  e             (siguiente palabra: "ERROR"/"WARNING"/"INFO")
+  v i w         (selecciona la palabra)
+  d             (la borra -- ahora tenemos el hueco])
+  | Aquí necesitaríamos lógica condicional, que es limitada... |
+  | Enfoque más simple: tres macros diferentes. |
+  | Macro A: añade [FAIL] al inicio de líneas con ERROR |
+  " b Q
+  / ERROR<Ret>
+  g s i [FAIL] <Esc>
+  Q
+  | Macro B: [WARN] para WARNING |
+  " c Q
+  / WARNING<Ret>
+  g s i [WARN] <Esc>
+  Q
+  | Macro C: [PASS] para INFO |
+  " d Q
+  / INFO<Ret>
+  g s i [PASS] <Esc>
+  Q
+  | Ahora ejecuta cada macro en orden: |
+  q b           (macro B: busca WARNING, añade [WARN])
+  q c           (macro C: busca INFO, añade [PASS])
+  q d           (macro D... no, q a para ERROR:  q a)
+  q a           (macro A: busca ERROR, añade [FAIL])
+  | NOTA: El orden importa. Al final cada línea tiene su etiqueta. |
+
+
+--- El registro de cambios: ]g, [g, ]G, [G ------------------------------------
+
+ESCENARIO:
+  Helix rastrea dónde has hecho cambios. Puedes saltar entre ellos
+  sin buscar manualmente.
+
+TEXTO INICIAL:
+  (Cualquier archivo donde hayas hecho al menos 3 ediciones)
+
+OBJETIVO: Salta al siguiente cambio, al anterior, al primero, al último.
+
+SOLUCIÓN:
+  ] g           (siguiente cambio)
+  [ g           (cambio anterior)
+  ] G           (último cambio del archivo)
+  [ G           (primer cambio del archivo)
+  | Esto es independiente del undo: son las marcas de modificación
+    que Helix mantiene automáticamente. |
+
+
+--- Composición de comandos con selecciones ----------------------------------
+
+ESCENARIO:
+  Puedes encadenar comandos porque casi todos operan sobre la
+  selección actual. Ejemplo: seleccionar, transformar, formatear.
+
+TEXTO INICIAL:
+  let   datos  : Vec <i32> =  vec![ 1 , 2 , 3 ];
+
+OBJETIVO:
+  let datos: Vec<i32> = vec![1, 2, 3];
+
+SOLUCIÓN:
+  v %           (selecciona todo)
+  _             (trim whitespace de la selección)
+  | _ no recorta espacios internos, solo los bordes. |
+  | Para espacios internos: |
+  v %           (selecciona todo)
+  s \s +        (selecciona todos los espacios múltiples)
+  r <Space>     (reemplaza cada match con un solo espacio)
+  | Para arreglar los espacios alrededor de < y >: |
+  f <           (salta al <)
+  v             (select mode)
+  f >           (extiende hasta >)
+  m i a         (select inside angle brackets... no)
+  | Más directo: |
+  f < d i >     (borra inner >... no)
+  | La forma más rápida: |
+  : format<Ret> (si tienes LSP, lo arregla todo de golpe)
+
+
+--- Insertar registros en insert mode: Ctrl-r --------------------------------
+
+ESCENARIO:
+  Desde insert mode, Ctrl-r seguido de una letra inserta el contenido
+  de ese registro. Útil para pegar texto sin salir de insert mode.
+
+TEXTO INICIAL:
+  fn reportar() {
+      let msg = "TODO: implementar reporte";
+      // Necesito copiar "TODO: implementar reporte" aquí abajo
+  }
+
+OBJETIVO: Duplica el mensaje debajo sin salir de insert mode.
+
+SOLUCIÓN:
+  Colócate en "TODO: implementar reporte".
+  v i "         (selecciona inner quote)
+  " r y         (yank al registro 'r')
+  j             (baja a la línea vacía)
+  A             (insert at end of line)
+  <C-r> r       (inserta el contenido del registro 'r')
+  <Esc>         (normal mode)
+  | Ctrl-r en insert mode es rápido para evitar el baile
+    de salir a normal mode, yank, volver a insert, paste. |
+
+
+--- Repetir última inserción: . -----------------------------------------------
+
+ESCENARIO:
+  El punto (.) repite la última inserción (todo lo que escribiste
+  entre entrar y salir de insert mode).
+
+TEXTO INICIAL:
+  fn main() {
+      procesar();
+      procesar();
+      procesar();
+  }
+
+OBJETIVO:
+  fn main() {
+      procesar().await;
+      procesar().await;
+      procesar().await;
+  }
+
+SOLUCIÓN:
+  Colócate al final de "procesar()" en la primera línea.
+  a .await<Esc> (inserta ".await" y vuelve a normal)
+  j .           (baja y repite: j mueve, . repite la inserción)
+  j .           (baja y repite otra vez)
+  | . repite exactamente lo que escribiste en insert mode.
+    No repite movimientos ni comandos de normal mode. |
+
+
+--- Alineación en columnas con & -------------------------------------------
+
+ESCENARIO:
+  & alinea las selecciones en columnas. Es útil para tabular datos
+  o código que quieras que quede visualmente alineado.
+
+TEXTO INICIAL:
+  let config = Config {
+      host: String::from("localhost"),
+      port: 8080,
+      database_url: String::from("postgres://localhost/mydb"),
+      timeout_secs: 30,
+  };
+
+OBJETIVO: Alinea los valores después de los dos puntos:
+  let config = Config {
+      host:         String::from("localhost"),
+      port:         8080,
+      database_url: String::from("postgres://localhost/mydb"),
+      timeout_secs: 30,
+  };
+
+SOLUCIÓN:
+  Colócate dentro del bloque del struct.
+  v             (entra en select mode)
+  ] p           (extiende hasta el final del párrafo)
+  | Mejor: selecciona las líneas del struct manualmente |
+  x x x x       (selecciona las 4 líneas de campos)
+  s :           (selecciona todos los dos puntos)
+  &             (align selections in column)
+  | & ajusta las selecciones para que queden en la misma columna.
+    Si las selecciones son los dos puntos, los alinea verticalmente. |
+
+====================================================================
+
