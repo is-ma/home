@@ -1,0 +1,161 @@
+#################################################################
+#                             TMUX                              #
+#################################################################
+
+Ctrl-b !    # Romper panel actual en ventana nueva (break-pane)
+Ctrl-b "    # Dividir panel horizontalmente (split-window -v)
+$    # Fin de línea (end-of-line) [vi: $, emacs: C-e]
+Ctrl-b $    # Renombrar sesión actual (rename-session)
+%    # Ir al siguiente corchete/parentesis coincidente (next-matching-bracket)
+Ctrl-b %    # Dividir panel verticalmente (split-window -h)
+Ctrl-b &    # Matar ventana actual (kill-window)
+Ctrl-b '    # Pedir índice de ventana para seleccionar (command-prompt)
+Ctrl-b (    # Cambiar a sesión anterior (switch-client -p)
+Ctrl-b )    # Cambiar a sesión siguiente (switch-client -n)
+,    # Repetir último salto en dirección inversa (jump-reverse) [vi/emacs]
+Ctrl-b ,    # Renombrar ventana actual (rename-window)
+Ctrl-b -    # Borrar el buffer copiado más reciente (delete-buffer)
+Ctrl-b .    # Pedir índice para mover ventana actual (command-prompt)
+Ctrl-b /    # Buscar hacia adelante en modo copia (search-forward) [vi]
+:    # Ir a línea específica (goto-line) [vi: :, emacs: g]
+Ctrl-b :    # Abrir prompt de comando de tmux (command-prompt)
+;    # Repetir último salto (jump-again) [vi/emacs]
+Ctrl-b ;    # Ir al panel previamente activo (last-pane)
+M-<    # Ir al inicio del historial (history-top) [vi: g, emacs: M-<]
+Ctrl-b =    # Elegir buffer interactivamente para pegar (choose-buffer)
+M->    # Ir al final del historial (history-bottom) [vi: G, emacs: M->]
+Ctrl-b ?    # Listar todos los atajos de teclado (list-keys)
+Ctrl-b [    # Entrar modo copia (copy-mode)
+Ctrl-b ]    # Pegar el buffer más reciente (paste-buffer)
+^    # Ir al primer carácter no blanco (back-to-indentation) [vi: ^, emacs: M-m]
+{    # Párrafo anterior (previous-paragraph) [vi: {, emacs: M-{]
+Ctrl-b {    # Intercambiar con panel anterior (swap-pane -U)
+M-{    # Párrafo anterior (previous-paragraph) [vi: {, emacs: M-{]
+}    # Siguiente párrafo (next-paragraph) [vi: }, emacs: M-}]
+Ctrl-b }    # Intercambiar con panel siguiente (swap-pane -D)
+M-}    # Siguiente párrafo (next-paragraph) [vi: }, emacs: M-}]
+Ctrl-b ~    # Mostrar mensajes anteriores de tmux (show-messages)
+0    # Inicio de línea (start-of-line) [vi: 0, emacs: C-a]
+Ctrl-b 0..9    # Seleccionar ventana 0 a 9 (select-window -t :0..9)
+Ctrl-b M-1    # Layout even-horizontal
+Ctrl-b M-2    # Layout even-vertical
+Ctrl-b M-3    # Layout main-horizontal
+Ctrl-b M-4    # Layout main-horizontal-mirrored
+Ctrl-b M-5    # Layout main-vertical
+Ctrl-b M-6    # Layout main-vertical-mirrored
+Ctrl-b M-7    # Layout tiled
+A    # Añadir selección al buffer y salir (append-selection-and-cancel) [vi]
+C-a    # Inicio de línea (start-of-line) [vi: 0, emacs: C-a]
+B    # Palabra anterior separada por espacios (previous-space) [vi]
+b    # Palabra anterior (previous-word) [vi: b, emacs: M-b]
+M-b    # Palabra anterior (previous-word) [vi: b, emacs: M-b]
+C-b    # Página arriba (page-up) [vi: C-b, emacs: PageUp]
+Ctrl-b C-b    # Enviar el prefijo a la aplicación (send-prefix)
+M-C-b    # Ir al corchete/parentesis coincidente anterior (previous-matching-bracket) [emacs]
+Ctrl-b c    # Crear nueva ventana (new-window)
+C-c    # Cancelar operación / salir (cancel) [emacs]
+Ctrl-b D    # Elegir cliente para desconectar (choose-client)
+Ctrl-b d    # Desconectar cliente actual / detach sesión (detach-client)
+Down    # Cursor abajo (cursor-down) [vi/emacs]
+Ctrl-b Down    # Cambiar foco al panel de abajo (select-pane -D)
+M-Down    # Media página abajo (halfpage-down) [vi: C-d, emacs: M-Down]
+Ctrl-b M-Down    # Redimensionar panel abajo 5 celdas (resize-pane -D)
+C-d    # Media página abajo (halfpage-down) [vi: C-d, emacs: M-Down]
+Ctrl-b C-d    # Media página abajo en modo copia (halfpage-down) [vi]
+C-Down    # Scroll hacia abajo (scroll-down) [vi: C-e, emacs: C-Down]
+Ctrl-b C-Down    # Redimensionar panel abajo 1 celda (resize-pane -D)
+E    # Fin de palabra separada por espacios (next-space-end) [vi]
+e    # Fin de palabra actual/siguiente (next-word-end) [vi: e, emacs: M-f]
+Enter    # Copiar selección y salir (copy-selection-and-cancel) [vi: Enter, emacs: M-w]
+Escape    # Salir del modo copia (cancel) [vi: q, emacs: Escape]
+C-e    # Fin de línea (end-of-line) [vi: $, emacs: C-e]
+C-e    # Scroll hacia abajo (scroll-down) [vi: C-e, emacs: C-Down]
+F    # Saltar hacia atrás a carácter (jump-backward) [vi/emacs]
+f    # Saltar hacia adelante a carácter (jump-forward) [vi/emacs]
+Ctrl-b f    # Buscar texto en ventanas abiertas (find-window)
+M-f    # Fin de palabra actual/siguiente (next-word-end) [vi: e, emacs: M-f]
+C-f    # Página abajo (page-down) [vi: C-f, emacs: PageDown]
+Ctrl-b C-f    # Página abajo en modo copia (page-down) [vi]
+M-C-f    # Ir al siguiente corchete/parentesis coincidente (next-matching-bracket)
+g    # Ir a línea específica (goto-line) [vi: :, emacs: g]
+g    # Ir al inicio del historial (history-top) [vi: g, emacs: M-<]
+G    # Ir al final del historial (history-bottom) [vi: G, emacs: M->]
+C-g    # Cancelar operación / salir (cancel) [emacs]
+h    # Cursor izquierda (cursor-left) [vi/emacs]
+H    # Ir a línea superior visible (top-line) [vi: H, emacs: M-R]
+Ctrl-b i    # Mostrar información de la ventana actual (display-message)
+j    # Cursor abajo (cursor-down) [vi/emacs]
+k    # Cursor arriba (cursor-up) [vi/emacs]
+L    # Ir a línea inferior visible (bottom-line) [vi]
+l    # Cursor derecha (cursor-right) [vi/emacs]
+Ctrl-b L    # Volver a la última sesión usada (switch-client -l)
+Ctrl-b l    # Cambiar a la ventana previamente seleccionada (last-window)
+Left    # Cursor izquierda (cursor-left) [vi/emacs]
+Ctrl-b Left    # Cambiar foco al panel de la izquierda (select-pane -L)
+M-l    # Centrar cursor horizontalmente (cursor-centre-horizontal) [emacs]
+Ctrl-b M-Left    # Redimensionar panel izquierda 5 celdas (resize-pane -L)
+C-l    # Centrar cursor verticalmente en pantalla (cursor-centre-vertical) [emacs]
+Ctrl-b C-Left    # Redimensionar panel izquierda 1 celda (resize-pane -L)
+M    # Ir a línea media visible (middle-line) [vi: M, emacs: M-r]
+Ctrl-b M    # Limpiar marca del panel (select-pane -M)
+Ctrl-b m    # Marcar panel actual (select-pane -m)
+M-m    # Ir al primer carácter no blanco (back-to-indentation) [vi: ^, emacs: M-m]
+N    # Coincidencia anterior de búsqueda (search-reverse) [vi/emacs]
+n    # Siguiente coincidencia de búsqueda (search-again) [vi/emacs]
+Ctrl-b n    # Cambiar a ventana siguiente (next-window)
+Ctrl-b M-n    # Ir a siguiente ventana con bell/actividad
+C-n    # Cursor abajo (cursor-down) [emacs]
+o    # Cambiar extremo de la selección (other-end) [vi]
+Ctrl-b o    # Seleccionar siguiente panel (select-pane -t :.+)
+Ctrl-b M-o    # Rotar paneles hacia atrás (rotate-window -D)
+Ctrl-b C-o    # Rotar paneles hacia adelante (rotate-window)
+P    # Mostrar/ocultar indicador de posición (toggle-position) [vi/emacs]
+Ctrl-b p    # Cambiar a ventana anterior (previous-window)
+Ctrl-b Page Up    # Entrar modo copia y subir una página (copy-mode -u)
+PageDown    # Página abajo (page-down) [vi: C-f, emacs: PageDown]
+PageUp    # Página arriba (page-up) [vi: C-b, emacs: PageUp]
+Ctrl-b M-p    # Ir a anterior ventana con bell/actividad
+C-p    # Cursor arriba (cursor-up) [emacs]
+q    # Salir del modo copia (cancel) [vi: q, emacs: Escape]
+Ctrl-b q    # Mostrar índices de paneles brevemente (display-panes)
+r    # Refrescar contenido desde el panel (refresh-from-pane) [vi/emacs]
+R    # Alternar selección rectangular (rectangle-toggle) [vi: v, emacs: R]
+Ctrl-b r    # Forzar redibujado del cliente (refresh-client)
+Right    # Cursor derecha (cursor-right) [vi/emacs]
+Ctrl-b Right    # Cambiar foco al panel de la derecha (select-pane -R)
+M-R    # Ir a línea superior visible (top-line) [vi: H, emacs: M-R]
+M-r    # Ir a línea media visible (middle-line) [vi: M, emacs: M-r]
+Ctrl-b M-Right    # Redimensionar panel derecha 5 celdas (resize-pane -R)
+C-r    # Búsqueda incremental hacia atrás (search-backward-incremental) [emacs]
+Ctrl-b C-Right    # Redimensionar panel derecha 1 celda (resize-pane -R)
+Ctrl-b s    # Elegir sesión interactivamente (choose-tree)
+Space    # Iniciar selección (begin-selection) [vi: Space, emacs: C-Space]
+Ctrl-b Space    # Cambiar al siguiente layout predefinido (next-layout)
+C-s    # Búsqueda incremental hacia adelante (search-forward-incremental) [emacs]
+C-Space    # Iniciar selección (begin-selection) [vi: Space, emacs: C-Space]
+T    # Saltar hacia atrás (antes del carácter) (jump-to-backward) [vi]
+t    # Saltar hacia adelante (antes del carácter) (jump-to-forward) [vi]
+Ctrl-b t    # Mostrar reloj en pantalla (clock-mode)
+Up    # Cursor arriba (cursor-up) [vi/emacs]
+Ctrl-b Up    # Cambiar foco al panel de arriba (select-pane -U)
+M-Up    # Media página arriba (halfpage-up) [vi: C-u, emacs: M-Up]
+Ctrl-b M-Up    # Redimensionar panel arriba 5 celdas (resize-pane -U)
+C-u    # Media página arriba (halfpage-up) [vi: C-u, emacs: M-Up]
+Ctrl-b C-u    # Media página arriba en modo copia (halfpage-up) [vi]
+C-Up    # Scroll hacia arriba (scroll-up) [vi: C-y, emacs: C-Up]
+Ctrl-b C-Up    # Redimensionar panel arriba 1 celda (resize-pane -U)
+V    # Seleccionar línea completa (select-line) [vi]
+v    # Alternar selección rectangular (rectangle-toggle) [vi: v, emacs: R]
+W    # Siguiente palabra separada por espacios (next-space) [vi]
+w    # Siguiente palabra (next-word) [vi]
+Ctrl-b w    # Elegir ventana interactivamente (choose-tree -Zw)
+M-w    # Copiar selección y salir (copy-selection-and-cancel) [vi: Enter, emacs: M-w]
+C-w    # Copiar selección y salir (copy-selection-and-cancel) [emacs]
+X    # Establecer marca (set-mark) [vi/emacs]
+Ctrl-b x    # Matar panel actual (kill-pane)
+M-x    # Saltar a la marca (jump-to-mark) [vi/emacs]
+y    # Copiar selección y salir (copy-selection-and-cancel) [vi]
+C-y    # Scroll hacia arriba (scroll-up) [vi: C-y, emacs: C-Up]
+z    # Centrar cursor verticalmente (scroll-middle) [vi]
+Ctrl-b z    # Maximizar/restaurar panel actual (resize-pane -Z)
+Ctrl-b C-z    # Suspender cliente tmux (suspend-client)

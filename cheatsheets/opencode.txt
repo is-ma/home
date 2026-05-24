@@ -1,0 +1,299 @@
+#################################################################
+#                           OPENCODE                            #
+#################################################################
+
+!comando    # Ejecutar shell e inyectar output como tool result
+$schema: https://opencode.ai/config.json    # Autocompletado y validación en editor
+$schema: https://opencode.ai/theme.json    # Schema para temas custom
+--type-add=web:*.{html,css,js}    # Añadir tipo de archivo custom en config rg
+.claude/skills/<name>/SKILL.md    # Compatibilidad con Claude Code
+.connect    # Añadir/configurar proveedor y API keys
+.new (/clear)    # Iniciar nueva sesión
+.opencode/agents/    # Agentes personalizados del proyecto
+.opencode/commands/    # Comandos personalizados del proyecto
+.opencode/modes/    # Modos personalizados del proyecto
+.opencode/plugins/    # Plugins locales del proyecto
+.opencode/skills/    # Skills del proyecto
+.opencode/themes/    # Temas personalizados del proyecto
+.opencode/tools/    # Herramientas personalizadas del proyecto
+.sessions (/resume, /continue)    # Listar y cambiar entre sesiones
+.well-known/opencode    # Config remota organizacional (endpoint)
+/<custom-command>    # Ejecutar comando personalizado definido en config
+/agents    # Listar y cambiar entre agentes en TUI
+/cancel    # Cancelar ejecución en curso en TUI
+/compact (/summarize)    # Compactar contexto de la sesión
+/details    # Alternar visibilidad de detalles de ejecución
+/editor    # Abrir editor externo para componer mensaje
+/etc/opencode/    # Config administrada Linux
+/exit (/quit, /q)    # Salir de OpenCode
+/export    # Exportar conversación a Markdown y abrir editor
+/help    # Mostrar diálogo de ayuda
+/init    # Crear o actualizar AGENTS.md del proyecto
+/Library/Application Support/opencode/    # Config administrada macOS
+/models    # Listar modelos disponibles
+/new (/clear)    # Iniciar nueva sesión
+/redo    # Rehacer mensaje deshecho previamente
+/sessions (/resume, /continue)    # Listar y cambiar entre sesiones
+/share    # Compartir sesión actual (genera link público)
+/stop    # Alias de /cancel para abortar ejecución
+/themes    # Listar temas disponibles
+/thinking    # Alternar visibilidad de bloques thinking/reasoning
+/undo    # Deshacer último mensaje y revertir cambios
+/unshare    # Dejar de compartir sesión actual
+@<alias>    # Referencia a alias de ruta configurado
+@<alias>/<ruta>    # Autocompletar archivos dentro de alias
+@<nombre-archivo>    # Referencia fuzzy-search de archivo como contexto
+@<subagente>    # Invocar manualmente un subagente
+[    # Entrar modo copia/scroll (copy-mode)
+agent.<name>.*    # Opciones adicionales passthrough al provider
+agent.<name>.color    # Color visual (#hex o nombre temático)
+agent.<name>.description    # Descripción para selección automática
+agent.<name>.disable: true    # Desactivar agente
+agent.<name>.hidden: true    # Ocultar de autocompletar @ (solo subagentes)
+agent.<name>.maxSteps    # Máximo iteraciones agente antes de forzar respuesta
+agent.<name>.mode    # Modo: primary, subagent, all
+agent.<name>.model    # Modelo específico del agente
+agent.<name>.permission    # Permisos específicos del agente
+agent.<name>.prompt    # System prompt o ruta a archivo
+agent.<name>.task_permissions    # Control de qué subagentes puede invocar vía Task
+agent.<name>.temperature    # Temperatura del LLM (0.0 - 1.0+)
+agent.<name>.top_p    # Top-P alternative a temperature
+alias ll='ls -l'    # Crear alias en shell
+arrastrar y soltar imágenes    # Adjuntar imágenes al prompt automáticamente
+attachment.image.auto_resize    # Redimensionar imágenes que excedan límites
+attachment.image.max_base64_bytes    # Tamaño máximo base64 de imagen (default 5MB)
+attachment.image.max_height    # Alto máximo antes de resize/rechazo
+attachment.image.max_width    # Ancho máximo antes de resize/rechazo
+attention.enabled    # Notificaciones escritorio y sonidos
+attention.notifications    # Notificaciones desktop cuando terminal no foco
+attention.sound    # Reproducir sonidos de atención
+attention.sound_pack    # ID de pack de sonidos
+attention.sounds.<event>: <path>    # Ruta/URL custom por tipo de sonido
+attention.volume    # Volumen de sonidos (0.0 a 1.0)
+autoupdate: true/false/"notify"    # Autoactualizar, notificar, o desactivar
+bash (shell)    # Ejecutar comandos terminal
+compaction.auto    # Compactar contexto automáticamente (default true)
+compaction.prune    # Poda outputs antiguos para ahorrar tokens
+compaction.reserved    # Tokens reservados para buffer de compactación
+Ctrl+A    # Listar proveedores de modelos
+Ctrl+Alt+B    # Página arriba (alt)
+Ctrl+Alt+D    # Media página abajo
+Ctrl+Alt+E    # Bajar página
+Ctrl+Alt+F    # Página abajo (alt)
+Ctrl+Alt+K    # Toggle which-key
+Ctrl+Alt+Shift+K    # Toggle layout which-key
+Ctrl+Alt+U    # Media página arriba
+Ctrl+Alt+Y    # Subir página
+Ctrl+C    # Limpiar input
+Ctrl+D    # Eliminar sesión / eliminar stash
+Ctrl+Enter / Alt+Enter / Ctrl+J    # Nueva línea en prompt
+Ctrl+F    # Toggle favorito de modelo
+Ctrl+G / Home    # Primer mensaje
+Ctrl+P    # Abrir command palette / lista de comandos
+Ctrl+R    # Renombrar sesión
+Ctrl+T    # Ciclar variantes (reasoning effort) del modelo
+Ctrl+X C    # /compact (con leader ctrl+x)
+Ctrl+X E    # /editor
+Ctrl+X H    # Alternar conceal / tips
+Ctrl+X M    # /models
+Ctrl+X N    # /new
+Ctrl+X Q    # /exit
+Ctrl+X R    # /redo
+Ctrl+X T    # /themes
+Ctrl+X U    # /undo
+Ctrl+X X    # /export
+Ctrl+X Y    # Copiar mensaje actual
+Ctrl+Z    # Suspender terminal (POSIX)
+default_agent: "build"    # Agente primario por defecto
+disabled_providers: ["id1"]    # Denylist de proveedores a no cargar
+edit    # Reemplazo exacto de strings en archivos
+enabled_providers: ["id1"]    # Allowlist de únicos proveedores activos
+End    # Último mensaje
+Escape    # Interrumpir sesión en ejecución
+F2    # Ciclar modelos recientes
+formatter: true    # Habilitar formateadores integrados
+glob    # Búsqueda de archivos por patrón
+grep    # Búsqueda de contenido regex
+instructions: ["path"]    # Archivos de instrucciones adicionales
+keybinds.<action>: "<shortcut>"    # Mapeo custom de atajos
+lsp: true    # Habilitar servidores LSP (auto-descarga)
+model: "provider/model"    # Modelo principal por defecto
+mouse: true/false    # Captura de ratón en TUI
+opencode    # Iniciar TUI en directorio actual
+opencode --agent <name>    # Forzar agente al iniciar TUI
+opencode --continue    # Continuar la última sesión
+opencode --cors <origen>    # Orígenes CORS adicionales
+opencode --fork    # Crear fork de la sesión al continuar
+opencode --hostname <host>    # Hostname para servidor
+opencode --log-level <lvl>    # Nivel de log: DEBUG, INFO, WARN, ERROR
+opencode --mdns    # Habilitar descubrimiento mDNS
+opencode --mdns-domain <dom>    # Dominio mDNS personalizado
+opencode --model <p/m>    # Forzar modelo al iniciar TUI
+opencode --port <n>    # Puerto para servidor local
+opencode --print-logs    # Imprimir logs a stderr
+opencode --prompt <texto>    # Prompt inicial al arrancar TUI
+opencode --pure    # Ejecutar sin plugins externos
+opencode --session <id>    # Continuar una sesión por ID
+opencode --version    # Mostrar versión de OpenCode
+opencode -v    # Alias de --version
+opencode [project]    # Iniciar TUI en directorio especificado
+opencode acp    # Iniciar servidor ACP (Agent Client Protocol) nd-JSON
+opencode acp --cwd <path>    # Directorio de trabajo para ACP
+opencode agent create    # Crear nuevo agente interactivamente
+opencode agent create --description <d>    # Descripción del propósito del agente
+opencode agent create --mode <mode>    # Modo: primary, subagent, all
+opencode agent create --model <m>    # Modelo para el agente nuevo
+opencode agent create --path <dir>    # Directorio destino del archivo agente
+opencode agent create --permissions <list>    # Lista de permisos a allow: bash,read,edit
+opencode agent list    # Listar todos los agentes disponibles
+opencode attach --password <p>    # Contraseña para basic auth en attach
+opencode attach --username <u>    # Usuario para basic auth en attach
+opencode attach <url>    # Adjuntar TUI a servidor OpenCode ya en ejecución
+opencode auth list    # Alias de providers list
+opencode auth login    # Alias de providers login
+opencode auth logout    # Alias de providers logout
+opencode completion    # Generar script de autocompletado para shell
+opencode config    # Manipular o validar configuración del proyecto
+opencode db --format json    # Formato JSON para salida de db
+opencode db --format tsv    # Formato TSV para salida de db
+opencode db [query]    # Ejecutar query SQL o abrir shell sqlite3
+opencode db migrate    # Migrar datos JSON antiguos a SQLite
+opencode db path    # Mostrar ruta a la base de datos SQLite
+opencode debug agent <name>    # Mostrar configuración detallada de un agente
+opencode debug config    # Mostrar configuración resuelta
+opencode debug file    # Utilidades de debug para filesystem
+opencode debug info    # Información general de debug
+opencode debug lsp    # Utilidades de debug para LSP
+opencode debug paths    # Mostrar rutas globales
+opencode debug rg    # Utilidades de debug para ripgrep
+opencode debug scrap    # Listar proyectos conocidos
+opencode debug skill    # Listar skills disponibles
+opencode debug snapshot    # Utilidades de debug para snapshots
+opencode debug startup    # Mostrar tiempos de arranque
+opencode debug v2    # Debug catálogo v2 y plugins built-in
+opencode debug wait    # Esperar indefinidamente (para debugging)
+opencode export --sanitize    # Exportar redactando datos sensibles
+opencode export [sessionID]    # Exportar sesión a JSON
+opencode github install    # Instalar agente GitHub Actions en repo
+opencode github run    # Ejecutar agente GitHub (usado en CI/CD)
+opencode github run --event <e>    # Evento mock para ejecutar agente
+opencode github run --token <t>    # Token personalizado de GitHub
+opencode import <file|url>    # Importar sesión desde JSON o URL de share
+opencode mcp add    # Añadir servidor MCP local o remoto
+opencode mcp auth [name]    # Autenticar servidor MCP con OAuth
+opencode mcp auth list    # Listar servidores OAuth-capables y estado
+opencode mcp debug <name>    # Depurar conexión OAuth de servidor MCP
+opencode mcp list    # Listar servidores MCP y estado de conexión
+opencode mcp logout [name]    # Eliminar credenciales OAuth de un MCP
+opencode models    # Listar modelos disponibles de proveedores
+opencode models --refresh    # Recargar caché de modelos desde models.dev
+opencode models --verbose    # Ver metadata de costes y capacidades
+opencode models [provider]    # Listar modelos de un proveedor específico
+opencode plug <module>    # Alias corto de plugin
+opencode plugin <module>    # Instalar plugin npm y actualizar config
+opencode plugin <module> --force    # Reemplazar versión existente del plugin
+opencode plugin <module> --global    # Instalar plugin en config global
+opencode pr <number>    # Fetch y checkout de PR, luego iniciar TUI
+opencode providers list    # Listar proveedores autenticados
+opencode providers login --method <label>    # Saltar selección de método
+opencode providers login --provider <id>    # Especificar proveedor directamente
+opencode providers login [url]    # Iniciar sesión en un proveedor
+opencode providers logout    # Cerrar sesión de proveedor configurado
+opencode run --attach <url>    # Ejecutar conectado a servidor remoto
+opencode run --dangerously-skip-permissions    # Autoaprobar permisos no denegados
+opencode run --file <path>    # Adjuntar archivo(s) al mensaje
+opencode run --format json    # Salida en eventos JSON crudos
+opencode run --thinking    # Mostrar bloques de thinking
+opencode run --title <title>    # Título personalizado para la sesión
+opencode run --variant <variant>    # Variante de modelo (reasoning effort)
+opencode run [mensaje..]    # Ejecutar OpenCode en modo no-interactivo
+opencode serve    # Iniciar servidor headless HTTP/API
+opencode serve --hostname <host>    # Host del servidor
+opencode serve --port <n>    # Puerto del servidor
+opencode session delete <id>    # Eliminar sesión por ID
+opencode session list    # Listar sesiones
+opencode session list --format json    # Formato JSON
+opencode session list --max-count <n>    # Limitar a N sesiones recientes
+opencode stats    # Mostrar estadísticas de uso y coste de tokens
+opencode stats --days <n>    # Filtrar últimos N días
+opencode stats --models <n>    # Desglose de uso por modelo
+opencode stats --project <name>    # Filtrar por proyecto
+opencode stats --tools <n>    # Mostrar top N herramientas
+opencode uninstall    # Desinstalar OpenCode
+opencode uninstall --dry-run    # Mostrar qué se eliminaría sin eliminar
+opencode uninstall --keep-config    # Desinstalar pero conservar configuración
+opencode uninstall --keep-data    # Desinstalar pero conservar sesiones/snapshots
+opencode upgrade [target]    # Actualizar OpenCode a última o versión específica
+opencode web    # Iniciar servidor con interfaz web
+opencode web --port <n>    # Puerto para interfaz web
+OPENCODE_AUTO_SHARE=1    # Variable para auto-compartir sesiones
+OPENCODE_CLIENT    # Identificador de cliente (default cli)
+OPENCODE_CONFIG=<path>    # Variable para path custom de config
+OPENCODE_CONFIG_CONTENT=<json>    # JSON inline para overrides runtime
+OPENCODE_CONFIG_DIR=<path>    # Directorio custom equivalente a .opencode
+OPENCODE_DISABLE_AUTOUPDATE    # Desactivar chequeo de actualizaciones
+OPENCODE_DISABLE_CLAUDE_CODE    # Desactivar compatibilidad .claude
+OPENCODE_DISABLE_CLAUDE_CODE_PROMPT    # Desactivar CLAUDE.md como fallback
+OPENCODE_DISABLE_CLAUDE_CODE_SKILLS    # Desactivar .claude/skills
+OPENCODE_DISABLE_DEFAULT_PLUGINS    # Desactivar plugins por defecto
+OPENCODE_DISABLE_LSP_DOWNLOAD=1    # Desactivar descarga automática de LSPs
+OPENCODE_DISABLE_MOUSE    # Desactivar captura de ratón en TUI
+OPENCODE_DISABLE_PRUNE    # Desactivar purga de datos antiguos
+OPENCODE_DISABLE_TERMINAL_TITLE    # Desactivar actualización título terminal
+OPENCODE_ENABLE_EXA    # Habilitar búsqueda web Exa
+OPENCODE_ENABLE_EXPERIMENTAL_MODELS    # Activar modelos experimentales
+OPENCODE_FAKE_VCS    # Proveedor VCS fake para testing
+OPENCODE_LOG_LEVEL    # Variable de entorno para nivel de log (DEBUG, INFO, WARN, ERROR)
+OPENCODE_MODELS_URL    # URL custom para catálogo de modelos
+OPENCODE_PERMISSION    # JSON inline de permisos
+OPENCODE_SERVER_PASSWORD    # Habilitar basic auth en serve/web
+OPENCODE_SERVER_USERNAME    # Usuario para basic auth (default opencode)
+OPENCODE_TUI_CONFIG=<path>    # Variable para path custom de TUI config
+permission.*: "ask"    # Catch-all para todas las herramientas
+permission.<tool>: "allow"    # Permitir sin preguntar
+permission.<tool>: "ask"    # Preguntar antes de ejecutar (once/always/reject)
+permission.<tool>: "deny"    # Bloquear completamente
+provider.<id>.models.<id>.limit.context    # Límite de contexto de modelo
+provider.<id>.models.<id>.limit.output    # Límite de output de modelo
+provider.<id>.models.<id>.name    # Nombre display de modelo
+provider.<id>.options.apiKey    # API key de proveedor
+provider.<id>.options.baseURL    # URL base custom del proveedor
+provider.<id>.options.chunkTimeout    # Timeout entre chunks de stream
+provider.<id>.options.setCacheKey    # Forzar cache key en proveedor
+provider.<id>.options.timeout    # Timeout de request en ms (default 300000)
+read    # Leer contenido de archivos
+scroll_acceleration.enabled    # Aceleración estilo macOS (anula scroll_speed)
+scroll_speed: 3    # Velocidad de scroll (mín 0.001)
+server.cors    # Lista de orígenes CORS adicionales
+server.hostname    # Host para servidor
+server.mdns    # Habilitar descubrimiento mDNS
+server.mdnsDomain    # Dominio mDNS custom
+server.port    # Puerto para opencode serve/web
+share: "auto"    # Compartir automáticamente nuevas conversaciones
+share: "disabled"    # Desactivar funcionalidad de share
+share: "manual"    # Default: solo compartir bajo demanda
+shell: "pwsh" / "/bin/zsh"    # Shell para terminal interactiva y bash tool
+Shift+Enter    # Nueva línea en prompt
+Shift+F2    # Ciclar modelos recientes inversamente
+skill    # Cargar definición SKILL.md en contexto
+skill: compatibility    # Compatibilidad (ej: "opencode")
+skill: description    # Descripción 1-1024 chars
+skill: license    # Licencia opcional
+skill: metadata    # Mapa string-string opcional
+skill: name    # Nombre único (1-64 chars, lowercase alfanumérico)
+small_model: "provider/model"    # Modelo ligero para títulos/resúmenes
+snapshot: true/false    # Activar/desactivar sistema de snapshots (undo)
+Tab    # Cambiar entre agentes primarios (build ↔ plan)
+TUI multi-sesión    # Múltiples agentes en paralelo
+watcher.ignore: ["glob"]    # Patrones glob ignorados por file watcher
+write    # Crear/sobrescribir archivos
+~/.claude/CLAUDE.md    # Compatibilidad global Claude Code
+~/.config/opencode/agents/    # Agentes personalizados globales
+~/.config/opencode/commands/    # Comandos personalizados globales
+~/.config/opencode/modes/    # Modos personalizados globales
+~/.config/opencode/opencode.json    # Config global del usuario
+~/.config/opencode/plugins/    # Plugins globales
+~/.config/opencode/skills/    # Skills globales
+~/.config/opencode/themes/    # Temas personalizados globales
+~/.config/opencode/tools/    # Herramientas personalizadas globales
+~/.config/opencode/tui.json    # Config global TUI

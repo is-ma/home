@@ -1,0 +1,64 @@
+#################################################################
+#                     EMACS FOR THE TERMINAL                    #
+#################################################################
+
+# Movimiento del cursor
+Ctrl+A           | Ir al inicio de la línea
+Ctrl+E           | Ir al final de la línea
+Ctrl+F           | Avanzar un caracter
+Ctrl+B           | Retroceder un caracter
+Alt+F            | Avanzar una palabra
+Alt+B            | Retroceder una palabra
+Ctrl+X X         | Alternar entre posición actual e inicio de línea
+Ctrl+]           | Buscar carácter hacia adelante (salta al siguiente carácter bajo el cursor)
+Alt+Ctrl+]       | Buscar carácter hacia atrás (salta al anterior carácter bajo el cursor)
+Alt+<            | Ir al primer comando del historial
+Alt+>            | Ir al último comando del historial
+
+# Borrado
+Ctrl+D           | Borrar caracter bajo el cursor
+Ctrl+H           | Retroceso (backspace)
+Alt+D            | Borrar palabra hacia adelante
+Ctrl+W           | Borrar palabra hacia atrás
+Ctrl+K           | Borrar desde el cursor hasta el final de la línea
+Ctrl+U           | Borrar desde el cursor hasta el inicio de la línea
+Ctrl+Y           | Pegar lo último que borraste (Yank)
+Alt+\            | Borrar todos los espacios alrededor del cursor
+
+# Historial de comandos
+Ctrl+P           | Comando anterior (prev)
+Ctrl+N           | Comando siguiente (next)
+Ctrl+R           | Buscar en el historial (modo búsqueda)
+Ctrl+G           | Salir del modo búsqueda sin seleccionar
+Alt+.            | Insertar el último argumento del comando anterior
+Alt+R            | Revertir cambios en una línea del historial
+Ctrl+O           | Ejecutar comando actual y traer el siguiente del historial
+Ctrl+S           | Búsqueda incremental hacia adelante en el historial (puede requerir stty -ixon si la terminal captura Ctrl+S como XOFF)
+
+# Misceláneos útiles
+Ctrl+L           | Limpiar la pantalla (como clear)
+Ctrl+T           | Transponer dos caracteres
+Alt+U            | Mayúsculas desde el cursor hasta el final de la palabra
+Alt+L            | Minúsculas desde el cursor hasta el final de la palabra
+Alt+C            | Capitalizar la palabra actual (primera letra mayúscula)
+Ctrl+_           | Deshacer (Undo)
+Alt+T            | Intercambiar palabra antes del cursor con la siguiente
+Alt+Y            | Tras Ctrl+Y, rota por el kill ring para pegar cortes anteriores (solo funciona inmediatamente después de Ctrl+Y)
+Ctrl+X Ctrl+E    | Abrir el comando actual en $EDITOR para edición avanzada (requiere tener $EDITOR configurado, ej: export EDITOR=nano)
+Ctrl+Q / Ctrl+V  | Insertar el siguiente carácter literalmente (útil para caracteres de control)
+Alt+#            | Inserta # al inicio de la línea y la ejecuta (comenta el comando actual)
+Alt+0..9 / Alt+- | Prefijo numérico para repetir comandos (p.ej. Alt+3 Alt+F = avanzar 3 palabras; Alt+- para dirección inversa)
+Ctrl+X (         | Empezar a grabar macro de teclado
+Ctrl+X )         | Terminar de grabar macro
+Ctrl+X E         | Ejecutar la última macro grabada
+Ctrl+@           | Marcar posición actual para selección (set-mark)
+Ctrl+X Ctrl+R    | Recargar ~/.inputrc sin reiniciar la shell
+
+# Comandos de autocompletado
+Tab              | Autocompletar archivo/comando
+Alt+?            | Listar posibles autocompletados
+Alt+*            | Insertar todos los posibles autocompletados
+Alt+/            | Autocompletar nombre de archivo
+Alt+$            | Autocompletar variable de shell ($PATH, $HOME...)
+Alt+@            | Autocompletar hostname (localhost, google.com...)
+Alt+!            | Autocompletar nombre de comando
