@@ -1,6 +1,6 @@
 {
   "plugin": ["oh-my-openagent@latest"],
-  "": "https://opencode.ai/config.json",
+  "$schema": "https://opencode.ai/config.json",
   "provider": {
     "deepseek": {
       "options": {
