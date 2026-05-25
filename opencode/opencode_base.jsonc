@@ -1,6 +1,6 @@
 {
   "plugin": ["oh-my-openagent@latest"],
-  "": "https://opencode.ai/config.json",
+  "$schema": "https://opencode.ai/config.json",
   "provider": {
     "deepseek": {
       "options": {
@@ -10,7 +10,7 @@
   },
   "agent": {
     "DeepBro": {
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "$DEEP_BRO",
       "temperature": 0.7,
       "mode": "primary",
       "color": "#8B5CF6",
@@ -37,7 +37,7 @@
       }
     },
     "DeepJunior": {
-      "model": "deepseek/deepseek-v4-flash",
+      "model": "$DEEP_JUNIOR",
       "temperature": 0.3,
       "mode": "primary",
       "color": "#10B981",
@@ -64,7 +64,7 @@
       }
     },
     "DeepGenius": {
-      "model": "deepseek/deepseek-v4-pro",
+      "model": "$DEEP_GENIUS",
       "temperature": 0.35,
       "mode": "primary",
       "color": "#EF4444",
