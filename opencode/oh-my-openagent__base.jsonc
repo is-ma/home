@@ -80,13 +80,6 @@
       "temperature": 0.55
     }
   },
-  "background_task": {
-    "defaultConcurrency": 15,
-    "modelConcurrency": {
-      "$OMO_AGENT__PROMETHEUS": 20,
-      "$OMO_AGENT__SISYPHUS": 1000
-    }
-  },
   "experimental": {
     "disable_omo_env": true
   }

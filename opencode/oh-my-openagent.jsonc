@@ -80,13 +80,6 @@
       "temperature": 0.55
     }
   },
-  "background_task": {
-    "defaultConcurrency": 15,
-    "modelConcurrency": {
-      "deepseek/deepseek-v4-pro": 20,
-      "deepseek/deepseek-v4-flash": 1000
-    }
-  },
   "experimental": {
     "disable_omo_env": true
   }
