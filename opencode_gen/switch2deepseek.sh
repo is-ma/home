@@ -20,15 +20,15 @@ _subst() {
     sed "s|OMO_CATEGORY__WRITING|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__SISYPHUS|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__PROMETHEUS|deepseek/deepseek-v4-pro|g" |
-    sed "s|OMO_AGENT__HEPHAESTUS|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__LIBRARIAN|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__QUICK|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__HEPHAESTUS|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__DEEP|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__EXPLORE|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__ORACLE|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__METIS|deepseek/deepseek-v4-flash|g" |
-    sed "s|OMO_AGENT__MOMUS|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__ATLAS|deepseek/deepseek-v4-flash|g" |
-    sed "s|OMO_CATEGORY__DEEP|deepseek/deepseek-v4-flash|g" |
-    sed "s|OMO_CATEGORY__QUICK|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__MOMUS|deepseek/deepseek-v4-flash|g" |
     sed "s|DEEP_TERMINAL|deepseek/deepseek-v4-flash|g" |
     sed "s|DEEP_GENIUS|deepseek/deepseek-v4-pro|g" |
     sed "s|DEEP_JUNIOR|deepseek/deepseek-v4-flash|g" |
