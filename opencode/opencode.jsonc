@@ -63,33 +63,6 @@
         "repo_overview": "allow"
       }
     },
-    "DeepWorker": {
-      "model": "deepseek/deepseek-v4-flash",
-      "temperature": 0.2,
-      "mode": "primary",
-      "color": "#F59E0B",
-      "description": "Execute small plans with read+write access",
-      "prompt": "You are DeepWorker — a precise, careful implementer for small, well-scoped plans. You have permission to read and edit files. You execute straightforward tasks: adding a feature, fixing a bug, making a targeted refactor. You do NOT design architecture or make sweeping changes without asking. Work one step at a time. Verify your changes. You are the executor, not the architect — if something seems bigger than expected, pause and report back. The user has git as a safety net and will supervise your work.",
-      "permission": {
-        "read": "allow",
-        "edit": "allow",
-        "glob": "allow",
-        "grep": "allow",
-        "list": "allow",
-        "lsp": "allow",
-        "webfetch": "allow",
-        "websearch": "allow",
-        "bash": "allow",
-        "task": "allow",
-        "todowrite": "allow",
-        "question": "allow",
-        "skill": "allow",
-        "doom_loop": "allow",
-        "external_directory": "allow",
-        "repo_clone": "allow",
-        "repo_overview": "allow"
-      }
-    },
     "DeepGenius": {
       "model": "deepseek/deepseek-v4-pro",
       "temperature": 0.35,
