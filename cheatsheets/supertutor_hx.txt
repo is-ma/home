@@ -12,10 +12,10 @@ hx --health python     | Python tools installed
 :x                     | Same as :wq
 :x!                    | Same as :wq!
 :q                     | Close current window
-:q                     | Close current window ignoring buffer changes
+:q!                    | Close current window ignoring buffer changes (force)
 :o / e                 | Open a file from disk
 :bc                    | Buffer close
-:bc                    | Buffer close, ignoring unsaved changes
+:bc!                   | Buffer close, ignoring unsaved changes (force)
 :bco                   | Buffer close others
 :bco!                  | Buffer close others (force)
 :bca                   | Buffer close all without quiting
@@ -41,7 +41,7 @@ hx --health python     | Python tools installed
 :qa                    | Quit all views
 :qa!                   | Quit all views (ignoring unsaved changes)
 :cquit                 | Code quit (default 1)
-:cquit                 | Code quit (default 1, ignoring unsaved changes)
+:cquit!                | Code quit (default 1, ignoring unsaved changes) (force)
 :theme                 | Change editor theme
 :cd                    | Changes current working directory
 :pwd                   | Show the current working directory
@@ -63,7 +63,7 @@ hx --health python     | Python tools installed
 :sort                  | Sort ranges in selection
 :sort -i               | Sort case-insensitively
 :sort -r               | Sort in reverse order
-:reflow                | Hard-wrap selection to a given with
+:reflow                | Hard-wrap selection to a given width
 :config-reload         | Refresh user config
 :config-open           | Open the user config.toml file
 :config-open-workspace | Open the workspace config.toml file
@@ -80,8 +80,6 @@ hx --health python     | Python tools installed
 :mv                    | Move current buffer/file to different path
 :mv!                   | Move current buffer/file to different path (creating dirs)
 :r                     | Load a file into buffer
-Ctrl+X, E              | Escribe prompt en editor externo
-
 
 #################################################################
 #                             HELIX                             #
@@ -90,14 +88,15 @@ Ctrl+X, E              | Escribe prompt en editor externo
 `        # Set the selected text to lower case (switch_to_lowercase)
 Alt-`    # Set the selected text to upper case (switch_to_uppercase)
 ~        # Switch case of the selected text (switch_case)
-,        # Select a register to yank to or paste from (select_register)
+"        # Select a register to yank to or paste from (select_register)
+,        # Keep only the primary selection (keep_primary_selection)
 .        # Repeat last insert (N/A)
 Alt-.    # Repeat last motion (f, t, m, [ or ]) (repeat_last_motion)
 >        # Indent selection (indent)
 <        # Unindent selection (unindent)
 =        # Format selection (LSP) (format_selection)
 a        # Insert after selection (append_mode)
-Ctrl-a   # Increment object (number) under cursor (decrement)
+Ctrl-a   # Increment object (number) under cursor (increment)
 A        # Insert at the end of the line (insert_at_line_end)
 b        # Move previous word start (move_prev_word_start)
 B        # Move previous WORD start (move_prev_long_word_start)
@@ -140,7 +139,4 @@ y        # Yank selection (yank)
 Ctrl-x   # Decrement object under cursor (decrement)
 Q        # Start/stop macro recording to the selected register (record_macro)
 q        # Play back a recorded macro from the selected register (replay_macro)
-
-{"user": "rich", "role": "ingeniero", "year": "2026"}
-{"user": "regi", "role": "doctora", "year": "2026"}
 
