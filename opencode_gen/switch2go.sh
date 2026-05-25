@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# switch2go.sh - Sustituye placeholders en templates __base
-#               y genera opencode.jsonc / oh-my-openagent.jsonc
+# switch2go.sh — Modo "exprimir suscripción Go"
+# Asigna modelos del proveedor Go (opencode-go/*) a todos los agentes,
+# priorizando los modelos premium (Qwen, Kimi) donde más aportan.
+# Ideal para aprovechar al máximo los tokens contratados del mes.
 # Uso: bash switch2go.sh
 
 set -euo pipefail

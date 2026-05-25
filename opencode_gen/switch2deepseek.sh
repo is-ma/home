@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# switch2deepseek.sh - Sustituye placeholders en templates __base
-#                     y genera opencode.jsonc / oh-my-openagent.jsonc
+# switch2deepseek.sh — Modo "compensación DeepSeek"
+# Cambia todos los agentes al proveedor DeepSeek (deepseek/*) cuando
+# la suscripción Go se agota antes de fin de mes. Usa Flash para el
+# día a día y Pro solo para lo que realmente lo necesita, estirando
+# el presupuesto hasta que se renueve Go.
 # Uso: bash switch2deepseek.sh
 
 set -euo pipefail
