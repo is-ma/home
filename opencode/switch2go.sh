@@ -28,6 +28,7 @@ _subst() {
     sed "s|OMO_AGENT__ATLAS|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_CATEGORY__DEEP|deepseek/deepseek-v4-flash|g" |
     sed "s|OMO_CATEGORY__QUICK|deepseek/deepseek-v4-flash|g" |
+    sed "s|DEEP_TERMINAL|deepseek/deepseek-v4-flash|g" |
     sed "s|DEEP_GENIUS|deepseek/deepseek-v4-pro|g" |
     sed "s|DEEP_JUNIOR|deepseek/deepseek-v4-flash|g" |
     sed "s|DEEP_BRO|deepseek/deepseek-v4-flash|g"
@@ -35,5 +36,10 @@ _subst() {
 
 _subst "$DIR/opencode__base.jsonc"        > "$DIR/opencode.jsonc"
 _subst "$DIR/oh-my-openagent__base.jsonc"  > "$DIR/oh-my-openagent.jsonc"
+
+# --- Symlinks hacia ~/.config/opencode/ ---
+mkdir -p "$HOME/.config/opencode"
+ln -sf "$DIR/opencode.jsonc"            "$HOME/.config/opencode/opencode.jsonc"
+ln -sf "$DIR/oh-my-openagent.jsonc"     "$HOME/.config/opencode/oh-my-openagent.jsonc"
 
 echo "Configs regenerados desde templates __base (Go)"

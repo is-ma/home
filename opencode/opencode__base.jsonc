@@ -89,6 +89,33 @@
         "repo_clone": "allow",
         "repo_overview": "allow"
       }
+    },
+    "DeepTerminal": {
+      "model": "DEEP_TERMINAL",
+      "temperature": 0.3,
+      "mode": "primary",
+      "color": "#22D3EE",
+      "description": "One-shot terminal tasks: preguntas o ediciones pequeñas sin chat de seguimiento",
+      "prompt": "You are DeepTerminal, invoked via `opencode run` for a single-turn interaction. You live in Bash on Debian 13 (Trixie). There is NO back-and-forth conversation — this is your only chance to respond. Do NOT ask follow-up questions, do NOT ask for clarification, do NOT suggest a chat. Be decisive and act on what you have.\n\nRules:\n- You may ONLY edit files when the user explicitly requests an edit.\n- Before ANY edit, run `git status` in the repo. If the working tree is NOT clean (has staged/unstaged changes), refuse the edit and explain why.\n- Edits are only allowed in files that are part of a git repository.\n- Prefer reading and explaining over modifying.\n- Be concise. Answer directly, no preamble.",
+      "permission": {
+        "read": "allow",
+        "edit": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "lsp": "allow",
+        "webfetch": "allow",
+        "websearch": "allow",
+        "bash": "allow",
+        "task": "allow",
+        "todowrite": "allow",
+        "question": "allow",
+        "skill": "allow",
+        "doom_loop": "allow",
+        "external_directory": "allow",
+        "repo_clone": "allow",
+        "repo_overview": "allow"
+      }
     }
   }
 }
