@@ -1,0 +1,2504 @@
+#####################################################################
+#                    LAZYGIT TUTOR                                  #
+#             ~80 ejercicios para dominar Git en terminal           #
+#                 con LazyGit 0.40+ bindings                        #
+#####################################################################
+
+=== CÓMO USAR ESTE TUTORIAL =========================================
+
+Cada ejercicio crea un repositorio limpio en /tmp/lazygit-practice-*.
+Los pasos de setup se indican al inicio de cada ejercicio.
+
+IMPORTANTE:
+  - LazyGit debe estar YA ABIERTO en cada ejercicio
+  - No se incluye el paso de lanzamiento (asume lazygit ya ejecutado)
+  - Cada ejercicio es independiente: siempre parte de repo vacío
+  - Al terminar, limpia con: rm -rf /tmp/lg-practice-*
+
+SETUP TÍPICO DE CADA EJERCICIO:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-X && \
+  cd /tmp/lg-practice-X && git init && \
+  git config user.name "Test" && git config user.email "test@test.com"
+
+Reemplaza X con el número del ejercicio. Luego abre LazyGit en ese
+directorio y practica los atajos indicados.
+
+
+=== CONVENCIONES DE TECLAS ==========================================
+
+  <Esc>        = Escape (cierra paneles, cancela operaciones)
+  <Ret>        = Enter (confirma selección, ejecuta acción)
+  <Tab>        = Tabulador (cambia entre paneles principales)
+  <Space>      = Barra espaciadora (marca/desmarca archivos, staging)
+  <C-c>        = Ctrl+C (cancela operación en curso, cierra popup)
+  <C-z>        = Ctrl+Z (minimiza LazyGit temporalmente)
+  <A-letra>    = Alt + letra (atajos compuestos)
+  ?            = Abre menú de ayuda global
+  /            = Abre búsqueda/filtro dentro del panel activo
+  x            = Abre menú de contexto para selección actual
+
+
+=== CONVENCIONES DE PANELES =========================================
+
+Los atajos se especifican con el panel de contexto:
+
+  Panel: atajo
+
+Ejemplos:
+  Files: d          = En panel Files, presiona d (stage/unstage)
+  Commits: r        = En panel Commits, presiona r (revert commit)
+  Stash: a          = En panel Stash, presiona a (apply stash)
+  Branches: c       = En panel Branches, presiona c (create branch)
+  Remotes: f        = En panel Remotes, presiona f (fetch)
+
+Paneles principales (navegación con <Tab>):
+  - Files: archivos modificados, staged, untracked
+  - Commits: historial de commits locales
+  - Branches: ramas locales y remotas
+  - Stash: stashes guardados
+  - Remotes: repositorios remotos
+  - Reflog: historial de referencias
+
+
+=== NOTA SOBRE LAZYGIT ==============================================
+
+Versión: 0.40+
+Bindings: por defecto (default keybindings)
+Layout: default (paneles estándar)
+
+Si tus atajos no coinciden, verifica tu configuración con:
+  lazygit --version
+
+Los ejercicios asumen la configuración por defecto de LazyGit 0.40+.
+Si has personalizado keybindings en ~/.config/lazygit/config.yml,
+algunos atajos pueden diferir.
+
+
+=== CAPITULO 1: NAVEGACION Y PANELES ===
+
+En LazyGit cada panel tiene su propio conjunto de atajos. Dominar la
+navegacion entre paneles es la base para todo lo demas.
+
+
+--- Rotar entre paneles principales con Tab --------------------------
+
+ESCENARIO:
+  LazyGit muestra multiples paneles (Files, Commits, Branches, Stash).
+  Necesitas moverte rapidamente entre ellos para revisar diferentes
+  aspectos del repositorio.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-1 && cd /tmp/lg-practice-1 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "A" > file1.txt && git add . && git commit -m "init"
+  echo "B" > file2.txt && git add . && git commit -m "add file2"
+  echo "C" > file3.txt
+
+OBJETIVO:
+  Navegar en ciclo: Files → Branches → Commits → Stash → Files
+
+SOLUCION:
+  Files: <Tab>         (va a Branches)
+  Branches: <Tab>      (va a Commits)
+  Commits: <Tab>       (va a Stash)
+  Stash: <Tab>         (vuelve a Files)
+
+VERIFICACION:
+  git status         # debe mostrar file3.txt como untracked
+  git log --oneline  # debe mostrar 2 commits (init, add file2)
+
+
+--- Navegar items dentro de un panel con j/k -------------------------
+
+ESCENARIO:
+  El panel Commits tiene varios commits. Necesitas revisar el historial
+  moviendote arriba y abajo para ver detalles de cada commit.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-2 && cd /tmp/lg-practice-2 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "1" > a.txt && git add . && git commit -m "commit 1"
+  echo "2" > b.txt && git add . && git commit -m "commit 2"
+  echo "3" > c.txt && git add . && git commit -m "commit 3"
+  echo "4" > d.txt && git add . && git commit -m "commit 4"
+  echo "5" > e.txt && git add . && git commit -m "commit 5"
+
+OBJETIVO:
+  En el panel Commits, navegar desde el commit mas reciente hasta el
+  primero (commit 1) y volver al mas reciente.
+
+SOLUCION:
+  Files: <Tab>       (va a Branches)
+  Branches: <Tab>    (va a Commits)
+  Commits: j         (baja un commit)
+  Commits: j         (baja otro commit)
+  Commits: j         (baja otro commit)
+  Commits: j         (baja otro commit)
+  Commits: k         (sube un commit)
+  Commits: k         (sube otro commit)
+  Commits: k         (sube otro commit)
+  Commits: k         (sube otro commit)
+  Commits: k         (sube hasta el primer commit)
+
+VERIFICACION:
+  git status         # debe estar limpio, sin cambios pendientes
+  git log --oneline  # debe mostrar 5 commits
+
+
+--- Expandir/contraer secciones con espacio --------------------------
+
+ESCENARIO:
+  El panel Files muestra dos secciones: "Staged changes" y
+  "Unstaged changes". El espacio expande o contrae cada seccion
+  para mostrar u ocultar los archivos dentro de ella.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-3 && cd /tmp/lg-practice-3 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "staged1" > staged1.txt && echo "staged2" > staged2.txt
+  echo "unstaged1" > unstaged1.txt && echo "unstaged2" > unstaged2.txt
+  git add staged1.txt staged2.txt
+
+OBJETIVO:
+  En el panel Files, contraer la seccion "Staged changes" y luego
+  expandirla nuevamente. Hacer lo mismo con "Unstaged changes".
+
+SOLUCION:
+  Files: <Space>     (contrae/expande "Staged changes")
+  Files: <Space>     (vuelve a expandir "Staged changes")
+  Files: j j         (baja a "Unstaged changes")
+  Files: <Space>     (contrae/expande "Unstaged changes")
+  Files: <Space>     (vuelve a expandir "Unstaged changes")
+
+VERIFICACION:
+  git status         # debe mostrar 2 staged y 2 unstaged files
+  git log --oneline  # debe mostrar 0 commits (repo vacio)
+
+
+--- Ir a primer/ultimo item y paginacion -----------------------------
+
+ESCENARIO:
+  Con muchos archivos en el panel Files, necesitas saltar rapidamente
+  al inicio o final de la lista, o hacer scroll de media pagina.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-4 && cd /tmp/lg-practice-4 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  for i in $(seq 1 20); do echo "file $i" > file$i.txt; done
+
+OBJETIVO:
+  En el panel Files, ir al ultimo archivo con G, luego al primero con g,
+  y finalmente hacer scroll de media pagina abajo y arriba.
+
+SOLUCION:
+  Files: G           (salta al ultimo item de la lista)
+  Files: g           (salta al primer item de la lista)
+  Files: <C-d>       (scroll media pagina abajo)
+  Files: <C-u>       (scroll media pagina arriba)
+
+VERIFICACION:
+  git status         # debe mostrar 20 untracked files
+  git log --oneline  # debe mostrar 0 commits (repo vacio)
+
+
+--- Buscar dentro de un panel con / ----------------------------------
+
+ESCENARIO:
+  Tienes muchos archivos en el panel Files y necesitas encontrar
+  rapidamente uno por nombre sin navegar manualmente por toda la lista.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-5 && cd /tmp/lg-practice-5 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "alpha" > alpha.txt && echo "beta" > beta.txt
+  echo "gamma" > gamma.txt && echo "delta" > delta.txt
+  echo "epsilon" > epsilon.txt
+
+OBJETIVO:
+  En el panel Files, usar la busqueda para encontrar el archivo
+  "gamma.txt" rapidamente, luego salir del modo busqueda.
+
+SOLUCION:
+  Files: /           (abre filtro de busqueda)
+  Files: gamma       (escribe el nombre a buscar)
+  Files: <Esc>       (cierra el filtro de busqueda)
+  Files: /           (abre filtro nuevamente)
+  Files: epsilon     (busca otro archivo)
+  Files: <Esc>       (cierra el filtro)
+
+VERIFICACION:
+    git status         # debe mostrar 5 untracked files
+    git log --oneline  # debe mostrar 0 commits (repo vacio)
+
+
+=== CAPITULO 2: STAGING ===
+
+El staging area es el area de preparacion entre tu working directory y el
+historial de commits. LazyGit te permite afinar exactamente QUE incluiras
+en el siguiente commit, desde archivos completos hasta lineas individuales.
+
+
+--- Stage un archivo nuevo con space ---------------------------------
+
+ESCENARIO:
+  Tienes archivos nuevos (untracked) y necesitas agregar solo uno al
+  staging area, dejando los otros fuera del proximo commit.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-6 && cd /tmp/lg-practice-6 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "archivo1" > archivo1.txt
+  echo "archivo2" > archivo2.txt
+  echo "archivo3" > archivo3.txt
+
+OBJETIVO:
+  En el panel Files, hacer stage solo de "archivo2.txt" usando el atajo
+  space, dejando archivo1.txt y archivo3.txt como untracked.
+
+SOLUCION:
+  Files: j             (baja a archivo2.txt)
+  Files: <Space>       (stage archivo2.txt)
+
+VERIFICACION:
+  git status           # debe mostrar 1 staged file (archivo2.txt) y 2 untracked
+  git diff --staged    # debe mostrar el contenido de archivo2.txt
+
+
+--- Stage todos los archivos con a -----------------------------------
+
+ESCENARIO:
+  Tienes multiples archivos modificados y sin trackear. Quieres incluir
+  todos en el staging area de una sola vez.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-7 && cd /tmp/lg-practice-7 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "uno" > uno.txt
+  echo "dos" > dos.txt
+  echo "tres" > tres.txt
+  echo "cuatro" > cuatro.txt
+
+OBJETIVO:
+  En el panel Files, hacer stage de TODOS los archivos untracked de una
+  sola vez usando el atajo global 'a'.
+
+SOLUCION:
+  Files: a             (stage todos los archivos del panel)
+
+VERIFICACION:
+  git status           # debe mostrar 4 staged files, 0 untracked
+  git diff --staged    # debe mostrar los 4 archivos agregados
+
+
+--- Unstage un archivo ya stageado con space -------------------------
+
+ESCENARIO:
+  Un archivo ya esta en el staging area pero decidiste que no debe ir
+  en el proximo commit. Necesitas quitarlo del stage.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-8 && cd /tmp/lg-practice-8 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "staged1" > staged1.txt && echo "staged2" > staged2.txt && echo "staged3" > staged3.txt
+  git add staged1.txt staged2.txt staged3.txt
+
+OBJETIVO:
+  En el panel Files, navegar a la seccion "Staged changes" y hacer
+  unstage de "staged2.txt" usando space.
+
+SOLUCION:
+  Files: j             (baja a staged2.txt en la seccion Staged changes)
+  Files: <Space>       (unstage archivo2.txt)
+
+VERIFICACION:
+  git status           # debe mostrar 2 staged files y 1 unstaged file
+  git diff --staged    # debe mostrar solo staged1.txt y staged3.txt
+
+
+--- Stage un hunk especifico con enter -------------------------------
+
+ESCENARIO:
+  Un archivo tiene dos cambios independientes (dos hunks). Solo quieres
+  incluir el primer hunk en el commit, dejando el segundo fuera.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-9 && cd /tmp/lg-practice-9 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "linea1" > archivo.txt && echo "linea2" >> archivo.txt && echo "linea3" >> archivo.txt
+  git add . && git commit -m "initial"
+  echo "MODIFICACION 1" > temp.txt
+  sed -i '1s/.*/MODIFICACION 1/' archivo.txt
+  rm temp.txt
+  echo "MODIFICACION 2" > temp.txt
+  sed -i '3s/.*/MODIFICACION 2/' archivo.txt
+  rm temp.txt
+
+OBJETIVO:
+  En el panel Files, entrar al modo diff con enter, navegar al primer
+  hunk y hacer stage solo de ese hunk.
+
+SOLUCION:
+  Files: <Enter>       (abre el diff del archivo)
+  Diff: <Tab>          (navega al primer hunk si es necesario)
+  Diff: <Space>        (stage este hunk)
+  Diff: <Esc>          (vuelve al panel Files)
+
+VERIFICACION:
+  git status           # debe mostrar 1 staged file con cambios parciales
+  git diff --staged    # debe mostrar solo el primer hunk (linea 1)
+  git diff             # debe mostrar el segundo hunk sin staged (linea 3)
+
+
+--- Stage una linea especifica con enter + space ---------------------
+
+ESCENARIO:
+  Un archivo tiene varias lineas modificadas. Necesitas hacer stage de
+  una sola linea especifica, no de todo el hunk.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-10 && cd /tmp/lg-practice-10 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "original1" > archivo.txt && echo "original2" >> archivo.txt && echo "original3" >> archivo.txt && echo "original4" >> archivo.txt
+  git add . && git commit -m "initial"
+  sed -i '1s/.*/CAMBIO1/' archivo.txt
+  sed -i '2s/.*/CAMBIO2/' archivo.txt
+  sed -i '3s/.*/CAMBIO3/' archivo.txt
+  sed -i '4s/.*/CAMBIO4/' archivo.txt
+
+OBJETIVO:
+  En el panel Files, entrar al diff con enter, navegar a la linea 2 y
+  hacer stage solo de esa linea usando space.
+
+SOLUCION:
+  Files: <Enter>       (abre el diff del archivo)
+  Diff: j              (baja a la linea CAMBIO2)
+  Diff: <Space>        (stage solo esta linea)
+  Diff: <Esc>          (vuelve al panel Files)
+
+VERIFICACION:
+  git status           # debe mostrar 1 staged file
+  git diff --staged    # debe mostrar solo la linea 2 (CAMBIO2)
+  git diff             # debe mostrar lineas 1, 3, 4 sin staged
+
+
+--- Unstage todo con U -----------------------------------------------
+
+ESCENARIO:
+  Varios archivos estan en el staging area pero decidiste reiniciar y
+  quitar TODO del stage para empezar de cero.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-11 && cd /tmp/lg-practice-11 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "uno" > uno.txt && echo "dos" > dos.txt && echo "tres" > tres.txt
+  git add uno.txt dos.txt tres.txt
+
+OBJETIVO:
+  En el panel Files, hacer unstage de TODOS los archivos de una vez
+  usando el atajo 'U' (mayuscula).
+
+SOLUCION:
+  Files: U             (unstage todos los archivos)
+
+VERIFICACION:
+  git status           # debe mostrar 0 staged files, 3 unstaged files
+  git diff --staged    # debe estar vacio (sin cambios staged)
+
+
+--- Discard cambios de un archivo con d ------------------------------
+
+ESCENARIO:
+  Un archivo tiene modificaciones no deseadas en el working directory.
+  Quieres descartar esos cambios y volver a la version del ultimo commit.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-12 && cd /tmp/lg-practice-12 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "original" > archivo.txt
+  git add . && git commit -m "initial"
+  echo "MODIFICACION NO DESEADA" > archivo.txt
+
+OBJETIVO:
+  En el panel Files, descartar los cambios del archivo modificado y
+  restaurarlo a su estado original usando el atajo 'd'.
+
+SOLUCION:
+  Files: d             (abre menu de discard)
+  Files: <Enter>       (confirma discard en el menu)
+
+VERIFICACION:
+  git status           # debe mostrar working tree clean
+  cat archivo.txt      # debe mostrar "original"
+
+
+--- Discard todos los cambios con D ----------------------------------
+
+ESCENARIO:
+  Varios archivos tienen modificaciones no deseadas. Quieres descartar
+  TODOS los cambios de una vez y limpiar el working directory.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-13 && cd /tmp/lg-practice-13 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "uno" > uno.txt && echo "dos" > dos.txt && echo "tres" > tres.txt
+  git add . && git commit -m "initial"
+  echo "MOD1" > uno.txt
+  echo "MOD2" > dos.txt
+  echo "MOD3" > tres.txt
+
+OBJETIVO:
+  En el panel Files, descartar todos los cambios modificados de una vez
+  usando el atajo 'D' (mayuscula).
+
+SOLUCION:
+  Files: D             (abre menu de discard all)
+  Files: <Enter>       (confirma discard all en el menu)
+
+VERIFICACION:
+  git status           # debe mostrar working tree clean
+  cat uno.txt          # debe mostrar "uno"
+  cat dos.txt          # debe mostrar "dos"
+  cat tres.txt         # debe mostrar "tres"
+
+
+=== CAPITULO 3: COMMITS ===
+
+El panel Commits muestra el historial de commits del branch actual. Desde aqui
+puedes crear nuevos commits, modificar los existentes (amend, reword), deshacer
+errores (undo, redo) y resetear el branch a estados anteriores (soft, mixed,
+hard). Dominar estas operaciones te da control total sobre tu historial.
+
+
+--- Commit con mensaje rapido Files: c -------------------------------
+
+ESCENARIO:
+  Tienes un archivo nuevo en el staging area y necesitas crear un commit
+  con un mensaje corto de una linea.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-14 && cd /tmp/lg-practice-14 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "contenido nuevo" > archivo.txt
+  git add archivo.txt
+
+OBJETIVO:
+  En el panel Files, con el archivo ya stageado, abrir el prompt de commit
+  y crear el commit con un mensaje rapido usando 'c'.
+
+SOLUCION:
+  Files: c             (abre prompt de commit con mensaje)
+  Files: "Mi commit"   (escribe el mensaje y presiona Enter)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 1 commit con mensaje "Mi commit"
+  git status           # debe mostrar working tree clean
+
+
+--- Commit con editor externo Files: C -------------------------------
+
+ESCENARIO:
+  Necesitas crear un commit con un mensaje largo y detallado que requiere
+  edicion en tu editor de texto preferido (vim, nano, vscode).
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-15 && cd /tmp/lg-practice-15 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "feature importante" > feature.txt
+  git add feature.txt
+
+OBJETIVO:
+  En el panel Files, abrir el editor externo para escribir un mensaje de
+  commit multilinea usando 'C' (mayuscula).
+
+SOLUCION:
+  Files: C             (abre editor externo para commit)
+  Editor: escribir mensaje multilinea y guardar
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 1 commit
+  git log -1           # debe mostrar el mensaje completo multilinea
+
+
+--- Amend ultimo commit Commits: shift+A -----------------------------
+
+ESCENARIO:
+  Acabas de hacer un commit pero olvidaste incluir un archivo pequeno.
+  Quieres agregar ese archivo al commit anterior sin crear uno nuevo.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-16 && cd /tmp/lg-practice-16 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "archivo1" > archivo1.txt
+  git add archivo1.txt && git commit -m "primer commit"
+  echo "archivo2" > archivo2.txt
+  git add archivo2.txt
+
+OBJETIVO:
+  En el panel Commits, navegar al ultimo commit y hacer amend para incluir
+  el archivo olvidado usando 'shift+A'.
+
+SOLUCION:
+  Commits: <Enter>     (navega al primer commit en la lista)
+  Commits: shift+A     (amend ultimo commit con cambios staged)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 1 commit (no 2)
+  git show --stat      # debe mostrar archivo1.txt Y archivo2.txt en el commit
+
+
+--- Reword mensaje Commits: r ----------------------------------------
+
+ESCENARIO:
+  El ultimo commit tiene un mensaje incorrecto o poco descriptivo.
+  Necesitas cambiar solo el mensaje sin modificar el contenido.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-17 && cd /tmp/lg-practice-17 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "contenido" > archivo.txt
+  git add archivo.txt && git commit -m "mal mensaje"
+
+OBJETIVO:
+  En el panel Commits, seleccionar el ultimo commit y cambiar su mensaje
+  usando 'r' (reword).
+
+SOLUCION:
+  Commits: <Enter>     (navega al commit)
+  Commits: r           (abre prompt para reword)
+  Commits: "mensaje corregido" (escribe nuevo mensaje)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 1 commit con mensaje "mensaje corregido"
+  git log -1 --format=%s  # debe mostrar solo el nuevo mensaje
+
+
+--- Undo ultimo commit Commits: z ------------------------------------
+
+ESCENARIO:
+  Acabas de hacer un commit pero te diste cuenta de que fue un error.
+  Quieres deshacer ese commit y recuperar los cambios en el working directory.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-18 && cd /tmp/lg-practice-18 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "commit1" > archivo1.txt
+  git add archivo1.txt && git commit -m "commit 1"
+  echo "commit2" > archivo2.txt
+  git add archivo2.txt && git commit -m "commit 2"
+
+OBJETIVO:
+  En el panel Commits, deshacer el ultimo commit (commit 2) y recuperar
+  los cambios usando 'z'.
+
+SOLUCION:
+  Commits: z           (undo ultimo commit, cambios vuelven al working dir)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 1 commit (solo "commit 1")
+  git status           # debe mostrar archivo2.txt como unstaged
+  cat archivo2.txt     # debe existir con contenido "commit2"
+
+
+--- Redo commit deshecho Commits: Ctrl+z -----------------------------
+
+ESCENARIO:
+  Hiciste undo de un commit pero te arrepentiste. Quieres recuperar el
+  commit que acabas de deshacer.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-19 && cd /tmp/lg-practice-19 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "commit1" > archivo1.txt
+  git add archivo1.txt && git commit -m "commit 1"
+  echo "commit2" > archivo2.txt
+  git add archivo2.txt && git commit -m "commit 2"
+  # Simular que ya se hizo undo (archivo2.txt queda sin commitear)
+  git reset --soft HEAD~1
+
+OBJETIVO:
+  En el panel Commits, recuperar el commit que fue deshecho con undo
+  usando 'Ctrl+z' (redo).
+
+SOLUCION:
+  Commits: Ctrl+z      (redo del ultimo undo)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 2 commits nuevamente
+  git status           # debe mostrar working tree clean
+
+
+--- Reset soft Commits: g -> soft ------------------------------------
+
+ESCENARIO:
+  Tienes 3 commits y quieres deshacerlos TODOS, pero mantener los cambios
+  de los archivos en el staging area para reorganizarlos.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-20 && cd /tmp/lg-practice-20 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "commit1" > archivo1.txt && git add . && git commit -m "commit 1"
+  echo "commit2" > archivo2.txt && git add . && git commit -m "commit 2"
+  echo "commit3" > archivo3.txt && git add . && git commit -m "commit 3"
+
+OBJETIVO:
+  En el panel Commits, navegar al primer commit y hacer reset soft para
+  deshacer todos los commits manteniendo cambios en staging area.
+
+SOLUCION:
+  Commits: <Enter>     (navega al commit mas antiguo)
+  Commits: g           (abre menu de reset)
+  Commits: soft        (selecciona reset soft)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 0 commits o 1 commit inicial
+  git status           # debe mostrar 3 archivos en staged changes
+  git diff --staged    # debe mostrar los 3 archivos
+
+
+--- Reset mixed Commits: g -> mixed ----------------------------------
+
+ESCENARIO:
+  Tienes 3 commits y quieres deshacerlos TODOS, quitando los cambios del
+  staging area pero dejandolos en el working directory.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-21 && cd /tmp/lg-practice-21 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "commit1" > archivo1.txt && git add . && git commit -m "commit 1"
+  echo "commit2" > archivo2.txt && git add . && git commit -m "commit 2"
+  echo "commit3" > archivo3.txt && git add . && git commit -m "commit 3"
+
+OBJETIVO:
+  En el panel Commits, navegar al primer commit y hacer reset mixed para
+  deshacer commits y quitar cambios del staging area.
+
+SOLUCION:
+  Commits: <Enter>     (navega al commit mas antiguo)
+  Commits: g           (abre menu de reset)
+  Commits: mixed       (selecciona reset mixed)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 0 commits o 1 commit inicial
+  git status           # debe mostrar 3 archivos como unstaged (no staged)
+  git diff             # debe mostrar los 3 archivos con cambios
+
+
+--- Reset hard Commits: g -> hard ------------------------------------
+
+ESCENARIO:
+  Tienes 3 commits y cambios en el working directory. Quieres borrar
+  TODO y volver al estado exacto de un commit anterior.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-22 && cd /tmp/lg-practice-22 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "commit1" > archivo1.txt && git add . && git commit -m "commit 1"
+  echo "commit2" > archivo2.txt && git add . && git commit -m "commit 2"
+  echo "commit3" > archivo3.txt && git add . && git commit -m "commit 3"
+  echo "cambio no deseado" > archivo4.txt
+
+OBJETIVO:
+  En el panel Commits, navegar al commit 1 y hacer reset hard para
+  borrar commits posteriores y cambios del working directory.
+
+SOLUCION:
+  Commits: k           (navega al commit 1 "commit 1")
+  Commits: g           (abre menu de reset)
+  Commits: hard        (selecciona reset hard)
+
+VERIFICACION:
+  git log --oneline    # debe mostrar 1 commit (solo "commit 1")
+  git status           # debe mostrar working tree clean
+  ls                   # solo debe mostrar archivo1.txt
+
+
+--- Ver diff de commit Commits: enter -> d ---------------------------
+
+ESCENARIO:
+  Quieres ver que cambios introdujo un commit especifico en el historial
+  sin usar comandos git externos.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-23 && cd /tmp/lg-practice-23 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "linea1" > archivo.txt && git add . && git commit -m "commit 1"
+  echo "linea2" >> archivo.txt && git add . && git commit -m "commit 2"
+  echo "linea3" >> archivo.txt && git add . && git commit -m "commit 3"
+
+OBJETIVO:
+  En el panel Commits, seleccionar un commit y ver el diff completo de
+  ese commit usando enter y luego 'd'.
+
+SOLUCION:
+  Commits: j           (navega al commit deseado)
+  Commits: <Enter>     (abre vista detallada del commit)
+  Commits: d           (abre el diff del commit seleccionado)
+
+VERIFICACION:
+  # En la vista de diff debes ver los cambios del commit
+  git show HEAD~1    # debe coincidir con lo mostrado en LazyGit
+
+
+=== CAPITULO 4: BRANCHES ===
+
+El panel Branches muestra todas las ramas locales y remotas del repositorio.
+Desde aqui puedes crear nuevas branches, cambiar entre ellas (checkout),
+fusionar cambios (merge), eliminar branches (delete, force delete), renombrar,
+ver logs y comparar diferencias entre branches. Dominar estas operaciones
+es esencial para el flujo de trabajo con Git.
+
+
+--- Crear branch nuevo Branches: n -----------------------------------
+
+ESCENARIO:
+  Estas trabajando en main y necesitas comenzar una nueva funcionalidad.
+  Quieres crear un branch llamado "feature/login" para desarrollar aislado.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-24 && cd /tmp/lg-practice-24 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main content" > main.txt
+  git add main.txt && git commit -m "initial commit on main"
+
+OBJETIVO:
+  En el panel Branches, crear un nuevo branch llamado "feature/login"
+  usando 'n' (new branch).
+
+SOLUCION:
+  Branches: n          (abre prompt para crear branch)
+  Branches: feature/login (escribe el nombre y presiona Enter)
+
+VERIFICACION:
+  git branch           # debe mostrar feature/login con * al lado (branch actual)
+  git branch -a        # debe mostrar solo feature/login y main
+
+
+--- Checkout de branch Branches: space -------------------------------
+
+ESCENARIO:
+  Tienes dos branches: main y feature/login. Necesitas cambiar de branch
+  para trabajar en uno diferente.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-25 && cd /tmp/lg-practice-25 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main content" > main.txt && git add . && git commit -m "main commit"
+  git checkout -b feature/login
+  echo "feature content" > feature.txt && git add . && git commit -m "feature commit"
+  git checkout main
+
+OBJETIVO:
+  En el panel Branches, seleccionar "feature/login" y hacer checkout
+  usando 'space' para cambiar a ese branch.
+
+SOLUCION:
+  Branches: j          (navega a feature/login)
+  Branches: <Space>    (hace checkout del branch seleccionado)
+
+VERIFICACION:
+  git branch           # debe mostrar feature/login con * al lado (branch actual)
+  ls                   # debe mostrar feature.txt (archivo del branch feature)
+
+
+--- Merge sin conflictos Branches: m ---------------------------------
+
+ESCENARIO:
+  Tienes main con un commit y feature/login con commits diferentes (sin
+  solapamiento). Quieres fusionar feature/login en main sin conflictos.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-26 && cd /tmp/lg-practice-26 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature/login
+  echo "feature" > feature.txt && git add . && git commit -m "add feature"
+  git checkout main
+  echo "main change" > main.txt && git add . && git commit -m "add main file"
+
+OBJETIVO:
+  En el panel Branches, estando en main, seleccionar feature/login y
+  hacer merge usando 'm' para fusionar los cambios.
+
+SOLUCION:
+  Branches: j          (navega a feature/login)
+  Branches: m          (merge del branch seleccionado al actual)
+
+VERIFICACION:
+  git log --oneline --graph  # debe mostrar commits de main y feature/login
+  git branch --merged        # debe mostrar feature/login como merged
+  ls                         # debe mostrar base.txt, feature.txt, main.txt
+
+
+--- Delete branch Branches: d ----------------------------------------
+
+ESCENARIO:
+  Ya fusionaste feature/login en main y quieres eliminar ese branch
+  porque ya no lo necesitas.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-27 && cd /tmp/lg-practice-27 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature/login
+  echo "feature" > feature.txt && git add . && git commit -m "add feature"
+  git checkout main
+  git merge feature/login --no-edit
+
+OBJETIVO:
+  En el panel Branches, seleccionar feature/login y eliminarlo usando
+  'd' (delete branch).
+
+SOLUCION:
+  Branches: j          (navega a feature/login)
+  Branches: d          (elimina el branch seleccionado)
+
+VERIFICACION:
+  git branch           # debe mostrar solo main (feature/login eliminado)
+  git branch -a        # no debe mostrar feature/login
+
+
+--- Force delete branch Branches: D ----------------------------------
+
+ESCENARIO:
+  Tienes un branch con cambios no fusionados que quieres eliminar
+  forzosamente, descartando esos cambios.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-28 && cd /tmp/lg-practice-28 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature/temp
+  echo "temp work" > temp.txt && git add . && git commit -m "temp commit"
+  git checkout main
+
+OBJETIVO:
+  En el panel Branches, seleccionar feature/temp y eliminarlo forzosamente
+  usando 'D' (force delete, mayuscula).
+
+SOLUCION:
+  Branches: j          (navega a feature/temp)
+  Branches: D          (force delete del branch no merged)
+
+VERIFICACION:
+  git branch           # debe mostrar solo main (feature/temp eliminado)
+  git branch -a        # no debe mostrar feature/temp
+
+
+--- Rename branch Branches: r ----------------------------------------
+
+ESCENARIO:
+  Creaste un branch llamado "feature/wip" pero quieres renombrarlo a
+  "feature/login" para que sea mas descriptivo.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-29 && cd /tmp/lg-practice-29 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature/wip
+  echo "wip" > wip.txt && git add . && git commit -m "wip commit"
+
+OBJETIVO:
+  En el panel Branches, seleccionar feature/wip y renombrarlo a
+  "feature/login" usando 'r' (rename).
+
+SOLUCION:
+  Branches: j          (navega a feature/wip)
+  Branches: r          (abre prompt para renombrar)
+  Branches: feature/login (escribe nuevo nombre y presiona Enter)
+
+VERIFICACION:
+  git branch           # debe mostrar feature/login (no feature/wip)
+  git log --oneline    # debe mostrar los commits del branch renombrado
+
+
+--- Checkout remote branch Branches: c en Remotes --------------------
+
+ESCENARIO:
+  Tienes un repositorio remoto con un branch "develop" y quieres traerlo
+  localmente y hacer checkout usando remote tracking.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-30 && cd /tmp/lg-practice-30 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  mkdir remote && cd remote && git init --bare && cd ..
+  echo "main" > main.txt && git add . && git commit -m "initial"
+  git checkout -b develop && echo "dev" > dev.txt && git add . && git commit -m "dev commit"
+  git checkout main
+  git remote add origin remote/
+  git push -u origin main
+  git push -u origin develop
+  git checkout main
+
+OBJETIVO:
+  En el panel Remotes, navegar al branch develop remoto y hacer checkout
+  usando 'c' para crear local tracking branch.
+
+SOLUCION:
+  Files: <Tab>         (navega a Branches)
+  Branches: <Tab>      (navega a Commits)
+  Commits: <Tab>       (navega a Remotes)
+  Remotes: j           (navega a origin/develop)
+  Remotes: c           (checkout del remote branch, crea develop local)
+
+VERIFICACION:
+  git branch -a        # debe mostrar develop local y origin/develop remoto
+  git branch           # debe mostrar develop con * (branch actual)
+
+
+--- Ver diff entre branches Branches: d ------------------------------
+
+ESCENARIO:
+  Tienes dos branches divergentes y quieres ver que cambios hay entre
+  ellos sin hacer merge todavia.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-31 && cd /tmp/lg-practice-31 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature
+  echo "feature" > feature.txt && git add . && git commit -m "add feature"
+  git checkout main
+  echo "main change" > main.txt && git add . && git commit -m "main change"
+
+OBJETIVO:
+  En el panel Branches, seleccionar feature y ver el diff entre ese
+  branch y el actual usando 'd'.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: d          (abre diff entre branch seleccionado y actual)
+
+VERIFICACION:
+  # En la vista de diff debes ver los cambios entre main y feature
+  git diff main..feature  # debe coincidir con lo mostrado en LazyGit
+
+
+--- Ver log de branch Branches: l ------------------------------------
+
+ESCENARIO:
+  Quieres ver el historial de commits de un branch especifico sin
+  cambiar a ese branch.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-32 && cd /tmp/lg-practice-32 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature
+  echo "f1" > f1.txt && git add . && git commit -m "feature commit 1"
+  echo "f2" > f2.txt && git add . && git commit -m "feature commit 2"
+  git checkout main
+
+OBJETIVO:
+  En el panel Branches, seleccionar feature y ver su log de commits
+  usando 'l'.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: l          (abre log del branch seleccionado)
+
+VERIFICACION:
+  # En la vista de log debes ver los commits del branch feature
+  git log --oneline feature  # debe mostrar 3 commits (base + 2 feature)
+
+
+--- Comparar branch con main Branches: e -----------------------------
+
+ESCENARIO:
+  Quieres comparar visualmente un branch contra main para ver cuantos
+  commits ahead/behind esta.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-33 && cd /tmp/lg-practice-33 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature
+  echo "f1" > f1.txt && git add . && git commit -m "feature commit 1"
+  git checkout main
+  echo "m1" > m1.txt && git add . && git commit -m "main commit 1"
+  echo "m2" > m2.txt && git add . && git commit -m "main commit 2"
+
+OBJETIVO:
+  En el panel Branches, seleccionar feature y comparar con main usando
+  'e' para ver commits ahead/behind.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: e          (abre vista de comparacion con main)
+
+VERIFICACION:
+  # Debes ver que feature tiene 1 commit ahead y 2 commits behind
+  git rev-list --left-right --count main..feature  # muestra 1 0
+  git rev-list --left-right --count feature..main  # muestra 0 2
+
+
+=== CAPITULO 5: MERGE Y CONFLICTOS ===
+
+Cuando haces merge de dos branches que modifican las mismas partes de un archivo,
+Git no puede decidir automaticamente cual version usar y marca un conflicto.
+LazyGit muestra los archivos en conflicto en el panel Files con indicadores
+visuales claros. Debes editar manualmente el archivo para resolver el conflicto,
+marcarlo como resuelto y completar el merge. Aprenderas a identificar, resolver
+y gestionar conflictos de merge de manera eficiente.
+
+
+--- Merge sin conflictos Branches: m ---------------------------------
+
+ESCENARIO:
+  Tienes main con un archivo base.txt y feature/login con otro archivo
+  diferente feature.txt. Quieres fusionar feature/login en main sin
+  conflictos porque los cambios no se solapan.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-34 && cd /tmp/lg-practice-34 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base content" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature/login
+  echo "feature content" > feature.txt && git add . && git commit -m "add feature"
+  git checkout main
+
+OBJETIVO:
+  En el panel Branches, estando en main, seleccionar feature/login y
+  hacer merge usando 'm' para fusionar los cambios sin conflictos.
+
+SOLUCION:
+  Branches: j          (navega a feature/login)
+  Branches: m          (merge del branch seleccionado)
+  Files: <Enter>       (confirmar merge commit si se abre editor)
+
+VERIFICACION:
+  git status           # no debe mostrar conflictos, debe estar limpio
+  git log --oneline    # debe mostrar commits de ambos branches
+  ls                   # debe mostrar base.txt y feature.txt
+
+
+--- Resolver same-line conflict Files: enter -------------------------
+
+ESCENARIO:
+  Main y feature/login editan la MISMA linea 1 de config.txt con valores
+  diferentes. Al hacer merge, Git no puede decidir y marca conflicto.
+  Debes elegir cual version conservar o editar manualmente.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-35 && cd /tmp/lg-practice-35 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "version=1.0" > config.txt && git add . && git commit -m "initial config"
+  git checkout -b feature/login
+  echo "version=2.0-feature" > config.txt && git add . && git commit -m "update version in feature"
+  git checkout main
+  echo "version=2.0-main" > config.txt && git add . && git commit -m "update version in main"
+
+OBJETIVO:
+  Hacer merge de feature/login en main. Cuando aparezca el conflicto en
+  config.txt, usar el panel Files para ver el conflicto y resolverlo
+  eligiendo una de las versiones o editando manualmente.
+
+SOLUCION:
+  Branches: j          (navega a feature/login)
+  Branches: m          (merge - produce conflicto)
+  Files: <Enter>       (abre archivo en conflicto con marcadores)
+  # Editar: eliminar marcadores <<<<<<<, =======, >>>>>>> y dejar solo la version deseada
+  # Ejemplo: dejar solo "version=2.0-feature"
+  Files: a             (marcar archivo como resuelto - stage)
+  Files: <Enter>       (completar merge commit)
+
+VERIFICACION:
+  git status           # debe estar limpio, sin conflictos
+  cat config.txt       # debe mostrar la version elegida (sin marcadores)
+  git log --oneline    # debe mostrar el merge commit
+
+
+--- Resolver adjacent edits Files: enter -----------------------------
+
+ESCENARIO:
+  Main edita las lineas 1-2 de readme.txt y feature edita las lineas 2-3.
+  La linea 2 se solapa, creando un conflicto de ediciones adyacentes.
+  Debes revisar ambos cambios y decidir como combinarlos.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-36 && cd /tmp/lg-practice-36 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  printf "Line 1\nLine 2\nLine 3\n" > readme.txt && git add . && git commit -m "initial readme"
+  git checkout -b feature
+  printf "Line 1\nLine 2 FEATURE\nLine 3 FEATURE\n" > readme.txt && git add . && git commit -m "update lines 2-3 in feature"
+  git checkout main
+  printf "Line 1 MAIN\nLine 2 MAIN\nLine 3\n" > readme.txt && git add . && git commit -m "update lines 1-2 in main"
+
+OBJETIVO:
+  Hacer merge de feature en main. Resolver el conflicto de ediciones
+  adyacentes en readme.txt combinando los cambios de manera logica.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: m          (merge - produce conflicto en linea 2)
+  Files: <Enter>       (abre archivo con marcadores de conflicto)
+  # Editar: combinar ambos cambios, por ejemplo:
+  # Line 1 MAIN
+  # Line 2 MAIN FEATURE
+  # Line 3 FEATURE
+  Files: a             (marcar como resuelto)
+  Files: <Enter>       (completar merge commit)
+
+VERIFICACION:
+  git status           # debe estar limpio
+  cat readme.txt       # debe mostrar version combinada sin marcadores
+  git log --oneline    # debe mostrar merge commit
+
+
+--- Resolver file delete vs modify Files: enter ----------------------
+
+ESCENARIO:
+  Main modifica old.txt pero feature borra el mismo archivo. Git no sabe
+  si conservar los cambios o eliminar el archivo. Debes decidir.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-37 && cd /tmp/lg-practice-37 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "old content" > old.txt && git add . && git commit -m "add old file"
+  git checkout -b feature
+  git rm old.txt && git commit -m "delete old file"
+  git checkout main
+  echo "modified old content" > old.txt && git add . && git commit -m "modify old file"
+
+OBJETIVO:
+  Hacer merge de feature en main. Resolver el conflicto delete vs modify
+  decidiendo si conservar el archivo modificado o eliminarlo.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: m          (merge - produce conflicto delete/modify)
+  # Opcion A: Conservar archivo modificado
+  Files: <Enter>       (abre archivo, verificar contenido)
+  Files: a             (marcar como resuelto - conserva archivo)
+  # Opcion B: Eliminar archivo
+  # Files: d           (delete file del working tree)
+  # Files: a           (marcar como resuelto)
+  Files: <Enter>       (completar merge commit)
+
+VERIFICACION:
+  git status           # debe estar limpio
+  ls                   # muestra old.txt si se conservo, no existe si se elimino
+  git log --oneline    # debe mostrar merge commit
+
+
+--- Abortar merge en curso Files: X ----------------------------------
+
+ESCENARIO:
+  Iniciaste un merge pero te diste cuenta que no es el branch correcto
+  o hay conflictos que no quieres resolver ahora. Quieres cancelar el
+  merge y volver al estado anterior.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-38 && cd /tmp/lg-practice-38 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  git checkout -b feature
+  echo "feature" > feature.txt && git add . && git commit -m "add feature"
+  git checkout main
+  echo "main" > main.txt && git add . && git commit -m "add main"
+
+OBJETIVO:
+  Iniciar merge de feature, luego abortar el merge usando la opcion de
+  cancelar en el panel Files antes de completar.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: m          (merge - puede haber conflicto o no)
+  Files: X             (abort merge, vuelve al estado pre-merge)
+  # Confirmar abort en el prompt
+
+VERIFICACION:
+  git status           # debe mostrar "nothing to commit", merge cancelado
+  git log --oneline    # no debe mostrar merge commit
+  ls                   # solo archivos del branch main
+
+
+--- Marcar archivo resuelto Files: a ---------------------------------
+
+ESCENARIO:
+  Tienes un merge con conflictos en multiple files. Ya editaste manualmente
+  los archivos para resolver los conflictos. Ahora debes marcar cada archivo
+  como resuelto (stage) antes de completar el merge.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-39 && cd /tmp/lg-practice-39 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "A=1" > file1.txt && echo "B=1" > file2.txt && git add . && git commit -m "initial"
+  git checkout -b feature
+  echo "A=2-feature" > file1.txt && echo "B=2-feature" > file2.txt && git add . && git commit -m "update both in feature"
+  git checkout main
+  echo "A=2-main" > file1.txt && echo "B=2-main" > file2.txt && git add . && git commit -m "update both in main"
+
+OBJETIVO:
+  Hacer merge de feature, resolver conflictos en file1.txt y file2.txt
+  editandolos manualmente, luego marcar ambos como resueltos con 'a'.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: m          (merge - produce conflictos en ambos archivos)
+  Files: <Enter>       (edita file1.txt, elimina marcadores)
+  Files: j             (navega a file2.txt)
+  Files: <Enter>       (edita file2.txt, elimina marcadores)
+  Files: k             (vuelve a file1.txt)
+  Files: a             (marca file1.txt como resuelto)
+  Files: j             (navega a file2.txt)
+  Files: a             (marca file2.txt como resuelto)
+  Files: <Enter>       (completar merge commit)
+
+VERIFICACION:
+  git status           # debe estar limpio
+  cat file1.txt        # sin marcadores de conflicto
+  cat file2.txt        # sin marcadores de conflicto
+  git log --oneline    # debe mostrar merge commit
+
+
+--- Ver diff de conflicto Files: d -----------------------------------
+
+ESCENARIO:
+  Tienes un conflicto de merge y quieres ver exactamente que cambios
+  hay entre tu version actual y la version del branch que estas mergeando
+  antes de decidir como resolver.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-40 && cd /tmp/lg-practice-40 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "line1\nline2\nline3" > data.txt && git add . && git commit -m "initial"
+  git checkout -b feature
+  echo "line1-feature\nline2\nline3-feature" > data.txt && git add . && git commit -m "update in feature"
+  git checkout main
+  echo "line1-main\nline2-main\nline3" > data.txt && git add . && git commit -m "update in main"
+
+OBJETIVO:
+  Iniciar merge, ver el diff del conflicto para entender exactamente
+  que partes conflictivas hay antes de resolver.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: m          (merge - produce conflicto)
+  Files: <Tab>         (navega entre paneles si es necesario)
+  Files: d             (abre diff del archivo en conflicto)
+  # Revisar diff para ver lineas conflictivas
+  Files: q             (cerrar diff)
+  Files: <Enter>       (editar archivo para resolver)
+  Files: a             (marcar resuelto)
+  Files: <Enter>       (completar merge)
+
+VERIFICACION:
+  git status           # debe estar limpio despues de resolver
+  cat data.txt         # version resuelta sin marcadores
+  git log --oneline    # debe mostrar merge commit
+
+
+--- Continuar merge post-resolucion Files: enter ---------------------
+
+ESCENARIO:
+  Resolviste todos los conflictos de un merge y marcaste los archivos
+  como resueltos. Ahora debes completar el merge creando el commit final.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-41 && cd /tmp/lg-practice-41 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "config: v1" > app.conf && git add . && git commit -m "initial config"
+  git checkout -b feature
+  echo "config: v2-feature" > app.conf && git add . && git commit -m "update config in feature"
+  git checkout main
+  echo "config: v2-main" > app.conf && git add . && git commit -m "update config in main"
+
+OBJETIVO:
+  Hacer merge, resolver el conflicto en app.conf, marcar como resuelto
+  y completar el merge con el commit final.
+
+SOLUCION:
+  Branches: j          (navega a feature)
+  Branches: m          (merge - produce conflicto)
+  Files: <Enter>       (abre app.conf, edita para resolver)
+  # Dejar solo la version deseada, ej: "config: v2-feature"
+  Files: a             (marcar como resuelto - stage)
+  Files: <Enter>       (abre editor de commit message para completar merge)
+  # Guardar y cerrar editor (por defecto mensaje auto-generado)
+
+VERIFICACION:
+  git status           # debe estar limpio, working tree clean
+  git log --oneline -5 # debe mostrar merge commit reciente
+  cat app.conf         # version resuelta sin marcadores
+  git branch --merged  # debe mostrar feature como merged en main
+
+
+=== CAPITULO 6: REBASE INTERACTIVO ===
+
+El rebase interactivo te permite reescribir el historial de commits de forma
+controlada. Puedes reordenar, combinar (squash/fixup), editar, eliminar (drop)
+o dividir commits. LazyGit abre un editor interactivo donde cambias la accion
+de cada commit (pick, squash, fixup, reword, edit, drop, break, exec). Es
+ideal para limpiar commits antes de hacer merge o preparar un PR profesional.
+Advertencia: nunca hagas rebase de commits ya publicados en branches compartidas.
+
+
+--- Reorder commits Commits: r ---------------------------------------
+
+ESCENARIO:
+  Tienes 4 commits en orden incorrecto: A, B, C, D. Quieres mover el commit C
+  antes del commit B para que el historial quede en orden logico A, C, B, D.
+  El rebase interactivo te permite reordenar commits arrastrandolos con j/k.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-42 && cd /tmp/lg-practice-42 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "A" > fileA.txt && git add . && git commit -m "feat: add A"
+  echo "B" > fileB.txt && git add . && git commit -m "feat: add B"
+  echo "C" > fileC.txt && git add . && git commit -m "feat: add C"
+  echo "D" > fileD.txt && git add . && git commit -m "feat: add D"
+
+OBJETIVO:
+  Iniciar rebase interactivo desde el panel Commits, reordenar los commits
+  moviendo C antes que B usando j/k para navegar y mover en la lista.
+
+SOLUCION:
+  Commits: r         (inicia rebase interactivo, abre editor con lista de commits)
+  Commits: j j       (navega hasta el commit C)
+  Commits: k         (mueve commit C una posicion hacia arriba, repite hasta estar antes de B)
+  Commits: Ctrl+s    (guarda y ejecuta el rebase, o equivalente segun editor)
+  # LazyGit aplica el rebase en orden
+
+VERIFICACION:
+  git log --oneline  # debe mostrar commits en orden: A, C, B, D
+  ls                 # debe mostrar fileA.txt, fileC.txt, fileB.txt, fileD.txt
+
+
+--- Squash commits Commits: r ----------------------------------------
+
+ESCENARIO:
+  Tienes 3 commits relacionados: "feat: add login", "fix: adjust login",
+  "docs: update login". Quieres combinarlos en un solo commit mas limpio
+  usando squash para mantener un solo mensaje descriptivo.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-43 && cd /tmp/lg-practice-43 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "login form" > login.html && git add . && git commit -m "feat: add login form"
+  echo "login styled" > login.html && git add . && git commit -m "fix: adjust login styles"
+  echo "login docs" > login.md && git add . && git commit -m "docs: add login documentation"
+
+OBJETIVO:
+  Iniciar rebase interactivo, cambiar los commits 2 y 3 de "pick" a "squash"
+  para combinarlos con el primer commit, editando el mensaje combinado.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase interactivo)
+  Commits: j         (navega al segundo commit)
+  Commits: s         (cambia de pick a squash, o usa menu de acciones)
+  Commits: j         (navega al tercer commit)
+  Commits: s         (cambia a squash)
+  Commits: Ctrl+s    (guarda, abre editor para editar mensaje combinado)
+  # Editar mensaje: combinar los 3 mensajes en uno solo descriptivo
+  # Guardar y cerrar editor
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 1 commit en lugar de 3
+  git show           # debe mostrar todos los cambios combinados
+
+
+--- Fixup commits Commits: r -----------------------------------------
+
+ESCENARIO:
+  Tienes commits: "feat: add config", "fix: typo in config". Quieres
+  combinar el fix al commit anterior pero SIN agregar su mensaje al
+  commit final. Fixup descarta el mensaje del commit fusionado.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-44 && cd /tmp/lg-practice-44 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "debug=false" > config.ini && git add . && git commit -m "feat: add config file"
+  echo "debug=false # production" > config.ini && git add . && git commit -m "fix: add comment to config"
+
+OBJETIVO:
+  Usar rebase interactivo para hacer fixup del segundo commit al primero,
+  combinando los cambios pero descartando el mensaje "fix: add comment".
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  Commits: j         (navega al segundo commit)
+  Commits: f         (cambia de pick a fixup, o selecciona fixup del menu)
+  Commits: Ctrl+s    (guarda y ejecuta, no pide editar mensaje)
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 1 commit con mensaje "feat: add config file"
+  git show           # debe incluir ambos cambios (archivo + comment)
+
+
+--- Reword commits Commits: r ----------------------------------------
+
+ESCENARIO:
+  Tienes un commit con mensaje mal escrito: "addd feat" en lugar de
+  "feat: add feature". Quieres corregir solo el mensaje sin cambiar
+  los cambios del commit.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-45 && cd /tmp/lg-practice-45 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "feature code" > feature.py && git add . && git commit -m "addd feat"
+
+OBJETIVO:
+  Iniciar rebase interactivo, cambiar el commit a "reword" para editar
+  solo el mensaje de commit sin modificar los cambios.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  Commits: r         (cambia de pick a reword en el primer commit)
+  Commits: Ctrl+s    (guarda, abre editor para editar mensaje)
+  # Cambiar mensaje a: "feat: add feature"
+  # Guardar y cerrar
+
+VERIFICACION:
+  git log --oneline  # debe mostrar "feat: add feature"
+  git show --stat    # debe mostrar los mismos cambios originales
+
+
+--- Edit commit Commits: r -------------------------------------------
+
+ESCENARIO:
+  Tienes 2 commits. El primero olvido incluir un archivo importante.
+  Quieres pausar el rebase en ese commit, agregar el archivo olvidado
+  con git commit --amend, y continuar el rebase.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-46 && cd /tmp/lg-practice-46 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main code" > main.py && git add . && git commit -m "feat: add main module"
+  echo "test code" > test.py && git add . && git commit -m "test: add tests"
+
+OBJETIVO:
+  Usar rebase interactivo con "edit" en el primer commit, agregar el
+  archivo olvidado, hacer amend, y continuar el rebase.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  Commits: j         (navega al primer commit)
+  Commits: e         (cambia de pick a edit)
+  Commits: Ctrl+s    (guarda, rebase se detiene en ese commit)
+  # Git hace checkout del estado de ese commit
+  echo "forgotten" > forgotten.txt && git add .
+  git commit --amend --no-edit
+  Commits: m         (continue rebase, o usa menu Continue)
+  # El rebase continua aplicando el segundo commit
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 2 commits
+  git show HEAD~1    # debe incluir main.py Y forgotten.txt
+  ls                 # debe mostrar main.py, test.py, forgotten.txt
+
+
+--- Drop commit Commits: r -------------------------------------------
+
+ESCENARIO:
+  Tienes commits: "feat: add feature", "WIP: debugging", "fix: polish".
+  El commit "WIP: debugging" fue solo temporal y quieres eliminarlo
+  completamente del historial.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-47 && cd /tmp/lg-practice-47 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "feature" > feature.txt && git add . && git commit -m "feat: add feature"
+  echo "debug print" > debug.txt && git add . && git commit -m "WIP: debugging"
+  echo "polish" > polish.txt && git add . && git commit -m "fix: polish feature"
+
+OBJETIVO:
+  Usar rebase interactivo para eliminar (drop) el commit "WIP: debugging"
+  del historial, manteniendo los otros dos commits.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  Commits: j         (navega al commit "WIP: debugging")
+  Commits: d         (cambia de pick a drop, o elimina la linea)
+  Commits: Ctrl+s    (guarda y ejecuta rebase)
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 2 commits (sin WIP: debugging)
+  ls                 # NO debe mostrar debug.txt
+  cat feature.txt    # debe existir
+  cat polish.txt     # debe existir
+
+
+--- Break commits Commits: r -----------------------------------------
+
+ESCENARIO:
+  Quieres pausar el rebase en un punto especifico para ejecutar comandos
+  manuales o verificar el estado antes de continuar. Usas "break" para
+  insertar un punto de pausa en la secuencia de rebase.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-48 && cd /tmp/lg-practice-48 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "step1" > step1.txt && git add . && git commit -m "step 1"
+  echo "step2" > step2.txt && git add . && git commit -m "step 2"
+  echo "step3" > step3.txt && git add . && git commit -m "step 3"
+
+OBJETIVO:
+  Insertar un "break" entre step 1 y step 2 para pausar el rebase,
+  verificar el estado, y luego continuar manualmente.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  Commits: j         (navega despues del primer commit)
+  # Insertar linea "break" entre commits (depende del editor, normalmente
+  # se agrega una nueva linea con la palabra "break")
+  # En LazyGit: usar menu para insertar break o editar manualmente
+  Commits: Ctrl+s    (guarda, rebase se detiene en el break)
+  # Verificar estado: git status, git log, etc.
+  Commits: m         (continue rebase despues de verificar)
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 3 commits
+  git status         # debe estar limpio despues de continuar
+  ls                 # debe mostrar step1.txt, step2.txt, step3.txt
+
+
+--- Exec commits Commits: r ------------------------------------------
+
+ESCENARIO:
+  Quieres ejecutar un comando shell durante el rebase, por ejemplo
+  correr tests despues de cada commit para verificar que nada se rompio.
+  Usas "exec" para insertar comandos en la secuencia de rebase.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-49 && cd /tmp/lg-practice-49 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "code v1" > app.py && git add . && git commit -m "feat: v1"
+  echo "code v2" > app.py && git add . && git commit -m "feat: v2"
+
+OBJETIVO:
+  Insertar un comando "exec" durante el rebase para verificar el estado
+  del working tree despues de aplicar el primer commit.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  Commits: j         (navega despues del primer commit)
+  # Insertar linea: exec git status
+  # En LazyGit: usar menu para insertar exec o editar manualmente
+  Commits: Ctrl+s    (guarda, ejecuta rebase con comando)
+  # El comando se ejecuta automaticamente durante el rebase
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 2 commits
+  git status         # debe estar limpio
+  cat app.py         # debe mostrar "code v2"
+
+
+--- Abortar rebase Commits: a ----------------------------------------
+
+ESCENARIO:
+  Iniciaste un rebase interactivo pero te diste cuenta que elegiste
+  el commit base incorrecto o quieres cancelar los cambios. Quieres
+  abortar el rebase y volver al estado original.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-50 && cd /tmp/lg-practice-50 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > base.txt && git add . && git commit -m "base commit"
+  echo "feat1" > feat1.txt && git add . && git commit -m "feat: feature 1"
+  echo "feat2" > feat2.txt && git add . && git commit -m "feat: feature 2"
+
+OBJETIVO:
+  Iniciar rebase interactivo y abortarlo antes de completar, volviendo
+  al estado original sin cambios en el historial.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  # Hacer algun cambio, ej: cambiar un commit a edit
+  Commits: Ctrl+s    (guarda, inicia rebase)
+  Commits: a         (abort rebase, confirma el abort)
+  # Confirmar en el prompt que deseas abortar
+
+VERIFICACION:
+  git log --oneline  # debe mostrar los 3 commits originales sin cambios
+  git status         # debe estar limpio, sin rebase en curso
+  ls                 # debe mostrar base.txt, feat1.txt, feat2.txt
+
+
+--- Continue rebase Commits: m ---------------------------------------
+
+ESCENARIO:
+  Estas en medio de un rebase que se detuvo (por un conflicto o por
+  usar "edit"). Ya resolviste el conflicto o hiciste tus cambios.
+  Ahora debes continuar el rebase para aplicar los commits restantes.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-51 && cd /tmp/lg-practice-51 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "original" > file.txt && git add . && git commit -m "original commit"
+  echo "change1" > file.txt && git add . && git commit -m "change 1"
+  echo "change2" > file.txt && git add . && git commit -m "change 2"
+
+OBJETIVO:
+  Iniciar rebase con "edit" en el primer commit, hacer un cambio small,
+  y usar "continue" para completar el rebase.
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  Commits: j         (navega al primer commit)
+  Commits: e         (cambia a edit)
+  Commits: Ctrl+s    (guarda, rebase se detiene en ese commit)
+  echo "amended" > amended.txt && git add .
+  git commit --amend --no-edit
+  Commits: m         (continue rebase)
+  # El rebase aplica los commits restantes
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 3 commits
+  git status         # debe estar limpio
+  ls                 # debe mostrar file.txt y amended.txt
+
+
+--- Rebase onto branch Branches: r -----------------------------------
+
+ESCENARIO:
+  Tienes main con commits A-B-C. Creaste feature desde B con commits
+  D-E. Mientras tanto, main avanzo a C. Quieres mover feature para
+  que ahora empiece desde C, reubicando D-E encima de C.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-52 && cd /tmp/lg-practice-52 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "A" > A.txt && git add . && git commit -m "commit A"
+  echo "B" > B.txt && git add . && git commit -m "commit B"
+  git checkout -b feature
+  echo "D" > D.txt && git add . && git commit -m "feature D"
+  echo "E" > E.txt && git add . && git commit -m "feature E"
+  git checkout main
+  echo "C" > C.txt && git add . && git commit -m "commit C"
+
+OBJETIVO:
+  Estando en feature, hacer rebase onto main para mover los commits
+  D-E encima del commit C mas reciente de main.
+
+SOLUCION:
+  Branches: j        (navega a feature)
+  Branches: <Enter>  (checkout feature)
+  Commits: r         (inicia rebase, seleccionar main como upstream)
+  # O usar menu: Commits -> Rebase -> onto main
+  Commits: Ctrl+s    (ejecuta rebase)
+
+VERIFICACION:
+  git log --oneline  # debe mostrar: A, B, C, D, E (feature ahora sobre C)
+  git branch -v      # feature debe estar ahead de main por 2 commits
+  ls                 # debe mostrar A.txt, B.txt, C.txt, D.txt, E.txt
+
+
+--- Autosquash commits Commits: r ------------------------------------
+
+ESCENARIO:
+  Tienes commits: "feat: add feature", "fixup! add feature",
+  "fixup! add feature". Quieres usar autosquash para combinar
+  automaticamente los fixup commits al commit original sin editar
+  manualmente el rebase interactivo.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-53 && cd /tmp/lg-practice-53 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "feature" > feature.txt && git add . && git commit -m "feat: add feature"
+  echo "fix 1" > feature.txt && git add . && git commit -m "fixup! add feature"
+  echo "fix 2" > feature.txt && git add . && git commit -m "fixup! add feature"
+
+OBJETIVO:
+  Usar rebase interactivo con autosquash para combinar automaticamente
+  los commits "fixup!" al commit original "feat: add feature".
+
+SOLUCION:
+  Commits: r         (abre editor de rebase)
+  # LazyGit detecta commits fixup! y los marca automaticamente
+  # O usar: git rebase -i --autosquash desde terminal
+  Commits: Ctrl+s    (ejecuta rebase, autosquash combina automaticamente)
+
+VERIFICACION:
+  git log --oneline  # debe mostrar 1 commit
+  git show           # debe incluir todos los cambios (feature + fix1 + fix2)
+  cat feature.txt    # debe mostrar version final con todos los fixes
+
+
+=== CAPITULO 7: STASH ===
+
+Guarda cambios temporalmente sin hacer commit. Ideal para cambiar de
+rama rapidamente, guardar trabajo incompleto, o limpiar el working dir.
+El stash panel muestra la lista de stashes disponibles.
+
+--- Stash cambios Files: s -------------------------------------------
+
+ESCENARIO:
+  Tienes un archivo modificado en el working dir que necesitas guardar
+  temporalmente para limpiar tu directorio de trabajo sin hacer commit.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-54 && cd /tmp/lg-practice-54 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "original" > file.txt && git add . && git commit -m "initial commit"
+  echo "modified" > file.txt
+
+OBJETIVO:
+  Guardar los cambios del archivo modificado en un stash para limpiar
+  el working dir, luego verificar que el stash fue creado.
+
+SOLUCION:
+  Files: s           (stash cambios del working dir)
+
+VERIFICACION:
+  git stash list     # debe mostrar stash@{0}
+  git status         # working tree clean, sin cambios pendientes
+  cat file.txt       # debe mostrar "original", no "modified"
+
+
+--- Stash con mensaje Files: S ---------------------------------------
+
+ESCENARIO:
+  Tienes cambios que necesitas guardar temporalmente con un mensaje
+  descriptivo para identificar el contexto del stash despues.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-55 && cd /tmp/lg-practice-55 && git init && git config user.name "Test" && git.config user.email "test@test.com"
+  echo "v1" > data.txt && git add . && git commit -m "initial"
+  echo "v2" > data.txt
+
+OBJETIVO:
+  Crear un stash con un mensaje descriptivo "WIP: data update" para
+  poder identificarlo facilmente en la lista de stashes.
+
+SOLUCION:
+  Files: S           (stash con mensaje)
+  # Escribir: WIP: data update
+  Enter              (confirmar mensaje)
+
+VERIFICACION:
+  git stash list     # debe mostrar "WIP: data update"
+  git stash show -p  # muestra los cambios guardados
+
+
+--- Pop Stash panel: space -------------------------------------------
+
+ESCENARIO:
+  Tienes un stash guardado y quieres restaurar los cambios al working
+  dir, eliminando el stash de la lista despues de aplicarlo.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-56 && cd /tmp/lg-practice-56 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > file.txt && git add . && git commit -m "initial"
+  echo "changed" > file.txt
+  # Crear stash desde terminal para este ejercicio
+  git stash push -m "test stash"
+
+OBJETIVO:
+  Desde el Stash panel de LazyGit, aplicar el stash con pop para
+  restaurar los cambios y eliminar el stash de la lista.
+
+SOLUCION:
+  Stash panel: space (pop stash - aplica y elimina)
+
+VERIFICACION:
+  git stash list     # debe estar vacio (stash eliminado)
+  git status         # muestra file.txt modificado
+  cat file.txt       # debe mostrar "changed"
+
+
+--- Apply sin borrar Stash panel: a ----------------------------------
+
+ESCENARIO:
+  Tienes un stash y necesitas aplicar los cambios al working dir pero
+  conservar el stash en la lista para usarlo despues en otra rama.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-57 && cd /tmp/lg-practice-57 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "original" > test.txt && git add . && git commit -m "initial"
+  echo "modified" > test.txt
+  git stash push -m "keep this"
+
+OBJETIVO:
+  Aplicar el stash al working dir sin eliminarlo de la lista, para
+  poder reutilizarlo despues en otro contexto.
+
+SOLUCION:
+  Stash panel: a     (apply stash - aplica sin borrar)
+
+VERIFICACION:
+  git stash list     # debe mostrar el stash (no fue eliminado)
+  git status         # muestra test.txt modificado
+  cat test.txt       # debe mostrar "modified"
+
+
+--- Drop Stash panel: d ----------------------------------------------
+
+ESCENARIO:
+  Tienes multiples stashes acumulados y necesitas eliminar uno
+  especifico que ya no es util para limpiar la lista.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-58 && cd /tmp/lg-practice-58 && git init && git config user.name "Test" && git.config user.email "test@test.com"
+  echo "v1" > file1.txt && git add . && git commit -m "commit 1"
+  echo "v1" > file2.txt && git add . && git commit -m "commit 2"
+  echo "change1" > file1.txt
+  git stash push -m "old stash"
+  echo "change2" > file2.txt
+  git stash push -m "new stash"
+
+OBJETIVO:
+  Desde el Stash panel, eliminar el stash "old stash" que ya no
+  necesitas, conservando el stash mas reciente.
+
+SOLUCION:
+  Stash panel: j/k   (navega al stash "old stash")
+  Stash panel: d     (drop stash - elimina el seleccionado)
+
+VERIFICACION:
+  git stash list     # debe mostrar solo 1 stash ("new stash")
+  git stash show     # muestra cambios del stash restante
+
+
+=== CAPITULO 8: CHERRY-PICK ===
+
+
+--- Cherry-pick commit desde Commits panel: C ------------------------
+
+ESCENARIO:
+  Tienes una rama feature con commits valiosos que necesitas aplicar
+  selectivamente a main sin mergear toda la rama.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-59 && cd /tmp/lg-practice-59 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base" > file.txt && git add . && git commit -m "base commit"
+  git checkout -b feature
+  echo "feature A" > feature-a.txt && git add . && git commit -m "feature A"
+  echo "feature B" > feature-b.txt && git add . && git commit -m "feature B"
+  git checkout main
+
+OBJETIVO:
+  Desde el Commits panel, aplicar solo el commit "feature A" a main
+  usando cherry-pick, sin traer el commit "feature B".
+
+SOLUCION:
+  Commits panel: j/k  (navega al commit "feature A")
+  Commits panel: C    (cherry-pick - aplica el commit seleccionado)
+
+VERIFICACION:
+  git log --oneline         # debe mostrar "feature A" en main
+  ls                        # debe mostrar feature-a.txt
+  cat feature-a.txt         # debe mostrar "feature A"
+
+
+--- Cherry-pick rango de commits: C en multiple ----------------------
+
+ESCENARIO:
+  Una rama hotfix tiene 3 commits que necesitas aplicar en orden a
+  production, pero solo esos commits especificos.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-60 && cd /tmp/lg-practice-60 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "v1" > app.txt && git add . && git commit -m "v1"
+  git checkout -b hotfix
+  echo "fix1" >> app.txt && git add . && git commit -m "fix 1"
+  echo "fix2" >> app.txt && git add . && git commit -m "fix 2"
+  echo "fix3" >> app.txt && git add . && git commit -m "fix 3"
+  git checkout main
+
+OBJETIVO:
+  Aplicar los 3 commits de hotfix a main usando cherry-pick multiple
+  desde el Commits panel.
+
+SOLUCION:
+  Commits panel: j/k        (navega al primer commit "fix 1")
+  Commits panel: espacio    (marca el commit)
+  Commits panel: j/k        (navega a "fix 2", espacio, repite para "fix 3")
+  Commits panel: C          (cherry-pick todos los marcados)
+
+VERIFICACION:
+  git log --oneline         # debe mostrar fix 1, fix 2, fix 3 en main
+  cat app.txt               # debe contener v1, fix1, fix2, fix3
+
+
+--- Cherry-pick desde otra branch: Branches panel --------------------
+
+ESCENARIO:
+  La rama develop tiene un commit crítico que necesita estar en main
+  urgentemente. Estás en main y necesitas navegar a develop para
+  seleccionar el commit.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-61 && cd /tmp/lg-practice-61 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main" > main.txt && git add . && git commit -m "main commit"
+  git checkout -b develop
+  echo "critical" > critical.txt && git add . && git commit -m "critical fix"
+  echo "other" > other.txt && git add . && git commit -m "other dev work"
+  git checkout main
+
+OBJETIVO:
+  Desde el Branches panel, navegar a develop y aplicar solo el commit
+  "critical fix" a main usando cherry-pick.
+
+SOLUCION:
+  Branches panel: j/k       (navega a develop)
+  Branches panel: enter     (abre Commits de develop)
+  Commits panel: j/k        (navega a "critical fix")
+  Commits panel: C          (cherry-pick)
+
+VERIFICACION:
+  git log --oneline         # debe mostrar "critical fix" en main
+  ls                        # debe mostrar critical.txt
+  cat critical.txt          # debe mostrar "critical"
+
+
+--- Cherry-pick abortar: x despues de conflicto ----------------------
+
+ESCENARIO:
+  Intentas hacer cherry-pick de un commit que tiene conflictos con
+  tu codigo actual. Necesitas abortar el cherry-pick y volver al
+  estado original.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-62 && cd /tmp/lg-practice-62 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "line1" > conflict.txt && git add . && git commit -m "base"
+  git checkout -b feature
+  echo "line2" >> conflict.txt && git add . && git commit -m "feature change"
+  git checkout main
+  echo "different line2" >> conflict.txt && git add . && git commit -m "main change"
+
+OBJETIVO:
+  Intentar cherry-pick del commit "feature change", ver el conflicto,
+  y abortar el cherry-pick para volver al estado limpio de main.
+
+SOLUCION:
+  Commits panel: j/k        (navega al commit "feature change")
+  Commits panel: C          (cherry-pick - genera conflicto)
+  Panel conflicto: x        (abort cherry-pick - cancela operacion)
+
+VERIFICACION:
+  git status                # no debe haber conflicto activo
+  git cherry-pick --abort   # debe decir "no cherry-pick in progress"
+  cat conflict.txt          # debe mostrar solo "line1" y "different line2"
+
+
+--- Cherry-pick continuar: despues de resolver conflicto -------------
+
+ESCENARIO:
+  Un cherry-pick genera conflicto en un archivo. Resuelves el conflicto
+  manualmente y necesitas continuar el cherry-pick para completarlo.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-63 && cd /tmp/lg-practice-63 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "base content" > data.txt && git add . && git commit -m "base"
+  git checkout -b feature
+  echo "feature line" >> data.txt && git add . && git commit -m "add feature"
+  git checkout main
+  echo "main line" >> data.txt && git add . && git commit -m "add main"
+
+OBJETIVO:
+  Hacer cherry-pick de "add feature", resolver el conflicto en data.txt
+  manteniendo ambos cambios, y continuar el cherry-pick hasta completarlo.
+
+SOLUCION:
+  Commits panel: j/k        (navega a "add feature")
+  Commits panel: C          (cherry-pick - genera conflicto)
+  Panel conflicto: enter    (abre editor para resolver)
+  # Editar data.txt: mantener base content, main line, feature line
+  # Guardar y cerrar editor
+  Panel conflicto: c        (continue - completa cherry-pick)
+
+VERIFICACION:
+  git log --oneline         # debe mostrar "add feature" en main
+  cat data.txt              # debe tener base, main line, feature line
+  git status                # working tree limpio
+
+
+=== CAPITULO 9: BISECT ===
+
+
+--- Bisect iniciar: b para encontrar commit problematico --------------
+
+ESCENARIO:
+  Tu proyecto tiene un bug que no existia antes. Hay varios commits entre
+  el ultimo bueno y el actual. Necesitas usar bisect para encontrar cual
+  commit introdujo el problema.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-64 && cd /tmp/lg-practice-64 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "VERSION=10" > config.txt && git add . && git commit -m "initial version"
+  echo "feature A" >> app.txt && git add . && git commit -m "add feature A"
+  echo "VERSION=0" > config.txt && git add . && git commit -m "refactor config"
+  echo "feature B" >> app.txt && git add . && git commit -m "add feature B"
+  echo "feature C" >> app.txt && git add . && git commit -m "add feature C"
+
+OBJETIVO:
+  Iniciar git bisect desde el panel de Commits para encontrar el commit
+  que rompio la configuracion (cambio VERSION de 10 a 0).
+
+SOLUCION:
+  Commits panel: j/k        (navega al commit inicial, el mas antiguo)
+  Commits panel: b          (inicia bisect - marca como good)
+  Commits panel: j/k        (navega al commit actual HEAD)
+  Commits panel: b          (marca como bad - inicia busqueda)
+
+VERIFICACION:
+  git bisect log            # debe mostrar "git bisect start" con bad y good
+  git status                # debe decir "bisecting..."
+
+
+--- Bisect marcar bad: HEAD tiene el bug -----------------------------
+
+ESCENARIO:
+  Estas en medio de una sesion de bisect. El commit actual que LazyGit
+  te muestra tiene el bug (VERSION=0 en lugar de VERSION=10).
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-65 && cd /tmp/lg-practice-65 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "VERSION=10" > config.txt && git add . && git commit -m "initial version"
+  echo "feature A" >> app.txt && git add . && git commit -m "add feature A"
+  echo "VERSION=0" > config.txt && git add . && git commit -m "refactor config"
+  echo "feature B" >> app.txt && git add . && git commit -m "add feature B"
+  echo "feature C" >> app.txt && git add . && git commit -m "add feature C"
+  # Simular bisect ya iniciado y posicionado en commit con bug
+  git bisect start && git bisect bad HEAD && git bisect good HEAD~3
+
+OBJETIVO:
+  Verificar que el commit actual tiene el bug y marcarlo como bad para
+  que bisect continue la busqueda.
+
+SOLUCION:
+  Revisar archivo: cat config.txt   # verifica VERSION=0 (bug presente)
+  Commits panel: b          (marca commit actual como bad)
+  # LazyGit te mueve automaticamente al siguiente commit a probar
+
+VERIFICACION:
+  git bisect log            # debe mostrar el commit marcado como bad
+  git status                # sigue en modo bisect
+
+
+--- Bisect marcar good: commit sin bug encontrado --------------------
+
+ESCENARIO:
+  Bisect te ha movido a un commit intermedio. Verificas que este commit
+  NO tiene el bug (VERSION=10 correcto) y necesitas marcarlo como good.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-66 && cd /tmp/lg-practice-66 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "VERSION=10" > config.txt && git add . && git commit -m "initial version"
+  echo "feature A" >> app.txt && git add . && git commit -m "add feature A"
+  echo "VERSION=0" > config.txt && git add . && git commit -m "refactor config"
+  echo "feature B" >> app.txt && git add . && git commit -m "add feature B"
+  echo "feature C" >> app.txt && git add . && git commit -m "add feature C"
+  # Simular bisect posicionado en commit bueno (HEAD~2 = "add feature A")
+  git bisect start && git bisect bad HEAD && git bisect good HEAD~4
+  git bisect run sh -c 'grep -q "VERSION=10" config.txt || exit 1' 2>/dev/null || true
+
+OBJETIVO:
+  Verificar que el commit actual es bueno (VERSION=10) y marcarlo como
+  good para que bisect narree el rango de busqueda.
+
+SOLUCION:
+  Revisar archivo: cat config.txt   # verifica VERSION=10 (sin bug)
+  Commits panel: b          (marca commit actual como good)
+  # Bisect continua narrowing down hasta encontrar el culpable
+
+VERIFICACION:
+  git bisect log            # muestra historial de good/bad marks
+  git bisect status         # muestra progreso de la busqueda
+
+
+--- Bisect reset: terminar sesion de bisect --------------------------
+
+ESCENARIO:
+  Has encontrado el commit culpable con bisect o necesitas cancelar la
+  sesion de bisect para volver al estado normal del repositorio.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-67 && cd /tmp/lg-practice-67 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "VERSION=10" > config.txt && git add . && git commit -m "initial version"
+  echo "feature A" >> app.txt && git add . && git commit -m "add feature A"
+  echo "VERSION=0" > config.txt && git add . && git commit -m "refactor config"
+  echo "feature B" >> app.txt && git add . && git commit -m "add feature B"
+  echo "feature C" >> app.txt && git add . && git commit -m "add feature C"
+  git bisect start && git bisect bad HEAD && git bisect good HEAD~4
+
+OBJETIVO:
+  Terminar la sesion de bisect y volver al estado normal del repositorio
+  (HEAD en la branch original, sin bisect activo).
+
+SOLUCION:
+  Commits panel: j/k        (navega si necesitas ver otro commit)
+  Commits panel: B          (bisect reset - termina sesion de bisect)
+  # Alternativa manual: git bisect reset
+
+VERIFICACION:
+  git status                # no debe decir "bisecting..."
+  git bisect log            # debe decir "no bisect in progress"
+  git log --oneline         # muestra todos los commits, HEAD en branch
+
+
+=== CAPITULO 10: WORKTREES ===
+
+
+--- Worktree create: crear worktree desde branch existente ----------
+
+ESCENARIO:
+  Tienes un repositorio con main y una branch feature. Quieres trabajar
+  en feature sin hacer checkout, usando un worktree separado en otro
+  directorio para revisar o modificar esa branch en paralelo.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-68 && cd /tmp/lg-practice-68 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main content" > app.txt && git add . && git commit -m "initial commit"
+  git checkout -b feature && echo "feature content" >> app.txt && git add . && git commit -m "add feature"
+  git checkout main
+
+OBJETIVO:
+  Crear un worktree en /tmp/lg-practice-68/feature-worktree que apunte
+  a la branch feature, permitiendo trabajar en ella sin cambiar el
+  directorio de trabajo principal.
+
+SOLUCION:
+  Branches panel: w         (abre menu de worktrees)
+  Seleccionar feature: Enter
+  Crear worktree: c         (create worktree)
+  Ruta: /tmp/lg-practice-68/feature-worktree
+  # LazyGit crea el worktree y lo lista en el panel
+
+VERIFICACION:
+  git worktree list         # muestra ambos worktrees (main y feature)
+  ls /tmp/lg-practice-68/feature-worktree  # confirma directorio creado
+
+
+--- Worktree list: ver worktrees activos -----------------------------
+
+ESCENARIO:
+  Tienes multiples worktrees creados y necesitas ver cuales estan
+  activos, en que branches apuntan y sus rutas absolutas.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-69 && cd /tmp/lg-practice-69 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main content" > app.txt && git add . && git commit -m "initial commit"
+  git checkout -b feature && echo "feature content" >> app.txt && git add . && git commit -m "add feature"
+  git checkout main
+  git worktree add /tmp/lg-practice-69/feature-worktree feature
+
+OBJETIVO:
+  Listar todos los worktrees del repositorio para ver sus rutas,
+  branches asociadas y estado actual.
+
+SOLUCION:
+  Branches panel: w         (abre menu de worktrees)
+  # El panel muestra lista de worktrees con:
+  # - Ruta absoluta
+  # - Branch asociada
+  # - Indicador de cual es el actual
+  # Navegar: j/k para ver detalles de cada worktree
+
+VERIFICACION:
+  git worktree list         # muestra formato: ruta branch commit
+  git worktree list --porcelain  # formato detallado maquina
+
+
+--- Worktree remove: eliminar worktree -------------------------------
+
+ESCENARIO:
+  Tienes un worktree que ya no necesitas y quieres eliminarlo para
+  liberar espacio y mantener el repositorio limpio.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-70 && cd /tmp/lg-practice-70 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main content" > app.txt && git add . && git commit -m "initial commit"
+  git checkout -b feature && echo "feature content" >> app.txt && git add . && git commit -m "add feature"
+  git checkout main
+  git worktree add /tmp/lg-practice-70/feature-worktree feature
+
+OBJETIVO:
+  Eliminar el worktree de feature ya que completaste esa tarea y no
+  lo necesitas mas.
+
+SOLUCION:
+  Branches panel: w         (abre menu de worktrees)
+  Seleccionar feature-worktree: j/k
+  Eliminar worktree: d      (delete/remove worktree)
+  Confirmar: Enter          # confirma eliminacion
+  # LazyGit elimina el worktree y su directorio
+
+VERIFICACION:
+  git worktree list         # solo muestra worktree principal (main)
+  ls /tmp/lg-practice-70/   # no existe feature-worktree
+
+
+--- Worktree switch: cambiar entre worktrees -------------------------
+
+ESCENARIO:
+  Tienes multiples worktrees activos y quieres cambiar tu sesion actual
+  de terminal al directorio de otro worktree para trabajar en el.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-71 && cd /tmp/lg-practice-71 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main content" > app.txt && git add . && git commit -m "initial commit"
+  git checkout -b feature && echo "feature content" >> app.txt && git add . && git commit -m "add feature"
+  git checkout main
+  git worktree add /tmp/lg-practice-71/feature-worktree feature
+
+OBJETIVO:
+  Cambiar el directorio de trabajo actual al worktree de feature para
+  continuar trabajando en esa branch.
+
+SOLUCION:
+  Branches panel: w         (abre menu de worktrees)
+  Seleccionar feature-worktree: j/k
+  Cambiar a worktree: s     (switch/enter worktree)
+  # LazyGit muestra la ruta del worktree
+  # En terminal: cd /tmp/lg-practice-71/feature-worktree
+
+VERIFICACION:
+  pwd                       # debe mostrar ruta del worktree seleccionado
+  git branch --show-current # muestra branch del worktree (feature)
+  git worktree list         # confirma worktree activo
+
+
+=== CAPITULO 11: REFLOG ===
+
+El reflog es el registro de todas las referencias en tu repositorio local.
+Cada vez que HEAD cambia (checkout, commit, reset, rebase), se guarda un entry.
+Sirve para recuperar commits "perdidos", branches eliminadas y deshacer operaciones.
+
+
+--- Ver reflog completo ------------------------------------------------
+
+ESCENARIO:
+  Quieres ver el historial completo de movimientos de HEAD para entender
+  que operaciones se realizaron y en que orden.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-72 && cd /tmp/lg-practice-72 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "v1" > app.txt && git add . && git commit -m "commit 1"
+  echo "v2" >> app.txt && git add . && git commit -m "commit 2"
+  echo "v3" >> app.txt && git add . && git commit -m "commit 3"
+  git checkout -b feature && echo "feature" >> app.txt && git add . && git commit -m "feature commit"
+  git checkout main
+
+OBJETIVO:
+  Ver el reflog completo para inspeccionar todos los movimientos de HEAD
+  que ocurrieron en el repositorio.
+
+SOLUCION:
+  Reflog panel: 6           (abre panel de Reflog)
+  Navegar: j/k              (explorar entries del reflog)
+  Ver detalles: Enter       (muestra commit seleccionado)
+  # El reflog muestra: HEAD@{0}: checkout, HEAD@{1}: commit, etc.
+  # Cada entry tiene indice, hash, mensaje y timestamp
+
+VERIFICACION:
+  git reflog                # muestra mismo historial en terminal
+  # Debe mostrar: checkout main, feature commit, checkout feature, commit 3, commit 2, commit 1
+
+
+--- Recuperar commit borrado con reset --hard --------------------------
+
+ESCENARIO:
+  Tenias commits importantes pero hiciste reset --hard por error y ahora
+  esos commits "desaparecieron". Necesitas recuperarlos.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-73 && cd /tmp/lg-practice-73 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "v1" > app.txt && git add . && git commit -m "commit 1"
+  echo "v2" >> app.txt && git add . && git commit -m "commit 2"
+  echo "v3" >> app.txt && git add . && git commit -m "commit 3"
+  echo "v4" >> app.txt && git add . && git commit -m "commit 4 - IMPORTANTE"
+  git reset --hard HEAD~2   # BORRA commits 3 y 4 - ahora solo hay 2 commits
+
+OBJETIVO:
+  Recuperar el commit 4 que fue eliminado con reset --hard usando el reflog.
+
+SOLUCION:
+  Reflog panel: 6           (abre panel de Reflog)
+  Buscar commit 4: j        (bajar hasta encontrar "commit 4 - IMPORTANTE")
+  Seleccionar commit 4: Enter
+  Reset a ese commit: r     (reset to this commit)
+  Confirmar: Enter          # confirma reset
+  # LazyGit hace reset --hard al commit seleccionado
+
+VERIFICACION:
+  git log --oneline         # muestra commits 1, 2, 3, 4 recuperados
+  git reflog                # confirma reset al commit 4
+
+
+--- Recuperar branch eliminada con branch -D ---------------------------
+
+ESCENARIO:
+  Eliminaste una branch importante con branch -D y ahora necesitas
+  recuperarla con todo su historial de commits.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-74 && cd /tmp/lg-practice-74 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main" > app.txt && git add . && git commit -m "main commit"
+  git checkout -b feature-auth && echo "auth" > auth.txt && git add . && git commit -m "add auth feature"
+  echo "more auth" >> auth.txt && git add . && git commit -m "complete auth"
+  git checkout main
+  git branch -D feature-auth   # ELIMINA la branch - ahora "no existe"
+
+OBJETIVO:
+  Recuperar la branch feature-auth que fue eliminada usando el reflog
+  para encontrar el ultimo commit de esa branch.
+
+SOLUCION:
+  Reflog panel: 6           (abre panel de Reflog)
+  Buscar commit de feature: j/k (buscar "complete auth" o "checkout main")
+  Seleccionar ultimo commit de feature-auth: Enter
+  Crear branch: b           (create branch from selected commit)
+  Nombre: feature-auth      (escribir nombre de la branch)
+  Enter                     # crea la branch en ese commit
+
+VERIFICACION:
+  git branch                # muestra feature-auth recuperada
+  git log feature-auth --oneline  # muestra commits de la branch
+  git log --oneline         # main y feature-auth con sus commits
+
+
+--- Undo rebase problematico -------------------------------------------
+
+ESCENARIO:
+  Hiciste un rebase que salio mal o no era lo que querias y necesitas
+  deshacerlo completamente para volver al estado anterior al rebase.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-75 && cd /tmp/lg-practice-75 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "main" > app.txt && git add . && git commit -m "main commit"
+  git checkout -b feature && echo "f1" > f.txt && git add . && git commit -m "feature 1"
+  echo "f2" >> f.txt && git add . && git commit -m "feature 2"
+  git checkout main
+  echo "main2" > m.txt && git add . && git commit -m "main 2"
+  git checkout feature
+  git rebase main           # hace rebase - cambia los hashes de los commits
+
+OBJETIVO:
+  Deshacer el rebase y volver al estado exacto antes de hacerlo usando
+  el reflog para encontrar el estado anterior.
+
+SOLUCION:
+  Reflog panel: 6           (abre panel de Reflog)
+  Buscar entry anterior: j  (buscar "rebase" o entry antes del rebase)
+  Seleccionar entry antes del rebase: Enter (donde dice "feature 2")
+  Reset a ese estado: r     (reset to this commit)
+  Confirmar: Enter          # confirma reset
+
+VERIFICACION:
+  git log --oneline         # muestra commits originales sin rebase
+  git reflog | head -5      # muestra rebase y reset en historial
+
+
+--- Encontrar dangling commit ------------------------------------------
+
+ESCENARIO:
+  Tienes commits "huerfanos" o "dangling" que no pertenecen a ninguna
+  branch y quieres encontrarlos para decidir si recuperarlos o eliminarlos.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-76 && cd /tmp/lg-practice-76 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "v1" > app.txt && git add . && git commit -m "commit 1"
+  git checkout -b temp && echo "temp" > temp.txt && git add . && git commit -m "temp commit"
+  git checkout main
+  git branch -D temp        # elimina branch - commit queda dangling
+  git checkout --orphan orphan && echo "orphan" > o.txt && git add . && git commit -m "orphan commit"
+  git checkout main
+
+OBJETIVO:
+  Encontrar commits dangling/orphan usando el reflog que no estan en
+  ninguna branch activa.
+
+SOLUCION:
+  Reflog panel: 6           (abre panel de Reflog)
+  Navegar entries: j/k      (explorar todos los entries)
+  Identificar dangling:     (commits sin branch asociada)
+  Seleccionar dangling: Enter
+  Inspeccionar: Enter       (ver contenido del commit)
+  # Opcional: crear branch para recuperar: b -> nombre
+
+VERIFICACION:
+  git fsck --lost-found     # muestra dangling commits en terminal
+  git reflog                # confirma entries de commits orphan/temp
+
+
+--- Reset via reflog a punto especifico --------------------------------
+
+ESCENARIO:
+  Quieres volver a un punto especifico en el tiempo que viste en el reflog
+  pero no recuerdas el hash exacto del commit.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-77 && cd /tmp/lg-practice-77 && git init && git config user.name "Test" && git config user.email "test@test.com"
+  echo "v1" > app.txt && git add . && git commit -m "initial"
+  echo "v2" >> app.txt && git add . && git commit -m "add feature A"
+  echo "v3" >> app.txt && git add . && git commit -m "add feature B"
+  echo "v4" >> app.txt && git add . && git commit -m "add feature C"
+  echo "v5" >> app.txt && git add . && git commit -m "add feature D"
+  echo "broken" >> app.txt && git add . && git commit -m "BROKEN - no funciona"
+
+OBJETIVO:
+  Usar el reflog para volver al estado justo antes del commit "BROKEN"
+  sin necesidad de recordar el hash exacto.
+
+SOLUCION:
+  Reflog panel: 6           (abre panel de Reflog)
+  Buscar commit anterior: j (bajar hasta "add feature D")
+  Seleccionar ese commit: Enter
+  Reset suave: r            (reset to this commit)
+  Confirmar: Enter          # confirma reset
+  # El commit BROKEN queda en el reflog pero no en la branch
+
+VERIFICACION:
+  git log --oneline         # muestra hasta "add feature D"
+  git reflog | head -3      # muestra reset y commit BROKEN en historial
+  git status                # working directory limpio en estado anterior
+
+=== CAPITULO 12: SUBMODULES ===
+
+---
+
+ESCENARIO:
+  Tienes un proyecto principal que necesita incluir otro repositorio como submodulo
+  por ejemplo una libreria compartida o configuracion compartida.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-*
+  git config --global protocol.file.allow always
+  mkdir -p /tmp/lg-practice-78-child && cd /tmp/lg-practice-78-child && git init
+  git config user.name "Test" && git config user.email "test@test.com"
+  echo "shared config" > config.txt && git add . && git commit -m "initial config"
+  cd /tmp
+  mkdir lg-practice-78-parent && cd lg-practice-78-parent && git init
+  git config user.name "Test" && git config user.email "test@test.com"
+  echo "main project" > main.txt && git add . && git commit -m "main project init"
+
+OBJETIVO:
+  Agregar el repositorio child como submodulo del repositorio parent
+  y verificar que aparece en el panel de Submodules de LazyGit.
+
+SOLUCION:
+  Terminal: git submodule add /tmp/lg-practice-78-child lib-shared
+  Terminal: git commit -m "add submodule"
+  LazyGit: Panel numerico: 7    (abre panel de Submodules)
+  # Ver el submodulo listado con su hash y path
+
+VERIFICACION:
+  git submodule status    # muestra hash y path del submodulo
+  ls -la                  # muestra directorio lib-shared
+  cat .gitmodules         # muestra configuracion del submodulo
+
+---
+
+ESCENARIO:
+  El repositorio del submodulo ha recibido nuevos commits
+  y necesitas actualizar tu submodulo a la ultima version.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-*
+  git config --global protocol.file.allow always
+  mkdir -p /tmp/lg-practice-79-child && cd /tmp/lg-practice-79-child && git init
+  git config user.name "Test" && git config user.email "test@test.com"
+  echo "v1" > lib.txt && git add . && git commit -m "lib v1"
+  cd /tmp
+  mkdir lg-practice-79-parent && cd lg-practice-79-parent && git init
+  git config user.name "Test" && git config user.email "test@test.com"
+  git submodule add /tmp/lg-practice-79-child lib-shared
+  git commit -m "add submodule"
+  cd lib-shared && echo "v2" >> lib.txt && git add . && git commit -m "lib v2"
+  cd ..
+
+OBJETIVO:
+  Actualizar el submodulo a la ultima version del repositorio child
+  usando LazyGit para ver el cambio pendiente.
+
+SOLUCION:
+  LazyGit: Panel numerico: 7        (abre panel de Submodules)
+  # Ver submodulo con hash desactualizado (flecha o indicador)
+  Seleccionar submodulo: Enter
+  Update submodule: u               (update this submodule)
+  # O actualizar todos: Shift+U     (update all submodules)
+  Terminal: git add lib-shared
+  Terminal: git commit -m "update submodule to v2"
+
+VERIFICACION:
+  git submodule status    # muestra nuevo hash del submodulo
+  cat lib-shared/lib.txt  # muestra v1 y v2
+  git log --oneline -3    # muestra commit de actualizacion
+
+---
+
+ESCENARIO:
+  Clonaste un repositorio que tiene submodulos
+  pero los directorios de submodulos estan vacios.
+
+ESTADO INICIAL:
+  rm -rf /tmp/lg-practice-*
+  git config --global protocol.file.allow always
+  mkdir -p /tmp/lg-practice-80-child && cd /tmp/lg-practice-80-child && git init
+  git config user.name "Test" && git config user.email "test@test.com"
+  echo "submodule content" > sub.txt && git add . && git commit -m "submodule init"
+  cd /tmp
+  mkdir lg-practice-80-parent && cd lg-practice-80-parent && git init
+  git config user.name "Test" && git config user.email "test@test.com"
+  git submodule add /tmp/lg-practice-80-child lib-shared
+  git commit -m "add submodule"
+  cd /tmp && rm -rf lg-practice-80-parent
+  git clone /tmp/lg-practice-80-parent /tmp/lg-practice-80-cloned
+  cd /tmp/lg-practice-80-cloned
+
+OBJETIVO:
+  Inicializar y descargar los submodulos despues de clonar
+  verificando el estado en el panel de Submodules de LazyGit.
+
+SOLUCION:
+  # Opcion 1 - Terminal antes de abrir LazyGit:
+  Terminal: git submodule update --init
+  # Opcion 2 - Desde LazyGit:
+  LazyGit: Panel numerico: 7        (abre panel de Submodules)
+  Seleccionar submodulo: Enter
+  Init submodule: i                   (initialize this submodule)
+  Update submodule: u                 (update this submodule)
+  # Ver contenido disponible en el directorio del submodulo
+
+VERIFICACION:
+  git submodule status    # muestra hash del submodulo inicializado
+  ls lib-shared/          # muestra archivos del submodulo
+  cat lib-shared/sub.txt  # muestra "submodule content"
+
