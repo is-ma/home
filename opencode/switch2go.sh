@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# switch2go.sh - Sustituye placeholders en templates __base
+#               y genera opencode.jsonc / oh-my-openagent.jsonc
+# Uso: bash switch2go.sh
+
+set -euo pipefail
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+_subst() {
+  < "$1" \
+    sed "s|OMO_CATEGORY__VISUAL_ENGINEERING|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__UNSPECIFIED_HIGH|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__UNSPECIFIED_LOW|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__MULTIMODAL_LOOKER|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__SISYPHUS_JUNIOR|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__ULTRABRAIN|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__ARTISTRY|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__WRITING|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__SISYPHUS|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__PROMETHEUS|deepseek/deepseek-v4-pro|g" |
+    sed "s|OMO_AGENT__HEPHAESTUS|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__LIBRARIAN|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__EXPLORE|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__ORACLE|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__METIS|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__MOMUS|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__ATLAS|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__DEEP|deepseek/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__QUICK|deepseek/deepseek-v4-flash|g" |
+    sed "s|DEEP_GENIUS|deepseek/deepseek-v4-pro|g" |
+    sed "s|DEEP_JUNIOR|deepseek/deepseek-v4-flash|g" |
+    sed "s|DEEP_BRO|deepseek/deepseek-v4-flash|g"
+}
+
+_subst "$DIR/opencode__base.jsonc"        > "$DIR/opencode.jsonc"
+_subst "$DIR/oh-my-openagent__base.jsonc"  > "$DIR/oh-my-openagent.jsonc"
+
+echo "Configs regenerados desde templates __base (Go)"
