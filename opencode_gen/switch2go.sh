@@ -6,6 +6,7 @@
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+STOW_DIR="$HOME/is-ma/home/stowing/opencode"
 
 _subst() {
   < "$1" \
@@ -34,12 +35,13 @@ _subst() {
     sed "s|DEEP_BRO|opencode-go/deepseek-v4-flash|g"
 }
 
-_subst "$DIR/opencode__base.jsonc"        > "$DIR/opencode.jsonc"
-_subst "$DIR/oh-my-openagent__base.jsonc"  > "$DIR/oh-my-openagent.jsonc"
+mkdir -p "$STOW_DIR"
+_subst "$DIR/opencode__base.jsonc"        > "$STOW_DIR/opencode.jsonc"
+_subst "$DIR/oh-my-openagent__base.jsonc"  > "$STOW_DIR/oh-my-openagent.jsonc"
 
 # --- Symlinks hacia ~/.config/opencode/ ---
 mkdir -p "$HOME/.config/opencode"
-ln -sf "$DIR/opencode.jsonc"            "$HOME/.config/opencode/opencode.jsonc"
-ln -sf "$DIR/oh-my-openagent.jsonc"     "$HOME/.config/opencode/oh-my-openagent.jsonc"
+ln -sf "$STOW_DIR/opencode.jsonc"            "$HOME/.config/opencode/opencode.jsonc"
+ln -sf "$STOW_DIR/oh-my-openagent.jsonc"     "$HOME/.config/opencode/oh-my-openagent.jsonc"
 
 echo "Configs regenerados desde templates __base (Go)"
