@@ -10,24 +10,24 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 _subst() {
   < "$1" \
     sed "s|OMO_CATEGORY__VISUAL_ENGINEERING|opencode-go/qwen3.5-plus|g" |
-    sed "s|OMO_CATEGORY__UNSPECIFIED_HIGH|opencode-go/kimi-k2.6|g" |
-    sed "s|OMO_CATEGORY__UNSPECIFIED_LOW|opencode-go/qwen3.5-plus|g" |
+    sed "s|OMO_CATEGORY__UNSPECIFIED_HIGH|opencode-go/qwen3.5-plus|g" |
+    sed "s|OMO_CATEGORY__UNSPECIFIED_LOW|opencode-go/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__MULTIMODAL_LOOKER|opencode-go/mimo-v2.5-pro|g" |
-    sed "s|OMO_AGENT__SISYPHUS_JUNIOR|opencode-go/kimi-k2.6|g" |
-    sed "s|OMO_CATEGORY__ULTRABRAIN|opencode-go/kimi-k2.6|g" |
+    sed "s|OMO_AGENT__SISYPHUS_JUNIOR|opencode-go/deepseek-v4-flash|g" |
+    sed "s|OMO_CATEGORY__ULTRABRAIN|opencode-go/deepseek-v4-flash|g" |
     sed "s|OMO_CATEGORY__ARTISTRY|opencode-go/qwen3.5-plus|g" |
     sed "s|OMO_CATEGORY__WRITING|opencode-go/qwen3.5-plus|g" |
-    sed "s|OMO_AGENT__SISYPHUS|opencode-go/kimi-k2.6|g" |
-    sed "s|OMO_AGENT__PROMETHEUS|opencode-go/glm-5.1|g" |
-    sed "s|OMO_AGENT__HEPHAESTUS|opencode-go/deepseek-v4-pro|g" |
-    sed "s|OMO_AGENT__LIBRARIAN|opencode-go/qwen3.5-plus|g" |
-    sed "s|OMO_AGENT__EXPLORE|opencode-go/qwen3.5-plus|g" |
-    sed "s|OMO_AGENT__ORACLE|opencode-go/qwen3.5-plus|g" |
-    sed "s|OMO_AGENT__METIS|opencode-go/qwen3.6-plus|g" |
-    sed "s|OMO_AGENT__MOMUS|opencode-go/glm-5.1|g" |
+    sed "s|OMO_AGENT__SISYPHUS|opencode-go/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__PROMETHEUS|opencode-go/kimi-k2.6|g" |
+    sed "s|OMO_AGENT__HEPHAESTUS|opencode-go/qwen3.6-plus|g" |
+    sed "s|OMO_AGENT__LIBRARIAN|opencode-go/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__EXPLORE|opencode-go/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__ORACLE|opencode-go/deepseek-v4-flash|g" |
+    sed "s|OMO_AGENT__METIS|opencode-go/qwen3.5-plus|g" |
+    sed "s|OMO_AGENT__MOMUS|opencode-go/deepseek-v4-flash|g" |
     sed "s|OMO_AGENT__ATLAS|opencode-go/deepseek-v4-pro|g" |
-    sed "s|OMO_CATEGORY__DEEP|opencode-go/glm-5.1|g" |
-    sed "s|OMO_CATEGORY__QUICK|opencode-go/qwen3.5-plus|g" |
+    sed "s|OMO_CATEGORY__DEEP|opencode-go/qwen3.6-plus|g" |
+    sed "s|OMO_CATEGORY__QUICK|opencode-go/deepseek-v4-flash|g" |
     sed "s|DEEP_TERMINAL|opencode-go/deepseek-v4-flash|g" |
     sed "s|DEEP_GENIUS|opencode-go/deepseek-v4-pro|g" |
     sed "s|DEEP_JUNIOR|opencode-go/deepseek-v4-flash|g" |
