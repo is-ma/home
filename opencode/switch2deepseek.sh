@@ -36,4 +36,4 @@ _subst() {
 _subst "$DIR/opencode__base.jsonc"        > "$DIR/opencode.jsonc"
 _subst "$DIR/oh-my-openagent__base.jsonc"  > "$DIR/oh-my-openagent.jsonc"
 
-echo "Configs regenerados desde templates __base"
+echo "Configs regenerados desde templates __base (DeepSeek)"
