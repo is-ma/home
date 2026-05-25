@@ -1221,11 +1221,11 @@ ESCENARIO:
 
 ESTADO INICIAL:
   rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-40 && cd /tmp/lg-practice-40 && git init && git config user.name "Test" && git config user.email "test@test.com"
-  echo "line1\nline2\nline3" > data.txt && git add . && git commit -m "initial"
+  printf "line1\nline2\nline3\n" > data.txt && git add . && git commit -m "initial"
   git checkout -b feature
-  echo "line1-feature\nline2\nline3-feature" > data.txt && git add . && git commit -m "update in feature"
+  printf "line1-feature\nline2\nline3-feature\n" > data.txt && git add . && git commit -m "update in feature"
   git checkout main
-  echo "line1-main\nline2-main\nline3" > data.txt && git add . && git commit -m "update in main"
+  printf "line1-main\nline2-main\nline3\n" > data.txt && git add . && git commit -m "update in main"
 
 OBJETIVO:
   Iniciar merge, ver el diff del conflicto para entender exactamente
@@ -1698,7 +1698,7 @@ ESCENARIO:
   descriptivo para identificar el contexto del stash despues.
 
 ESTADO INICIAL:
-  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-55 && cd /tmp/lg-practice-55 && git init && git config user.name "Test" && git.config user.email "test@test.com"
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-55 && cd /tmp/lg-practice-55 && git init && git config user.name "Test" && git config user.email "test@test.com"
   echo "v1" > data.txt && git add . && git commit -m "initial"
   echo "v2" > data.txt
 
@@ -1774,7 +1774,7 @@ ESCENARIO:
   especifico que ya no es util para limpiar la lista.
 
 ESTADO INICIAL:
-  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-58 && cd /tmp/lg-practice-58 && git init && git config user.name "Test" && git.config user.email "test@test.com"
+  rm -rf /tmp/lg-practice-* && mkdir /tmp/lg-practice-58 && cd /tmp/lg-practice-58 && git init && git config user.name "Test" && git config user.email "test@test.com"
   echo "v1" > file1.txt && git add . && git commit -m "commit 1"
   echo "v1" > file2.txt && git add . && git commit -m "commit 2"
   echo "change1" > file1.txt
@@ -2392,7 +2392,7 @@ VERIFICACION:
 
 === CAPITULO 12: SUBMODULES ===
 
----
+--- Agregar submodulo desde repositorio local --------------------------
 
 ESCENARIO:
   Tienes un proyecto principal que necesita incluir otro repositorio como submodulo
@@ -2424,7 +2424,7 @@ VERIFICACION:
   ls -la                  # muestra directorio lib-shared
   cat .gitmodules         # muestra configuracion del submodulo
 
----
+--- Actualizar submodulo a ultima version ------------------------------
 
 ESCENARIO:
   El repositorio del submodulo ha recibido nuevos commits
@@ -2462,43 +2462,40 @@ VERIFICACION:
   cat lib-shared/lib.txt  # muestra v1 y v2
   git log --oneline -3    # muestra commit de actualizacion
 
----
+--- Sincronizar submodulo con remote -----------------------------------
 
 ESCENARIO:
-  Clonaste un repositorio que tiene submodulos
-  pero los directorios de submodulos estan vacios.
+  El repositorio del submodulo cambio de ubicacion (nuevo remote URL)
+  y necesitas sincronizar la configuracion del submodulo para que apunte
+  a la nueva ubicacion sin tener que reinstalarlo.
 
 ESTADO INICIAL:
   rm -rf /tmp/lg-practice-*
   git config --global protocol.file.allow always
   mkdir -p /tmp/lg-practice-80-child && cd /tmp/lg-practice-80-child && git init
   git config user.name "Test" && git config user.email "test@test.com"
-  echo "submodule content" > sub.txt && git add . && git commit -m "submodule init"
+  echo "lib content" > lib.txt && git add . && git commit -m "lib init"
   cd /tmp
   mkdir lg-practice-80-parent && cd lg-practice-80-parent && git init
   git config user.name "Test" && git config user.email "test@test.com"
   git submodule add /tmp/lg-practice-80-child lib-shared
   git commit -m "add submodule"
-  cd /tmp && rm -rf lg-practice-80-parent
-  git clone /tmp/lg-practice-80-parent /tmp/lg-practice-80-cloned
-  cd /tmp/lg-practice-80-cloned
+  # Simular cambio de remote
+  cd lib-shared && git remote set-url origin https://github.com/example/lib-shared.git
+  cd ..
 
 OBJETIVO:
-  Inicializar y descargar los submodulos despues de clonar
-  verificando el estado en el panel de Submodules de LazyGit.
+  Sincronizar la URL del remote del submodulo usando el panel de Submodules
+  de LazyGit para actualizar la configuracion local.
 
 SOLUCION:
-  # Opcion 1 - Terminal antes de abrir LazyGit:
-  Terminal: git submodule update --init
-  # Opcion 2 - Desde LazyGit:
   LazyGit: Panel numerico: 7        (abre panel de Submodules)
   Seleccionar submodulo: Enter
-  Init submodule: i                   (initialize this submodule)
-  Update submodule: u                 (update this submodule)
-  # Ver contenido disponible en el directorio del submodulo
+  Sync submodule: s                 (sync this submodule)
+  # Actualiza la URL del remote en .git/config
 
 VERIFICACION:
-  git submodule status    # muestra hash del submodulo inicializado
-  ls lib-shared/          # muestra archivos del submodulo
-  cat lib-shared/sub.txt  # muestra "submodule content"
+  git submodule status    # muestra estado del submodulo
+  git config --get submodule.lib-shared.url  # muestra URL sincronizada
+  cat .gitmodules         # muestra configuracion del submodulo
 
