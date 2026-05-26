@@ -1,0 +1,19 @@
+theme = "gruvbox_rich"
+
+[editor]
+line-number = "relative"
+cursorline = true
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.normal]
+"-" = "select_register"  # instead of "
+#"A-l" = "switch_to_lowercase"  # instead of `
+#"A-u" = "switch_to_uppercase"  # instead of Alt-`
+
+[keys.normal.space]
+t = [":pipe center_title.py"]

@@ -11,9 +11,9 @@ mkdir -p ~/.config/espanso/match/
 stow -t ~/.config/espanso/match/ espanso/
 
 # # helix
-# mkdir -p ~/.config/helix/runtime/themes/
-# stow -t ~/.config/helix/ helix_conf/
-# stow -t ~/.config/helix/runtime/themes/ helix_themes/
+mkdir -p ~/.config/helix/runtime/themes/
+stow -t ~/.config/helix/ helix_conf/
+stow -t ~/.config/helix/runtime/themes/ helix_themes/
 
 # opencode
 mkdir -p ~/.config/opencode/

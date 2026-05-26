@@ -1,0 +1,27 @@
+inherits = "gruvbox_material_dark_hard"
+
+#"ui.cursorline.primary" = { bg = "#1d2021" }  # dark: bg0 (invisible, 0%)
+#"ui.cursorline.primary" = { bg = "#32302f" }  # original (fuerte, 100%)
+
+# --- PERILLA SELECTORA SUTIL (Rango original Gruvbox Material) ---
+#"ui.cursorline.primary" = { bg = "#1d2021" }  #   0% (Invisible - Fondo base)
+#"ui.cursorline.primary" = { bg = "#1e1e22" }  #   5%
+#"ui.cursorline.primary" = { bg = "#1f1f22" }  #  10%
+#"ui.cursorline.primary" = { bg = "#202023" }  #  15%
+#"ui.cursorline.primary" = { bg = "#212124" }  #  20% (Tu preferido)
+#"ui.cursorline.primary" = { bg = "#222225" }  #  25%
+"ui.cursorline.primary" = { bg = "#232325" }  #  30%
+#"ui.cursorline.primary" = { bg = "#242426" }  #  35%
+#"ui.cursorline.primary" = { bg = "#252527" }  #  40%
+#"ui.cursorline.primary" = { bg = "#262628" }  #  45%
+#"ui.cursorline.primary" = { bg = "#272728" }  #  50%
+#"ui.cursorline.primary" = { bg = "#282829" }  #  55%
+#"ui.cursorline.primary" = { bg = "#2a292a" }  #  60%
+#"ui.cursorline.primary" = { bg = "#2b2a2b" }  #  65%
+#"ui.cursorline.primary" = { bg = "#2c2b2b" }  #  70%
+#"ui.cursorline.primary" = { bg = "#2d2c2c" }  #  75%
+#"ui.cursorline.primary" = { bg = "#2e2d2d" }  #  80%
+#"ui.cursorline.primary" = { bg = "#2f2e2e" }  #  85%
+#"ui.cursorline.primary" = { bg = "#302f2e" }  #  90%
+#"ui.cursorline.primary" = { bg = "#31302f" }  #  95%
+#"ui.cursorline.primary" = { bg = "#32302f" }  # 100% (Original fuerte)
