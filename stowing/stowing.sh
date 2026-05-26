@@ -7,8 +7,8 @@ mkdir -p ~/.config/alacritty/
 stow -t ~/.config/alacritty/ alacritty/
 
 # espanso
-# mkdir -p ~/.config/espanso/match/
-# stow -t ~/.config/espanso/match/ espanso/
+mkdir -p ~/.config/espanso/match/
+stow -t ~/.config/espanso/match/ espanso/
 
 # # helix
 # mkdir -p ~/.config/helix/runtime/themes/

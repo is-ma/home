@@ -1,0 +1,59 @@
+matches:  
+############
+  - trigger: ",--"
+    replace: "—"
+############
+  - trigger: ",<"
+    replace: "«$|$»"
+############
+  - trigger: ",box"
+    replace: "- [ ]"
+############
+  - trigger: ",thebox"
+    replace: "- [ ] `$|$`"
+############
+  - trigger: ",go-bujo"
+    replace: "cd ~/is-ma/bujo; l"
+############
+  - trigger: ",dong"
+    replace: "🎐🌸💬 ¡¡DOOONGGGG!! 💬🌸🎐"
+############
+  - trigger: ",dinkus"
+    replace: "♦️♦️♦️"
+############
+  - trigger: ",dot"
+    replace: "⋅"
+############
+  - trigger: ",go-home"
+    replace: "cd ~/is-ma/home; l"
+############
+  - trigger: ",iplocal"
+    replace: "{{ip}}"
+    vars:
+      - name: ip
+        type: shell
+        params:
+          cmd: "hostname -I | awk '{print $1}'"
+############
+  - trigger: ",ipweb"
+    replace: "{{ip}}"
+    vars:
+      - name: ip
+        type: shell
+        params:
+          cmd: "hostname -I | awk '{print $2}'"
+############
+  - trigger: ",go-isma; l"
+    replace: "cd ~/is-ma/"
+############
+  - trigger: ",line"
+    replace: "########## ########## ##########"
+############
+  - trigger: ",vio"
+    replace: "violinantiguo@gmail.com"
+############
+  - trigger: ",vv"
+    replace: "✓"
+############
+  - trigger: ",xx"
+    replace: "✗"
