@@ -26,5 +26,5 @@ stow -t ~/.config/dunst/ dunst/
 #################################################################
 #                         CUSTOM SCRIPTS                        #
 #################################################################
-# mkdir -p ~/.local/bin/
-# stow -t ~/.local/bin/ custom_scripts/
+mkdir -p ~/.local/bin/
+stow -t ~/.local/bin/ custom_scripts/
