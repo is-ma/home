@@ -1,0 +1,96 @@
+[general]
+live_config_reload = true
+
+[window]
+padding = { x = 5, y = 5 }
+decorations = "None"
+decorations_theme_variant = "Dark"
+
+[scrolling]
+history = 50000
+multiplier = 1
+
+[font]
+size = 9.0
+
+[font.normal]
+family = "MesloLGMDZ Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+family = "MesloLGMDZ Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "MesloLGMDZ Nerd Font Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "MesloLGMDZ Nerd Font Mono"
+style = "Bold Italic"
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Block", blinking = "Always" }
+blink_interval = 650
+blink_timeout = 5
+unfocused_hollow = true
+
+# ====================================================================
+# TEMA: Gruvbox Material Dark Hard (Sincronizado con tu tema de Helix)
+# ====================================================================
+[colors.primary]
+background = "#1d2021" # Tomado de gruvbox_material_dark_hard.toml (bg0)
+foreground = "#d4be98" # Tomado de gruvbox_material_dark_medium.toml (fg0)
+
+[colors.selection]
+background = "#3c3836" # bg2 de Dark Hard, ideal para contraste de selección
+text = "#d4be98"       # fg0
+
+[colors.cursor]
+text = "#1d2021"   # bg0 (Invertido para legibilidad)
+cursor = "#a89984" # grey2 de tu tema (Equivalente al cursor de Helix)
+
+[colors.normal]
+black   = "#282828" # bg0 de Medium / bg1 de Hard
+red     = "#ea6962" # red
+green   = "#a9b665" # green
+yellow  = "#d8a657" # yellow
+blue    = "#7daea3" # blue
+magenta = "#d3869b" # purple
+cyan    = "#89b482" # aqua
+white   = "#ddc7a1" # fg1
+
+[colors.bright]
+black   = "#7c6f64" # grey0
+red     = "#ea6962" # Alacritty brilla por fuentes, mantenemos la paleta limpia
+green   = "#a9b665" 
+yellow  = "#d8a657" 
+blue    = "#7daea3" 
+magenta = "#d3869b" 
+cyan    = "#89b482" 
+white   = "#d4be98" # fg0
+
+
+
+# ====================================================================
+# Keyboard bindings
+# ====================================================================
+
+[[keyboard.bindings]]
+key = "Enter"
+mods = "Shift"
+chars = "\u000a"
+
+[[keyboard.bindings]]
+key = "k"
+mods = "Alt"
+action = "ScrollLineUp"
+
+[[keyboard.bindings]]
+key = "j"
+mods = "Alt"
+action = "ScrollLineDown"
+
