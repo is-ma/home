@@ -20,8 +20,8 @@ mkdir -p ~/.config/opencode/
 stow -t ~/.config/opencode/ opencode/
 
 # dunst
-# mkdir -p ~/.config/dunst/
-# stow -t ~/.config/dunst/ dunst/
+mkdir -p ~/.config/dunst/scripts/
+stow -t ~/.config/dunst/ dunst/
 
 #################################################################
 #                         CUSTOM SCRIPTS                        #
