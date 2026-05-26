@@ -1,0 +1,9 @@
+{
+  "notifyChildSessions": false,
+  "sounds": {
+    "idle": "Glass",
+    "error": "Basso",
+    "permission": "Submarine",
+    "question": "Submarine"
+  }
+}
