@@ -1,0 +1,166 @@
+# Windows key
+set $mod Mod4
+
+# useful defaults
+font pango:DejaVu Sans Mono 18
+default_border pixel 0
+default_floating_border pixel 1
+
+# notifications
+exec --no-startup-id dunst
+
+# espanso
+exec --no-startup-id espanso start --unmanaged
+
+# drag & drop floating windows by left-clicking into the title bar
+tiling_drag modifier titlebar
+
+# [down] split in vertical orientation
+bindsym $mod+Down split v
+
+# [enter] Alacritty
+bindsym $mod+Return exec alacritty
+
+# [mouse] Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# [right] split in horizontal orientation
+bindsym $mod+Right split h
+
+# [space] toggle focus tiling/floating; toggle tiling/floating
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
+
+# [a]
+
+# [b]
+
+# [c] reload ~/.bashrc; reload i3 configuration file
+bindsym $mod+c exec --no-startup-id source ~/.bashrc
+bindsym $mod+Shift+c reload
+
+# [d] Rofi
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+
+# [e]
+
+# [f] fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# [g]
+
+# [h] change focus: left; move focused window: left
+bindsym $mod+h focus left
+bindsym $mod+Shift+h move left
+
+# [i]
+
+# [j] change focus: down; move focused window: down
+bindsym $mod+j focus down
+bindsym $mod+Shift+j move down
+
+# [k] change focus: up; move focused window: up
+bindsym $mod+k focus up
+bindsym $mod+Shift+k move up
+
+# [l] change focus: right; move focused window: right
+bindsym $mod+l focus right
+bindsym $mod+Shift+l move right
+
+# [m]
+
+# [n]
+
+# [o] output as panes; output as tabs; output as stacking
+bindsym $mod+o layout toggle split
+bindsym $mod+Shift+o layout tabbed
+bindsym $mod+Control+o layout stacking
+
+# [p] Laptop screen, HDMI, Inverted HDMI (DeepSeek)
+bindsym $mod+p exec --no-startup-id "xrandr --output HDMI-1 --off --output eDP-1 --mode 1920x1080 --primary --rate 60 2>/dev/null || true"
+bindsym $mod+Shift+p exec --no-startup-id "xrandr --output eDP-1 --off --output HDMI-1 --mode 2560x1600 --primary --rate 60 --rotate normal 2>/dev/null || true"
+bindsym $mod+Ctrl+p exec --no-startup-id "xrandr --output eDP-1 --off --output HDMI-1 --mode 2560x1600 --primary --rate 60 --rotate inverted 2>/dev/null || true"
+
+# [q] quit focused pane, quit i3
+bindsym $mod+q kill
+bindsym $mod+Shift+q exec --no-startup-id "i3-msg exit"
+
+# [r] resize window (you can also use the mouse for that); restart i3 inplace
+mode "resize" {
+        bindsym h resize shrink width 1 px or 1 ppt
+        bindsym j resize grow height 1 px or 1 ppt
+        bindsym k resize shrink height 1 px or 1 ppt
+        bindsym l resize grow width 1 px or 1 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+bindsym $mod+Shift+r restart
+
+# [s]
+
+# [t]
+
+# [u]
+
+# [v] volume (later on i3blocks, pamixer --get-volume-human)
+bindsym $mod+Shift+v exec --no-startup-id pamixer --increase 1
+bindsym $mod+v exec --no-startup-id pamixer --decrease 1
+bindsym $mod+Control+v exec --no-startup-id pamixer --toggle-mute
+
+# [w]
+
+# [x]
+
+# [y]
+
+# [z] lock screen with Gruvvbox color (DeepSeek)
+exec --no-startup-id xset s 600 600  # 10 min
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 1d2021 --nofork
+bindsym $mod+z exec --no-startup-id i3lock -c 1d2021
+
+# [1-0] Name workspaces (w); switch to w.; move focused pane to w.
+set $ws1 "1"
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+Shift+1 move container to workspace number $ws1
+set $ws2 "2"
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+Shift+2 move container to workspace number $ws2
+set $ws3 "3"
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+Shift+3 move container to workspace number $ws3
+set $ws4 "4"
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+Shift+4 move container to workspace number $ws4
+set $ws5 "5"
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+Shift+5 move container to workspace number $ws5
+set $ws6 "6"
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+Shift+6 move container to workspace number $ws6
+set $ws7 "7"
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+Shift+7 move container to workspace number $ws7
+set $ws8 "8"
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+Shift+8 move container to workspace number $ws8
+set $ws9 "9"
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+Shift+9 move container to workspace number $ws9
+set $ws10 "10"
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+Shift+0 move container to workspace number $ws10
+set $wsf6 "F6:btm"
+bindsym $mod+F6 workspace $wsf6
+bindsym $mod+Shift+F6 move container to workspace $wsf6
+assign [class="Alacritty" instance="btm"] $wsf6
+exec --no-startup-id alacritty --title "btm" --class "Alacritty","btm" -e btm
+
+bar {
+        position top
+        status_command i3status -c ~/.config/i3status/config
+}
