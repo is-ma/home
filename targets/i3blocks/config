@@ -17,14 +17,14 @@ interval=10
 [weather]
 command=$HOME/.config/i3blocks/scripts/weather
 color=#83a598
-interval=1800
+interval=3600
 
 # Battery
 [battery]
 command=$HOME/.config/i3blocks/scripts/battery
 label=󰂄
 color=#98971a
-interval=30
+interval=60
 
 # Volume
 [volume]
@@ -38,20 +38,20 @@ signal=10
 command=$HOME/.config/i3blocks/scripts/cpu_usage
 label=󰟀
 color=#d79921
-interval=10
+interval=5
 
 # Memory
 [memory]
 command=$HOME/.config/i3blocks/scripts/memory
 label=󰆼
 color=#b16286
-interval=30
+interval=5
 
 # Date & time
 [time]
 command=date '+%a %d/%b %H:%M:%S'
 color=#cc241d
-interval=5
+interval=1
 
 # Caps Lock
 [keyindicator]
