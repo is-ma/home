@@ -18,6 +18,12 @@ command=$HOME/.config/i3blocks/scripts/net_up
 color=#d65d0e
 interval=5
 
+# OpenCode Go
+[opencode_go]
+command=$HOME/.config/i3blocks/scripts/opencode_go
+color=#689d6a
+interval=300
+
 # WiFi
 [wifi]
 command=$HOME/.config/i3blocks/scripts/wifi

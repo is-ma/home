@@ -141,6 +141,10 @@ THIS_FILE="$HOME/.config/i3blocks/scripts/net_up"
 POINTS_TO="$TARGETS/i3blocks/scripts/net_up"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+THIS_FILE="$HOME/.config/i3blocks/scripts/opencode_go"
+POINTS_TO="$TARGETS/i3blocks/scripts/opencode_go"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 THIS_FILE="$HOME/.config/i3blocks/scripts/keyindicator"
 POINTS_TO="$TARGETS/i3blocks/scripts/keyindicator"
 ln -sf "$POINTS_TO" "$THIS_FILE"
