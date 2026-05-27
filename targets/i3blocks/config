@@ -10,6 +10,7 @@ markup=none
 [wifi]
 command=$HOME/.config/i3blocks/scripts/wifi
 instance=wlo1
+color=#458588
 interval=10
 separator=false
 
@@ -17,36 +18,39 @@ separator=false
 [battery]
 command=$HOME/.config/i3blocks/scripts/battery
 label=BAT
+color=#98971a
 interval=30
 
 # Volume
 [volume]
 label=VOL
-color=#FF8800
+color=#d65d0e
 interval=once
 signal=10
 
 # Date & time
 [time]
 command=date '+%A %d/%b %H:%M:%S'
-color=#FF4444
+color=#cc241d
 interval=5
 
 # CPU
 [cpu_usage]
+command=$HOME/.config/i3blocks/scripts/cpu_usage
 label=CPU
-color=#FFFC00
+color=#d79921
 interval=10
 
 # Memory
 [memory]
 command=$HOME/.config/i3blocks/scripts/memory
 label=MEM
-color=#FFB0C0
+color=#b16286
 interval=30
 
 # Caps Lock
 [keyindicator]
+command=/usr/share/i3blocks/keyindicator -c '#ffffff' -C '#504945'
 instance=CAPS
 interval=once
 signal=11

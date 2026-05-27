@@ -36,13 +36,4 @@ SSID=$(nmcli -t -f active,ssid dev wifi 2>/dev/null | grep '^yes' | cut -d: -f2)
 echo "${SSID:-?} $QUALITY%" # full text
 echo "$QUALITY%" # short text
 
-# color
-if [[ $QUALITY -ge 80 ]]; then
-    echo "#00FF00"
-elif [[ $QUALITY -lt 80 ]]; then
-    echo "#FFF600"
-elif [[ $QUALITY -lt 60 ]]; then
-    echo "#FFAE00"
-elif [[ $QUALITY -lt 40 ]]; then
-    echo "#FF0000"
-fi
+
