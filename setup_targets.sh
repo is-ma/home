@@ -15,6 +15,14 @@ POINTS_TO="$TARGETS/custom_scripts/center_title.py"
 mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+THIS_FILE="$HOME/.local/bin/suspend"
+POINTS_TO="$TARGETS/custom_scripts/suspend"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+THIS_FILE="$HOME/.local/bin/hibernate"
+POINTS_TO="$TARGETS/custom_scripts/hibernate"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 # dunst
 THIS_FILE="$HOME/.config/dunst/dunstrc"
 POINTS_TO="$TARGETS/dunst/dunstrc"
