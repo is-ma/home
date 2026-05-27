@@ -120,8 +120,8 @@ bindsym $mod+Control+v exec --no-startup-id pamixer --toggle-mute
 
 # [z] lock screen with Gruvvbox color (DeepSeek)
 exec --no-startup-id xset s 600 600  # 10 min
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -c 1d2021 --nofork
-bindsym $mod+z exec --no-startup-id i3lock -c 1d2021
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i /home/rich/is-ma/home/targets/wallapers/candle_2560x1600.png --nofork
+bindsym $mod+z exec --no-startup-id i3lock -i /home/rich/is-ma/home/targets/wallapers/candle_2560x1600.png
 
 # [1-0] Name workspaces (w); switch to w.; move focused pane to w.
 set $ws1 "1"
@@ -162,5 +162,5 @@ exec --no-startup-id alacritty --title "btm" --class "Alacritty","btm" -e btm
 
 bar {
         position top
-        status_command i3status -c ~/.config/i3status/config
+        status_command i3blocks -c ~/.config/i3blocks/config
 }
