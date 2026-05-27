@@ -19,6 +19,13 @@ command=$HOME/.config/i3blocks/scripts/battery
 label=BAT
 interval=30
 
+# Volume
+[volume]
+label=VOL
+color=#FF8800
+interval=once
+signal=10
+
 # Memory
 [memory]
 label=MEM
@@ -27,4 +34,11 @@ interval=30
 # Date & time
 [time]
 command=date '+%A %d/%b %H:%M:%S'
+color=#FF4444
 interval=5
+
+# Caps Lock
+[keyindicator]
+instance=CAPS
+interval=once
+signal=11
