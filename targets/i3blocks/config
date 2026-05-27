@@ -13,6 +13,12 @@ instance=wlo1
 color=#458588
 interval=10
 
+# Weather
+[weather]
+command=$HOME/.config/i3blocks/scripts/weather
+color=#83a598
+interval=1800
+
 # Battery
 [battery]
 command=$HOME/.config/i3blocks/scripts/battery
@@ -26,12 +32,6 @@ label=VOL
 color=#d65d0e
 interval=once
 signal=10
-
-# Date & time
-[time]
-command=date '+%A %d/%b %H:%M:%S'
-color=#cc241d
-interval=5
 
 # CPU
 [cpu_usage]
@@ -53,3 +53,9 @@ command=/usr/share/i3blocks/keyindicator -c '#ffffff' -C '#504945'
 instance=CAPS
 interval=once
 signal=11
+
+# Date & time
+[time]
+command=date '+%A %d/%b %H:%M:%S'
+color=#cc241d
+interval=5
