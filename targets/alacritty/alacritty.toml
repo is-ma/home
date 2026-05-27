@@ -14,19 +14,19 @@ multiplier = 1
 size = 9.0
 
 [font.normal]
-family = "MesloLGMDZ Nerd Font Mono"
+family = "UbuntuSansMono Nerd Font Mono"
 style = "Regular"
 
 [font.bold]
-family = "MesloLGMDZ Nerd Font Mono"
+family = "UbuntuSansMono Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "MesloLGMDZ Nerd Font Mono"
+family = "UbuntuSansMono Nerd Font Mono"
 style = "Italic"
 
 [font.bold_italic]
-family = "MesloLGMDZ Nerd Font Mono"
+family = "UbuntuSansMono Nerd Font Mono"
 style = "Bold Italic"
 
 [selection]

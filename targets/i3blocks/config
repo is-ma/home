@@ -22,13 +22,13 @@ interval=1800
 # Battery
 [battery]
 command=$HOME/.config/i3blocks/scripts/battery
-label=BAT
+label=󰂄
 color=#98971a
 interval=30
 
 # Volume
 [volume]
-label=VOL
+label=󰕾
 color=#d65d0e
 interval=once
 signal=10
@@ -36,26 +36,26 @@ signal=10
 # CPU
 [cpu_usage]
 command=$HOME/.config/i3blocks/scripts/cpu_usage
-label=CPU
+label=󰟀
 color=#d79921
 interval=10
 
 # Memory
 [memory]
 command=$HOME/.config/i3blocks/scripts/memory
-label=MEM
+label=󰆼
 color=#b16286
 interval=30
 
+# Date & time
+[time]
+command=date '+%a %d/%b %H:%M:%S'
+color=#cc241d
+interval=5
+
 # Caps Lock
 [keyindicator]
-command=/usr/share/i3blocks/keyindicator -c '#ffffff' -C '#504945'
+command=$HOME/.config/i3blocks/scripts/keyindicator -c '#ffffff' -C '#504945'
 instance=CAPS
 interval=once
 signal=11
-
-# Date & time
-[time]
-command=date '+%A %d/%b %H:%M:%S'
-color=#cc241d
-interval=5
