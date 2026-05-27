@@ -12,7 +12,6 @@ command=$HOME/.config/i3blocks/scripts/wifi
 instance=wlo1
 color=#458588
 interval=10
-separator=false
 
 # Battery
 [battery]
