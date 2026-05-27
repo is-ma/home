@@ -69,6 +69,10 @@ POINTS_TO="$TARGETS/fonts/MesloLGMDZNerdFontMono-Regular.ttf"
 mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+THIS_FILE="$HOME/.local/share/fonts/UbuntuSansMonoNerdFontMono-Regular.ttf"
+POINTS_TO="$TARGETS/fonts/UbuntuSansMonoNerdFontMono-Regular.ttf"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 # git
 THIS_FILE="$HOME/.gitconfig"
 POINTS_TO="$TARGETS/git/dot-gitconfig"

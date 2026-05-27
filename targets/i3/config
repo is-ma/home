@@ -167,6 +167,7 @@ assign [class="Alacritty" instance="btm"] $wsf6
 exec --no-startup-id alacritty --title "btm" --class "Alacritty","btm" -e btm
 
 bar {
+        font pango:UbuntuSansMono Nerd Font Mono 20
         position bottom
         status_command i3blocks -c ~/.config/i3blocks/config
 }
