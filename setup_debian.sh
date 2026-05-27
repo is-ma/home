@@ -3,6 +3,7 @@
 sudo apt update
 
 ## sudo apt install
+sudo apt install -y acpi  # battery status for i3blocks
 sudo apt install -y alacritty
 sudo apt install -y bat
 sudo apt install -y btm
@@ -14,10 +15,10 @@ sudo apt install -y firefox-esr
 sudo apt install -y fzf
 sudo apt install -y git
 sudo apt install -y gtypist
-sudo apt install -y acpi  # battery status for i3blocks
 sudo apt install -y i3 i3blocks i3lock rofi xinit
 sudo apt install -y plocate
 sudo apt install -y ripgrep
+sudo apt install -y sysstat  # mpstat for cpu_usage in i3blocks
 sudo apt install -y x11-xserver-utils  # xrand (monitors)
 sudo apt install -y vim
 sudo apt install -y whois
