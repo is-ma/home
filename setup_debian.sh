@@ -7,7 +7,7 @@ sudo apt install -y alacritty
 if ! grep -q 'is-ma.sh' ~/.bashrc; then
     echo "" >> ~/.bashrc
     echo "# IS-MA" >> ~/.bashrc
-    echo "source ~/is-ma/home/configs/bash/is-ma.sh" >> ~/.bashrc
+    echo "source ~/is-ma/home/targets/bash/is-ma.sh" >> ~/.bashrc
     echo "" >> ~/.bashrc
 fi
 

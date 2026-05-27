@@ -9,7 +9,7 @@
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STOW_DIR="$HOME/is-ma/home/configs/stowing/opencode"
+STOW_DIR="$HOME/is-ma/home/targets/opencode"
 
 _subst() {
   < "$1" \
