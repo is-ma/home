@@ -1,2 +1,21 @@
 #!/bin/bash
-curl -s 'wttr.in/Mexico+City?format=CDMX+%C+%t'
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+cond=$(curl -s 'wttr.in/Mexico+City?format=%C' | tr -d '\r\n')
+temp=$(curl -s 'wttr.in/Mexico+City?format=%t' | tr -d '\r\n')
+
+# Map condition to Nerd Font icon
+case "$cond" in
+    *Clear*|*Sunny*) icon="󰖙" ;;
+    *"Partly cloudy"*) icon="󰖕" ;;
+    *Cloudy*|*Overcast*) icon="󰅟" ;;
+    *Mist*|*Fog*|*"Freezing fog"*) icon="󰖐" ;;
+    *"Light rain"*|*"Patchy rain"*|*"Light drizzle"*) icon="󰼳" ;;
+    *Rain*|*"Heavy rain"*|*"Moderate rain"*|*"Torrential rain"*) icon="󰼶" ;;
+    *Snow*|*Blizzard*|*"Patchy snow"*|*"Light snow"*|*"Heavy snow"*|*"Light sleet"*|*"Patchy sleet"*|*"Blowing snow"*) icon="󰼴" ;;
+    *Thunder*|*Thundery*) icon="󰙾" ;;
+    *) icon="󰖙" ;;
+esac
+
+echo "CDMX $icon $temp"
