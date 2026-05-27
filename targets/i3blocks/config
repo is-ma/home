@@ -13,6 +13,18 @@ instance=wlo1
 color=#458588
 interval=10
 
+# Network Download
+[net_down]
+command=$HOME/.config/i3blocks/scripts/net_down
+color=#98971a
+interval=5
+
+# Network Upload
+[net_up]
+command=$HOME/.config/i3blocks/scripts/net_up
+color=#d65d0e
+interval=5
+
 # Uptime
 [uptime]
 command=$HOME/.config/i3blocks/scripts/uptime

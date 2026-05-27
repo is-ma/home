@@ -1,0 +1,7 @@
+#!/bin/bash
+iface="wlo1"
+rx1=$(cat /sys/class/net/$iface/statistics/rx_bytes)
+sleep 1
+rx2=$(cat /sys/class/net/$iface/statistics/rx_bytes)
+delta=$(( (rx2 - rx1) * 8 / 1000 ))
+printf "↓ %'dK\n" "$delta"
