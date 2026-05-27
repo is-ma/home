@@ -3,86 +3,92 @@ set -euo pipefail
 
 TARGETS=/home/rich/is-ma/home/targets
 
+# git
+THIS_FILE="$HOME/.gitconfig"
+POINTS_TO="$TARGETS/git/dot-gitconfig"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 # alacritty
-ORIG="$HOME/.config/alacritty/alacritty.toml"
-DEST="$TARGETS/alacritty/alacritty.toml"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/alacritty/alacritty.toml"
+POINTS_TO="$TARGETS/alacritty/alacritty.toml"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # dunst
-ORIG="$HOME/.config/dunst/dunstrc"
-DEST="$TARGETS/dunst/dunstrc"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/dunst/dunstrc"
+POINTS_TO="$TARGETS/dunst/dunstrc"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
-ORIG="$HOME/.config/dunst/icq-uh-oh-padded.wav"
-DEST="$TARGETS/dunst/icq-uh-oh-padded.wav"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/dunst/icq-uh-oh-padded.wav"
+POINTS_TO="$TARGETS/dunst/icq-uh-oh-padded.wav"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
-ORIG="$HOME/.config/dunst/scripts/opencode-sound.sh"
-DEST="$TARGETS/dunst/scripts/opencode-sound.sh"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/dunst/scripts/opencode-sound.sh"
+POINTS_TO="$TARGETS/dunst/scripts/opencode-sound.sh"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # espanso
-ORIG="$HOME/.config/espanso/match/base.yml"
-DEST="$TARGETS/espanso/base.yml"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/espanso/match/base.yml"
+POINTS_TO="$TARGETS/espanso/base.yml"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
-ORIG="$HOME/.config/espanso/match/emojis.yml"
-DEST="$TARGETS/espanso/emojis.yml"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/espanso/match/emojis.yml"
+POINTS_TO="$TARGETS/espanso/emojis.yml"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # helix
-ORIG="$HOME/.config/helix/config.toml"
-DEST="$TARGETS/helix_conf/config.toml"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/helix/config.toml"
+POINTS_TO="$TARGETS/helix_conf/config.toml"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
-ORIG="$HOME/.config/helix/runtime/themes/gruvbox_rich.toml"
-DEST="$TARGETS/helix_themes/gruvbox_rich.toml"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/helix/runtime/themes/gruvbox_rich.toml"
+POINTS_TO="$TARGETS/helix_themes/gruvbox_rich.toml"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # i3
-ORIG="$HOME/.config/i3/config"
-DEST="$TARGETS/i3/config"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/i3/config"
+POINTS_TO="$TARGETS/i3/config"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # i3status
-ORIG="$HOME/.config/i3status/config"
-DEST="$TARGETS/i3status/config"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/i3status/config"
+POINTS_TO="$TARGETS/i3status/config"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # opencode
-ORIG="$HOME/.config/opencode/opencode.jsonc"
-DEST="$TARGETS/opencode/opencode.jsonc"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/opencode/opencode.jsonc"
+POINTS_TO="$TARGETS/opencode/opencode.jsonc"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
-ORIG="$HOME/.config/opencode/ocx.jsonc"
-DEST="$TARGETS/opencode/ocx.jsonc"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/opencode/ocx.jsonc"
+POINTS_TO="$TARGETS/opencode/ocx.jsonc"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
-ORIG="$HOME/.config/opencode/kdco-notify.json"
-DEST="$TARGETS/opencode/kdco-notify.json"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/opencode/kdco-notify.json"
+POINTS_TO="$TARGETS/opencode/kdco-notify.json"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
-ORIG="$HOME/.config/opencode/oh-my-openagent.jsonc"
-DEST="$TARGETS/opencode/oh-my-openagent.jsonc"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/opencode/oh-my-openagent.jsonc"
+POINTS_TO="$TARGETS/opencode/oh-my-openagent.jsonc"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # rofi
-ORIG="$HOME/.config/rofi/config.rasi"
-DEST="$TARGETS/rofi/config.rasi"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.config/rofi/config.rasi"
+POINTS_TO="$TARGETS/rofi/config.rasi"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # custom scripts
-ORIG="$HOME/.local/bin/center_title.py"
-DEST="$TARGETS/custom_scripts/center_title.py"
-mkdir -p "$(dirname "$ORIG")"
-ln -sf "$DEST" "$ORIG"
+THIS_FILE="$HOME/.local/bin/center_title.py"
+POINTS_TO="$TARGETS/custom_scripts/center_title.py"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"

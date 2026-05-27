@@ -1,0 +1,11 @@
+[user]
+	email = 14076090+is-ma@users.noreply.github.com
+	name = Rich
+[core]
+	editor = vim
+
+[init]
+        defaultBranch = main
+
+[protocol "file"]
+	allow = always

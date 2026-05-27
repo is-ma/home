@@ -1,5 +1,10 @@
 # SETUP DEBIAN
 
+sudo apt update
+
+## git
+sudo apt install -y git
+
 ## alacritty
 sudo apt install -y alacritty
 
