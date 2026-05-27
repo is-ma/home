@@ -34,3 +34,7 @@ fi
 ## fonts (~/.local/share/fonts/)
 fc-cache -fv
 # fc-list | grep -i "Meslo"
+
+## otros
+#    - lazygit: ver sys_configs/lazygit.md (requiere Go, se instala con go install) 
+# 
