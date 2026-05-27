@@ -59,6 +59,8 @@ alias ll='ls -alhF --color=auto'     # Lista detallada (permisos, tamaño, fecha
 alias ls="ls -F"
 
 # [m]
+alias mailrm="rm /var/mail/deploy"
+alias mailww="vim /var/mail/deploy"
 alias md5='md5sum'                    # Calcular checksum MD5
 alias md="rm /var/mail/deploy"
 alias me="vim /var/mail/deploy"
