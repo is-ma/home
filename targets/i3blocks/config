@@ -16,7 +16,7 @@ interval=5
 [opencode_go]
 command=$HOME/.config/i3blocks/scripts/opencode_go
 color=#98971a
-interval=300
+interval=3600
 
 # WiFi
 [wifi]
