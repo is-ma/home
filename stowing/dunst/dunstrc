@@ -6,7 +6,7 @@
     # so nothing changes visually vs. before
     monitor = 0
     follow = none
-    width = 300
+    width = 600
     height = (0, 300)
     origin = top-right
     offset = (10, 50)
@@ -34,8 +34,8 @@
 
 [urgency_normal]
     # from: Alacritty (Gruvbox Material Dark Hard)
-    background = "#ea6962"
-    foreground = "#ffffff"
+    background = "#d8a657"
+    foreground = "#1d2021"
     timeout = 10
     default_icon = dialog-information
 
