@@ -2,11 +2,24 @@
 
 sudo apt update
 
-## git
-sudo apt install -y git
-
-## alacritty
+## sudo apt install
 sudo apt install -y alacritty
+sudo apt install -y bat
+sudo apt install -y btm
+sudo apt install -y build-essential
+sudo apt install -y curl
+sudo apt install -y dunst libnotify-bin
+sudo apt install -y fastfetch
+sudo apt install -y firefox-esr
+sudo apt install -y fzf
+sudo apt install -y git
+sudo apt install -y gtypist
+sudo apt install -y i3 i3status i3lock rofi xinit
+sudo apt install -y plocate
+sudo apt install -y ripgrep
+sudo apt install -y x11-xserver-utils  # xrand (monitors)
+sudo apt install -y vim
+sudo apt install -y whois
 
 ## bash
 if ! grep -q 'is-ma.sh' ~/.bashrc; then
@@ -16,15 +29,6 @@ if ! grep -q 'is-ma.sh' ~/.bashrc; then
     echo "" >> ~/.bashrc
 fi
 
-## browser
-sudo apt install -y firefox-esr
-
 ## fonts (~/.local/share/fonts/)
 fc-cache -fv
 # fc-list | grep -i "Meslo"
-
-## i3
-sudo apt install -y x11-xserver-utils  # xrand
-sudo apt install -y i3 i3status i3lock rofi xinit
-sudo apt install -y libnotify-bin dunst
-
