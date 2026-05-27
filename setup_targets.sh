@@ -3,15 +3,15 @@ set -euo pipefail
 
 TARGETS=/home/rich/is-ma/home/targets
 
-# git
-THIS_FILE="$HOME/.gitconfig"
-POINTS_TO="$TARGETS/git/dot-gitconfig"
-mkdir -p "$(dirname "$THIS_FILE")"
-ln -sf "$POINTS_TO" "$THIS_FILE"
-
 # alacritty
 THIS_FILE="$HOME/.config/alacritty/alacritty.toml"
 POINTS_TO="$TARGETS/alacritty/alacritty.toml"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+# custom scripts
+THIS_FILE="$HOME/.local/bin/center_title.py"
+POINTS_TO="$TARGETS/custom_scripts/center_title.py"
 mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
@@ -38,6 +38,33 @@ ln -sf "$POINTS_TO" "$THIS_FILE"
 
 THIS_FILE="$HOME/.config/espanso/match/emojis.yml"
 POINTS_TO="$TARGETS/espanso/emojis.yml"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+## fonts
+THIS_FILE="$HOME/.local/share/fonts/MesloLGMDZNerdFontMono-BoldItalic.ttf"
+POINTS_TO="$TARGETS/fonts/MesloLGMDZNerdFontMono-BoldItalic.ttf"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+THIS_FILE="$HOME/.local/share/fonts/MesloLGMDZNerdFontMono-Bold.ttf"
+POINTS_TO="$TARGETS/fonts/MesloLGMDZNerdFontMono-Bold.ttf"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+THIS_FILE="$HOME/.local/share/fonts/MesloLGMDZNerdFontMono-Italic.ttf"
+POINTS_TO="$TARGETS/fonts/MesloLGMDZNerdFontMono-Italic.ttf"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+THIS_FILE="$HOME/.local/share/fonts/MesloLGMDZNerdFontMono-Regular.ttf"
+POINTS_TO="$TARGETS/fonts/MesloLGMDZNerdFontMono-Regular.ttf"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+# git
+THIS_FILE="$HOME/.gitconfig"
+POINTS_TO="$TARGETS/git/dot-gitconfig"
+mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
 # helix
@@ -87,8 +114,3 @@ POINTS_TO="$TARGETS/rofi/config.rasi"
 mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
-# custom scripts
-THIS_FILE="$HOME/.local/bin/center_title.py"
-POINTS_TO="$TARGETS/custom_scripts/center_title.py"
-mkdir -p "$(dirname "$THIS_FILE")"
-ln -sf "$POINTS_TO" "$THIS_FILE"
