@@ -1,4 +1,4 @@
-# paquete profesional para administrar la batt
+# Battery charge in a healthy range
 sudo apt install -y tlp
 
 # veamos si es compatible la computadora
@@ -16,4 +16,3 @@ sudo tlp start
 
 # comprobamos los cambios
 sudo tlp-stat -b
-
