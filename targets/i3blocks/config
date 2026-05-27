@@ -6,13 +6,6 @@ command=/usr/share/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# WiFi
-[wifi]
-command=$HOME/.config/i3blocks/scripts/wifi
-instance=wlo1
-color=#458588
-interval=10
-
 # Network Download
 [net_down]
 command=$HOME/.config/i3blocks/scripts/net_down
@@ -24,6 +17,13 @@ interval=5
 command=$HOME/.config/i3blocks/scripts/net_up
 color=#d65d0e
 interval=5
+
+# WiFi
+[wifi]
+command=$HOME/.config/i3blocks/scripts/wifi
+instance=wlo1
+color=#458588
+interval=10
 
 # Uptime
 [uptime]
