@@ -145,6 +145,10 @@ THIS_FILE="$HOME/.config/i3blocks/scripts/keyindicator"
 POINTS_TO="$TARGETS/i3blocks/scripts/keyindicator"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+THIS_FILE="$HOME/.config/i3blocks/scripts/volume"
+POINTS_TO="$TARGETS/i3blocks/scripts/volume"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 # opencode
 THIS_FILE="$HOME/.config/opencode/opencode.jsonc"
 POINTS_TO="$TARGETS/opencode/opencode.jsonc"

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Volume indicator using pamixer
+# Mouse:
+#   right click  → toggle mute
+#   scroll up    → increase 5%
+#   scroll down  → decrease 5%
+
+case $BLOCK_BUTTON in
+  3) pamixer --toggle-mute ;;
+  4) pamixer --increase 5 ;;
+  5) pamixer --decrease 5 ;;
+esac
+
+VOLUME=$(pamixer --get-volume-human 2>/dev/null)
+
+if [ "$VOLUME" = "muted" ]; then
+  echo "󰝟 MUTE"
+  echo "󰝟 MUTE"
+else
+  echo "󰕾 $VOLUME"
+  echo "$VOLUME"
+fi

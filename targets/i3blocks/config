@@ -47,9 +47,9 @@ interval=60
 
 # Volume
 [volume]
-label=󰕾
+command=$HOME/.config/i3blocks/scripts/volume
 color=#d65d0e
-interval=once
+interval=10
 signal=10
 
 # CPU
