@@ -13,6 +13,13 @@ instance=wlo1
 color=#458588
 interval=10
 
+# Uptime
+[uptime]
+command=$HOME/.config/i3blocks/scripts/uptime
+label=󰥔
+color=#8f3f71
+interval=60
+
 # Weather
 [weather]
 command=$HOME/.config/i3blocks/scripts/weather

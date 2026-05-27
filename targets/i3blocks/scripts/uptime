@@ -1,0 +1,18 @@
+#!/bin/bash
+raw=$(uptime -p | sed 's/up //')
+
+days=0
+hours=0
+minutes=0
+
+if echo "$raw" | grep -q "day"; then
+    days=$(echo "$raw" | grep -oP '\d+(?= day)')
+fi
+if echo "$raw" | grep -q "hour"; then
+    hours=$(echo "$raw" | grep -oP '\d+(?= hour)')
+fi
+if echo "$raw" | grep -q "minute"; then
+    minutes=$(echo "$raw" | grep -oP '\d+(?= minute)')
+fi
+
+printf "%dd %02d:%02d\n" "$days" "$hours" "$minutes"
