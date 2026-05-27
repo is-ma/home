@@ -90,6 +90,21 @@ POINTS_TO="$TARGETS/i3status/config"
 mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+# i3blocks
+THIS_FILE="$HOME/.config/i3blocks/config"
+POINTS_TO="$TARGETS/i3blocks/config"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+THIS_FILE="$HOME/.config/i3blocks/scripts/wifi"
+POINTS_TO="$TARGETS/i3blocks/scripts/wifi"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
+THIS_FILE="$HOME/.config/i3blocks/scripts/battery"
+POINTS_TO="$TARGETS/i3blocks/scripts/battery"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 # opencode
 THIS_FILE="$HOME/.config/opencode/opencode.jsonc"
 POINTS_TO="$TARGETS/opencode/opencode.jsonc"

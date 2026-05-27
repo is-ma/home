@@ -1,0 +1,30 @@
+# i3blocks config - minimal
+#
+# See man i3blocks for complete reference.
+
+command=/usr/share/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+# WiFi
+[wifi]
+command=$HOME/.config/i3blocks/scripts/wifi
+instance=wlo1
+interval=10
+separator=false
+
+# Battery
+[battery]
+command=$HOME/.config/i3blocks/scripts/battery
+label=BAT
+interval=30
+
+# Memory
+[memory]
+label=MEM
+interval=30
+
+# Date & time
+[time]
+command=date '+%A %d/%b %H:%M:%S'
+interval=5

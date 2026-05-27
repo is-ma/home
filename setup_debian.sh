@@ -14,7 +14,8 @@ sudo apt install -y firefox-esr
 sudo apt install -y fzf
 sudo apt install -y git
 sudo apt install -y gtypist
-sudo apt install -y i3 i3status i3lock rofi xinit
+sudo apt install -y acpi  # battery status for i3blocks
+sudo apt install -y i3 i3blocks i3lock rofi xinit
 sudo apt install -y plocate
 sudo apt install -y ripgrep
 sudo apt install -y x11-xserver-utils  # xrand (monitors)
