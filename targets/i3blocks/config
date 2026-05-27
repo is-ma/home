@@ -6,22 +6,16 @@ command=/usr/share/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# Network Download
-[net_down]
-command=$HOME/.config/i3blocks/scripts/net_down
-color=#98971a
-interval=5
-
-# Network Upload
-[net_up]
-command=$HOME/.config/i3blocks/scripts/net_up
+# Network Speed
+[net_speed]
+command=$HOME/.config/i3blocks/scripts/net_speed
 color=#d65d0e
 interval=5
 
 # OpenCode Go
 [opencode_go]
 command=$HOME/.config/i3blocks/scripts/opencode_go
-color=#689d6a
+color=#98971a
 interval=300
 
 # WiFi

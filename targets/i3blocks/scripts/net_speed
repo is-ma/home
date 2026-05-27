@@ -1,0 +1,13 @@
+#!/bin/bash
+iface="wlo1"
+
+rx1=$(cat /sys/class/net/$iface/statistics/rx_bytes)
+tx1=$(cat /sys/class/net/$iface/statistics/tx_bytes)
+sleep 1
+rx2=$(cat /sys/class/net/$iface/statistics/rx_bytes)
+tx2=$(cat /sys/class/net/$iface/statistics/tx_bytes)
+
+rx_kbps=$(( (rx2 - rx1) * 8 / 1000 ))
+tx_kbps=$(( (tx2 - tx1) * 8 / 1000 ))
+
+printf "↓ %'dK ↑ %'dK\n" "$rx_kbps" "$tx_kbps"

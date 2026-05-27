@@ -133,12 +133,8 @@ THIS_FILE="$HOME/.config/i3blocks/scripts/uptime"
 POINTS_TO="$TARGETS/i3blocks/scripts/uptime"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
-THIS_FILE="$HOME/.config/i3blocks/scripts/net_down"
-POINTS_TO="$TARGETS/i3blocks/scripts/net_down"
-ln -sf "$POINTS_TO" "$THIS_FILE"
-
-THIS_FILE="$HOME/.config/i3blocks/scripts/net_up"
-POINTS_TO="$TARGETS/i3blocks/scripts/net_up"
+THIS_FILE="$HOME/.config/i3blocks/scripts/net_speed"
+POINTS_TO="$TARGETS/i3blocks/scripts/net_speed"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
 THIS_FILE="$HOME/.config/i3blocks/scripts/opencode_go"
