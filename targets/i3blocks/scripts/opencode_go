@@ -9,5 +9,6 @@ set -euo pipefail
 
 output=$(opencode stats 2>/dev/null) || { echo "󰌵 ?"; exit 0; }
 cost=$(echo "$output" | grep -oP 'Total Cost\s+\$\K[\d.]+') || { echo "󰌵 ?"; exit 0; }
+days=$(echo "$output" | grep -oP 'Days\s+\K\d+') || { echo "󰌵 ?"; exit 0; }
 percent=$(awk "BEGIN {printf \"%d\", ($cost * 100) / 60}")
-echo "󰌵 ${percent}% \$${cost}"
+echo "󰌵 ${days}d \$${cost} ${percent}%"
