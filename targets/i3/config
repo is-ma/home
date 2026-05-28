@@ -38,8 +38,8 @@ bindsym $mod+Shift+space floating toggle
 # [c] reload ~/.bashrc; reload i3 configuration file
 bindsym $mod+Shift+c reload
 
-# [d] dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run
+# [d] dmenu (Gruvbox)
+bindsym $mod+d exec --no-startup-id dmenu_run -i -fn 'MesloLGMDZ Nerd Font Mono:size=22' -nb '#3c3836' -nf '#d65d0e' -sb '#504945' -sf '#ebdbb2'
 
 # [e]
 
