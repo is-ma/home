@@ -36,7 +36,6 @@ bindsym $mod+Shift+space floating toggle
 # [b]
 
 # [c] reload ~/.bashrc; reload i3 configuration file
-bindsym $mod+c exec --no-startup-id source ~/.bashrc
 bindsym $mod+Shift+c reload
 
 # [d] Rofi
