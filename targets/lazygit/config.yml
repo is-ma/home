@@ -1,0 +1,53 @@
+# Gruvbox Material Dark theme for lazygit
+gui:
+  nerdFontsVersion: "3"
+  showIcons: true
+  showFileTree: true
+  mouseEvents: false
+  language: en
+  border: rounded
+  expandFocusedSidePanel: true
+  screenMode: normal
+  scrollHeight: 1
+  animateExplosion: true
+  switchTabsWithPanelJumpKeys: true
+  showBottomLine: true
+  showPanelJumps: true
+  theme:
+    activeBorderColor:
+      - '#a9b665'
+      - bold
+    inactiveBorderColor:
+      - '#3f4830'
+    optionsTextColor:
+      - '#d8a657'
+    selectedLineBgColor:
+      - '#45403d'
+    selectedRangeBgColor:
+      - '#5a524c'
+    cherryPickedCommitBgColor:
+      - '#5a524c'
+    cherryPickedCommitFgColor:
+      - '#a9b665'
+    unstagedChangesColor:
+      - '#ea6962'
+    defaultFgColor:
+      - '#ddc7a1'
+    searchingActiveBorderColor:
+      - '#e78a4e'
+      - bold
+
+git:
+  autoFetch: true
+  autoRefresh: true
+  autoStageResolvedConflicts: true
+  mainBranches:
+    - main
+  parseEmoji: false
+  log:
+    order: topo-order
+    showGraph: always
+
+os:
+  editPreset: helix
+  open: 'xdg-open {{filename}} >/dev/null'

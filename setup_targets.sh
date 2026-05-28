@@ -172,6 +172,12 @@ for plugin_dir in "$PWD/targets/albert/python/plugins"/*; do
     fi
 done
 
+# lazygit
+THIS_FILE="$HOME/.config/lazygit/config.yml"
+POINTS_TO="$TARGETS/lazygit/config.yml"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 # opencode
 THIS_FILE="$HOME/.config/opencode/opencode.jsonc"
 POINTS_TO="$TARGETS/opencode/opencode.jsonc"
