@@ -48,7 +48,3 @@ fi
 ## fonts (~/.local/share/fonts/)
 fc-cache -fv
 # fc-list | egrep -i "MesloLG|UbuntuSansMono"
-
-## otros
-#    - lazygit: ver sys_configs/lazygit.md (requiere Go, se instala con go install) 
-# 
