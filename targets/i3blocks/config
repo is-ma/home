@@ -41,7 +41,6 @@ interval=3600
 # Battery
 [battery]
 command=$HOME/.config/i3blocks/scripts/battery
-label=󰂄
 color=#98971a
 interval=60
 

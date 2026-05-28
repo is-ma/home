@@ -15,6 +15,7 @@
 use strict;
 use warnings;
 use utf8;
+use open ':std', ':encoding(UTF-8)';
 
 my $acpi;
 my $status;
@@ -35,15 +36,33 @@ if ($acpi !~ /: (.+), (\d+)%/) {
 
 $status = $1;
 $percent = $2;
-$full_text = "$percent%";
+
+# === choose icon based on status and charge level ===
+my $icon;
+if ($status eq 'Discharging') {
+	# No charger connected
+	if ($percent >= 50) {
+		$icon = chr(0xf008c); # md-battery_positive
+	} elsif ($percent >= 20) {
+		$icon = chr(0xf007e); # md-battery_90
+	} else {
+		$icon = chr(0xf007a); # md-battery_50
+	}
+} elsif ($status eq 'Charging') {
+	$icon = chr(0xf0084); # md-battery_charging_40 (BAT_RAYO)
+} else {
+	# "Full" or "Not charging" — charger connected, not actively charging
+	$icon = chr(0xf0079); # md-battery_40
+}
+
+$full_text = "$icon $percent%";
+$short_text = "$icon $percent%";
 
 if ($status eq 'Discharging') {
 	$full_text .= ' DIS';
 } elsif ($status eq 'Charging') {
 	$full_text .= ' CHR';
 }
-
-$short_text = $full_text;
 
 if ($acpi =~ /(\d\d:\d\d):/) {
 	$full_text .= " ($1)";
