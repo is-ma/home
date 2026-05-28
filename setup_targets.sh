@@ -149,6 +149,23 @@ THIS_FILE="$HOME/.config/i3blocks/scripts/volume"
 POINTS_TO="$TARGETS/i3blocks/scripts/volume"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+# --- Albert launcher ---
+echo "Setting up Albert launcher configs..."
+mkdir -p ~/.config/albert
+ln -sf "$PWD/targets/albert/albert.conf" ~/.config/albert/albert.conf
+ln -sf "$PWD/targets/albert/org.albert.websearch" ~/.config/albert/org.albert.websearch
+
+# Albert Python plugins
+echo "Setting up Albert Python plugins..."
+mkdir -p ~/.local/share/albert/python/plugins
+for plugin_dir in "$PWD/targets/albert/python/plugins"/*; do
+    if [ -d "$plugin_dir" ]; then
+        plugin_name=$(basename "$plugin_dir")
+        echo "  Linking plugin: $plugin_name"
+        ln -sf "$plugin_dir" "$HOME/.local/share/albert/python/plugins/$plugin_name"
+    fi
+done
+
 # opencode
 THIS_FILE="$HOME/.config/opencode/opencode.jsonc"
 POINTS_TO="$TARGETS/opencode/opencode.jsonc"

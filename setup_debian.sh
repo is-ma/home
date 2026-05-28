@@ -24,6 +24,18 @@ sudo apt install -y x11-xserver-utils  # xrand (monitors)
 sudo apt install -y vim
 sudo apt install -y whois
 
+# --- Albert launcher (from official OBS repo) ---
+echo "Adding Albert launcher repository..."
+echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/Debian_13/ /' | sudo tee /etc/apt/sources.list.d/home:manuelschneid3r.list
+curl -fsSL https://download.opensuse.org/repositories/home:/manuelschneid3r/Debian_13/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_manuelschneid3r.gpg > /dev/null
+sudo apt update
+echo "Installing Albert launcher and dependencies..."
+sudo apt install -y albert libqalculate scrot picom
+
+# --- CopyQ clipboard manager ---
+echo "Installing CopyQ clipboard manager..."
+sudo apt install -y copyq copyq-plugins copyq-doc
+
 ## bash
 if ! grep -q 'is-ma.sh' ~/.bashrc; then
     echo "" >> ~/.bashrc
