@@ -167,9 +167,4 @@ THIS_FILE="$HOME/.config/opencode/oh-my-openagent.jsonc"
 POINTS_TO="$TARGETS/opencode/oh-my-openagent.jsonc"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
-# rofi
-THIS_FILE="$HOME/.config/rofi/config.rasi"
-POINTS_TO="$TARGETS/rofi/config.rasi"
-mkdir -p "$(dirname "$THIS_FILE")"
-ln -sf "$POINTS_TO" "$THIS_FILE"
 

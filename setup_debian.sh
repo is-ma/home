@@ -15,7 +15,7 @@ sudo apt install -y firefox-esr
 sudo apt install -y fzf
 sudo apt install -y git
 sudo apt install -y gtypist
-sudo apt install -y i3 i3blocks i3lock rofi xinit
+sudo apt install -y i3 i3blocks i3lock xinit
 # sudo apt install -y libxss-dev libx11-dev libxext-dev build-essential  # build deps for xautolock (ver sys_configs/xautolock_build.md)
 sudo apt install -y plocate
 sudo apt install -y ripgrep

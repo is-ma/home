@@ -36,7 +36,6 @@ System-level changes (outside `$HOME`) are documented as markdown notes in `sys_
 │   ├── i3status/           # legacy, superseded by i3blocks
 │   ├── opencode/
 │   ├── rg/
-│   ├── rofi/
 │   └── wallapers/
 ├── sys_configs/            # system-level notes (hibernate, deep sleep, etc.)
 ├── cheatsheets/            # quick reference docs
@@ -79,7 +78,7 @@ System-level changes (outside `$HOME`) are documented as markdown notes in `sys_
 | Terminal | Alacritty |
 | Editor | Helix |
 | Shell | Bash |
-| App launcher | Rofi |
+| App launcher | dmenu |
 | Notifications | Dunst |
 | Text expander | Espanso |
 | Fonts | MesloLGS Nerd Font Mono |
