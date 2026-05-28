@@ -57,7 +57,7 @@ bindsym --release $mod+c exec --no-startup-id "copyq menu"
 bindsym $mod+Shift+c reload
 
 # [d] Albert launcher (replaced dmenu)
-# bindsym $mod+d exec --no-startup-id rofi -show drun # REPLACED by albert
+bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+a exec --no-startup-id albert show
 # bindsym $mod+Shift+d exec --no-startup-id rofi -show run # REPLACED by Albert
 
