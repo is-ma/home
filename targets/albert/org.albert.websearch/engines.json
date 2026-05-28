@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Google",
+    "trigger": "gg",
+    "url": "https://www.google.com/search?q=%s",
+    "iconPath": ":google",
+    "fallback": true
+  },
+  {
+    "name": "Wikipedia",
+    "trigger": "wiki",
+    "url": "https://en.wikipedia.org/wiki/%s",
+    "iconPath": ":wikipedia",
+    "fallback": false
+  },
+  {
+    "name": "YouTube",
+    "trigger": "yt",
+    "url": "https://www.youtube.com/results?search_query=%s",
+    "iconPath": ":youtube",
+    "fallback": false
+  },
+  {
+    "name": "Google Maps",
+    "trigger": "maps",
+    "url": "https://maps.google.com/maps?q=%s",
+    "iconPath": ":maps",
+    "fallback": false
+  },
+  {
+    "name": "Google Translate",
+    "trigger": "tr",
+    "url": "https://translate.google.com/#auto|en|%s",
+    "iconPath": ":google_translate",
+    "fallback": false
+  },
+  {
+    "name": "GitHub",
+    "trigger": "gh",
+    "url": "https://github.com/search?q=%s",
+    "iconPath": ":github",
+    "fallback": false
+  },
+  {
+    "name": "Gmail",
+    "trigger": "gmail",
+    "url": "https://mail.google.com/mail/ca/u/0/#apps/%s",
+    "iconPath": ":google",
+    "fallback": false
+  },
+  {
+    "name": "Google Images",
+    "trigger": "image",
+    "url": "https://www.google.com/search?q=%s&tbm=isch",
+    "iconPath": ":google",
+    "fallback": false
+  },
+  {
+    "name": "Mistral Chat",
+    "trigger": "mm",
+    "url": "https://chat.mistral.ai/chat?q=%s",
+    "iconPath": ":default",
+    "fallback": false
+  }
+]
