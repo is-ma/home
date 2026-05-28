@@ -57,7 +57,7 @@ sudo apt install -y albert libqalculate23 scrot picom
 Google is the default fallback (no keyword needed).
 
 ## i3 Integration
-- Albert hotkey: `$mod+d` (replaces Rofi drun)
+- Albert hotkey: `$mod+a` (replaces `$mod+d` which was dmenu/rofi)
 - Albert floating rule: `for_window [class="^Albert$"] floating enable, border none, focus`
 - CopyQ hotkey: `$mod+c` (clipboard menu)
 
