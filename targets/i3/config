@@ -57,7 +57,7 @@ bindsym --release $mod+c exec --no-startup-id "copyq menu"
 bindsym $mod+Shift+c reload
 
 # [d] Albert launcher (replaced dmenu)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run -i -fn 'MesloLGMDZ Nerd Font Mono:size=22' -nb '#3c3836' -nf '#d65d0e' -sb '#504945' -sf '#ebdbb2'
 bindsym $mod+a exec --no-startup-id albert show
 # bindsym $mod+Shift+d exec --no-startup-id rofi -show run # REPLACED by Albert
 
