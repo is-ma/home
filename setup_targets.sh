@@ -152,8 +152,13 @@ ln -sf "$POINTS_TO" "$THIS_FILE"
 # --- Albert launcher ---
 echo "Setting up Albert launcher configs..."
 mkdir -p ~/.config/albert
+rm -f ~/.config/albert/albert.conf
 ln -sf "$PWD/targets/albert/albert.conf" ~/.config/albert/albert.conf
-ln -sf "$PWD/targets/albert/org.albert.websearch" ~/.config/albert/org.albert.websearch
+# Note: org.albert.websearch is a REAL directory (not symlink) because
+# symlinking the whole dir causes recursive symlink on re-run (ln -sf quirk).
+# Only engines.json is symlinked into it.
+mkdir -p ~/.config/albert/org.albert.websearch
+ln -sf "$PWD/targets/albert/org.albert.websearch/engines.json" ~/.config/albert/org.albert.websearch/engines.json
 
 # Albert Python plugins
 echo "Setting up Albert Python plugins..."
@@ -162,6 +167,7 @@ for plugin_dir in "$PWD/targets/albert/python/plugins"/*; do
     if [ -d "$plugin_dir" ]; then
         plugin_name=$(basename "$plugin_dir")
         echo "  Linking plugin: $plugin_name"
+        rm -rf "$HOME/.local/share/albert/python/plugins/$plugin_name"
         ln -sf "$plugin_dir" "$HOME/.local/share/albert/python/plugins/$plugin_name"
     fi
 done
