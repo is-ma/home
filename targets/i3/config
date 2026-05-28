@@ -102,6 +102,8 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+r restart
 
 # [s]
+bindsym $mod+Shift+s exec --no-startup-id suspend
+bindsym $mod+Ctrl+s exec --no-startup-id hibernate
 
 # [t]
 
@@ -125,8 +127,6 @@ bindsym $mod+Control+v exec --no-startup-id "pamixer --toggle-mute; pkill -RTMIN
 exec --no-startup-id xautolock -time 10 -locker "i3lock -i /home/rich/is-ma/home/targets/wallapers/candle_2560x1600.png" -detectsleep &
 exec --no-startup-id xset dpms 3600 3600 3600  # monitor off at 1h
 bindsym $mod+z exec --no-startup-id i3lock -i /home/rich/is-ma/home/targets/wallapers/candle_2560x1600.png
-bindsym $mod+s exec --no-startup-id suspend
-bindsym $mod+Shift+s exec --no-startup-id hibernate
 
 # [1-0] Name workspaces (w); switch to w.; move focused pane to w.
 set $ws1 "1"
