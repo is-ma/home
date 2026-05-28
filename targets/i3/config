@@ -9,8 +9,23 @@ default_floating_border pixel 1
 # notifications
 exec --no-startup-id dunst
 
+# Compositor for Albert transparency/shadows
+exec --no-startup-id picom --daemon
+
+# Albert launcher
+exec --no-startup-id albert
+
+# CopyQ clipboard manager
+exec --no-startup-id copyq
+
 # espanso
 exec --no-startup-id espanso start --unmanaged
+
+# Albert launcher — always floating, no border (Qt popup)
+for_window [class="^Albert$"] floating enable, border none, focus
+
+# CopyQ — floating without border to avoid the 1px shift bug on i3
+for_window [instance="^copyq$" class="^Copyq$"] border pixel 0, floating enable
 
 # drag & drop floating windows by left-clicking into the title bar
 tiling_drag modifier titlebar
@@ -35,11 +50,15 @@ bindsym $mod+Shift+space floating toggle
 
 # [b]
 
+# [c] CopyQ clipboard menu (--release prevents focus issues on i3)
+bindsym --release $mod+c exec --no-startup-id "copyq menu"
+
 # [c] reload ~/.bashrc; reload i3 configuration file
 bindsym $mod+Shift+c reload
 
-# [d] dmenu (Gruvbox)
-bindsym $mod+d exec --no-startup-id dmenu_run -i -fn 'MesloLGMDZ Nerd Font Mono:size=22' -nb '#3c3836' -nf '#d65d0e' -sb '#504945' -sf '#ebdbb2'
+# [d] Albert launcher (replaced dmenu)
+bindsym $mod+d exec --no-startup-id albert show
+# bindsym $mod+Shift+d exec --no-startup-id rofi -show run # REPLACED by Albert
 
 # [e]
 
