@@ -1,3 +1,7 @@
+--- Reset soft Commits: g -> soft ------------------------------------
+--- Reset soft Commits: g -> soft ------------------------------------
+--- Reset soft Commits: g -> soft ------------------------------------
+
 #####################################################################
 #                    LAZYGIT TUTOR                                  #
 #             ~80 ejercicios para dominar Git en terminal           #
