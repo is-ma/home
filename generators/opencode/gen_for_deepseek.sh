@@ -35,7 +35,9 @@ _subst() {
     sed "s|DEEP_TERMINAL|deepseek/deepseek-v4-flash|g" |
     sed "s|DEEP_GENIUS|deepseek/deepseek-v4-pro|g" |
     sed "s|DEEP_JUNIOR|deepseek/deepseek-v4-flash|g" |
-    sed "s|DEEP_BRO|deepseek/deepseek-v4-flash|g"
+    sed "s|DEEP_BRO|deepseek/deepseek-v4-flash|g" |
+    sed "s|GROK_BRO|openrouter/x-ai/grok-4.20|g" |
+    sed "s|GEMINI_BRO|openrouter/google/gemini-3.1-flash-lite|g"
 }
 
 mkdir -p "$STOW_DIR"
