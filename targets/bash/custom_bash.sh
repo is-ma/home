@@ -125,5 +125,6 @@ wo () { whois $1 | egrep "^   (Admin|Creation|Updated)"; }
 # [y]
 
 # [z]
+alias z="lazygit"
 
 # [a]
