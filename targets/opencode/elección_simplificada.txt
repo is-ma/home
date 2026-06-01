@@ -43,7 +43,7 @@ METODOLOGÍA
    - Nunca sacrificar más de 3 puntos de score para ganar llamadas en Grupo A.
    - En Grupo B, el score mínimo aceptable es aparecer en algún Top 20.
 
-5. Actualizar oh-my-openagent.jsonc con los nuevos mappings y documentar el
+5. Actualizar oh-my-openagent__go.jsonc con los nuevos mappings y documentar el
    razonamiento en los comentarios inline (# Xk/mes — motivo).
 
 CUÁNDO REVISAR
