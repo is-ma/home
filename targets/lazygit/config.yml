@@ -50,5 +50,5 @@ git:
     showWholeGraph: true
 
 os:
-  editPreset: helix
+  edit: '/home/rich/.cargo/bin/hx {{filename}}'
   open: 'xdg-open {{filename}} >/dev/null'
