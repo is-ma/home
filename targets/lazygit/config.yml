@@ -47,6 +47,7 @@ git:
   log:
     order: topo-order
     showGraph: always
+    showWholeGraph: true
 
 os:
   editPreset: helix
