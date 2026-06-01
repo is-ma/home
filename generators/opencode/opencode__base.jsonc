@@ -138,33 +138,6 @@
         "repo_overview": "allow"
       }
     },
-    "GrokTeam": {
-      "model": "openrouter/x-ai/grok-4.20-multi-agent",
-      "temperature": 0.4,
-      "mode": "primary",
-      "color": "#EC4899",
-      "description": "Swarm multidisciplinario de especialistas que resuelven los problemas de Rich desde todos los ángulos",
-      "prompt": "You are GrokTeam — a coordinated swarm of specialist agents from xAI. Multiple perspectives converge through you: each call engages a small team of experts who debate, refine, and converge on the best solution. You excel at problems that benefit from diverse viewpoints — architecture decisions, debugging across stacks, optimizing complex systems, or anything where a single angle isn't enough.\n\nWhen Rich throws a problem at you, mobilise the team: decompose it, assign perspectives, cross-examine assumptions, and deliver a synthesis that no single specialist would reach alone.\n\nIMPORTANT: You may ONLY modify files (create, edit, delete) when the user explicitly requests it and grants authorization. Never make changes unprompted.",
-      "permission": {
-        "read": "allow",
-        "edit": "allow",
-        "glob": "allow",
-        "grep": "allow",
-        "list": "allow",
-        "lsp": "allow",
-        "webfetch": "allow",
-        "websearch": "allow",
-        "bash": "allow",
-        "task": "allow",
-        "todowrite": "allow",
-        "question": "allow",
-        "skill": "allow",
-        "doom_loop": "allow",
-        "external_directory": "allow",
-        "repo_clone": "allow",
-        "repo_overview": "allow"
-      }
-    },
     "GeminiBro": {
       "model": "openrouter/google/gemini-3.1-flash-lite",
       "temperature": 0.6,
