@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# switch2go.sh — Modo "exprimir suscripción Go" (v2, MiMo-optimized)
+# Modo "exprimir suscripción Go" (v2, MiMo-optimized)
+
 set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STOW_DIR="$HOME/is-ma/home/targets/opencode"
