@@ -43,13 +43,8 @@ METODOLOGÍA
    - Nunca sacrificar más de 3 puntos de score para ganar llamadas en Grupo A.
    - En Grupo B, el score mínimo aceptable es aparecer en algún Top 20.
 
-5. Validar que los DEEP_* estén correctos:
-   - DEEP_TERMINAL y DEEP_JUNIOR → modelo de mayor volumen (Grupo B)
-   - DEEP_GENIUS → modelo de mayor score (Grupo A)
-   - DEEP_BRO → modelo de mayor volumen (Grupo B)
-
-6. Actualizar switch2go.sh con los nuevos mappings y documentar el razonamiento
-   en los comentarios inline (# Xk/mes — motivo).
+5. Actualizar oh-my-openagent.jsonc con los nuevos mappings y documentar el
+   razonamiento en los comentarios inline (# Xk/mes — motivo).
 
 CUÁNDO REVISAR
 - Cuando OpenCode Go actualice su catálogo o bolsas de llamadas.

@@ -2,81 +2,81 @@
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
   "agents": {
     "sisyphus": {
-      "model": "OMO_AGENT__SISYPHUS",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.1
     },
     "atlas": {
-      "model": "OMO_AGENT__ATLAS",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.2
     },
     "prometheus": {
-      "model": "OMO_AGENT__PROMETHEUS",
+      "model": "deepseek/deepseek-v4-pro",
       "temperature": 0.15
     },
     "metis": {
-      "model": "OMO_AGENT__METIS",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.5
     },
     "momus": {
-      "model": "OMO_AGENT__MOMUS",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.05
     },
     "multimodal-looker": {
-      "model": "OMO_AGENT__MULTIMODAL_LOOKER",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.05
     },
     "oracle": {
-      "model": "OMO_AGENT__ORACLE",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.1
     },
     "hephaestus": {
-      "model": "OMO_AGENT__HEPHAESTUS",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.35
     },
     "explore": {
-      "model": "OMO_AGENT__EXPLORE",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.05
     },
     "librarian": {
-      "model": "OMO_AGENT__LIBRARIAN",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.05
     },
     "sisyphus-junior": {
-      "model": "OMO_AGENT__SISYPHUS_JUNIOR",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.3
     }
   },
   "categories": {
     "visual-engineering": {
-      "model": "OMO_CATEGORY__VISUAL_ENGINEERING",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.5
     },
     "ultrabrain": {
-      "model": "OMO_CATEGORY__ULTRABRAIN",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.4
     },
     "deep": {
-      "model": "OMO_CATEGORY__DEEP",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.5
     },
     "artistry": {
-      "model": "OMO_CATEGORY__ARTISTRY",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.65
     },
     "quick": {
-      "model": "OMO_CATEGORY__QUICK",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.1
     },
     "unspecified-low": {
-      "model": "OMO_CATEGORY__UNSPECIFIED_LOW",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.1
     },
     "unspecified-high": {
-      "model": "OMO_CATEGORY__UNSPECIFIED_HIGH",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.45
     },
     "writing": {
-      "model": "OMO_CATEGORY__WRITING",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.55
     }
   },
