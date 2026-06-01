@@ -31,11 +31,18 @@ METODOLOGÍA
        mayor bolsa de llamadas dentro de su tier.
 
    GRUPO B — Roles de volumen/mecánicos (muchas llamadas, calidad suficiente):
-     sisyphus, sisyphus-junior, momus, oracle, explore, librarian, metis
+     sisyphus, sisyphus-junior, momus, explore, librarian, metis
      y categorías: quick, ultrabrain, unspecified-low/high, visual-engineering,
      artistry, writing
      → Asignar el modelo con más llamadas/mes que aún tenga presencia en
        algún benchmark. Nunca elegir a ciegas por precio sin respaldo de índice.
+
+   EXCEPCIÓN — Oracle: consulta esporádica de alto valor.
+     Aunque pertenece al Grupo B por volumen, su naturaleza es de consulta
+     arquitectónica y debugging profundo — llamadas poco frecuentes pero
+     críticas. Se le asigna modelo PRO (mimo-v2.5-pro) porque el costo
+     incremental es insignificante frente al valor de una respuesta
+     correcta en una consulta de alta dificultad.
 
 4. El criterio de desempate entre modelos similares en score:
    - Más llamadas/mes gana siempre.
