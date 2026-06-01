@@ -24,7 +24,7 @@ _subst() {
     sed "s|OMO_AGENT__ATLAS|opencode-go/mimo-v2.5-pro|g" |                  # 16K/mes — Agentic #7, supera a DS Pro
     sed "s|OMO_AGENT__METIS|opencode-go/mimo-v2.5|g" |                      # 150K/mes — Agentic #14, como Flash pero más listo
     sed "s|OMO_AGENT__MOMUS|opencode-go/mimo-v2.5|g" |                      # 150K/mes — crítica mecánica
-    sed "s|OMO_CATEGORY__DEEP|opencode-go/mimo-v2.5-pro|g"                # 16K/mes — análisis profundo
+    sed "s|OMO_CATEGORY__DEEP|opencode-go/mimo-v2.5-pro|g"                  # 16K/mes — análisis profundo
 }
 
 mkdir -p "$STOW_DIR"
@@ -36,4 +36,3 @@ ln -sf "$STOW_DIR/opencode.jsonc"            "$HOME/.config/opencode/opencode.js
 ln -sf "$STOW_DIR/oh-my-openagent.jsonc"     "$HOME/.config/opencode/oh-my-openagent.jsonc"
 
 echo "Configs regenerados desde templates __base (Go v2 - MiMo-optimized)"
- 
