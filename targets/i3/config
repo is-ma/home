@@ -130,10 +130,10 @@ bindsym --release Caps_Lock exec --no-startup-id pkill -RTMIN+11 i3blocks
 
 # [u]
 
-# [v] volume (later on i3blocks, pamixer --get-volume-human)
-bindsym $mod+Shift+v exec --no-startup-id "pamixer --increase 1; pkill -RTMIN+10 i3blocks"
-bindsym $mod+v exec --no-startup-id "pamixer --decrease 1; pkill -RTMIN+10 i3blocks"
-bindsym $mod+Control+v exec --no-startup-id "pamixer --toggle-mute; pkill -RTMIN+10 i3blocks"
+# [F11/F12/Ins] volume (Logitech K380s)
+bindsym $mod+F11 exec --no-startup-id "pamixer --toggle-mute; pkill -RTMIN+10 i3blocks"
+bindsym $mod+F12 exec --no-startup-id "pamixer --decrease 1; pkill -RTMIN+10 i3blocks"
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id "pamixer --increase 1; pkill -RTMIN+10 i3blocks"
 
 # [w]
 
