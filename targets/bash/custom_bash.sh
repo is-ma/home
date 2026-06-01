@@ -73,8 +73,8 @@ alias myps='ps -u $USER -o pid,pcpu,pmem,comm'  # Procesos del usuario actual
 
 # [o]
 alias o='opencode run --agent DeepTerminal'
-alias od='unset VISUAL; ln -sf ~/is-ma/home/generators/opencode/oh-my-openagent__deepseek.jsonc ~/is-ma/home/targets/opencode/oh-my-openagent.jsonc && opencode'
-alias og='unset VISUAL; ln -sf ~/is-ma/home/generators/opencode/oh-my-openagent__go.jsonc ~/is-ma/home/targets/opencode/oh-my-openagent.jsonc && opencode'
+alias od='unset VISUAL; ln -sf ~/is-ma/home/generators/opencode/oh-my-openagent__deepseek.jsonc ~/.config/opencode/oh-my-openagent.jsonc && opencode'
+alias og='unset VISUAL; ln -sf ~/is-ma/home/generators/opencode/oh-my-openagent__go.jsonc ~/.config/opencode/oh-my-openagent.jsonc && opencode'
 
 # [p]
 alias pingt='ping -D'  # Ping con timestamp
