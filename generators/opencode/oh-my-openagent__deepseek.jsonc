@@ -10,7 +10,7 @@
       "temperature": 0.2
     },
     "prometheus": {
-      "model": "deepseek/deepseek-v4-pro",
+      "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.15
     },
     "metis": {
