@@ -3,7 +3,7 @@
 	name = Is Ma
 
 [core]
-	editor = vim
+	editor = /home/rich/.cargo/bin/hx
 
 [init]
     defaultBranch = main
