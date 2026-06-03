@@ -10,3 +10,7 @@
 
 [protocol "file"]
 	allow = always
+[cherry-pick]
+	reapplyCherryPicks = true
+[advice]
+	skippedCherryPicks = false
