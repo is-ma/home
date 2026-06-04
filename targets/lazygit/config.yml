@@ -6,13 +6,20 @@ gui:
   mouseEvents: false
   language: en
   border: rounded
+  timeFormat: ''
+  shortTimeFormat: ''
   expandFocusedSidePanel: true
   screenMode: normal
   scrollHeight: 1
   animateExplosion: true
-  switchTabsWithPanelJumpKeys: true
+  commitAuthorShortLength: 1
+  commitAuthorLongLength: 1
+  commitHashLength: 6
   showBottomLine: true
   showPanelJumps: true
+  authorColors:
+    'Is Ma': '#e78a4e'
+    '*': '#458588'
   theme:
     activeBorderColor:
       - '#a9b665'
@@ -41,6 +48,9 @@ git:
   autoFetch: true
   autoRefresh: true
   autoStageResolvedConflicts: true
+  branchLogCmd: git log --oneline --graph --decorate --color=always {{branchName}} --
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --oneline --decorate
   mainBranches:
     - main
   parseEmoji: false
@@ -50,5 +60,17 @@ git:
     showWholeGraph: true
 
 os:
+  shellFunctionsFile: /home/rich/is-ma/home/targets/bash/custom_bash.sh
   edit: '/home/rich/.cargo/bin/hx {{filename}}'
   open: 'xdg-open {{filename}} >/dev/null'
+
+skipAmendWarning: true
+skipDiscardChangeWarning: true
+skipStashWarning: true
+skipNoStagedFilesWarning: true
+skipRewordInEditorWarning: true
+skipSwitchWorktreeOnCheckoutWarning: true
+
+update:
+  method: background
+  days: 7
