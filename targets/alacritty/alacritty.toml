@@ -84,13 +84,3 @@ key = "Enter"
 mods = "Shift"
 chars = "\u000a"
 
-[[keyboard.bindings]]
-key = "k"
-mods = "Alt"
-action = "ScrollLineUp"
-
-[[keyboard.bindings]]
-key = "j"
-mods = "Alt"
-action = "ScrollLineDown"
-
