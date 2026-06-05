@@ -193,7 +193,7 @@ bar {
                 statusline #ddc7a1
                 separator  #504945
                 focused_workspace  #1d2021 #1d2021 #a9b665
-                inactive_workspace #1d2021 #1d2021 #3f4830
+                inactive_workspace #1d2021 #1d2021 #5a524c
                 urgent_workspace   #1d2021 #1d2021 #ea6962
         }
 }

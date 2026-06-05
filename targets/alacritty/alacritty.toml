@@ -7,7 +7,7 @@ decorations = "None"
 decorations_theme_variant = "Dark"
 
 [scrolling]
-history = 50000
+history = 0
 multiplier = 1
 
 [font]
@@ -30,7 +30,7 @@ family = "MesloLGMDZ Nerd Font Mono"
 style = "Bold Italic"
 
 [selection]
-save_to_clipboard = true
+save_to_clipboard = false
 
 [cursor]
 style = { shape = "Block", blinking = "Always" }
@@ -83,4 +83,9 @@ white   = "#d4be98" # fg0
 key = "Enter"
 mods = "Shift"
 chars = "\u000a"
+
+[[keyboard.bindings]]
+key = "Space"
+mods = "Control|Shift"
+action = "ReceiveChar"
 

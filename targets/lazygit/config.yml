@@ -19,17 +19,17 @@ gui:
   showPanelJumps: true
   authorColors:
     'Is Ma': '#e78a4e'
-    '*': '#458588'
+    '*': '#7daea3'
   theme:
     activeBorderColor:
       - '#a9b665'
       - bold
     inactiveBorderColor:
-      - '#3f4830'
+      - '#3c3836'
     optionsTextColor:
       - '#d8a657'
     selectedLineBgColor:
-      - '#45403d'
+      - '#3c3836'
     selectedRangeBgColor:
       - '#5a524c'
     cherryPickedCommitBgColor:
