@@ -113,8 +113,8 @@
     },
     "Magician": {
       // al terminarse los créditos de OpenCode Zen,
-      // "model": "openrouter/anthropic/claude-opus-4.6",
-      "model": "opencode/claude-opus-4-6",
+      // "model": "openrouter/anthropic/claude-opus-4.8",
+      "model": "opencode/claude-opus-4-8",
       "temperature": 0.4,
       "mode": "primary",
       "color": "#F59E0B",
