@@ -188,4 +188,12 @@ bar {
         font pango:UbuntuSansMono Nerd Font Mono 20
         position bottom
         status_command i3blocks -c ~/.config/i3blocks/config
+        colors {
+                background #1d2021
+                statusline #ddc7a1
+                separator  #504945
+                focused_workspace  #1d2021 #1d2021 #a9b665
+                inactive_workspace #1d2021 #1d2021 #3f4830
+                urgent_workspace   #1d2021 #1d2021 #ea6962
+        }
 }
