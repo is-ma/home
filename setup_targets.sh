@@ -196,4 +196,10 @@ THIS_FILE="$HOME/.config/opencode/oh-my-openagent.jsonc"
 POINTS_TO="$TARGETS/opencode/oh-my-openagent__deepseek.jsonc"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+# tmux
+THIS_FILE="$HOME/.config/tmux/tmux.conf"
+POINTS_TO="$TARGETS/tmux/tmux.conf"
+mkdir -p "$(dirname "$THIS_FILE")"
+ln -sf "$POINTS_TO" "$THIS_FILE"
+
 

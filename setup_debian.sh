@@ -21,6 +21,7 @@ sudo apt install -y lazygit
 sudo apt install -y plocate
 sudo apt install -y ripgrep
 sudo apt install -y sysstat  # mpstat for cpu_usage in i3blocks
+sudo apt install -y tmux
 sudo apt install -y x11-xserver-utils  # xrand (monitors)
 sudo apt install -y vim
 sudo apt install -y whois
