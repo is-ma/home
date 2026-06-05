@@ -1,0 +1,86 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "atlas": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.2
+    },
+    "prometheus": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.15
+    },
+    "metis": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.5
+    },
+    "momus": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "multimodal-looker": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "oracle": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "hephaestus": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.35
+    },
+    "explore": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "librarian": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "sisyphus-junior": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.3
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.5
+    },
+    "ultrabrain": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.4
+    },
+    "deep": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.5
+    },
+    "artistry": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.65
+    },
+    "quick": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "unspecified-low": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "unspecified-high": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.45
+    },
+    "writing": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.55
+    }
+  },
+  "experimental": {
+    "disable_omo_env": true
+  }
+}

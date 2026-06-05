@@ -1,0 +1,124 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "agents": {
+    "sisyphus": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "atlas": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.2
+    },
+    "prometheus": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.15
+    },
+    "metis": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.5
+    },
+    "momus": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "multimodal-looker": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "oracle": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "hephaestus": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.35
+    },
+    "explore": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "librarian": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.05
+    },
+    "sisyphus-junior": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.3
+    }
+  },
+  "categories": {
+    "visual-engineering": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.5
+    },
+    "ultrabrain": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.4
+    },
+    "deep": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.5
+    },
+    "artistry": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.65
+    },
+    "quick": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "unspecified-low": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.1
+    },
+    "unspecified-high": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.45
+    },
+    "writing": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
+      "model": "deepseek/deepseek-v4-flash",
+      "temperature": 0.55
+    }
+  },
+  "experimental": {
+    "disable_omo_env": true
+  }
+}

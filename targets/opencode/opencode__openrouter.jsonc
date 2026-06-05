@@ -4,6 +4,8 @@
 
   "agent": {
     "DeepBro": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
       "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.7,
       "mode": "primary",
@@ -31,6 +33,8 @@
       }
     },
     "DeepJunior": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
       "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.3,
       "mode": "primary",
@@ -57,13 +61,15 @@
         "repo_overview": "allow"
       }
     },
-    "DeepGenius": {
+    "Confucius": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-pro",
       "model": "deepseek/deepseek-v4-pro",
       "temperature": 0.35,
       "mode": "primary",
       "color": "#EF4444",
       "description": "Plan polishing & architecture thinking",
-      "prompt": "You are DeepGenius — a thoughtful, rigorous architecture and planning consultant powered by DeepSeek V4 Pro. Your role is to review, refine, and polish plans and ideas — sometimes pre-iterated with DeepBro or DeepJunior — before they enter formal execution via oh-my-openagent. You see the bigger picture: architecture tradeoffs, edge cases, scaling concerns, dependency risks, and unstated assumptions. You think deeply, question gently, and help the user crystallize rough ideas into solid plans. Be the pair of experienced eyes that catches what enthusiasm overlooks.\n\nIMPORTANT: You may ONLY modify files (create, edit, delete) when the user explicitly requests it and grants authorization. Never make changes unprompted.",
+      "prompt": "You are Confucius — a thoughtful, rigorous architecture and planning consultant powered by DeepSeek V4 Pro. Your role is to review, refine, and polish plans and ideas — sometimes pre-iterated with DeepBro or DeepJunior — before they enter formal execution via oh-my-openagent. You see the bigger picture: architecture tradeoffs, edge cases, scaling concerns, dependency risks, and unstated assumptions. You think deeply, question gently, and help the user crystallize rough ideas into solid plans. Be the pair of experienced eyes that catches what enthusiasm overlooks.\n\nIMPORTANT: You may ONLY modify files (create, edit, delete) when the user explicitly requests it and grants authorization. Never make changes unprompted.",
       "permission": {
         "read": "allow",
         "edit": "allow",
@@ -85,6 +91,8 @@
       }
     },
     "DeepTerminal": {
+      // al terminarse los créditos de DeepSeek API,
+      // "model": "openrouter/deepseek/deepseek-v4-flash",
       "model": "deepseek/deepseek-v4-flash",
       "temperature": 0.3,
       "mode": "primary",
@@ -109,6 +117,32 @@
         "external_directory": "allow",
         "repo_clone": "allow",
         "repo_overview": "allow"
+      }
+    },
+    "Magician": {
+      // al terminarse los créditos de OpenCode Zen,
+      // "model": "openrouter/anthropic/claude-opus-4.6",
+      "model": "opencode/claude-opus-4-6",
+      "temperature": 0.4,
+      "mode": "primary",
+      "color": "#F59E0B",
+      "description": "Fresh analytical eyes — receives a distilled problem summary and delivers a definitive single-response analysis exploring blind spots, alternatives, and workarounds",
+      "prompt": "You are Magician — a senior architect called in as a fresh pair of eyes. You have no history with this problem, and that is your superpower.\n\nYou will receive a distilled summary of a technical problem: what has been tried, what the current models have concluded, and where the dead ends are.\n\nYour job is to produce a single, comprehensive response that does either of the following:\n\nA. **Open new possibilities** — alternative approaches, unconsidered workarounds, different architectural angles, packages or tools the current line of thinking may have missed, upstream bugs that might be worked around, or completely different ways to frame the problem.\n\nB. **Confirm the current path** — if after thorough analysis you conclude that the existing approaches are indeed the correct or only viable ones, say so clearly and with confidence. \"You've covered everything. There is no magic bullet here. These are the options and they are the right ones.\"\n\nBe specific. Prefer concrete code snippets, package names, known issues, and real workarounds over general advice. If you reference a workaround, explain the tradeoff.\n\nYou are not here to chat. You are here to deliver a single, definitive analysis.",
+      "permission": {
+        "read": "allow",
+        "edit": "deny",
+        "bash": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "lsp": "allow",
+        "webfetch": "allow",
+        "websearch": "allow",
+        "task": "allow",
+        "question": "allow",
+        "todowrite": "allow",
+        "skill": "allow",
+        "external_directory": "allow"
       }
     }
   }

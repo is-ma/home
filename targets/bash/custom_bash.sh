@@ -73,8 +73,10 @@ alias myps='ps -u $USER -o pid,pcpu,pmem,comm'  # Procesos del usuario actual
 
 # [o]
 alias o='opencode run --agent DeepTerminal'
-alias od='unset VISUAL; ln -sf ~/is-ma/home/targets/opencode/oh-my-openagent__deepseek.jsonc ~/.config/opencode/oh-my-openagent.jsonc && opencode'
-alias og='unset VISUAL; ln -sf ~/is-ma/home/targets/opencode/oh-my-openagent__go.jsonc ~/.config/opencode/oh-my-openagent.jsonc && opencode'
+alias ogm='ln -sf ~/is-ma/home/targets/opencode/oh-my-openagent__go_mimo.jsonc ~/.config/opencode/oh-my-openagent.jsonc && ln -sf ~/is-ma/home/targets/opencode/opencode__go.jsonc ~/.config/opencode/opencode.jsonc && opencode'
+alias ogd='ln -sf ~/is-ma/home/targets/opencode/oh-my-openagent__go_deepseek.jsonc ~/.config/opencode/oh-my-openagent.jsonc && ln -sf ~/is-ma/home/targets/opencode/opencode__go.jsonc ~/.config/opencode/opencode.jsonc && opencode'
+alias orm='ln -sf ~/is-ma/home/targets/opencode/oh-my-openagent__openrouter_mimo.jsonc ~/.config/opencode/oh-my-openagent.jsonc && ln -sf ~/is-ma/home/targets/opencode/opencode__openrouter.jsonc ~/.config/opencode/opencode.jsonc && opencode'
+alias ord='ln -sf ~/is-ma/home/targets/opencode/oh-my-openagent__openrouter_deepseek.jsonc ~/.config/opencode/oh-my-openagent.jsonc && ln -sf ~/is-ma/home/targets/opencode/opencode__openrouter.jsonc ~/.config/opencode/opencode.jsonc && opencode'
 
 # [p]
 alias pingt='ping -D'  # Ping con timestamp
