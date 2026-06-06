@@ -1,4 +1,4 @@
-export VISUAL=vim  # use VIM instead of nano as a default editor
+export VISUAL="/home/rich/.cargo/bin/hx"  # Helix en vez de nano/vim
 
 # Original list: https://gist.github.com/gwing33/1650826
 ##########################################################
