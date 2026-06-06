@@ -47,6 +47,7 @@
     "markdownHeading": "fg1",
     "markdownCode": "fg1",
     "markdownCodeBlock": "fg0",
+    "markdownListItem": "yellow",
     "syntaxKeyword": "purple",
     "syntaxFunction": "green",
     "syntaxString": "aqua",
