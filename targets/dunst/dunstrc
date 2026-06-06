@@ -16,7 +16,7 @@
     format = "<b>%s</b>\n%b"
     alignment = left
     frame_width = 3
-    frame_color = "#aaaaaa"
+    frame_color = "#928374"
     separator_color = frame
     show_age_threshold = 60
     stack_duplicates = true
@@ -27,22 +27,21 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    background = "#222222"
-    foreground = "#888888"
+    background = "#282828"
+    foreground = "#d4be98"
     timeout = 10
     default_icon = dialog-information
 
 [urgency_normal]
-    # from: Alacritty (Gruvbox Material Dark Hard)
     background = "#d8a657"
     foreground = "#1d2021"
     timeout = 10
     default_icon = dialog-information
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#ffffff"
-    frame_color = "#ff0000"
+    background = "#ea6962"
+    foreground = "#1d2021"
+    frame_color = "#ea6962"
     timeout = 0
     default_icon = dialog-warning
 

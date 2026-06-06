@@ -52,15 +52,6 @@ Los colores se nombran con una convención de **capas**:
 | `aqua` | `#89b482` | Información secundaria |
 | `orange` | `#e78a4e` | Acento cálido |
 
-## Extensiones a la paleta
-
-Colores CSS con nombre oficial que incorporamos para necesidades específicas no cubiertas por Gruvbox:
-
-| Nombre CSS | Hex | Dónde lo usamos |
-|---|---|---|
-| `darkgreen` | `#006400` | Fondo de líneas añadidas en diffs (OpenCode) |
-| `maroon` | `#800000` | Fondo de líneas eliminadas en diffs (OpenCode) |
-
 ## Herramientas que usan esta paleta
 
 | Herramienta | Archivo de color |
@@ -71,4 +62,6 @@ Colores CSS con nombre oficial que incorporamos para necesidades específicas no
 | tmux | `targets/tmux/tmux.conf` |
 | i3blocks | `targets/i3blocks/config` |
 | LazyGit | `targets/lazygit/config.yml` (`gui.theme`) |
+| OpenCode | `targets/opencode/themes/gruvbox_rich.json` |
+| Dunst | `targets/dunst/dunstrc` |
 
