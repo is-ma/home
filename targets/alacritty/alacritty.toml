@@ -2,7 +2,7 @@
 live_config_reload = true
 
 [window]
-padding = { x = 0, y = 0 }
+padding = { x = 5, y = 0 }
 decorations = "None"
 decorations_theme_variant = "Dark"
 
