@@ -1,0 +1,16 @@
+#################################################################
+#                            REMOVED                            #
+#################################################################
+
+PREFIX : + swap-window -t -1
+tmux list-keys -T prefix | grep -i resize                                                               31,924 tokens
+
+
+#################################################################
+#                             NOTAS                             #
+#################################################################
+A veces uno quiere que lo copiado en tmux vaya al portapapeles del sistema. Eso se configura con
+set -g set-clipboard on y a veces requiere un clip tool (xclip, wl-clipboard, etc.). Pero eso es
+para una sesión más avanzada de personalización.
+
+
