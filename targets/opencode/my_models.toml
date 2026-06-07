@@ -2,55 +2,26 @@
 # Inventario de todos los modelos configurados en OpenCode.
 # Fuente de verdad para qué modelos existen y dónde se usan.
 
-# Modo de selección: CHEAP GO
-# - 'DeepSeek V4 Flash' usa 'OpenCode Go'
-# - 'DeepSeek V4 Pro' usa 'OpenCode Go'
-# - 'MiMo v2.5' usa 'OpenCode Go'
-# - 'MiMo v2.5 Pro' usa 'OpenCode Go'
-# - 'Qwen 3.7 Max' usa 'OpenCode Go'
-# - 'Kimi K2.6' usa 'OpenCode Go'
-# - 'Claude Opus 4.8' usa 'OpenCode Zen'
-#
-# Modo de selección: CHEAP OPENROUTER
-# - 'DeepSeek V4 Flash' usa 'DeepSeek API'
-# - 'DeepSeek V4 Pro' usa 'DeepSeek API'
-# - 'MiMo v2.5' usa 'OpenRouter'
-# - 'MiMo v2.5 Pro' usa 'OpenRouter'
-# - 'Qwen 3.7 Max' usa 'OpenRouter'
-# - 'Kimi K2.6' usa 'OpenRouter'
-# - 'Claude Opus 4.8' usa 'OpenRouter'
+[modes]
 
-[models]
+[modes.cheap_go]
+DeepSeek V4 Flash = "opencode-go/deepseek-v4-flash"
+DeepSeek V4 Pro = "opencode-go/deepseek-v4-pro"
+MiMo v2.5 = "opencode-go/mimo-v2.5"
+MiMo v2.5 Pro = "opencode-go/mimo-v2.5-pro"
+Qwen 3.7 Max = "opencode-go/qwen3.7-max"
+Kimi K2.6 = "opencode-go/kimi-k2.6"
+Claude Opus 4.8 = "opencode/claude-opus-4-8"     # Zen
 
-- DeepSeek V4 Flash
-  - OpenCode Go: opencode-go/deepseek-v4-flash
-  - OpenRouter: openrouter/deepseek/deepseek-v4-flash
-  - DeepSeek API: deepseek/deepseek-v4-flash
+[modes.cheap_openrouter]
+DeepSeek V4 Flash = "deepseek/deepseek-v4-flash" # DeepSeek API
+DeepSeek V4 Pro = "deepseek/deepseek-v4-pro"     # DeepSeek API
+MiMo v2.5 = "openrouter/xiaomi/mimo-v2.5"
+MiMo v2.5 Pro = "openrouter/xiaomi/mimo-v2.5-pro"
+Qwen 3.7 Max = "openrouter/qwen/qwen3.7-max"
+Kimi K2.6 = "openrouter/moonshotai/kimi-k2.6"
+Claude Opus 4.8 = "openrouter/anthropic/claude-opus-4-8"
 
-- DeepSeek V4 Pro
-  - OpenCode Go: opencode-go/deepseek-v4-pro
-  - OpenRouter: openrouter/deepseek/deepseek-v4-pro
-  - DeepSeek API: deepseek/deepseek-v4-pro
-
-- MiMo v2.5
-  - OpenCode Go: opencode-go/mimo-v2.5
-  - OpenRouter: openrouter/xiaomi/mimo-v2.5
-
-- MiMo v2.5 Pro
-  - OpenCode Go: opencode-go/mimo-v2.5-pro
-  - OpenRouter: openrouter/xiaomi/mimo-v2.5-pro
-
-- Qwen 3.7 Max
-  - OpenCode Go: opencode-go/qwen3.7-max
-  - OpenRouter: openrouter/qwen/qwen3.7-max
-
-- Kimi K2.6
-  - OpenCode Go: opencode-go/kimi-k2.6
-  - OpenRouter: openrouter/moonshotai/kimi-k2.6
-
-- Claude Opus 4.8
-  - OpenCode Zen: opencode/claude-opus-4-8
-  - OpenRouter: openrouter/anthropic/claude-opus-4-8
 
 [agents]
 
