@@ -70,7 +70,7 @@ PREFIX ?    # Listar todos los atajos de teclado (list-keys)
 # [@]
 
 # [A]
-A           # Añadir selección al buffer y salir (append-selection) [vi]
+A           # Acumular selección en buffer 'accum' SIN salir [vi] (custom)
 C-a         # Inicio de línea (start-of-line) [emacs]
 
 # [B]
@@ -236,6 +236,11 @@ PREFIX C-z  # Suspender cliente tmux (suspend-client)
 
 # [<]
 M-<         # Ir al inicio del historial (history-top) [emacs]
+
+# [\]
+PREFIX ]    # Pegar buffer (custom: si existe 'accum' lo pega, si no, pega normal)
+PREFIX C-]  # Vaciar el buffer acumulador 'accum' (custom)
+]           # (en modo copia no aplica)
 
 # [^]
 ^           # Ir al primer carácter no blanco (back-to-indentation) [vi]
