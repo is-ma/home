@@ -193,7 +193,7 @@ POINTS_TO="$TARGETS/opencode/kdco-notify.json"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
 THIS_FILE="$HOME/.config/opencode/oh-my-openagent.jsonc"
-POINTS_TO="$TARGETS/opencode/oh-my-openagent__deepseek.jsonc"
+POINTS_TO="$TARGETS/opencode/oh-my-openagent.jsonc"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
 THIS_FILE="$HOME/.config/opencode/tui.json"
