@@ -201,7 +201,7 @@ POINTS_TO="$TARGETS/opencode/tui.json"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
 THIS_FILE="$HOME/.config/opencode/themes/gruvbox_rich.json"
-POINTS_TO="$TARGETS/opencode/themes/gruvbox_rich.json"
+POINTS_TO="$TARGETS/opencode/gruvbox_rich.json"
 mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 

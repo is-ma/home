@@ -2,6 +2,24 @@
 # Inventario de todos los modelos configurados en OpenCode.
 # Fuente de verdad para qué modelos existen y dónde se usan.
 
+# Modo de selección: CHEAP GO
+# - 'DeepSeek V4 Flash' usa 'OpenCode Go'
+# - 'DeepSeek V4 Pro' usa 'OpenCode Go'
+# - 'MiMo v2.5' usa 'OpenCode Go'
+# - 'MiMo v2.5 Pro' usa 'OpenCode Go'
+# - 'Qwen 3.7 Max' usa 'OpenCode Go'
+# - 'Kimi K2.6' usa 'OpenCode Go'
+# - 'Claude Opus 4.8' usa 'OpenCode Zen'
+#
+# Modo de selección: CHEAP OPENROUTER
+# - 'DeepSeek V4 Flash' usa 'DeepSeek API'
+# - 'DeepSeek V4 Pro' usa 'DeepSeek API'
+# - 'MiMo v2.5' usa 'OpenRouter'
+# - 'MiMo v2.5 Pro' usa 'OpenRouter'
+# - 'Qwen 3.7 Max' usa 'OpenRouter'
+# - 'Kimi K2.6' usa 'OpenRouter'
+# - 'Claude Opus 4.8' usa 'OpenRouter'
+
 [models]
 
 - DeepSeek V4 Flash
