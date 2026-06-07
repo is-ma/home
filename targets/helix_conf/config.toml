@@ -2,7 +2,6 @@ theme = "gruvbox_rich"
 
 [editor]
 line-number = "relative"
-insecure = true
 cursorline = true
 color-modes = true
 
