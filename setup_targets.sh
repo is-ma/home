@@ -205,6 +205,18 @@ POINTS_TO="$TARGETS/opencode/gruvbox_rich.json"
 mkdir -p "$(dirname "$THIS_FILE")"
 ln -sf "$POINTS_TO" "$THIS_FILE"
 
+# global skills
+echo "Setting up global skills..."
+mkdir -p ~/.config/opencode/skills
+for skill_dir in "$TARGETS/global_skills"/*; do
+    if [ -d "$skill_dir" ]; then
+        skill_name=$(basename "$skill_dir")
+        echo "  Linking skill: $skill_name"
+        rm -rf "$HOME/.config/opencode/skills/$skill_name"
+        ln -sf "$skill_dir" "$HOME/.config/opencode/skills/$skill_name"
+    fi
+done
+
 # tmux
 THIS_FILE="$HOME/.config/tmux/tmux.conf"
 POINTS_TO="$TARGETS/tmux/tmux.conf"

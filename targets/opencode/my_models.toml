@@ -2,27 +2,6 @@
 # Inventario de todos los modelos configurados en OpenCode.
 # Fuente de verdad para qué modelos existen y dónde se usan.
 
-[modes]
-
-[modes.cheap_go]
-DeepSeek V4 Flash = "opencode-go/deepseek-v4-flash"
-DeepSeek V4 Pro = "opencode-go/deepseek-v4-pro"
-MiMo v2.5 = "opencode-go/mimo-v2.5"
-MiMo v2.5 Pro = "opencode-go/mimo-v2.5-pro"
-Qwen 3.7 Max = "opencode-go/qwen3.7-max"
-Kimi K2.6 = "opencode-go/kimi-k2.6"
-Claude Opus 4.8 = "opencode/claude-opus-4-8"     # Zen
-
-[modes.cheap_openrouter]
-DeepSeek V4 Flash = "deepseek/deepseek-v4-flash" # DeepSeek API
-DeepSeek V4 Pro = "deepseek/deepseek-v4-pro"     # DeepSeek API
-MiMo v2.5 = "openrouter/xiaomi/mimo-v2.5"
-MiMo v2.5 Pro = "openrouter/xiaomi/mimo-v2.5-pro"
-Qwen 3.7 Max = "openrouter/qwen/qwen3.7-max"
-Kimi K2.6 = "openrouter/moonshotai/kimi-k2.6"
-Claude Opus 4.8 = "openrouter/anthropic/claude-opus-4-8"
-
-
 [agents]
 
 # opencode.jsonc
@@ -58,3 +37,24 @@ quick              = "MiMo v2.5"
 unspecified-low    = "MiMo v2.5"
 unspecified-high   = "MiMo v2.5"
 writing            = "MiMo v2.5"
+
+
+[modes]
+
+[modes.cheap_go]
+DeepSeek V4 Flash = "opencode-go/deepseek-v4-flash"
+DeepSeek V4 Pro = "opencode-go/deepseek-v4-pro"
+MiMo v2.5 = "opencode-go/mimo-v2.5"
+MiMo v2.5 Pro = "opencode-go/mimo-v2.5-pro"
+Qwen 3.7 Max = "opencode-go/qwen3.7-max"
+Kimi K2.6 = "opencode-go/kimi-k2.6"
+Claude Opus 4.8 = "opencode/claude-opus-4-8"     # Zen
+
+[modes.cheap_openrouter]
+DeepSeek V4 Flash = "deepseek/deepseek-v4-flash" # DeepSeek API
+DeepSeek V4 Pro = "deepseek/deepseek-v4-pro"     # DeepSeek API
+MiMo v2.5 = "openrouter/xiaomi/mimo-v2.5"
+MiMo v2.5 Pro = "openrouter/xiaomi/mimo-v2.5-pro"
+Qwen 3.7 Max = "openrouter/qwen/qwen3.7-max"
+Kimi K2.6 = "openrouter/moonshotai/kimi-k2.6"
+Claude Opus 4.8 = "openrouter/anthropic/claude-opus-4-8"
